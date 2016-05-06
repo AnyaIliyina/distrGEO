@@ -1,11 +1,11 @@
 #include "MainWindow.h"
-#include "SearchForm.h"
 #include "SM_Session.h"
 #include "Session.h"
 #include "Site.h"
 #include "User.h"
-#include "NewSource.h"
-#include "ViewWindow.h"
+#include "ViewSites.h"
+#include "ViewDepartments.h"
+#include "TreeRegions.h"
 #include "State.h"
 #include "Database.h"
 #include <QTextEdit>
@@ -19,15 +19,14 @@ MainWindow::MainWindow(QMainWindow *parent)
 	
 	// Показать диалог с запросом пароля до появления основного окна:
 	LoginDialog *ld = new LoginDialog(); 
-	NewSource *ns = new NewSource();
+	
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
 	ld->slotShowLD();
 
-	//Показать окно авторизации, при нажатии смены пользователя
-	QObject::connect(ui->actionUser, SIGNAL(triggered()), ld, SLOT(slotShowLD()));
-	QObject::connect(ui->actionUser, SIGNAL(triggered()), this, SLOT(slotCloseMW()));
-	QObject::connect(ui->actionNewSource, SIGNAL(triggered()), ns, SLOT(slotShowNS()));
+	
+	
+	
 	
 }
 
@@ -42,17 +41,22 @@ MainWindow::~MainWindow()
 */
 void MainWindow::slotConfigure()
 {
-	vw = new ViewWindow();
+	/*vw = new ViewWindow();
 	QDockWidget *viewDockWidget = new QDockWidget("Список записей");
 	viewDockWidget->setWidget(vw);
 	viewDockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
 	setCentralWidget(viewDockWidget);
-	sf=new SearchForm();
-	addDockWidget(Qt::TopDockWidgetArea, sf);
+	*/
+	m_vd = new ViewDepartments();
+	m_vs = new ViewSites();
+	m_tr = new TreeRegions();
+	ui->tabWidget->addTab(m_vs, "Интернет-ресурсы");
+	ui->tabWidget->addTab(m_vd, "Ведомства");
+	ui->tabWidget->addTab(m_tr, "Регионы");
 	QStatusBar *status = new QStatusBar();
 	setStatusBar(status);
 	showMW();
-	QObject::connect(sf, SIGNAL(filterChanged(QString)), vw, SLOT(slotFilterChanged(QString)));
+	
 }
 
 
@@ -87,9 +91,7 @@ void MainWindow::showMW()
 */
 void MainWindow::slotCloseMW()
 {
-	delete sf;
-	this->close();
-	
+		this->close();
 }
 
 /*!

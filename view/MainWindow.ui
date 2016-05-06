@@ -6,105 +6,63 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
-    <height>560</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>1040</width>
-    <height>430</height>
-   </size>
-  </property>
-  <property name="font">
-   <font>
-    <pointsize>9</pointsize>
-   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>0</y>
-      <width>690</width>
-      <height>511</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>800</width>
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>186</width>
-      <height>116</height>
-     </rect>
-    </property>
+   <widget class="QMenu" name="menu_File">
     <property name="title">
-     <string>&amp;Файл</string>
+     <string>Файл</string>
     </property>
-    <addaction name="actionNewSource"/>
-    <addaction name="actionUser"/>
-    <addaction name="actionExit"/>
+    <addaction name="action_Exit"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menu_View">
     <property name="title">
-     <string>&amp;Справка</string>
+     <string>Вид</string>
     </property>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menu_File"/>
+   <addaction name="menu_View"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionExit">
+  <action name="action_Exit">
    <property name="text">
-    <string>&amp;Выход</string>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionUser">
-   <property name="text">
-    <string>&amp;Сменить пользователя</string>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionNewSource">
-   <property name="text">
-    <string>Новый источник</string>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
+    <string>Выход</string>
    </property>
   </action>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>actionExit</sender>
+   <sender>action_Exit</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
@@ -114,8 +72,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>364</x>
-     <y>279</y>
+     <x>399</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>

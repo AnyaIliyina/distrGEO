@@ -4,8 +4,10 @@
 #include <QString>
 #include "LoginDialog.h"
 #include "ui_MainWindow.h"
-#include "SearchForm.h"
-#include "ViewWindow.h"
+#include "ViewSites.h"
+#include "ViewDepartments.h"
+#include "TreeRegions.h"
+
 
 /*!
 	\file
@@ -32,8 +34,9 @@ private:
 	void showMW();
 	
 	Ui::MainWindow *ui;
-	SearchForm *sf;
-	ViewWindow *vw;
+	ViewDepartments *m_vd;
+	ViewSites *m_vs;
+	TreeRegions *m_tr;
 
 private slots:
 	/*!

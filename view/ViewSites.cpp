@@ -1,4 +1,4 @@
-#include "ViewWindow.h"
+#include "ViewSites.h"
 #include "Database.h"
 #include "Scale.h"
 #include "State.h"
@@ -9,7 +9,6 @@
 #include "Site.h"
 #include "Format.h"
 #include "Session.h"
-#include "SearchForm.h"
 #include "SortFilterProxyModel.h"
 #include <QSortFilterProxyModel>
 #include <QApplication>
@@ -21,7 +20,7 @@
 #include <QUrl>
 
 
-ViewWindow::ViewWindow(QWidget * parent): ui(new Ui::ViewWindow) // ??
+ViewSites::ViewSites(QWidget * parent): ui(new Ui::ViewSites) // ??
 {
 	ui->setupUi(this);
 	setupModel();
@@ -38,21 +37,21 @@ ViewWindow::ViewWindow(QWidget * parent): ui(new Ui::ViewWindow) // ??
 	//QObject::connect(ui->tableView->model, SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 }
 
-ViewWindow::~ViewWindow()
+ViewSites::~ViewSites()
 {
 	delete ui;
 	delete m_model;
 }
 
-void ViewWindow::setupModel()
+void ViewSites::setupModel()
 {
 	delete m_model;
 	QSqlDatabase db = Database::database();
 	m_model = new ItemModel();
-	createTable();
+	//createTable();
 }
 
-void ViewWindow::setDisabled()
+void ViewSites::setDisabled()
 {
 	ui->action_Edit->setEnabled(false);
 	ui->action_Delete->setEnabled(false);
@@ -62,12 +61,12 @@ void ViewWindow::setDisabled()
 	ui->action_OpenUrl->setEnabled(false);
 }
 
-void ViewWindow::slotRefresh()
+void ViewSites::slotRefresh()
 {
 	setupModel();
 }
 
-void ViewWindow::slotEnableButtons()
+void ViewSites::slotEnableButtons()
 {
 	if (m_editMode)
 	{
@@ -104,7 +103,7 @@ void ViewWindow::slotEnableButtons()
 	}
 }
 
-void ViewWindow::slotEnableButtons(const QItemSelection &, const QItemSelection &)
+void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &)
 {
 	if (m_editMode)
 	{
@@ -142,13 +141,13 @@ void ViewWindow::slotEnableButtons(const QItemSelection &, const QItemSelection 
 	
 }
 
-void ViewWindow::slotFilterChanged(QString text)
+void ViewSites::slotFilterChanged(QString text)
 {
 	QRegExp regExp(text, Qt::CaseInsensitive);
 	filterModel->setFilterRegExp(regExp);
 }
 
-void ViewWindow::createTable()
+void ViewSites::createTable()
 {
 	m_model->loadData(0);
 	filterModel = new SortFilterProxyModel();
@@ -174,7 +173,7 @@ void ViewWindow::createTable()
 
 }
 
-void ViewWindow::slotAdd()
+void ViewSites::slotAdd()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
@@ -188,7 +187,7 @@ void ViewWindow::slotAdd()
 	
 }
 
-void ViewWindow::slotDelete()
+void ViewSites::slotDelete()
 {
 	
 	int  deleteMsgBox = QMessageBox::question(this, "",
@@ -202,7 +201,7 @@ void ViewWindow::slotDelete()
 	}
 }
 
-void ViewWindow::slotEdit()
+void ViewSites::slotEdit()
 {
 	
 	m_editMode = true;
@@ -216,7 +215,7 @@ void ViewWindow::slotEdit()
 	ui->tableView->edit(m_index);
 }
 
-void ViewWindow::slotSave()
+void ViewSites::slotSave()
 {
 	if (m_model->save())
 	{
@@ -232,7 +231,7 @@ void ViewWindow::slotSave()
 
 }
 
-void ViewWindow::slotCancel()
+void ViewSites::slotCancel()
 {
 	if (m_model->cancel())
 	{
@@ -249,7 +248,7 @@ void ViewWindow::slotCancel()
 	
 }
 
-void ViewWindow::slotOpenUrl()
+void ViewSites::slotOpenUrl()
 {
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	auto m_index = filterModel->mapToSource(index);

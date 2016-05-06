@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "ui_ViewWindow.h"
+#include "ui_ViewDepartments.h"
 #include "Item_model.h"
 #include "Geodata.h"
 #include "SortFilterProxyModel.h"
@@ -16,18 +16,18 @@
 	 \date   апрель 2016
 */
 
-class ViewWindow : public QMainWindow {
+class ViewDepartments: public QMainWindow {
 	Q_OBJECT
 public:
 	/*!
 	Конструктор
 	*/
-	explicit ViewWindow(QWidget *parent = 0);
+	explicit ViewDepartments(QWidget *parent = 0);
 
 	/*!
 	Деструктор
 	*/
-	~ViewWindow();
+	~ViewDepartments();
 		
 	/*!
 	\param QString whereQryPart- строка запроса к базе
@@ -35,7 +35,7 @@ public:
 	 void setupModel();
 
 private:
-	Ui::ViewWindow *ui;
+	Ui::ViewDepartments *ui;
 	ItemModel* m_model=nullptr;
 	SortFilterProxyModel *filterModel;
 	bool m_editMode = false;
@@ -78,16 +78,13 @@ private slots:
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	 /*!
-	 Слот фильтрации данных в таблице
-	 \param QString text - искомая строка
-	 */
-	 void slotFilterChanged(QString text);
+	 ///*!
+	 //Слот фильтрации данных в таблице
+	 //\param QString text - искомая строка
+	 //*/
+	 //void slotFilterChanged(QString text);
 
-	 /*!
-	 Слот открытия ссылки
-	 */
-	 void slotOpenUrl();
+	
  signals:
 	 /*!
 	 Сигнал для включения/выключения кнопок
