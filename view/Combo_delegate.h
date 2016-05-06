@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "Multilist.h"
 #include <QItemDelegate>
 #include <QList>
 

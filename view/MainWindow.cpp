@@ -10,7 +10,10 @@
 #include "Database.h"
 #include <QTextEdit>
 #include <QDebug>
-#include <QStatusBar>
+//#include <QStatusBar>
+
+#define asRelease true
+	// как релиз, не дипломный вариант
 
 MainWindow::MainWindow(QMainWindow *parent)
 {
@@ -49,8 +52,11 @@ void MainWindow::slotConfigure()
 	setCentralWidget(viewDockWidget);
 	sf=new SearchForm();
 	addDockWidget(Qt::TopDockWidgetArea, sf);
-	QStatusBar *status = new QStatusBar();
-	setStatusBar(status);
+	if (!asRelease)
+	{
+		QStatusBar *status = new QStatusBar();
+		setStatusBar(status);
+	}
 	showMW();
 	QObject::connect(sf, SIGNAL(filterChanged(QString)), vw, SLOT(slotFilterChanged(QString)));
 }
@@ -72,14 +78,15 @@ void MainWindow::showMW()
 	this->show();
 	
 	// Начать работу модуля поиска
-	if (Site::uncheckedSitesFound()) 
+	if(!asRelease)
+			if (Site::uncheckedSitesFound()) 
 	{
 		SM_Session *session = new SM_Session();
 		QObject::connect(session, SIGNAL(signalStatusOffered(const QString &)),
 			SLOT(slotShowStatus(const QString &)));	// по сигналу от session менять текст в StatusBar
 		session->start();
 	}
-	else statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
+			else statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
 }
 
 /*!

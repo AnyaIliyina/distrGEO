@@ -1,5 +1,5 @@
 #include "Combo_delegate.h"
-
+#include "Multilist.h"
 #include <QComboBox>
 
 ComboDelegate::~ComboDelegate() {
@@ -13,8 +13,9 @@ QWidget* ComboDelegate::createEditor(
 	QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
 
 	// Возвращаем QComboBox
-	auto cBox = new QComboBox(parent);
-
+	//auto cBox = new QComboBox(parent);
+	MultiListWidget *cBox = new MultiListWidget(parent);
+	
 	for (int i = 0; i < m_list.count(); i++) {
 		cBox->addItem(m_list[i]);
 	}

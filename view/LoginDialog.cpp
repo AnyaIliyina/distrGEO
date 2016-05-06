@@ -8,6 +8,7 @@
 
 #define login "Olga"
 #define password "iamolga"
+#define asRelease true
 
 LoginDialog::LoginDialog(QDialog * ptr)
 {
@@ -16,7 +17,7 @@ LoginDialog::LoginDialog(QDialog * ptr)
 	connect(ui->btn_login, SIGNAL(clicked()), SLOT(slotAuthenticate()));
 	connect(this, SIGNAL(signalLogedIn(int)), this, SLOT(slotClose(int)));
 
-	// временно:
+	// пропускать авторизацию в не дипломном варианте
 	connect(this, SIGNAL(dialog_shown()), this, SLOT(slotAuthenticate()));
 }
 
@@ -50,9 +51,8 @@ void LoginDialog::slotClose(int)
 void LoginDialog::slotShowLD()
 {
 	this->show();
-	qDebug() << "shown";
-	// временно:
-	emit dialog_shown();
+	if(asRelease)
+		emit dialog_shown();
 }
 
 QString LoginDialog::getLogin() 
