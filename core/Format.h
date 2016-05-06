@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -21,27 +21,28 @@
 class Format: public QObject {
 	Q_OBJECT
 private:
-	int m_format_id;
-	QString m_format_name;
+	int m_id;
+	QString m_name;
 	
 public:
 	/*!
 	Возвращает название формата
 	\return QString& format_name - название формата
 	*/
-	const QString& format_name() const;
+	const QString& name() const;
 
 	/*!
-	Возвращает id формата
+	Возвращает id формата по его названию
 	\return int format_id - id формата
+	\param QString name - название формата
 	*/
-	static int format_id(QString format_name);
+	static int id(QString name);
 	
 	/*!
 	Создает формат с заданным названием
 	\param const QString &format_name - название создаваемого формата
 	*/
-	Format(const QString& format_name);
+	Format(const QString& name);
 	
 	/*!
 	Конструирует объект, используя информацию в базе
@@ -80,5 +81,5 @@ public:
 	Возращает список форматов
 	\return QStringList listFormat - список названий форматов
 	*/
-	static QStringList getFormatNames();
+	static QStringList getNames();
 };

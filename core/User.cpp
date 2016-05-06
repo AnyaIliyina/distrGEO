@@ -1,4 +1,4 @@
-﻿#include "User.h"
+#include "User.h"
 #include <QSqlError>
 #include <QSqlTableModel>
 #include <QSqlRecord>

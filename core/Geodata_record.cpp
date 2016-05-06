@@ -1,4 +1,4 @@
-﻿#include "Geodata_record.h"
+#include "Geodata_record.h"
 #include <QSqlError>
 #include <QSqlTableModel>
 #include <QSqlRecord>
@@ -6,13 +6,13 @@
 #include "Log.h"
 #include <QTextCodec>
 
-Geodata_record::Geodata_record(int site_id, int format_id, const QString& place_name,
+Geodata_record::Geodata_record(int site_id, int id, const QString& place_name,
 	int session_id, int state_id, int scale_id, const QString& url, const QString& comment)
 {
 	m_record_id = 0;
 	m_site_id = site_id;
 	m_session_id = session_id;
-	m_format_id = format_id;
+	m_id = id;
 	m_scale_id = scale_id;
 	m_state_id = state_id;
 	m_url = url;
@@ -35,9 +35,9 @@ int Geodata_record::state_id()
 	return m_state_id;
 }
 
-int Geodata_record::format_id()
+int Geodata_record::id()
 {
-	return m_format_id;
+	return m_id;
 }
 
 
@@ -45,7 +45,7 @@ bool Geodata_record::required_fields_filled()
 {
 	if (m_site_id <= 0)
 		return false;
-	if (m_format_id<=0)
+	if (m_id<=0)
 		return false;
 	if (m_session_id <= 0)
 			return false;
@@ -66,9 +66,9 @@ void Geodata_record::setSiteId(int site_id)
 	m_site_id = site_id;
 }
 
-void Geodata_record::setFormateId(int format_id)
+void Geodata_record::setFormateId(int id)
 {
-	m_format_id = format_id;
+	m_id = id;
 }
 
 void Geodata_record::setSessionId(int session_id)
@@ -122,7 +122,7 @@ Geodata_record::Geodata_record(int id)
 	m_record_id = id;
 	m_site_id = site_id;
 	m_session_id = session_id;
-	m_format_id = format_id;
+	m_id = format_id;
 	m_scale_id = scale_id;
 	m_state_id = state_id;
 	m_place_name = place_name;
@@ -153,7 +153,7 @@ bool Geodata_record::insertIntoDatabase()
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 	query.addBindValue(m_site_id);
 	query.addBindValue(m_session_id);
-	query.addBindValue(m_format_id);
+	query.addBindValue(m_id);
 	query.addBindValue(m_scale_id);
 	query.addBindValue(m_state_id);
 	query.addBindValue(m_place_name);
@@ -184,7 +184,7 @@ void Geodata_record::updateRecord()
 					comment=:comment, url=:url WHERE record_id=:record_id");
 	query.bindValue(":site_id", m_site_id);
 	query.bindValue(":session_id", m_session_id);
-	query.bindValue(":format_id", m_format_id);
+	query.bindValue(":format_id", m_id);
 	query.bindValue(":scale_id", m_scale_id);
 	query.bindValue(":state_id", m_state_id);
 	query.bindValue(":place_name", m_place_name);

@@ -1,4 +1,4 @@
-﻿#include "Session.h"
+#include "Session.h"
 #include "Database.h"
 #include <QSqlError>
 #include <QSqlTableModel>

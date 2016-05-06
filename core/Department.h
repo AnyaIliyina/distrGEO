@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -7,23 +7,121 @@
 #include <QSqlQuery>
 #include <QUrl>
 #include <QDateTime>
+#include "Database.h"
 
 
 /*!
 	\file
-	\brief    Представляет сущность Формат
-(таблица formats)
-	\author   Козырева О.
-	\date     15 март 2016
+	\brief    Ведомства
+(таблица departments)
+	\author  Ильина А.
+	\date    май 2016
 */
 
 
 class Department: public QObject {
 	Q_OBJECT
 private:
-	int m_format_id;
-	QString m_format_name;
-	
+	int m_id;
+	QString m_name;
+	QString m_country;
+	QString m_adress;
+	QString m_mail;
+	QString m_fax;
+	QString m_phone;
 public:
+	Department();
+	~Department();
 	
+	/*!
+	Возвращает id ведомства
+	\return int id
+	*/
+	int id() const;
+
+	/*!
+	Возвращает название ведомства
+	\return const QString& name - название*/
+	const QString & name() const;
+
+	/*! Возвращает страну, в которой находится ведомство
+	return const QString& country - страна*/
+	const QString & country() const;
+
+	/*!
+	Возвращает адрес ведомства
+	\return const QString& adress - адрес*/
+	const QString & adress() const;
+
+	/*!
+	Возвращает e-mail ведомства
+	\return const QString& mail - адрес*/
+	const QString & mail() const;
+
+	/*!
+	Возвращает телефон ведомства
+	\return const QString&  phone - телефон*/
+	const QString & phone() const;
+
+	/*!
+	Возвращает факс ведомства
+	\return const QString& fax - факс*/
+	const QString & fax() const;
+
+	/*!
+	Присваивает ведомству название
+	\param const QString& name - имя*/
+	void setName(const QString& name);
+
+	/*!
+	Устанавливает значение поля Страна.
+	\param const QString& name - название страны, в которй находится ведомство*/
+	void setCountry(const QString& country);
+
+	/*!
+	Присваивает телефон ведомству.
+	\param const QString& number - телефонный номер*/
+	void setPhone(const QString& phone);
+
+	/*!
+	Присваивает адрес ведомству.
+	\param const QString& adress - адрес*/
+	void setAdress(const QString& adress);
+
+	/*!
+	Присваивает ведомству факс
+	\param const QString& fax */
+	void setFax(const QString& fax);
+
+	/*!
+	Присваивает email ведомству
+	\param const QString& mail */
+	void setMail(const QString& mail);
+
+
+	// ----------- Методы, обращающиеся к базе ----------
+	/*! Конструктор
+	Получает информацию из БД 
+	\param int id - id ведомства*/
+	Department(int id);
+	
+	/*! Записывает в БД информацию о ведомстве
+	\param session_id - id текущей сессии
+	\return true - информация записана*/
+	bool insertIntoDatabase(int session_id = Database::currentSessionId());
+
+	/*! Изменяет информацию о ведомстве в базе
+	\param session_id - id текущей сессии
+	\return true - запись успешно изменена*/
+	bool update(int session_id=Database::currentSessionId());
+
+	/*! Удаляет ведомство из базы
+	\param department_id - id ведомства
+	\param session_id - id текущей сессии*/
+	static bool deleteDepartment(int department_id, 
+				int session_id = Database::currentSessionId());
+
+	/*! Создает в БД таблицу Ведомства
+	\return true - таблица создана*/
+	static bool createTable();
 };

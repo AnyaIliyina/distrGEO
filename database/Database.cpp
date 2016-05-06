@@ -1,4 +1,5 @@
-﻿#include "Database.h"
+#include "Database.h"
+#include "Department.h"
 #include "Format.h"
 #include "State.h"
 #include "Scale.h"
@@ -9,6 +10,7 @@
 #include "Log.h"
 #include "Site.h"
 #include "Geodata_record.h"
+#include "Language.h"
 #include <QFileInfo>
 /*!
 \file
@@ -110,5 +112,8 @@ void Database::configure()
 		// Geodata_record::completeTable();
 		Session::createTable();
 		Session::completeTable();
+		Department::createTable();
+		Language::createTable();
+		Language::completeTable();
 		Log::createTable();
 }

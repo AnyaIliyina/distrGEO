@@ -10,16 +10,16 @@
 */
 
 
-const QString& Format::format_name() const
+const QString& Format::name() const
 {
-	return m_format_name;
+	return m_name;
 }
 
-int Format::format_id(QString format_name) 
+int Format::id(QString name) 
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT format_id FROM formats WHERE format_name=\'" + format_name + "\'"))
+	if (!query.exec("SELECT id FROM formats WHERE name=\'" + name + "\'"))
 	{
 		qDebug() << "Zapros ne proshel";
 		qDebug() << query.lastError().text();
@@ -36,10 +36,10 @@ int Format::format_id(QString format_name)
 }
 
 
-Format::Format(const QString &format_name)
+Format::Format(const QString &name)
 {
-	m_format_name = format_name;
-	m_format_id = 0;
+	m_name = name;
+	m_id = 0;
 }
 
 Format::Format(int id)
@@ -47,14 +47,14 @@ Format::Format(int id)
 	QSqlDatabase db = Database::database();
 	QSqlTableModel model(this, db);
 	model.setTable("formats");
-	const QString filter = QString("format_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
-	QString format_name = model.record(0).value("format_name").toString();
+	QString name = model.record(0).value("name").toString();
 	db.close();
 
-	m_format_id = id;
-	m_format_name = format_name;
+	m_id = id;
+	m_name = name;
 }
 
 Format::~Format()
@@ -65,9 +65,9 @@ bool Format::insertIntoDatabase()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO formats(format_name)\
+	query.prepare("INSERT INTO formats(name)\
 	VALUES (?)");
-	query.addBindValue(m_format_name);
+	query.addBindValue(m_name);
 	if (!query.exec()) {
 		qDebug() << "Format::insertIntoDatabase(): error inserting into Table formats";
 		qDebug() << query.lastError().text();
@@ -84,7 +84,7 @@ bool Format::insert(QStringList formatNames)
 	QSqlQuery query(db);
 	for (int i = 0; i < formatNames.count(); i++)
 	{
-		query.prepare("INSERT INTO formats(format_name)\
+		query.prepare("INSERT INTO formats(name)\
 	VALUES (?)");
 		query.addBindValue(formatNames.at(i));
 		if (!query.exec()) {
@@ -102,8 +102,8 @@ bool Format::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS formats (\
-		format_id INTEGER PRIMARY KEY AUTOINCREMENT, \
-		format_name TEXT UNIQUE NOT NULL\
+		id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		name TEXT UNIQUE NOT NULL\
 		)"
 		))
 	{	
@@ -126,12 +126,12 @@ bool Format::completeTable()
 	return insert(formatNames);
 }
 
-QStringList Format::getFormatNames()
+QStringList Format::getNames()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	QStringList listFormat;
-	if (!query.exec("SELECT format_name FROM formats"))
+	if (!query.exec("SELECT name FROM formats"))
 	{
 		qDebug() << query.lastError().text();
 		db.close();

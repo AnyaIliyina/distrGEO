@@ -1,4 +1,4 @@
-﻿#include "Site.h"
+#include "Site.h"
 #include "Log.h"
 #include <QSqlError>
 #include <QSqlTableModel>
