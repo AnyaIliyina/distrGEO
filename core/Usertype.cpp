@@ -7,13 +7,13 @@
 
 QString Usertype::type_name()
 {
-	return m_type_name;
+	return m_name;
 }
 
 Usertype::Usertype(QString type_name)
 {
-	m_type_id = 0;
-	m_type_name = type_name;
+	m_id = 0;
+	m_name = type_name;
 }
 
 Usertype::Usertype(int id)
@@ -21,32 +21,32 @@ Usertype::Usertype(int id)
 	QSqlDatabase db = Database::database();
 	QSqlTableModel model(this, db);
 	model.setTable("usertypes");
-	const QString filter = QString("type_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
-	QString type_name = model.record(0).value("type_name").toString();
+	QString type_name = model.record(0).value("name").toString();
 	db.close();
 
-	m_type_id = id;
-	m_type_name = type_name;
+	m_id = id;
+	m_name = type_name;
 }
 
 Usertype::~Usertype()
 {
 }
 
-int Usertype::type_id()
+int Usertype::id()
 {
-	return m_type_id;
+	return m_id;
 }
 
 bool Usertype::insertIntoDatabase()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO usertypes(type_name)\
+	query.prepare("INSERT INTO usertypes(name)\
 	VALUES (?)");
-	query.addBindValue(m_type_name);
+	query.addBindValue(m_name);
 	if (!query.exec()) {
 		qDebug() << "State::insertIntoDatabase(): error inserting into Table usertypes";
 		qDebug() << query.lastError().text();
@@ -62,8 +62,8 @@ bool Usertype::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS usertypes (\
-		type_id INTEGER PRIMARY KEY AUTOINCREMENT, \
-		type_name TEXT UNIQUE NOT NULL\
+		id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		name TEXT UNIQUE NOT NULL\
 		)"
 		))
 	{
@@ -92,7 +92,7 @@ bool Usertype::insert(QStringList typeNames)
 	QSqlQuery query(db);
 	for (int i = 0; i < typeNames.count(); i++)
 	{
-		query.prepare("INSERT INTO usertypes(type_name)\
+		query.prepare("INSERT INTO usertypes(name)\
 	VALUES (?)");
 		query.addBindValue(typeNames.at(i));
 		if (!query.exec()) {

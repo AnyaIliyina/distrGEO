@@ -4,9 +4,9 @@
 #include <QSqlTableModel>
 #include <QSqlRecord>
 
-const QString & Site::site_name() const
+const QString & Site::name() const
 {
-	return m_site_name;
+	return m_name;
 }
 
 const QString & Site::comment() const
@@ -14,9 +14,9 @@ const QString & Site::comment() const
 	return m_comment;
 }
 
-int Site::site_id() const
+int Site::id() const
 {
-	return m_site_id;
+	return m_id;
 }
 
 
@@ -25,11 +25,11 @@ const QString&  Site::url() const
 	return m_url;
 }
 
-Site::Site(const QString& url, const QString& site_name, int status, const QString& comment)
+Site::Site(const QString& url, const QString& name, int status, const QString& comment)
 {
-	m_site_id = 0;
+	m_id = 0;
 	m_url = url;
-	m_site_name = site_name;
+	m_name = name;
 	m_status_id = status;
 	m_comment = comment;
 }
@@ -40,18 +40,18 @@ Site::Site(int id)
 	QSqlTableModel model(nullptr, db);
 	model.setTable("sites");
 	//const QString filter("siteId == " + QString::number(site_id));
-	const QString filter = QString("site_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
 	QString url = model.record(0).value("url").toString();
-	QString site_name = model.record(0).value("site_name").toString();
+	QString name = model.record(0).value("name").toString();
 	int status_id= model.record(0).value("status_id").toInt();
 	QString comment = model.record(0).value("comment").toString();
 	db.close();
 		
-	m_site_id = id;
+	m_id = id;
 	m_url = url;
-	m_site_name = site_name;
+	m_name = name;
 	m_status_id = status_id;
 	m_comment = comment;
 }
@@ -60,11 +60,6 @@ Site::~Site()
 {
 }
 
-
-int Site::site_id()
-{
-	return m_site_id;
-}
 
 int Site::status_id() const
 {
@@ -77,7 +72,7 @@ bool Site::setStatusId(int site_id, int status_id, int session_id)
 	QSqlQuery query(db);
 	query.prepare("UPDATE sites\
 		SET status_id = ?\
-		WHERE site_id = ?");
+		WHERE id = ?");
 	query.addBindValue(status_id);
 	query.addBindValue(site_id);
 	if (!query.exec()) {
@@ -97,7 +92,7 @@ int Site::site_id(QString & site_name)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT site_id FROM sites WHERE site_name=\'" + site_name + "\'"))
+	if (!query.exec("SELECT id FROM sites WHERE name=\'" + site_name + "\'"))
 	{
 		qDebug() << query.lastError().text();
 		return -1;
@@ -117,10 +112,10 @@ int Site::insertIntoDatabase(int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO sites ( url, site_name, status_id, comment)\
+	query.prepare("INSERT INTO sites ( url, name, status_id, comment)\
 		VALUES (?, ?, ?, ?)");
 	query.addBindValue(m_url);
-	query.addBindValue(m_site_name);
+	query.addBindValue(m_name);
 	query.addBindValue(m_status_id);
 	query.addBindValue(m_comment);
 	if (!query.exec()) {
@@ -147,10 +142,10 @@ bool Site::insert(QList<Site> sites)
 	QSqlQuery query(db);
 	for (int i = 0; i < sites.count(); i++)
 	{
-		query.prepare("INSERT INTO sites ( url, site_name, status_id, comment)\
+		query.prepare("INSERT INTO sites ( url, name, status_id, comment)\
 		VALUES (?, ?, ?, ?)");
 		query.addBindValue(sites.at(i).url());
-		query.addBindValue(sites.at(i).site_name());
+		query.addBindValue(sites.at(i).name());
 		query.addBindValue(sites.at(i).status_id());
 		query.addBindValue(sites.at(i).comment());
 		if (!query.exec()) {
@@ -174,7 +169,7 @@ bool Site::uncheckedSitesFound()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT site_id FROM sites WHERE status_id=1"))
+	if (!query.exec("SELECT id FROM sites WHERE status_id=1"))
 	{
 		qDebug() << "Site::uncheckedSitesFound() error";
 		qDebug() << query.lastError().text();
@@ -200,12 +195,12 @@ bool Site::createTable()
 	QSqlQuery query(db);
 	query.exec("PRAGMA foreign_keys = ON");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  sites (\
-		site_id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
+		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		url     TEXT    UNIQUE NOT NULL,\
-		site_name TEXT UNIQUE NOT NULL,\
+		name TEXT UNIQUE NOT NULL,\
 		status_id INTEGER,		\
 		comment TEXT,   \
-		FOREIGN KEY(status_id) REFERENCES statuses(status_id)\
+		FOREIGN KEY(status_id) REFERENCES statuses(id)\
 		)"
 		)) )
 	{
@@ -239,7 +234,7 @@ QList<Site> Site::sitesByStatus(int statusId)
 	model.select();
 	for (int i = 0; i < model.rowCount(); i++)
 	{
-		Site *s = new Site(model.record(i).value("site_id").toInt());
+		Site *s = new Site(model.record(i).value("id").toInt());
 		siteList.append(*s);
 		delete s;
 	}
@@ -253,7 +248,7 @@ QStringList Site::getSiteNames()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	QStringList listSites;
-	if (!query.exec("SELECT site_name FROM sites"))
+	if (!query.exec("SELECT name FROM sites"))
 	{
 		qDebug() << query.lastError().text();
 		db.close();

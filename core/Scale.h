@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -19,7 +19,7 @@
 class Scale: public QObject {
 	Q_OBJECT
 private:
-	int m_scale_id;
+	int m_id;
 	QString m_description;
 
 public:
@@ -49,7 +49,7 @@ public:
 	/*!
 	Возвращает id масштаба
 	*/
-	int scale_id();
+	int id();
 
 	/*!
 	Возвращает id заданного масштаба

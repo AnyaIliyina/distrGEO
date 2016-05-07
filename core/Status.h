@@ -19,11 +19,19 @@
 class Status : public QObject {
 	Q_OBJECT
 private:
-	int m_status_id;
-	QString m_status_name;
+	int m_id;
+	QString m_name;
 
 public:
-	QString status_name();
+	/*!
+	Возвращает id статуса
+	\return int status_id - id статуса
+	*/
+	int id();
+	
+	/*! Возращает название статуса
+	\return const QString& name - название статуса*/
+	const QString& name();
 		
 	/*!
 	Конструирует объект класса Status из параметров
@@ -42,12 +50,7 @@ public:
 	*/
 	~Status();
 	
-	/*!
-	Возвращает id статуса
-	\return int status_id - id статуса
-	*/
-	int status_id();
-	
+		
 	/*!
 	Записывает информацию о статусе в базу данных.
 	\return true - если запись в БД успешно добавлена

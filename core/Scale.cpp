@@ -1,4 +1,4 @@
-﻿#include "Scale.h"
+#include "Scale.h"
 #include "Database.h"
 #include <QSqlError>
 #include <QSqlTableModel>
@@ -8,7 +8,7 @@
 Scale::Scale(QString description)
 {
 	m_description = description;
-	m_scale_id = 0;
+	m_id = 0;
 }
 
 Scale::~Scale()
@@ -26,26 +26,26 @@ Scale::Scale(int id)
 	QSqlDatabase db = Database::database();
 	QSqlTableModel model(this, db);
 	model.setTable("scales");
-	const QString filter = QString("scate_id == %1");
+	const QString filter = QString("id == %1");
 	model.setFilter(filter);
 	model.select();
 	QString description = model.record(0).value("description").toString();
 	db.close();
 
-	m_scale_id = id;
+	m_id = id;
 	m_description = description;
 }
 
-int Scale::scale_id()
+int Scale::id()
 {
-	return m_scale_id;
+	return m_id;
 }
 
 int Scale::scale_id(QString description)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT scale_id FROM scales WHERE description=\'" + description + "\'"))
+	if (!query.exec("SELECT id FROM scales WHERE description=\'" + description + "\'"))
 	{
 		qDebug() << query.lastError().text();
 		return -1;
@@ -82,7 +82,7 @@ bool Scale::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS scales (\
-		scale_id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		id INTEGER PRIMARY KEY AUTOINCREMENT, \
 		description TEXT UNIQUE NOT NULL\
 		)"
 		))

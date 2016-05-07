@@ -1,6 +1,6 @@
 #include "Language.h"
 #include "Database.h"
-#include "QString"
+#include <QString>
 
 bool Language::createTable()
 {
@@ -38,7 +38,7 @@ bool Language::insert(QStringList languageNames)
 	VALUES (?)");
 		query.addBindValue(languageNames.at(i));
 		if (!query.exec()) {
-			qDebug() << "Language::insert(QStringList languageNames): error inserting into Table formats";
+			qDebug() << "Language::insert(QStringList languageNames): error inserting into table Languages";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;

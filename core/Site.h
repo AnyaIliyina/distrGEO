@@ -21,10 +21,10 @@
 class Site
 {
 private:
-	int m_site_id;
+	int m_id;
 	QString m_url;
 	int m_status_id;
-	QString m_site_name;
+	QString m_name;
 	QString m_comment;
 public:
 	
@@ -38,7 +38,7 @@ public:
 	Возвращает название сайта
 	\return QString& site_name - название сайта
 	*/
-	const QString& site_name() const;
+	const QString& name() const;
 	
 	/*!
 	Возвращает комментарий
@@ -50,7 +50,7 @@ public:
 	Возвращает id сайта
 	\return int site_id - id сайта;
 	*/
-	int site_id() const;
+	int id() const;
 
 	/*!
 	Возвращает id статуса
@@ -70,11 +70,11 @@ public:
 	/*!
 	Конструирует объект класса Site из параметров
 	\param const QString& url - адрес(url) сайта;
-	\param const QString& site_name - название сайта;
+	\param const QString& name - название сайта;
 	\param int status;
 	\param const QString& comment;
 	*/
-	Site(const QString& url, const QString& site_name, int status = 1, const QString& comment="");
+	Site(const QString& url, const QString& name, int status = 1, const QString& comment="");
 	
 	/*!
 	Конструирует объект класса Site из данных в базе
@@ -84,12 +84,6 @@ public:
 	
 	~Site();
 	
-	/*!
-	Возвращает id сайта
-	\return int site_id - id сайта;
-	*/
-	int site_id();
-
 	/*!
 	Возвращает id сайта
 	\return int site_id - id сайта;

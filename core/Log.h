@@ -23,7 +23,7 @@
 class Log: public QObject {
 	Q_OBJECT
 private:
-	int m_log_id = 0;
+	int m_id = 0;
 	int m_session_id;
 	QString m_operation_name;
 	int m_object_id = 0;
