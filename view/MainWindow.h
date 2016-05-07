@@ -37,11 +37,14 @@ private:
 	ViewDepartments *m_vd;
 	ViewSites *m_vs;
 	TreeRegions *m_tr;
-	QTreeView *tree;
+	QTreeView *treeSites;
+	QTreeView *treeDepartments;
+	QTreeView *treeSearch;
+	QTableView *tableSites;
+	QTableView *tableDepartments;
 	QHBoxLayout *vslayout;
 	QHBoxLayout *vdlayout;
-	QWidget *sites;
-	QWidget *departaments;
+	
 private slots:
 	/*!
 	Выводит сообщение на панель StatusBar
