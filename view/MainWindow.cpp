@@ -64,8 +64,11 @@ void MainWindow::slotConfigure()
 	layoutSites->addWidget(m_vs);
 	layoutSites->addWidget(tree);
 
+	ui->tabWidget->addTab(new QWidget, "Поиск источников");
+	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
+	ui->tabWidget->addTab(new QWidget, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
 	
 	departaments->setLayout(layoutDepart);
