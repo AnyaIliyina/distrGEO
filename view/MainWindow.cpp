@@ -51,20 +51,31 @@ void MainWindow::slotConfigure()
 	m_vd = new ViewDepartments();
 	m_vs = new ViewSites();
 	m_tr = new TreeRegions();
-	tree = new QTreeView();
+	treeSites = new QTreeView();
+	treeDepartments = new QTreeView();
+	treeSearch = new QTreeView();
+	tableSites = new QTableView();
+	tableDepartments = new QTableView();
 
 	QWidget *departaments = new QWidget();
 	QWidget *sites = new QWidget();
+	QWidget *search = new QWidget();
 
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
+	QHBoxLayout *layoutSearch = new QHBoxLayout();
+	QVBoxLayout *verticalLayout = new QVBoxLayout();
 
 	layoutDepart->addWidget(m_vd);
-	layoutDepart->addWidget(tree);
+	layoutDepart->addWidget(treeDepartments);
 	layoutSites->addWidget(m_vs);
-	layoutSites->addWidget(tree);
+	layoutSites->addWidget(treeSites);
+	verticalLayout->addWidget(tableSites);
+	verticalLayout->addWidget(tableDepartments);
+	layoutSearch->addWidget(treeSearch);
+	layoutSearch->addLayout(verticalLayout);
 
-	ui->tabWidget->addTab(new QWidget, "Поиск источников");
+	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
@@ -73,6 +84,7 @@ void MainWindow::slotConfigure()
 	
 	departaments->setLayout(layoutDepart);
 	sites->setLayout(layoutSites);
+	search->setLayout(layoutSearch);
 
 	QStatusBar *status = new QStatusBar();
 	setStatusBar(status);

@@ -33,7 +33,7 @@ ViewDepartments::ViewDepartments(QWidget * parent): ui(new Ui::ViewDepartments) 
 	QObject::connect(ui->tableView->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)) ,this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)) );
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	QObject::connect(ui->action_OpenUrl, SIGNAL(triggered()), this, SLOT(slotOpenUrl()));
+	
 	//QObject::connect(ui->tableView->model, SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 }
 
@@ -58,7 +58,7 @@ void ViewDepartments::setDisabled()
 	ui->action_New->setEnabled(false);
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
-	ui->action_OpenUrl->setEnabled(false);
+	
 }
 
 void ViewDepartments::slotRefresh()
@@ -73,7 +73,7 @@ void ViewDepartments::slotEnableButtons()
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
-		ui->action_OpenUrl->setEnabled(false);
+		
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
@@ -86,19 +86,19 @@ void ViewDepartments::slotEnableButtons()
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
-			ui->action_OpenUrl->setEnabled(false);
+			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
-			ui->action_OpenUrl->setEnabled(true);
+			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
-			ui->action_OpenUrl->setEnabled(false);
+			
 		}
 	}
 }
@@ -110,7 +110,7 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
-		ui->action_OpenUrl->setEnabled(false);
+		
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
@@ -123,19 +123,19 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
-			ui->action_OpenUrl->setEnabled(false);
+			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
-			ui->action_OpenUrl->setEnabled(true);
+			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
-			ui->action_OpenUrl->setEnabled(false);
+			
 		}
 	}
 	

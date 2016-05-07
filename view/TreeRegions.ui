@@ -51,7 +51,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action_New"/>
+   <addaction name="action_NewParent"/>
+   <addaction name="action_NewChild"/>
+   <addaction name="separator"/>
    <addaction name="action_Delete"/>
    <addaction name="separator"/>
    <addaction name="action_Edit"/>
@@ -59,63 +61,81 @@
    <addaction name="action_Yes"/>
    <addaction name="action_No"/>
   </widget>
-  <action name="action_New">
+  <action name="action_NewParent">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
-     <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
+    <iconset resource="icons/ViewWindowRes.qrc">
+     <normaloff>:/Bezymyanny.png</normaloff>:/Bezymyanny.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
    </property>
+   <property name="toolTip">
+    <string>Добавить( страну???)</string>
+   </property>
   </action>
   <action name="action_Delete">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
+    <iconset resource="icons/ViewWindowRes.qrc">
      <normaloff>:/trash.png</normaloff>:/trash.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Delete</string>
    </property>
+   <property name="toolTip">
+    <string>Удалить</string>
+   </property>
   </action>
   <action name="action_Edit">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
+    <iconset resource="icons/ViewWindowRes.qrc">
      <normaloff>:/note.png</normaloff>:/note.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Edit</string>
    </property>
+   <property name="toolTip">
+    <string>Редактировать</string>
+   </property>
   </action>
   <action name="action_Yes">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
+    <iconset resource="icons/ViewWindowRes.qrc">
      <normaloff>:/check.png</normaloff>:/check.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Yes</string>
    </property>
+   <property name="toolTip">
+    <string>Применить</string>
+   </property>
   </action>
   <action name="action_No">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
+    <iconset resource="icons/ViewWindowRes.qrc">
      <normaloff>:/close.png</normaloff>:/close.png</iconset>
    </property>
    <property name="text">
     <string>&amp;No</string>
    </property>
+   <property name="toolTip">
+    <string>Отменить</string>
+   </property>
   </action>
-  <action name="action_OpenUrl">
+  <action name="action_NewChild">
    <property name="icon">
-    <iconset resource="../../geo/view/icons/ViewWindowRes.qrc">
-     <normaloff>:/share2.png</normaloff>:/share2.png</iconset>
+    <iconset resource="icons/ViewWindowRes.qrc">
+     <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;OpenUrl</string>
+    <string>&amp;NewChild</string>
+   </property>
+   <property name="toolTip">
+    <string>Добавить</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="../../geo/view/icons/ViewWindowRes.qrc"/>
+  <include location="icons/ViewWindowRes.qrc"/>
  </resources>
  <connections/>
 </ui>

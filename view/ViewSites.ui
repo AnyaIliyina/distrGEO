@@ -81,6 +81,9 @@ border-width:2px
    <property name="text">
     <string>&amp;New</string>
    </property>
+   <property name="toolTip">
+    <string>Добавить</string>
+   </property>
   </action>
   <action name="action_Delete">
    <property name="icon">
@@ -89,6 +92,9 @@ border-width:2px
    </property>
    <property name="text">
     <string>&amp;Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Удалить</string>
    </property>
   </action>
   <action name="action_Edit">
@@ -99,6 +105,9 @@ border-width:2px
    <property name="text">
     <string>&amp;Edit</string>
    </property>
+   <property name="toolTip">
+    <string>Редактировать</string>
+   </property>
   </action>
   <action name="action_Yes">
    <property name="icon">
@@ -107,6 +116,9 @@ border-width:2px
    </property>
    <property name="text">
     <string>&amp;Yes</string>
+   </property>
+   <property name="toolTip">
+    <string>Применить</string>
    </property>
   </action>
   <action name="action_No">
@@ -117,6 +129,9 @@ border-width:2px
    <property name="text">
     <string>&amp;No</string>
    </property>
+   <property name="toolTip">
+    <string>Отменить</string>
+   </property>
   </action>
   <action name="action_OpenUrl">
    <property name="icon">
@@ -125,6 +140,9 @@ border-width:2px
    </property>
    <property name="text">
     <string>&amp;OpenUrl</string>
+   </property>
+   <property name="toolTip">
+    <string>Перейти по ссылке</string>
    </property>
   </action>
  </widget>

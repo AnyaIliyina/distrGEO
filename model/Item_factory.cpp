@@ -1,5 +1,6 @@
 #include "item_factory.h"
-
+#include "Resources.h"
+#include "Departments.h"
 #include "types.h"
 #include "Geodata.h"
 
@@ -20,10 +21,12 @@ BaseItem* ItemFactory::loadFromDb(int type) {
 BaseItem* ItemFactory::createNew(int type) {
 	switch (type)
 	{
-	
 	case ItemTypes::GeodataType:
 		return new Geodata();
-	
+	case ItemTypes::ResourceType:
+		return new Resources();
+	case ItemTypes::DepartmentType:
+		return new Departments();
 	default:
 		return NULL;
 	}
