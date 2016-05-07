@@ -80,10 +80,10 @@ int SM_Session::parseIfNeeded(Parser* p)
 		Site site = m_sites.at(i);
 		if (site.url().contains(p->url()))
 		{
-			result = p->parse(site.site_id());
+			result = p->parse(site.id());
 			
 			if (result == 0)
-				Geodata_record::deleteOldSmRecords(site.site_id());
+				Geodata_record::deleteOldSmRecords(site.id());
 		}
 	}
 	return result;
