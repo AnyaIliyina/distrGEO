@@ -4,6 +4,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QDebug>
+#include <QSqlError>
+#include "Database.h"
 
 /*!
 *	\file
