@@ -5,6 +5,7 @@
 #include "ParserGisLub.h"
 #include "ParserGeofabrik.h"
 #include "Site.h"
+#include "Language.h"
 #include "MainWindow.h"
 #include "Multilist.h"
 #include "Site.h"
@@ -17,26 +18,20 @@
 int main(int argc, char* argv[])
 {	
 	QApplication app(argc, argv);
-	/*MultiListWidget *multiList = new MultiListWidget();
-
-	multiList->addItems(QStringList() << "One" << "Two" << "Three" << "Four");
-	multiList->setCheckedItems(QStringList() << "One" << "Three");
-
-	QHBoxLayout *layout = new QHBoxLayout();
-
-	layout->addWidget(new QLabel("Select items:"));
-	layout->addWidget(multiList, 1);
-
-	QWidget widget;
-
-	widget.setWindowTitle("MultiList example");
-	widget.setLayout(layout);
-
-	widget.show();
-
-	return app.exec();*/
 	Database::restore();
-	//qDebug() << "site " << Site(1).languages().count();
+	
+	// все языки:
+	QStringList languagesList = Language::getList();
+	
+	// конкретный сайт и его языки:
+	Site *site = new Site(1);
+	QStringList siteLangs;
+
+	QList<int>ids = site->languageIDs();
+	for (int i = 0; i < ids.count(); i++)
+		siteLangs << languagesList.at(ids.at(i));
+	qDebug() << siteLangs.at(0);
+
 	MainWindow *w = new MainWindow();
 	return app.exec();
 };

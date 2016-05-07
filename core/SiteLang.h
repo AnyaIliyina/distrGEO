@@ -42,14 +42,16 @@ public:
 	/*! Возвращает список языков интернет-ресурса
 	\param int site_id - id интернет-ресурса
 	\return QList<int> langIds - список из id поддерживаемых языков*/
-	static QList<int>languagesOfSite(int site_id);
+	static QList<int>languagesBySite(int site_id);
 
-	/*! Удаляет пару site_id - language_id из базы
+	/*! Удаляет все пары site_id - language_id, 
+	в которых упоминается интернет-ресурс site_id
 	\param int site_id - id интернет-ресурса
-	\param int language_id - id языка*/
-	static void deletePair(int site_id, int language_id);
+	*/
+//	static void deleteBySite(int site_id);
 
-	/*! Создает таблицу site_langs*/
+	/*! Создает таблицу site_langs
+	\return true - таблица создана*/
 	static bool createTable();
 };
 

@@ -31,7 +31,6 @@ void SiteLang::insertIntoDatabase(int session_id)
 		db.close();
 		Log::create(session_id, "SiteLang: insert", id);
 	}
-
 }
 
 QList<int> SiteLang::sitesByLanguage(int language_id)
@@ -54,24 +53,24 @@ QList<int> SiteLang::sitesByLanguage(int language_id)
 	return siteIds;
 }
 
-QList<int> SiteLang::languagesOfSite(int site_id)
+QList<int> SiteLang::languagesBySite(int site_id)
 {
-	QList<int>siteIds;
+	QList<int>langIds;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	query.prepare("SELECT language_id FROM site_langs WHERE site_id =?");
 	query.addBindValue(site_id);
 	if (!query.exec())
 	{
-		qDebug() << "SiteLang::languagesOfSite(int site_id) error";
+		qDebug() << "SiteLang::languagesBySite(int site_id) error";
 		qDebug() << query.lastError().text();
 		db.close();
 	}
 	while (query.next())
-		siteIds << query.value(0).toInt();
+		langIds << query.value(0).toInt();
 
 	db.close();
-	return siteIds;
+	return langIds;
 	
 }
 
@@ -82,8 +81,8 @@ bool SiteLang::createTable()
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_langs (\
 		site_id INTEGER,		\
 		language_id INTEGER,   \
-		FOREIGN KEY(site_id) REFERENCES sites(id),\
-		FOREIGN KEY(language_id) REFERENCES languages(id)\
+		FOREIGN KEY(site_id) REFERENCES sites(id) ON DELETE CASCADE ON UPDATE CASCADE,\
+		FOREIGN KEY(language_id) REFERENCES languages(id) ON DELETE CASCADE ON UPDATE CASCADE\
 		)"
 		)))
 	{

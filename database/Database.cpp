@@ -9,10 +9,13 @@
 #include "Session.h"
 #include "Usertype.h"
 #include "Log.h"
+#include "GeodataType.h"
 #include "Site.h"
 #include "Geodata_record.h"
 #include "Language.h"
 #include "Region.h"
+#include "SiteRegion.h"
+#include "SiteType.h"
 #include <QFileInfo>
 /*!
 \file
@@ -117,9 +120,19 @@ void Database::configure()
 		// Geodata_record::completeTable();
 		Session::createTable();
 		Session::completeTable();
+		GeodataType::createTable();
+		GeodataType::completeTable();
 		Department::createTable();
 		Department::completeTable();
 		Region::createTable();
 		Region::completeTable();
-		SiteLang::createTable();
+		createBridgeTables();
+		
+}
+
+void Database::createBridgeTables()
+{
+	SiteRegion::createTable();
+	SiteLang::createTable();
+	SiteType::createTable();
 }

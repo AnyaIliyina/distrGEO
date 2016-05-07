@@ -6,7 +6,7 @@
 #include "Language.h"
 #include "SiteLang.h"
 
-//QStringList Site::langList = Language::getList();
+
 
 const QString & Site::name() const
 {
@@ -234,6 +234,11 @@ bool Site::completeTable()
 		<< Site("http://www.afanas.ru/mapbase/", "afanas.ru")
 		<< Site("http://download.geofabrik.de/index.html", "geofabrik.de");
 	return insert(sites);
+}
+
+QList<int> Site::languageIDs()
+{
+	return SiteLang::languagesBySite(m_id);
 }
 
 QList<Site> Site::sitesByStatus(int statusId)

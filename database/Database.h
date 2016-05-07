@@ -25,6 +25,10 @@ private:
 	"State", "Scale", "User", "Status", "Session", "Usertype" */
 	static void configure();
 
+	/*! Создает в базе вспомогательные таблицы site_regions, site_langs,
+	site_types*/
+	static void createBridgeTables();
+
 public:
 	/*!	Возвращает открытое подключение к базе.
 	\return QSqlDatabase db - подключение к базе */

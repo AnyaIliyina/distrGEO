@@ -26,7 +26,7 @@ private:
 	int m_status_id;
 	QString m_name;
 	QString m_comment;
-	//static QStringList langList;
+	
 public:
 	
 	/*!
@@ -112,6 +112,9 @@ public:
 	\return true - если таблица успешно заполнена
 	*/
 	static bool completeTable();
+
+	/*! Возвращает id языков, поддерживаемых сайтом */
+	QList<int> languageIDs();
 	
 	/*!
 	\brief Возвращает список сайтов с определенным status_id
