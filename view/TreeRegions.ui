@@ -64,7 +64,7 @@
   <action name="action_NewParent">
    <property name="icon">
     <iconset resource="icons/ViewWindowRes.qrc">
-     <normaloff>:/Bezymyanny.png</normaloff>:/Bezymyanny.png</iconset>
+     <normaloff>:/plus+.png</normaloff>:/plus+.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
