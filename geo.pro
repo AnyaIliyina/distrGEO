@@ -11,21 +11,20 @@ SOURCES += database/Database.cpp \
 	core/Site.cpp core/Format.cpp core/Geodata_record.cpp core/Usertype.cpp core/Department.cpp\
 	core/Log.cpp core/Language.cpp core/RecordLang.cpp core/GeodataType.cpp core/RecordType.cpp\
 	view/MainWindow.cpp view/LoginDialog.cpp  view/TreeRegions.cpp view/ViewDepartments.cpp view/ViewSites.cpp\
-	view/SearchForm.cpp view/NewSource.cpp view/ViewWindow.cpp  view/Combo_delegate.cpp  view/Multilist.cpp\
+	view/Combo_delegate.cpp  view/Multilist.cpp\
 	model/Base_item.cpp model/Item_model.cpp model/Item_factory.cpp \
 	model/SortFilterProxyModel.cpp model/Geodata.cpp 
 
 HEADERS += database/Database.h \
 	search_module/SM_Session.h search_module/Parser.h search_module/ParserGisLub.h\
 	search_module/ParserGeofabrik.h \
-	core/Site.h core/Format.h core/State.h core/Scale.h core/User.h core/Status.h \
-	core/Usertype.h core/Session.h core/Geodata_record.h core/Department.h \ 
-	core/Log.h core/Language.h core/RecordLang.h core/GeodataType.h core/RecordType.h\
+	core/Department.h core/Format.h core/Geodata_record.h core/GeodataType.h  core/Language.h\
+	core/Log.h core/Usertype.h core/Session.h  \ 
+	 core/RecordLang.h core/RecordType.h core/Site.h core/State.h core/Scale.h core/User.h core/Status.h\
 	view/MainWindow.h view/LoginDialog.h view/TreeRegions.h view/ViewDepartments.h view/ViewSites.h \
-	view/SearchForm.h view/NewSource.h view/ViewWindow.h view/Multilist.h view/Combo_delegate.h  \
+	 view/Multilist.h view/Combo_delegate.h  \
 	model/Base_item.h model/Item_model.h model/Item_factory.h \
 	model/SortFilterProxyModel.h model/Geodata.h model/Types.h
 
 FORMS +=  view/LoginDialog.ui view/MainWindow.ui \
-	view/SearchForm.ui view/NewSource.ui view/ViewWindow.ui \
 	view/TreeRegions.ui view/ViewDepartments.ui view/ViewSites.ui

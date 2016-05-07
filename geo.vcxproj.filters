@@ -47,7 +47,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\Base_item.cpp">
+    <ClCompile Include="model\Base_item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\Combo_delegate.cpp">
@@ -56,19 +56,28 @@
     <ClCompile Include="database\Database.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\Department.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="core\Format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\Geodata.cpp">
+    <ClCompile Include="model\Geodata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GeodataType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\Geodata_record.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\Item_factory.cpp">
+    <ClCompile Include="model\Item_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\Item_model.cpp">
+    <ClCompile Include="model\Item_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Language.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\Log.cpp">
@@ -92,6 +101,12 @@
     <ClCompile Include="search_module\ParserGisLub.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\RecordLang.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\RecordType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="search_module\SM_Session.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -104,7 +119,7 @@
     <ClCompile Include="core\Site.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\SortFilterProxyModel.cpp">
+    <ClCompile Include="model\SortFilterProxyModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\State.cpp">
@@ -133,7 +148,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\Base_item.h">
+    <ClInclude Include="model\Base_item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="view\Combo_delegate.h">
@@ -142,21 +157,30 @@
     <ClInclude Include="database\Database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="core\Department.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="core\Format.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="core\Geodata.h">
+    <ClInclude Include="model\Geodata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GeodataType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\Geodata_record.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\Item_factory.h">
+    <ClInclude Include="model\Item_factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="core\Item_model.h">
+    <CustomBuild Include="model\Item_model.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="core\Language.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="core\Log.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -178,6 +202,12 @@
     <CustomBuild Include="search_module\ParserGisLub.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="core\RecordLang.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\RecordType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="search_module\SM_Session.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -190,7 +220,7 @@
     <ClInclude Include="core\Site.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="core\SortFilterProxyModel.h">
+    <CustomBuild Include="model\SortFilterProxyModel.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="core\State.h">
@@ -202,7 +232,7 @@
     <CustomBuild Include="view\TreeRegions.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="core\Types.h">
+    <ClInclude Include="model\Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\User.h">
@@ -223,6 +253,12 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_Combo_delegate.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Department.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Department.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_Format.cpp">

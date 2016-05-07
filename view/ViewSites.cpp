@@ -157,7 +157,7 @@ void ViewSites::createTable()
 	auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
 	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
 
-	auto comboDelegateFormat = new ComboDelegate(Format::getFormatNames(), this);
+	auto comboDelegateFormat = new ComboDelegate(Format::getNames(), this);
 	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
 
 	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);

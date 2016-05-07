@@ -22,6 +22,7 @@ MainWindow::MainWindow(QMainWindow *parent)
 	
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
+	QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int index)), this, SLOT(slotTabConfigure(int index)));
 	ld->slotShowLD();
 
 	
@@ -50,9 +51,26 @@ void MainWindow::slotConfigure()
 	m_vd = new ViewDepartments();
 	m_vs = new ViewSites();
 	m_tr = new TreeRegions();
-	ui->tabWidget->addTab(m_vs, "Интернет-ресурсы");
-	ui->tabWidget->addTab(m_vd, "Ведомства");
+	tree = new QTreeView();
+
+	QWidget *departaments = new QWidget();
+	QWidget *sites = new QWidget();
+
+	QHBoxLayout *layoutDepart = new QHBoxLayout();
+	QHBoxLayout *layoutSites = new QHBoxLayout();
+
+	layoutDepart->addWidget(m_vd);
+	layoutDepart->addWidget(tree);
+	layoutSites->addWidget(m_vs);
+	layoutSites->addWidget(tree);
+
+	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
+	ui->tabWidget->addTab(departaments, "Ведомства");
 	ui->tabWidget->addTab(m_tr, "Регионы");
+	
+	departaments->setLayout(layoutDepart);
+	sites->setLayout(layoutSites);
+
 	QStatusBar *status = new QStatusBar();
 	setStatusBar(status);
 	showMW();
@@ -65,6 +83,11 @@ void MainWindow::slotStartSession(int user_id)
 	Session::createSession(user_id);
 	qDebug() << "SEEEEEEEEEE" << Database::currentSessionId();
 	slotConfigure();
+}
+
+void MainWindow::slotTabConfigure(int index)
+{
+
 }
 
 

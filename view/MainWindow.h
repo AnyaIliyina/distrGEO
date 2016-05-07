@@ -37,7 +37,11 @@ private:
 	ViewDepartments *m_vd;
 	ViewSites *m_vs;
 	TreeRegions *m_tr;
-
+	QTreeView *tree;
+	QHBoxLayout *vslayout;
+	QHBoxLayout *vdlayout;
+	QWidget *sites;
+	QWidget *departaments;
 private slots:
 	/*!
 	Выводит сообщение на панель StatusBar
@@ -60,6 +64,8 @@ private slots:
 	Начинает сессию для пользователя user_id
 	\param  user_id - идентификатор пользователя */
 	void slotStartSession(int user_id);
+
+	void slotTabConfigure(int index);
 };
 
 

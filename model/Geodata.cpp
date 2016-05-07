@@ -295,7 +295,7 @@ QList<BaseItem*> Geodata::loadItemsFromDb() {
 void Geodata::getFormatId()
 {
 	qDebug() << "getting FormatId...";
-	m_format_id = Format::format_id(m_format_name);
+	m_format_id = Format::id(m_format_name);
 	qDebug() << "m_formatId = " << m_format_id;
 }
 
