@@ -1,7 +1,9 @@
 #include "GeodataType.h"
 #include "Database.h"
 #include <QStringList>
-
+#include <QSqlQuery>
+#include <QDebug>
+#include <QSqlError>
 bool GeodataType::createTable()
 {
 	QSqlDatabase db = Database::database();
