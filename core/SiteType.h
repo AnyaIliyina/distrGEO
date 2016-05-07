@@ -7,8 +7,8 @@
 
 /*!
 \file
-\brief    Тип карты
-(таблица record_langs)
+\brief    Типы ГПИ, предоставляемой интернет-ресурсом
+(таблица syte_types)
 \author   Ильина А.
 \date     май 2016
 */
@@ -17,8 +17,8 @@
 class RecordType {
 private:
 	int m_id;
-	int m_record_id;
-	int m_language_id;
+	int m_site_id;
+	int m_type_id;
 
 };
 

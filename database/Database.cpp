@@ -3,6 +3,7 @@
 #include "Format.h"
 #include "State.h"
 #include "Scale.h"
+#include "SiteLang.h"
 #include "User.h"
 #include "Status.h"
 #include "Session.h"
@@ -11,6 +12,7 @@
 #include "Site.h"
 #include "Geodata_record.h"
 #include "Language.h"
+#include "Region.h"
 #include <QFileInfo>
 /*!
 \file
@@ -94,6 +96,9 @@ QSqlDatabase Database::database()
 */
 void Database::configure()
 {
+		Log::createTable();
+		Language::createTable();
+		Language::completeTable();
 		Site::createTable();
 		Site::completeTable();
 		Format::createTable();
@@ -113,7 +118,8 @@ void Database::configure()
 		Session::createTable();
 		Session::completeTable();
 		Department::createTable();
-		Language::createTable();
-		Language::completeTable();
-		Log::createTable();
+		Department::completeTable();
+		Region::createTable();
+		Region::completeTable();
+		SiteLang::createTable();
 }

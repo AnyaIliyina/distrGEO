@@ -30,6 +30,7 @@ private:
 	QString m_fax = "";
 	QString m_phone;
 	QString m_comment = "";
+	static QStringList languages;
 public:
 	Department();
 	~Department();
@@ -135,4 +136,10 @@ public:
 	/*! Создает в БД таблицу Ведомства
 	\return true - таблица создана*/
 	static bool createTable();
+
+	/*!
+	Заполняет таблицу "departments" в БД начальными значениями.
+	\return true - если таблица успешно заполнена
+	*/
+	static bool completeTable();
 };

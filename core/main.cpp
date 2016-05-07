@@ -7,6 +7,7 @@
 #include "Site.h"
 #include "MainWindow.h"
 #include "Multilist.h"
+#include "Site.h"
 
 /*!
 \file
@@ -35,6 +36,7 @@ int main(int argc, char* argv[])
 
 	return app.exec();*/
 	Database::restore();
+	//qDebug() << "site " << Site(1).languages().count();
 	MainWindow *w = new MainWindow();
 	return app.exec();
 };

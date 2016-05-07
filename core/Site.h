@@ -26,6 +26,7 @@ private:
 	int m_status_id;
 	QString m_name;
 	QString m_comment;
+	//static QStringList langList;
 public:
 	
 	/*!
@@ -57,6 +58,10 @@ public:
 	\return int status_id - id статуса;
 	*/
 	int status_id() const;
+
+	/*! Возвращает список языков сайта
+	\return QStringList language - список языков*/
+//	QStringList languages();
 
 	/*!
 	Изменяет статус сайта в базе

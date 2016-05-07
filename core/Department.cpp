@@ -5,6 +5,7 @@
 #include "Database.h"
 #include "Log.h"
 
+
 /*!
 \file
 \brief  
@@ -124,7 +125,7 @@ bool Department::insertIntoDatabase(int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO departments (name, country, adress, mail, fax, phone)\
+	query.prepare("INSERT INTO departments ( name, country, adress, mail, fax, phone, comment)\
 		VALUES (?, ?, ?, ?, ?, ?, ?)");
 	query.addBindValue(m_name);
 	query.addBindValue(m_country);
@@ -144,7 +145,7 @@ bool Department::insertIntoDatabase(int session_id)
 	else {
 		m_id = query.lastInsertId().toInt();
 		db.close();
-		Log::create(session_id, "Site: insert", m_id);
+		Log::create(session_id, "Department: insert", m_id);
 		return true;
 	}
 }
@@ -208,7 +209,7 @@ bool Department::createTable()
 		name     TEXT    UNIQUE NOT NULL,\
 		country TEXT NOT NULL,\
 		adress TEXT NOT NULL,\
-		male     TEXT  NOT NULL ,\
+		mail     TEXT  NOT NULL ,\
 		fax     TEXT   ,\
 		phone    TEXT NOT NULL  ,\
 		comment     TEXT   \
@@ -222,4 +223,17 @@ bool Department::createTable()
 	}
 	db.close();
 	return true;
+}
+
+bool Department::completeTable()
+{
+	Department* d = new Department();
+	d->setAdress("190031, г. Санкт-Петербург, Московский пр., д. 12");
+	d->setCountry("Россия");
+	d->setMail("hydep@hydrograph.spb.su");
+	d->setName("ФГУП \"Гидрографическое предприятие\"");
+	d->setPhone("(812) 310-37-68");
+	bool succeded = d->insertIntoDatabase();
+	delete d;
+	return succeded;
 }

@@ -3,6 +3,10 @@
 #include <QSqlError>
 #include <QSqlTableModel>
 #include <QSqlRecord>
+#include "Language.h"
+#include "SiteLang.h"
+
+//QStringList Site::langList = Language::getList();
 
 const QString & Site::name() const
 {
@@ -65,6 +69,15 @@ int Site::status_id() const
 {
 	return m_status_id;
 }
+
+//QStringList Site::languages()
+//{
+//	QStringList languages;
+//	QList<int> indexes = SiteLang::languagesOfSite(m_id);
+//	for (int i = 0; i < indexes.count(); i++)
+//		languages << langList.at(i);
+//	return languages;
+//}
 
 bool Site::setStatusId(int site_id, int status_id, int session_id)
 {
