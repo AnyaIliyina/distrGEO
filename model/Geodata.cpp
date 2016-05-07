@@ -193,7 +193,7 @@ bool Geodata::save() {
 		//Создание
 		Geodata_record* ngdr = new Geodata_record(m_site_id, m_format_id, m_place_name,  Database::currentSessionId(), m_state_id, m_scale_id, m_url, m_comment );
 		qDebug() << ngdr->insertIntoDatabase();
-		m_id = ngdr->record_id();
+		m_id = ngdr->id();
 		delete ngdr;
 
 
@@ -203,7 +203,7 @@ bool Geodata::save() {
 		Geodata_record *ngdr = new Geodata_record( m_site_id, m_format_id, m_place_name, Database::currentSessionId(), m_state_id, m_scale_id, m_url, m_comment );
 		ngdr->setRecordId(m_id);
 		ngdr->updateRecord();
-		m_id = ngdr->record_id();
+		m_id = ngdr->id();
 		delete ngdr;
 	}
 
