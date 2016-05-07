@@ -11,7 +11,7 @@ QString User::login()
 
 User::User(int type_id, const QString& login, const QString& password)
 {
-	m_user_id = 0;
+	m_id = 0;
 	m_type_id = type_id;
 	m_login = login;
 	m_password = password;
@@ -22,7 +22,7 @@ User::User(int id)
 	QSqlDatabase db = Database::database();
 	QSqlTableModel model(nullptr, db);
 	model.setTable("users");
-	const QString filter = QString("user_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
 	QString login = model.record(0).value("login").toString();
@@ -30,7 +30,7 @@ User::User(int id)
 	int type_id = model.record(0).value("type_id").toInt();
 	db.close();
 
-	m_user_id = id;
+	m_id = id;
 	m_type_id = type_id;
 	m_login = login;
 	m_password = password;
@@ -76,7 +76,7 @@ int User::user_id(const QString & login)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT user_id FROM users WHERE login=\'" + login + "\'"))
+	if (!query.exec("SELECT id FROM users WHERE login=\'" + login + "\'"))
 		return -1;	
 	if (query.next())
 		return query.value(0).toInt();		
@@ -108,9 +108,9 @@ bool User::insert(QList<User> users)
 	return false;
 }
 
-int User::user_id()
+int User::id()
 {
-	return m_user_id;
+	return m_id;
 }
 
 bool User::insertIntoDatabase()
@@ -137,11 +137,11 @@ bool User::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS  users (\
-		user_id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
+		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		type_id     integer     NOT NULL,\
 		login NVARCHAR(16) UNIQUE NOT NULL,\
 		password NVARCHAR(16),\
-		FOREIGN KEY(type_id) REFERENCES usertypes(type_id)\
+		FOREIGN KEY(type_id) REFERENCES usertypes(id)\
 		 )"
 		))
 	{

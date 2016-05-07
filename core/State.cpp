@@ -7,44 +7,44 @@
 
 QString State::state_name()
 {
-	return m_state_name;
+	return m_name;
 }
 
 State::State(QString state_name)
 {
-	m_state_name = state_name;
-	m_state_id = 0;
+	m_name = state_name;
+	m_id = 0;
 }
 
 State::State(int id)
 {
 	QSqlDatabase db = Database::database();
-	QSqlTableModel model(this, db);
+	QSqlTableModel model(nullptr, db);
 	model.setTable("states");
-	const QString filter = QString("state_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
-	QString state_name = model.record(0).value("state_name").toString();
+	QString state_name = model.record(0).value("name").toString();
 	db.close();
 
-	m_state_id = id;
-	m_state_name= state_name;
+	m_id = id;
+	m_name= state_name;
 }
 
 State::~State()
 {
 }
 
-int State::state_id()
+int State::id()
 {
-	return m_state_id;
+	return m_id;
 }
 
 int State::state_id(QString state_name)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if (!query.exec("SELECT state_id FROM states WHERE state_name=\'" + state_name + "\'"))
+	if (!query.exec("SELECT id FROM states WHERE name=\'" + state_name + "\'"))
 	{
 		qDebug() << query.lastError().text();
 		return -1;
@@ -63,9 +63,9 @@ bool State::insertIntoDatabase()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO states(state_name)\
+	query.prepare("INSERT INTO states(name)\
 	VALUES (?)");
-	query.addBindValue(m_state_name);
+	query.addBindValue(m_name);
 	if (!query.exec()) {
 		qDebug() << "State::insertIntoDatabase(): error inserting into Table states";
 		qDebug() << query.lastError().text();
@@ -81,12 +81,12 @@ bool State::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS states (\
-		state_id INTEGER PRIMARY KEY AUTOINCREMENT, \
-		state_name TEXT UNIQUE NOT NULL\
+		id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		name TEXT UNIQUE NOT NULL\
 		)"
 		))
 	{
-		qDebug() << "error creating states Table in database";
+		qDebug() << "error creating States table in database";
 		qDebug() << query.lastError().text();
 		db.close();
 		return false;
@@ -101,7 +101,7 @@ bool State::insert(QStringList stateNames)
 	QSqlQuery query(db);
 	for (int i = 0; i < stateNames.count(); i++)
 	{
-		query.prepare("INSERT INTO states(state_name)\
+		query.prepare("INSERT INTO states(name)\
 	VALUES (?)");
 		query.addBindValue(stateNames.at(i));
 		if (!query.exec()) {
@@ -130,7 +130,7 @@ QStringList State::getStates()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	QStringList listStates;
-	if (!query.exec("SELECT state_name FROM states"))
+	if (!query.exec("SELECT name FROM states"))
 	{
 		qDebug() << query.lastError().text();
 		db.close();

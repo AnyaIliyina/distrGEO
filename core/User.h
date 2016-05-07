@@ -16,7 +16,7 @@
 
 class User {
 	private:
-	int m_user_id;
+	int m_id;
 	int m_type_id;
 	QString m_login;
 	QString m_password;
@@ -80,7 +80,7 @@ public:
 	Возвращает id пользователя
 	\return int user_id - id пользователя в базе
 	*/
-	int user_id();
+	int id();
 	
 	/*!
 	Записывает информацию о пользователе в базу данных.

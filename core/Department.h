@@ -27,8 +27,9 @@ private:
 	QString m_country;
 	QString m_adress;
 	QString m_mail;
-	QString m_fax;
+	QString m_fax = "";
 	QString m_phone;
+	QString m_comment = "";
 public:
 	Department();
 	~Department();
@@ -69,6 +70,11 @@ public:
 	const QString & fax() const;
 
 	/*!
+	Возвращает комментарий
+	\return const QString& comment - комментарий*/
+	const QString & comment() const;
+
+	/*!
 	Присваивает ведомству название
 	\param const QString& name - имя*/
 	void setName(const QString& name);
@@ -97,6 +103,11 @@ public:
 	Присваивает email ведомству
 	\param const QString& mail */
 	void setMail(const QString& mail);
+
+	/*!
+	Добавляет комментарий
+	\param const QString& comment */
+	void setComment(const QString& comment);
 
 
 	// ----------- Методы, обращающиеся к базе ----------

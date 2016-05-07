@@ -53,6 +53,11 @@ const QString & Department::fax() const
 	return m_fax;
 }
 
+const QString & Department::comment() const
+{
+	return m_comment;
+}
+
 void Department::setName(const QString & name)
 {
 	m_name = name;
@@ -83,6 +88,11 @@ void Department::setMail(const QString & mail)
 	m_mail = mail;
 }
 
+void Department::setComment(const QString & comment)
+{
+	m_comment = comment;
+}
+
 Department::Department(int id)
 {
 	QSqlDatabase db = Database::database();
@@ -97,6 +107,7 @@ Department::Department(int id)
 	QString mail = model.record(0).value("mail").toString();
 	QString fax = model.record(0).value("fax").toString();
 	QString phone = model.record(0).value("phone").toString();
+	QString comment = model.record(0).value("comment").toString();
 	db.close();
 
 	m_id = id;
@@ -106,6 +117,7 @@ Department::Department(int id)
 	m_mail = mail;
 	m_fax = fax;
 	m_phone = phone;
+	m_comment = comment;
 }
 
 bool Department::insertIntoDatabase(int session_id)
@@ -113,13 +125,14 @@ bool Department::insertIntoDatabase(int session_id)
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	query.prepare("INSERT INTO departments (name, country, adress, mail, fax, phone)\
-		VALUES (?, ?, ?, ?, ?, ?)");
+		VALUES (?, ?, ?, ?, ?, ?, ?)");
 	query.addBindValue(m_name);
 	query.addBindValue(m_country);
 	query.addBindValue(m_adress);
 	query.addBindValue(m_mail);
 	query.addBindValue(m_fax);
 	query.addBindValue(m_phone);
+	query.addBindValue(m_comment);
 	if (!query.exec()) {
 		qDebug() << "Department::insertIntoDatabase():  error inserting into table Departments";
 		QString errorString = query.lastError().text();
@@ -144,13 +157,15 @@ bool Department::update(int session_id)
 					SET\
 					name=:name, country=:country, \
 					adress=:adress, mail=:mail, fax=:fax,\
-					phone=:phone WHERE id=:id");
+					phone=:phone, comment=:comment \
+						 WHERE id=:id");
 	query.bindValue(":name", m_name);
 	query.bindValue(":country", m_country);
 	query.bindValue(":adress", m_adress);
 	query.bindValue(":mail", m_mail);
 	query.bindValue(":fax", m_fax);
 	query.bindValue(":phone", m_phone);
+	query.bindValue(":comment", m_comment);
 	query.bindValue(":id", m_id);
 	if (!query.exec()) {
 		qDebug() << "Department::update():  error";
@@ -193,9 +208,10 @@ bool Department::createTable()
 		name     TEXT    UNIQUE NOT NULL,\
 		country TEXT NOT NULL,\
 		adress TEXT NOT NULL,\
-		male     TEXT   ,\
+		male     TEXT  NOT NULL ,\
 		fax     TEXT   ,\
-		phone    TEXT   ,\
+		phone    TEXT NOT NULL  ,\
+		comment     TEXT   \
 		)"
 		)))
 	{

@@ -26,7 +26,7 @@ bool Log::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS logs (\
-		log_id   INTEGER         PRIMARY KEY AUTOINCREMENT, \
+		id   INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		session_id INTEGER NOT NULL,\
 		operation_name TEXT NOT NULL,\
 		object_id INTEGER,\

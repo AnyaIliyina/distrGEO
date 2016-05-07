@@ -21,10 +21,10 @@
 
 class Geodata_record {
 private:
-	int m_record_id;
+	int m_id;
 	int m_site_id;
 	int m_session_id;
-	int m_id;
+	int m_format_id;
 	int m_scale_id = 1;
 	int m_state_id;
 	QString m_place_name;
@@ -38,7 +38,7 @@ public:
 	Возвращает id георесурса
 	\return int record_id - id ресурса
 	*/
-	int record_id();
+	int id();
 
 	/*!
 	Возвращает адрес ресурса
@@ -57,7 +57,7 @@ public:
 	Возвращает id формата
 	\return int format_id
 	*/
-	int id();
+	int format_id();
 
 
 	/*!
@@ -112,10 +112,11 @@ public:
 	\param const QString& url - адрес ресурса;
 	\param const QString& commant - комментарий;
 	*/
-	Geodata_record(int site_id, int id, const QString& place_name,
+	Geodata_record(int site_id, int format_id, const QString& place_name,
 		int session_id=1, int scale_id=1, int state_id=1, const QString& url=" ",
 		const QString& comment =" ");
-		
+	
+	/*! Деструктор */
 	~Geodata_record();
 
 

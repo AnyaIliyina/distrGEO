@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <QObject>
 #include <QString>
@@ -18,8 +18,8 @@
 class Usertype : public QObject{
 	Q_OBJECT
 private:
-	int m_type_id;
-	QString m_type_name;
+	int m_id;
+	QString m_name;
 
 public:
 	QString type_name();
@@ -45,7 +45,7 @@ public:
 	Возвращает id типа пользователя
 	\return int type_id - id типа пользователя
 	*/
-	int type_id();
+	int id();
 	
 	/*!
 	Записывает информацию о типе пользователя в базу данных.

@@ -18,8 +18,8 @@
 class State : public QObject {
 	Q_OBJECT
 private:
-	int m_state_id;
-	QString m_state_name;
+	int m_id;
+	QString m_name;
 
 public:
 	QString state_name();
@@ -45,7 +45,7 @@ public:
 	Возвращает id статуса
 	\return int state_id - id статуса
 	*/
-	int state_id();
+	int id();
 	
 	/*!
 	Возвращает id статуса

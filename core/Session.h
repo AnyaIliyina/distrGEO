@@ -22,7 +22,7 @@
 class Session: public QObject  {
 	Q_OBJECT
 private:
-	int m_session_id;
+	int m_id;
 	int m_user_id;
 	QDateTime m_date;
 
@@ -42,7 +42,7 @@ public:
 	Возвращает id сессии
 	\return int session_id - id сессии
 	*/
-	int session_id();
+	int id();
 	
 	/*!
 	Записывает информацию о сессии в базу данных.

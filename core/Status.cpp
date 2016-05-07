@@ -7,8 +7,8 @@
 
 Status::Status(QString status_name)
 {
-	m_status_id = 0;
-	m_status_name = status_name;
+	m_id = 0;
+	m_name = status_name;
 }
 
 Status::Status(int id)
@@ -16,37 +16,37 @@ Status::Status(int id)
 	QSqlDatabase db = Database::database();
 	QSqlTableModel model(this, db);
 	model.setTable("statuses");
-	const QString filter = QString("status_id == %1").arg(id);
+	const QString filter = QString("id == %1").arg(id);
 	model.setFilter(filter);
 	model.select();
-	QString status_name = model.record(0).value("status_name").toString();
+	QString status_name = model.record(0).value("name").toString();
 	db.close();
 
-	m_status_id = id;
-	m_status_name = status_name;
+	m_id = id;
+	m_name = status_name;
 }
 
 Status::~Status()
 {
 }
 
-QString Status::status_name()
+const QString& Status::name()
 {
-	return m_status_name;
+	return m_name;
 }
 
-int Status::status_id()
+int Status::id()
 {
-	return m_status_id;
+	return m_id;
 }
 
 bool Status::insertIntoDatabase()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO statuses(status_name)\
+	query.prepare("INSERT INTO statuses(name)\
 	VALUES (?)");
-	query.addBindValue(m_status_name);
+	query.addBindValue(m_name);
 	if (!query.exec()) {
 		qDebug() << "Status::insertIntoDatabase(): error inserting into Table statuses";
 		qDebug() << query.lastError().text();
@@ -62,8 +62,8 @@ bool Status::createTable()
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec("CREATE TABLE IF NOT EXISTS statuses (\
-		status_id INTEGER PRIMARY KEY AUTOINCREMENT, \
-		status_name TEXT UNIQUE NOT NULL\
+		id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		name TEXT UNIQUE NOT NULL\
 		)"
 		))
 	{
@@ -91,7 +91,7 @@ bool Status::insert(QStringList statusNames)
 	QSqlQuery query(db);
 	for (int i = 0; i < statusNames.count(); i++)
 	{
-		query.prepare("INSERT INTO statuses(status_name)\
+		query.prepare("INSERT INTO statuses(name)\
 	VALUES (?)");
 		query.addBindValue(statusNames.at(i));
 		if (!query.exec()) {
