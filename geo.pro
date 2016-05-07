@@ -11,7 +11,7 @@ SOURCES += database/Database.cpp \
 	core/Site.cpp core/Format.cpp core/Geodata_record.cpp core/Usertype.cpp core/Department.cpp\
 	core/Log.cpp core/Language.cpp core/RecordLang.cpp core/GeodataType.cpp core/RecordType.cpp\
 	view/MainWindow.cpp view/LoginDialog.cpp  view/TreeRegions.cpp view/ViewDepartments.cpp view/ViewSites.cpp\
-	view/Combo_delegate.cpp  view/Multilist.cpp\
+	view/Combo_delegate.cpp  view/Multilist.cpp view/EditDepartments.cpp view/EditSites.cpp\
 	model/Base_item.cpp model/Item_model.cpp model/Item_factory.cpp \
 	model/SortFilterProxyModel.cpp model/Geodata.cpp 
 
@@ -22,9 +22,9 @@ HEADERS += database/Database.h \
 	core/Log.h core/Usertype.h core/Session.h  \ 
 	 core/RecordLang.h core/RecordType.h core/Site.h core/State.h core/Scale.h core/User.h core/Status.h\
 	view/MainWindow.h view/LoginDialog.h view/TreeRegions.h view/ViewDepartments.h view/ViewSites.h \
-	 view/Multilist.h view/Combo_delegate.h  \
+	 view/Multilist.h view/Combo_delegate.h view/EditDepartments.h view/EditSites.h \
 	model/Base_item.h model/Item_model.h model/Item_factory.h \
 	model/SortFilterProxyModel.h model/Geodata.h model/Types.h
 
-FORMS +=  view/LoginDialog.ui view/MainWindow.ui \
+FORMS +=  view/LoginDialog.ui view/MainWindow.ui view/EditDepartments.ui view/EditSites.ui\
 	view/TreeRegions.ui view/ViewDepartments.ui view/ViewSites.ui

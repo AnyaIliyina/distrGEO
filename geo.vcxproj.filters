@@ -59,6 +59,12 @@
     <ClCompile Include="core\Department.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="view\EditDepartments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\EditSites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="core\Format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -160,6 +166,12 @@
     <CustomBuild Include="core\Department.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\EditDepartments.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\EditSites.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="core\Format.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -259,6 +271,18 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_Department.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_EditDepartments.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_EditDepartments.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_EditSites.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_EditSites.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_Format.cpp">
@@ -381,6 +405,12 @@
     <ClCompile Include="release\qrc_ViewWindowRes.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClInclude Include="ui_EditDepartments.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_EditSites.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
     <ClInclude Include="ui_LoginDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -398,6 +428,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="view\EditDepartments.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\EditSites.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="view\LoginDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
