@@ -59,6 +59,9 @@
     <ClCompile Include="core\Department.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="model\Departments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="view\EditDepartments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\RecordType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="search_module\SM_Session.cpp">
@@ -166,6 +172,9 @@
     <CustomBuild Include="core\Department.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="model\Departments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="view\EditDepartments.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -218,6 +227,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\RecordType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="search_module\SM_Session.h">

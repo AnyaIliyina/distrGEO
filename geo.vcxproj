@@ -139,6 +139,7 @@
     <ClCompile Include="view\Combo_delegate.cpp" />
     <ClCompile Include="database\Database.cpp" />
     <ClCompile Include="core\Department.cpp" />
+    <ClCompile Include="model\Departments.cpp" />
     <ClCompile Include="view\EditDepartments.cpp" />
     <ClCompile Include="view\EditSites.cpp" />
     <ClCompile Include="core\Format.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="search_module\ParserGisLub.cpp" />
     <ClCompile Include="core\RecordLang.cpp" />
     <ClCompile Include="core\RecordType.cpp" />
+    <ClCompile Include="model\Resources.cpp" />
     <ClCompile Include="search_module\SM_Session.cpp" />
     <ClCompile Include="core\Scale.cpp" />
     <ClCompile Include="core\Session.cpp" />
@@ -194,6 +196,7 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">MOC core/Department.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|Win32&apos;">release\moc_Department.cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="model\Departments.h" />
     <CustomBuild Include="view\EditDepartments.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">view\EditDepartments.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">setlocal&#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A;C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\EditDepartments.h -o debug\moc_EditDepartments.cpp&#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A;endlocal</Command>
@@ -311,6 +314,7 @@
     </CustomBuild>
     <ClInclude Include="core\RecordLang.h" />
     <ClInclude Include="core\RecordType.h" />
+    <ClInclude Include="model\Resources.h" />
     <CustomBuild Include="search_module\SM_Session.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">search_module\SM_Session.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|Win32&apos;">setlocal&#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A;C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\SM_Session.h -o debug\moc_SM_Session.cpp&#x000D;&#x000A;if errorlevel 1 goto VCEnd&#x000D;&#x000A;endlocal</Command>

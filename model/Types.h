@@ -11,7 +11,9 @@
 
 enum ItemTypes
 {
-	GeodataType=0
+	GeodataType=0,
+	ResourceType=1,
+	DepartmentType=2
 	/*ItgiGroupType = 0,
 	ItgiValueType = 1,
 	AttributeType = 2,
