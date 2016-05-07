@@ -55,7 +55,7 @@ void TreeRegions::setDisabled()
 {
 	ui->action_Edit->setEnabled(false);
 	ui->action_Delete->setEnabled(false);
-	ui->action_New->setEnabled(false);
+	//ui->action_New->setEnabled(false);
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	

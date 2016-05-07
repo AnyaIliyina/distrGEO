@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>Bezymyanny.png</file>
     <file>check.png</file>
     <file>close.png</file>
     <file>note.png</file>
