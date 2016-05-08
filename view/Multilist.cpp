@@ -93,7 +93,7 @@ void MultiListWidget::collectCheckedItems()
 		if (checkState == Qt::Checked)
 		{
 			mCheckedItems.push_back(currentItem->text());
-			mCheckedIDs.push_back(currentItem->row());
+			mCheckedIDs.push_back(currentItem->row()+1);
 		}
 	}
 
