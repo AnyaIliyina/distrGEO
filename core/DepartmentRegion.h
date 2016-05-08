@@ -29,8 +29,11 @@ public:
 	
 	/*! Записывает в базу данных информацию
 	о паре department_id - region_id
-	\param int session_id - id текущей сессии
-	*/
+	\param int session_id - id текущей сессии*/
 	void insertIntoDatabase(int session_id = Database::currentSessionId());
+
+
+	/*! Создает таблицу department_regions*/
+	static bool createTable();
 };
 

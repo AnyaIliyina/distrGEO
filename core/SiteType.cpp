@@ -75,6 +75,7 @@ bool SiteType::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_types (\
 		site_id INTEGER,		\
 		type_id INTEGER,   \

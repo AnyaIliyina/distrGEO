@@ -49,12 +49,15 @@ bool RegionItem::setData(int column, const QVariant& value, int role)
 	}
 }
 
-RegionItem::RegionItem(Region* region)
+RegionItem * RegionItem::itemFromRegion(Region * region)
 {
-	m_id = region->id();
-	m_parent_id = region->parent_id();
-	m_name = region->name();
-	m_comment = region->comment();
+	RegionItem* item = new RegionItem();
+	item->m_id = region->id();
+	item->m_parent_id = region->parent_id();
+	item->m_name = region->name();
+	item->m_comment = region->comment();
+	delete region;
+	return item;
 }
 
 RegionItem* RegionItem::findChildren(QList<RegionItem*> list)
@@ -110,27 +113,27 @@ bool RegionItem::cancel() { return true; }
 
 QList<BaseItem*> RegionItem::loadItemsFromDb() {
 	qDebug() << "loadItemsFromDb Regions";
-	QList<RegionItem*> list;
-	int id = 1;
-	Region* region = new Region(id);
-	while (region->name() != "")
-	{
-		RegionItem *item = new RegionItem(region);
-		list << item;		
-		delete region;
-		region = new Region(++id);
-	}
-	
+	//QList<RegionItem*> list;
+	//int id = 1;
+	//Region* region = new Region(id);
+	//while (region->name() != "")
+	//{
+	//	RegionItem *item = itemFromRegion(region);
+	//	list << item;		
+	//	delete region;
+	//	region = new Region(++id);
+	//}
+	//
 	QList<BaseItem*> finalList;
-	for (int i = 0; i < list.count(); i++)
-	{
-		if (list.at(i)->m_parent_id == 0)
-		{
-			finalList << list.at(i);
-			qDebug() << list.at(i)->m_id;
-		}
-		
-	}
+	//for (int i = 0; i < list.count(); i++)
+	//{
+	//	if (list.at(i)->m_parent_id == 0)
+	//	{
+	//		finalList << list.at(i);
+	//		qDebug() << list.at(i)->m_id;
+	//	}
+	//	
+	//}
 
 	return finalList;
 }

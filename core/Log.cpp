@@ -25,6 +25,7 @@ bool Log::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS logs (\
 		id   INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		session_id INTEGER NOT NULL,\

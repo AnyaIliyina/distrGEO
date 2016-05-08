@@ -1,2 +1,56 @@
 #include "DepartmentType.h"
 
+DepartmentType::DepartmentType(int department_id, int type_id):
+	m_department_id(department_id), m_type_id(type_id)
+{
+}
+
+DepartmentType::~DepartmentType()
+{
+}
+
+void DepartmentType::insertIntoDatabase(int session_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("INSERT INTO department_types( department_id, type_id)\
+		VALUES (?, ?)");
+	query.addBindValue(m_department_id);
+	query.addBindValue(m_type_id);
+	if (!query.exec()) {
+		qDebug() << "departmentType::insertIntoDatabase():  error ";
+		QString errorString = query.lastError().text();
+		qDebug() << errorString;
+		db.close();
+		Log::create(session_id, "DepartmentType: insert", 0, errorString);
+	}
+	else {
+		int id = query.lastInsertId().toInt();
+		db.close();
+		Log::create(session_id, "DepartmentType: insert", id);
+	}
+}
+
+bool DepartmentType::createTable()
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON;");
+	if ((!query.exec("CREATE TABLE IF NOT EXISTS  department_types (\
+		department_id INTEGER,		\
+		type_id INTEGER,   \
+		FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE CASCADE ON UPDATE CASCADE,\
+		FOREIGN KEY(type_id) REFERENCES type(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		)"
+		)))
+	{
+		qDebug() << "error creating Department_types table in database.";
+		qDebug() << query.lastError().text();
+		db.close();
+		return false;
+	}
+	db.close();
+	DepartmentType(1, 1).insertIntoDatabase();
+	return true;
+}
+
