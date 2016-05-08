@@ -13,7 +13,7 @@ SOURCES += database/Database.cpp \
 	core/Region.cpp core/DepartmentRegion.cpp core/Region.cpp core/SiteType.cpp core/SiteRegion.cpp core/SiteLang.cpp\
 	view/MainWindow.cpp view/LoginDialog.cpp  view/TreeRegions.cpp view/ViewDepartments.cpp view/ViewSites.cpp\
 	view/Combo_delegate.cpp  view/Multilist.cpp view/EditDepartments.cpp view/EditSites.cpp\
-	model/Base_item.cpp model/Item_model.cpp model/Item_factory.cpp \
+	model/Base_item.cpp model/Item_model.cpp model/Item_factory.cpp model/RegionItem.cpp\
 	model/SortFilterProxyModel.cpp model/Geodata.cpp model/Departments.cpp model/Resources.cpp
 
 HEADERS += database/Database.h \
@@ -25,7 +25,7 @@ HEADERS += database/Database.h \
 	core/DepartmentRegion.h core/Region.h core/SiteType.h core/SiteRegion.h core/SiteLang.h \
 	view/MainWindow.h view/LoginDialog.h view/TreeRegions.h view/ViewDepartments.h view/ViewSites.h \
 	 view/Multilist.h view/Combo_delegate.h view/EditDepartments.h view/EditSites.h \
-	model/Base_item.h model/Item_model.h model/Item_factory.h \
+	model/Base_item.h model/Item_model.h model/Item_factory.h model/RegionItem.h\
 	model/SortFilterProxyModel.h model/Geodata.h model/Types.h model/Departments.h model/Resources.h
 
 FORMS +=  view/LoginDialog.ui view/MainWindow.ui view/EditDepartments.ui view/EditSites.ui\

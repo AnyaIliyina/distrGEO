@@ -3,6 +3,7 @@
 #include "Departments.h"
 #include "types.h"
 #include "Geodata.h"
+#include "RegionItem.h"
 
 BaseItem* ItemFactory::loadFromDb(int type) {
 	// Создаем верхний элемент
@@ -27,6 +28,8 @@ BaseItem* ItemFactory::createNew(int type) {
 		return new Resources();
 	case ItemTypes::DepartmentType:
 		return new Departments();
+	case ItemTypes::RegionItemType:
+		return new RegionItem();
 	default:
 		return NULL;
 	}

@@ -23,6 +23,11 @@ QStringList MultiListWidget::checkedItems() const
 	return mCheckedItems;
 }
 
+QList<int> MultiListWidget::checkedIDs() const
+{
+	return mCheckedIDs;
+}
+
 void MultiListWidget::setCheckedItems(const QStringList &items)
 {
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());
@@ -76,6 +81,7 @@ void MultiListWidget::collectCheckedItems()
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());
 
 	mCheckedItems.clear();
+	mCheckedIDs.clear();
 
 	for (int i = 0; i < count(); ++i)
 	{
@@ -86,6 +92,7 @@ void MultiListWidget::collectCheckedItems()
 		if (checkState == Qt::Checked)
 		{
 			mCheckedItems.push_back(currentItem->text());
+			mCheckedIDs.push_back(currentItem->row()+1);
 		}
 	}
 
