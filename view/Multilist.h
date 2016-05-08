@@ -20,6 +20,7 @@ public:
 	virtual ~MultiListWidget();
 
 	QStringList checkedItems() const;
+	QList<int> checkedIDs() const;
 	void setCheckedItems(const QStringList &items);
 
 protected:
@@ -28,6 +29,7 @@ protected:
 
 private:
 	QStringList mCheckedItems;
+	QList<int> mCheckedIDs;
 
 	void collectCheckedItems();
 
