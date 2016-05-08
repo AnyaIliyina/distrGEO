@@ -18,6 +18,7 @@ class Language {
 private:
 	int m_id;
 	QString m_name;
+	
 
 public:
 	/*!
@@ -44,5 +45,9 @@ public:
 	\return QStringList languages*/
 	static QStringList getList();
 	
+	/*!
+	Возвращает список языков определенного сайта
+	\return QStringList languages*/
+	static QStringList getList(int id);
 };
 

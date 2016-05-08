@@ -20,17 +20,17 @@ int main(int argc, char* argv[])
 	QApplication app(argc, argv);
 	Database::restore();
 	
-	// все языки:
-	QStringList languagesList = Language::getList();
-	
-	// конкретный сайт и его языки:
-	Site *site = new Site(1);
-	QStringList siteLangs;
+	//// все языки:
+	//QStringList languagesList = Language::getList();
+	//
+	//// конкретный сайт и его языки:
+	//Site *site = new Site(1);
+	//QStringList siteLangs;
 
-	QList<int>ids = site->languageIDs();
-	for (int i = 0; i < ids.count(); i++)
-		siteLangs << languagesList.at(ids.at(i));
-	qDebug() << siteLangs.at(0);
+	//QList<int>ids = site->languageIDs();
+	//for (int i = 0; i < ids.count(); i++)
+	//	siteLangs << languagesList.at(ids.at(i));
+	//qDebug() << siteLangs.at(0);
 
 	MainWindow *w = new MainWindow();
 	return app.exec();

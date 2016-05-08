@@ -22,7 +22,6 @@ MainWindow::MainWindow(QMainWindow *parent)
 	
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
-	QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int index)), this, SLOT(slotTabConfigure(int index)));
 	ld->slotShowLD();
 
 }
@@ -37,39 +36,12 @@ MainWindow::~MainWindow()
 "Собирает" основное окно из виджетов
 */
 void MainWindow::slotConfigure()
-{
-	/*vw = new ViewWindow();
-	QDockWidget *viewDockWidget = new QDockWidget("Список записей");
-	viewDockWidget->setWidget(vw);
-	viewDockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
-	setCentralWidget(viewDockWidget);
-	*/
-	m_vd = new ViewDepartments();
-	m_vs = new ViewSites();
+{	
 	m_tr = new TreeRegions();
-	treeSites = new QTreeView();
-	treeDepartments = new QTreeView();
-	treeSearch = new QTreeView();
-	tableSites = new QTableView();
-	tableDepartments = new QTableView();
-
-	QWidget *departaments = new QWidget();
-	QWidget *sites = new QWidget();
-	QWidget *search = new QWidget();
-
-	QHBoxLayout *layoutDepart = new QHBoxLayout();
-	QHBoxLayout *layoutSites = new QHBoxLayout();
-	QHBoxLayout *layoutSearch = new QHBoxLayout();
-	QVBoxLayout *verticalLayout = new QVBoxLayout();
-
-	layoutDepart->addWidget(m_vd);
-	layoutDepart->addWidget(treeDepartments);
-	layoutSites->addWidget(m_vs);
-	layoutSites->addWidget(treeSites);
-	verticalLayout->addWidget(tableSites);
-	verticalLayout->addWidget(tableDepartments);
-	layoutSearch->addWidget(treeSearch);
-	layoutSearch->addLayout(verticalLayout);
+	
+	setSearchResources();
+	setResourcesView();
+	setDepartamentView();
 
 	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
@@ -77,10 +49,7 @@ void MainWindow::slotConfigure()
 	ui->tabWidget->addTab(departaments, "Ведомства");
 	ui->tabWidget->addTab(new QWidget, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
-	
-	departaments->setLayout(layoutDepart);
-	sites->setLayout(layoutSites);
-	search->setLayout(layoutSearch);
+
 
 	QStatusBar *status = new QStatusBar();
 	setStatusBar(status);
@@ -96,17 +65,12 @@ void MainWindow::slotStartSession(int user_id)
 	slotConfigure();
 }
 
-void MainWindow::slotTabConfigure(int index)
-{
-
-}
-
-
 /*!
 Выводит основное окно и начинает работу модуля поиска
 */
 void MainWindow::showMW()
 {
+	this->setMinimumSize(1200, 600);
 	this->show();
 	
 	// Начать работу модуля поиска
@@ -120,6 +84,74 @@ void MainWindow::showMW()
 	//else
 		statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
 }
+
+void MainWindow::setSearchResources()
+{
+	treeSearch = new QTreeView();
+	treeSearch->setMaximumWidth(400);
+	tableSites = new QTableView();
+	tableDepartments = new QTableView();
+	search = new QWidget();
+	QHBoxLayout *layoutSearch = new QHBoxLayout();
+	QVBoxLayout *verticalLayout = new QVBoxLayout();
+	verticalLayout->addWidget(tableSites);
+	verticalLayout->addWidget(tableDepartments);
+	layoutSearch->addWidget(treeSearch);
+	layoutSearch->addLayout(verticalLayout);
+	search->setLayout(layoutSearch);
+	setupModel();
+}
+
+void MainWindow::setResourcesView()
+{
+	m_vs = new ViewSites();
+	treeSites = new QTreeView();
+	treeSites->setMaximumSize(300, 1000);
+	sites = new QWidget();
+	QHBoxLayout *layoutSites = new QHBoxLayout();
+	layoutSites->addWidget(m_vs);
+	layoutSites->addWidget(treeSites);
+	sites->setLayout(layoutSites);
+}
+
+void MainWindow::setDepartamentView()
+{
+	m_vd = new ViewDepartments();
+	treeDepartments = new QTreeView();
+	treeDepartments->setMaximumSize(300, 1000);
+	departaments = new QWidget();
+	QHBoxLayout *layoutDepart = new QHBoxLayout();
+	layoutDepart->addWidget(m_vd);
+	layoutDepart->addWidget(treeDepartments);
+	departaments->setLayout(layoutDepart);
+
+}
+
+void MainWindow::setupModel()
+{
+	
+	m_res_model = new ItemModel();
+	m_res_model->loadData(1);
+	m_dep_model = new ItemModel();
+	m_dep_model->loadData(2);
+
+	m_filter_res_model = new SortFilterProxyModel();
+	m_filter_res_model->setSourceModel(m_res_model);
+	m_filter_dep_model = new SortFilterProxyModel();
+	m_filter_dep_model->setSourceModel(m_dep_model);
+
+	tableSites->setModel(m_filter_res_model);
+	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
+	tableSites->setColumnHidden(0, true);
+	tableSites->setSortingEnabled(true);
+	tableSites->resizeColumnsToContents();
+	tableDepartments->setModel(m_filter_dep_model);
+	tableDepartments->setSelectionBehavior(QAbstractItemView::SelectRows);
+	tableDepartments->setColumnHidden(0, true);
+	tableDepartments->setSortingEnabled(true);
+	tableDepartments->resizeColumnsToContents();
+}
+
 
 /*!
 Закрывает основное окно

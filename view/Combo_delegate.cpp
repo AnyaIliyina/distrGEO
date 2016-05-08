@@ -6,7 +6,7 @@ ComboDelegate::~ComboDelegate() {
 };
 
 ComboDelegate::ComboDelegate(const QList<QString>& list, QObject* parent) {
-	m_list = list;
+		m_list = list;
 };
 
 QWidget* ComboDelegate::createEditor(
