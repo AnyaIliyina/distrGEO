@@ -4,6 +4,7 @@
 #include "State.h"
 #include "Geodata_record.h"
 #include "Geodata.h"
+#include "RegionItem.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
@@ -23,7 +24,7 @@
 TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 {
 	ui->setupUi(this);
-	//setupModel();
+	setupModel();
 	setDisabled();
 	/*QObject::connect(ui->action_New, SIGNAL(triggered()), this, SLOT(slotAdd()));
 	QObject::connect(ui->action_Delete, SIGNAL(triggered()), this, SLOT(slotDelete()));
@@ -46,8 +47,11 @@ TreeRegions::~TreeRegions()
 void TreeRegions::setupModel()
 {
 	delete m_model;
-	QSqlDatabase db = Database::database();
+	//QSqlDatabase db = Database::database();
+	qDebug() << "here";
 	m_model = new ItemModel();
+	m_model->loadData(3);
+	
 	//createTable();
 }
 
