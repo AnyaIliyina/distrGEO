@@ -8,8 +8,7 @@ MultiListWidget::MultiListWidget(QWidget *parent)
 	
 	setMinimumSize(59, 29);
 	connect(model(), SIGNAL(rowsInserted(QModelIndex, int, int)), this, SLOT(slotModelRowsInserted(QModelIndex, int, int)));
-	//connect(model(), SIGNAL(rowsRemoved(QModelIndex, int, int)), this, SLOT(slotModelRowsRemoved(QModelIndex, int, int)));
-
+	
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());
 
 	connect(standartModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(slotModelItemChanged(QStandardItem*)));
@@ -138,15 +137,6 @@ void MultiListWidget::slotModelRowsInserted(const QModelIndex &parent, int start
 
 	connect(standartModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(slotModelItemChanged(QStandardItem*)));
 }
-
-//void MultiListWidget::slotModelRowsRemoved(const QModelIndex &parent, int start, int end)
-//{
-//	(void)parent;
-//	(void)start;
-//	(void)end;
-//
-//	collectCheckedItems();
-//}
 
 void MultiListWidget::slotModelItemChanged(QStandardItem *item)
 {
