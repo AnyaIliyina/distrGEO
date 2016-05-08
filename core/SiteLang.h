@@ -48,7 +48,7 @@ public:
 	в которых упоминается интернет-ресурс site_id
 	\param int site_id - id интернет-ресурса
 	*/
-//	static void deleteBySite(int site_id);
+	static void deleteBySite(int site_id);
 
 	/*! Создает таблицу site_langs
 	\return true - таблица создана*/

@@ -69,7 +69,10 @@ bool Resources::setData(int column, const QVariant& value, int role) {
 		if (column == 1)
 			m_name = value.toString();
 		if (column == 2)
-			m_url = value.toString();
+			if (Site::urlFromString(value.toString()))
+			{
+				m_url = value.toString();
+			}
 		if (column == 3)
 			m_language = value.toString();
 		if (column == 4)
