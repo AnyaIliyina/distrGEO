@@ -293,3 +293,26 @@ bool Site::urlFromString(QString & string)
 	}
 	return false;
 }
+
+void Site::deleteRecord(int & id, int session_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	qDebug() << id;
+	QString idstr = QString::number(id);
+	if (!query.exec("DELETE FROM sites WHERE id=\'" + idstr + "\'"))
+	{
+		QString errorString = query.lastError().text();
+		qDebug() << errorString;
+		Log::create(session_id, "Site: delete", id, errorString);
+	}
+	else
+	{
+		Log::create(session_id, "Site: delete", id);
+	}
+}
+
+void Site::setId(int id)
+{
+	m_id = id;
+}

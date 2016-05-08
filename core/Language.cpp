@@ -65,3 +65,21 @@ QStringList Language::getList()
 	return languages;
 }
 
+QStringList Language::getList(int id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery queryLang(db);
+	QStringList languages;
+	queryLang.prepare((" SELECT name FROM languages WHERE id in (SELECT site_langs.language_id FROM site_langs WHERE site_langs.site_id = :id )"));
+	queryLang.bindValue(":id", id);
+	if (!queryLang.exec())
+	{
+		qDebug() << queryLang.lastError().text();
+	}
+	while (queryLang.next())
+	{
+		languages.push_back(queryLang.value(0).toString());
+	}
+	return languages;
+}
+

@@ -7,7 +7,8 @@
 #include "ViewSites.h"
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
-
+#include "Item_model.h"
+#include "SortFilterProxyModel.h"
 
 /*!
 	\file
@@ -44,7 +45,19 @@ private:
 	QTableView *tableDepartments;
 	QHBoxLayout *vslayout;
 	QHBoxLayout *vdlayout;
-	
+	QWidget *search;
+	QWidget *sites;
+	QWidget *departaments;
+
+	ItemModel *m_res_model;
+	SortFilterProxyModel *m_filter_res_model;
+	ItemModel *m_dep_model;
+	SortFilterProxyModel *m_filter_dep_model;
+
+	void setSearchResources();
+	void setResourcesView();
+	void setDepartamentView();
+	void setupModel();
 private slots:
 	/*!
 	Выводит сообщение на панель StatusBar
@@ -68,7 +81,6 @@ private slots:
 	\param  user_id - идентификатор пользователя */
 	void slotStartSession(int user_id);
 
-	void slotTabConfigure(int index);
 };
 
 

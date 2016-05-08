@@ -48,7 +48,7 @@ void ViewDepartments::setupModel()
 	delete m_model;
 	QSqlDatabase db = Database::database();
 	m_model = new ItemModel();
-	//createTable();
+	createTable();
 }
 
 void ViewDepartments::setDisabled()
@@ -149,7 +149,7 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 
 void ViewDepartments::createTable()
 {
-	m_model->loadData(0);
+	m_model->loadData(2);
 	filterModel = new SortFilterProxyModel();
 	filterModel->setSourceModel(m_model);
 	ui->tableView->setModel(filterModel);

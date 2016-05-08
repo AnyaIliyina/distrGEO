@@ -7,7 +7,7 @@
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
-#include "Format.h"
+#include "Language.h"
 #include "Session.h"
 #include "SortFilterProxyModel.h"
 #include <QSortFilterProxyModel>
@@ -48,7 +48,7 @@ void ViewSites::setupModel()
 	delete m_model;
 	QSqlDatabase db = Database::database();
 	m_model = new ItemModel();
-	//createTable();
+	createTable();
 }
 
 void ViewSites::setDisabled()
@@ -149,28 +149,17 @@ void ViewSites::slotFilterChanged(QString text)
 
 void ViewSites::createTable()
 {
-	m_model->loadData(0);
+	m_model->loadData(1);
 	filterModel = new SortFilterProxyModel();
 	filterModel->setSourceModel(m_model);
 	ui->tableView->setModel(filterModel);
 
-	auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
-	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
-
-	auto comboDelegateFormat = new ComboDelegate(Format::getNames(), this);
-	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
-
-	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
-	ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
-
-	auto comboDelegateState = new ComboDelegate(State::getStates(), this);
-	ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
-
+	auto comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
+	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
 	ui->tableView->setSortingEnabled(true);
 	ui->tableView->resizeColumnsToContents();
-
 }
 
 void ViewSites::slotAdd()
@@ -253,7 +242,7 @@ void ViewSites::slotOpenUrl()
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	auto m_index = filterModel->mapToSource(index);
 	int row = m_index.row();
-	auto child = m_model->index(row, 8);
+	auto child = m_model->index(row, 2);
 	QString url= m_model->data(child).toString();
 	QUrl m_url(url);
 	bool res=QDesktopServices::openUrl(m_url);

@@ -1,11 +1,9 @@
 #include "Departments.h"
 #include "Database.h"
 #include "Geodata_record.h"
-#include "State.h"
 #include "Site.h"
-#include "Format.h"
-#include "Scale.h"
-#include "State.h"
+#include "Department.h"
+
 #include <QBrush>
 #include <QDebug>
 #include <QPixmap>
@@ -30,8 +28,7 @@ void Departments::removeChild(BaseItem* child) {
 	Departments* department = dynamic_cast<Departments*>(child);
 	if (department == NULL)
 		return;
-
-		//Geodata_record::deleteRecord(department->m_id);
+			Department::deleteDepartment(department->m_id);
 	m_children.removeOne(child);
 };
 
