@@ -3,7 +3,7 @@
 #include "Geodata_record.h"
 #include "Site.h"
 #include "Department.h"
-
+#include "GeodataType.h"
 #include <QBrush>
 #include <QDebug>
 #include <QPixmap>
@@ -131,9 +131,7 @@ bool Departments::isValid() const {
 		return false;
 	if (m_gpi.isNull() || m_gpi.isEmpty())
 		return false;
-	if (m_url.isNull() || m_url.isEmpty())
-		return false;
-
+	
 	
 	return true;
 };
@@ -148,28 +146,26 @@ bool Departments::hasChildren() const {
 
 bool Departments::save() {
 
-	//if (m_comment == NULL)
-	//	m_comment = " ";
-	//if (m_url == NULL)
-	//	m_url = " ";
-	//	
-	//if (m_id == 0) {
-	//	//Создание
-	//	Geodata_record* ngdr = new Geodata_record(m_site_id, m_format_id, m_name,  Database::currentSessionId(), m_state_id, m_scale_id, m_url, m_comment );
-	//	qDebug() << ngdr->insertIntoDatabase();
-	//	m_id = ngdr->id();
-	//	delete ngdr;
+	if (m_comment == NULL)
+	m_comment = " ";
+	if (m_fax == NULL)
+		m_fax = " ";
+	if (m_id == 0) {
+		//Создание
+		Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
+		qDebug() << nd->insertIntoDatabase();
+		m_id = nd->id();
+		delete nd;
 
-
-	//}
-	//else {
-	//	// Изменение 
-	//	Geodata_record *ngdr = new Geodata_record( m_site_id, m_format_id, m_name, Database::currentSessionId(), m_state_id, m_scale_id, m_url, m_comment );
-	//	ngdr->setRecordId(m_id);
-	//	ngdr->updateRecord();
-	//	m_id = ngdr->id();
-	//	delete ngdr;
-	//}
+	}
+	else {
+		// Изменение 
+		Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
+		nd->setId(m_id);
+		nd->update();
+		m_id = nd->id();
+		delete nd;
+	}
 
 	return true;
 };
@@ -178,36 +174,23 @@ bool Departments::cancel() {
 	if (isNew())
 		return true;
 
-	//QSqlDatabase db = Database::database();
-	//QSqlQuery query(db);
-	//query.prepare(
-	//	"SELECT record_id, place_name, site_name,  format_name, description, state_name,  date, type_name, geodata_records.url, geodata_records.comment\
-	//	FROM geodata_records\
-	//	JOIN sites ON geodata_records.site_id=sites.site_id\
-	//	JOIN formats ON geodata_records.format_id=formats.format_id\
-	//	JOIN scales ON scales.scale_id=geodata_records.scale_id\
-	//	JOIN states ON states.state_id=geodata_records.state_id\
-	//	JOIN sessions ON sessions.session_id=geodata_records.session_id\
-	//	JOIN users ON sessions.user_id=users.user_id\
-	//	JOIN usertypes ON users.type_id=usertypes.type_id\
-	//	WHERE record_id = :id "
-	//);
-	//query.bindValue(":id", m_id);
-
-	//// Добавить ошибку
-	//query.exec();
-	//query.next();
-
-	//m_name=query.value(1).toString();
-	//m_country= query.value(2).toString();
-	//m_address = query.value(3).toString();
-	//m_phone = query.value(4).toString();
-	//m_fax = query.value(5).toString();
-	//m_email = query.value(6).toString();query.value(6).toString();
-	//m_gpi = query.value(7).toString();
-	//m_url = query.value(8).toString();
-	//m_comment = query.value(9).toString();
-	
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments WHERE id=:id");
+	query.bindValue(":id", m_id);
+	if (!query.exec())
+	{
+		qDebug() << query.lastError().text();
+	}
+	query.next();
+	m_name = query.value(1).toString();
+	m_country = query.value(2).toString(); 
+	m_address = query.value(3).toString();
+	m_phone = query.value(4).toString();
+	m_fax = query.value(5).toString();
+	m_email = query.value(6).toString();
+	m_gpi = GeodataType::getListForDepartments(m_id).join(", ");
+	m_comment = query.value(7).toString();
 	
 	return true;
 };
@@ -215,43 +198,28 @@ bool Departments::cancel() {
 QList<BaseItem*> Departments::loadItemsFromDb() {
 	qDebug() << "loadItemsFromDb Departments";
 	QList<BaseItem*> list;
-
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 
-	//if (!query.exec(
-	//	"SELECT record_id, place_name, site_name,  format_name, description, state_name,  date, type_name, geodata_records.url, geodata_records.comment\
-	//	FROM geodata_records\
-	//	JOIN sites ON geodata_records.site_id=sites.site_id\
-	//	JOIN formats ON geodata_records.format_id=formats.format_id\
-	//	JOIN scales ON scales.scale_id=geodata_records.scale_id\
-	//	JOIN states ON states.state_id=geodata_records.state_id\
-	//	JOIN sessions ON sessions.session_id=geodata_records.session_id\
-	//	JOIN users ON sessions.user_id=users.user_id\
-	//	JOIN usertypes ON users.type_id=usertypes.type_id"
-	//	))
-	//{
-	//	qDebug() << "ERRRRRRORRRR";
-	//	qDebug() << query.lastError().text();
-	//}
+	if (!query.exec("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments"))
+	{
+		qDebug() << query.lastError().text();
+	}
 
-	//while (query.next()) {
-	//	Departments* geo = new Departments();
-	//	geo->m_id = query.value(0).toInt(); // id
-	//	geo->m_name = query.value(1).toString();
-	//	geo->m_country = query.value(2).toString(); // 
-	//	geo->m_address = query.value(3).toString();
-	//	geo->m_phone = query.value(4).toString();
-	//	geo->m_fax = query.value(5).toString();
-	//	geo->m_email =query.value(6).toString();
-	//	geo->m_gpi = query.value(7).toString();
-	//	geo->m_url = query.value(8).toString();
-	//	geo->m_comment = query.value(9).toString();
-	//	/*m_all1 = geo->m_name + geo->m_country;
-	//	geo->m_all= m_all1 + geo->m_address;*/
-	//	list << geo;
+	while (query.next()) {
+		Departments* dep = new Departments();
+		dep->m_id = query.value(0).toInt(); 
+		dep->m_name = query.value(1).toString();
+		dep->m_country = query.value(2).toString(); // 
+		dep->m_address = query.value(3).toString();
+		dep->m_phone = query.value(4).toString();
+		dep->m_fax = query.value(5).toString();
+		dep->m_email =query.value(6).toString();
+		dep->m_gpi = GeodataType::getListForDepartments(dep->m_id).join(", ");
+		dep->m_comment = query.value(7).toString();
+		list << dep;
 
-	//}
+	}
 
 	return list;
 };

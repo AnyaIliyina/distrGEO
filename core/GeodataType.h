@@ -49,7 +49,13 @@ public:
 	Возвращает список типов ГПИ определенного сайта
 	\param int id- id сайта
 	\return QStringList typeNames - названия типов*/
-	static QStringList getList(int id);
+	static QStringList getListForSites(int id);
+
+	/*!
+	Возвращает список типов ГПИ определенного департамента
+	\param int id- id департамента
+	\return QStringList typeNames - названия типов*/
+	static QStringList getListForDepartments(int id);
 	
 };
 

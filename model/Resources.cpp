@@ -127,6 +127,9 @@ bool Resources::hasChildren() const {
 };
 
 bool Resources::save() {
+	
+	if (m_comment == NULL)
+		m_comment = " ";
 
 	if (m_id == 0) {
 		//Создание
@@ -159,14 +162,13 @@ bool Resources::cancel() {
 	query.bindValue(":id", m_id);
 	if (!query.exec())
 	{
-		qDebug() << "ERRRRRRORRRR";
 		qDebug() << query.lastError().text();
 	}
 	query.next();
 	m_name = query.value(1).toString();
 	m_url = query.value(2).toString();
 	m_language = Language::getList(m_id).join(", ");
-	m_gpi = GeodataType::getList(m_id).join(", ");
+	m_gpi = GeodataType::getListForSites(m_id).join(", ");
 	m_comment = query.value(3).toString();
 	return true;
 }
@@ -182,7 +184,6 @@ QList<BaseItem*> Resources::loadItemsFromDb() {
 
 	if (!query.exec(" SELECT id, name, url, comment FROM sites"))
 	{
-		qDebug() << "ERRRRRRORRRR";
 		qDebug() << query.lastError().text();
 	}
 	while (query.next())
@@ -192,7 +193,7 @@ QList<BaseItem*> Resources::loadItemsFromDb() {
 		res->m_name = query.value(1).toString();
 		res->m_url = query.value(2).toString();
 		res->m_language = Language::getList(res->m_id).join(", ");
-		res->m_gpi = GeodataType::getList(res->m_id).join(", ");
+		res->m_gpi = GeodataType::getListForSites(res->m_id).join(", ");
 		res->m_comment = query.value(3).toString();
 		list << res;
 	}

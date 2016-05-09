@@ -94,6 +94,18 @@ void Department::setComment(const QString & comment)
 	m_comment = comment;
 }
 
+Department::Department(const QString & name, const QString & country, const QString & adress, const QString & mail, const QString & phone, const QString & fax,  const QString & comment)
+{
+	m_id = 0;
+	m_name = name;
+	m_country = country;
+	m_adress = adress;
+	m_mail = mail;
+	m_fax = fax;
+	m_phone = phone;
+	m_comment = comment;
+}
+
 Department::Department(int id)
 {
 	QSqlDatabase db = Database::database();
@@ -236,4 +248,9 @@ bool Department::completeTable()
 	bool succeded = d->insertIntoDatabase();
 	delete d;
 	return succeded;
+}
+
+void Department::setId(int id)
+{
+		m_id = id;
 }

@@ -3,7 +3,7 @@
 #include "Scale.h"
 #include "State.h"
 #include "Geodata_record.h"
-#include "Geodata.h"
+#include "GeodataType.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
@@ -34,7 +34,6 @@ ViewDepartments::ViewDepartments(QWidget * parent): ui(new Ui::ViewDepartments) 
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
 	
-	//QObject::connect(ui->tableView->model, SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 }
 
 ViewDepartments::~ViewDepartments()
@@ -141,11 +140,7 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 	
 }
 
-//void ViewDepartments::slotFilterChanged(QString text)
-//{
-//	QRegExp regExp(text, Qt::CaseInsensitive);
-//	filterModel->setFilterRegExp(regExp);
-//}
+
 
 void ViewDepartments::createTable()
 {
@@ -154,17 +149,8 @@ void ViewDepartments::createTable()
 	filterModel->setSourceModel(m_model);
 	ui->tableView->setModel(filterModel);
 
-	auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
-	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
-
-	auto comboDelegateFormat = new ComboDelegate(Format::getNames(), this);
-	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
-
-	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
-	ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
-
-	auto comboDelegateState = new ComboDelegate(State::getStates(), this);
-	ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
+	auto comboDelegate = new ComboDelegate(GeodataType::getList(), this);
+	ui->tableView->setItemDelegateForColumn(7, comboDelegate);
 
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
@@ -247,15 +233,4 @@ void ViewDepartments::slotCancel()
 		QItemSelectionModel::Rows);
 	
 }
-
-// void ViewDepartments::slotOpenUrl()
-//{
-//	auto index = ui->tableView->selectionModel()->currentIndex();
-//	auto m_index = filterModel->mapToSource(index);
-//	int row = m_index.row();
-//	auto child = m_model->index(row, 8);
-//	QString url= m_model->data(child).toString();
-//	QUrl m_url(url);
-//	bool res=QDesktopServices::openUrl(m_url);
-//}
 

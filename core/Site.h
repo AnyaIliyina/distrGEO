@@ -162,6 +162,6 @@ public:
 	 static void deleteRecord(int & id, int session_id = Database::currentSessionId());
 
 	 /*! Устанавливает значение id сайта
-	 \param int id - новый id сайта*/
+	 \param int id - id сайта*/
 	 void setId(int id);
 };
