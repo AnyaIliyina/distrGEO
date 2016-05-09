@@ -185,9 +185,13 @@ void ViewSites::slotDelete()
 		QMessageBox::Yes, QMessageBox::No);
 	if (deleteMsgBox == QMessageBox::Yes)
 	{
-		auto index = ui->tableView->selectionModel()->currentIndex();
-		auto m_index = filterModel->mapToSource(index);
-		m_model->removeRows(0, 1, m_index);
+		auto indexes = ui->tableView->selectionModel()->selectedRows();
+		for (int i = indexes.count()-1; i>=0; i--)
+		{
+			auto index = indexes.at(i);
+			auto m_index = filterModel->mapToSource(index);
+			m_model->removeRows(0, 1, m_index);
+		}
 	}
 }
 

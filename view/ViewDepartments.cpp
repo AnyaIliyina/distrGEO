@@ -72,7 +72,6 @@ void ViewDepartments::slotEnableButtons()
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
-		
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
@@ -85,7 +84,6 @@ void ViewDepartments::slotEnableButtons()
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
-			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
@@ -109,7 +107,6 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
-		
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
@@ -181,9 +178,13 @@ void ViewDepartments::slotDelete()
 		QMessageBox::Yes, QMessageBox::No);
 	if (deleteMsgBox == QMessageBox::Yes)
 	{
-		auto index = ui->tableView->selectionModel()->currentIndex();
-		auto m_index = filterModel->mapToSource(index);
-		m_model->removeRows(0, 1, m_index);
+		auto indexes = ui->tableView->selectionModel()->selectedRows();
+		for (int i = indexes.count() - 1; i >= 0; i--)
+		{
+			auto index = indexes.at(i);
+			auto m_index = filterModel->mapToSource(index);
+			m_model->removeRows(0, 1, m_index);
+		}
 	}
 }
 
