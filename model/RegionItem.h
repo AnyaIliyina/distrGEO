@@ -44,14 +44,7 @@ public:
 private:
 
 	int m_id=0;
-	int m_parent_id = 0;
 	QString m_name;
-	QString m_comment;
-	/*QString m_all1;
-	QString m_all;*/
+	QString m_comment="";
 	int m_type = 0;
-	RegionItem* itemFromRegion(Region* region);
-	
-	/*! Ищет в списке list дочерние элементы (рекурсивно)	*/
-	RegionItem* findChildren(QList<RegionItem*>list);
 };
