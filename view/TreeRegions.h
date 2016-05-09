@@ -41,10 +41,10 @@ private:
 	bool m_editMode = false;
 	
 
-	///*!
-	//Метод для установки модели в таблицу и настройки таблицы
-	//*/
-	// void createTable();
+	/*!
+	Метод для установки модели в таблицу и настройки таблицы
+	*/
+	 void createTable();
 
 	 void setDisabled();
 		
