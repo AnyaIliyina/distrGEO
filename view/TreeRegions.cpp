@@ -25,7 +25,8 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 {
 	ui->setupUi(this);
 	setupModel();
-	setDisabled();
+	
+	//setDisabled();
 	/*QObject::connect(ui->action_New, SIGNAL(triggered()), this, SLOT(slotAdd()));
 	QObject::connect(ui->action_Delete, SIGNAL(triggered()), this, SLOT(slotDelete()));
 	QObject::connect(ui->action_Edit, SIGNAL(triggered()), this, SLOT(slotEdit()));
@@ -51,8 +52,9 @@ void TreeRegions::setupModel()
 	qDebug() << "here";
 	m_model = new ItemModel();
 	m_model->loadData(3);
-	
-	//createTable();
+	/*ui->treeView->setModel(m_model);
+	ui->treeView->expandAll();*/
+	createTable();
 }
 
 void TreeRegions::setDisabled()
@@ -151,31 +153,61 @@ void TreeRegions::slotRefresh()
 ////	filterModel->setFilterRegExp(regExp);
 ////}
 //
-//void TreeRegions::createTable()
-//{
-//	m_model->loadData(0);
-//	filterModel = new SortFilterProxyModel();
-//	filterModel->setSourceModel(m_model);
-//	ui->tableView->setModel(filterModel);
-//
-//	auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
-//	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
-//
-//	auto comboDelegateFormat = new ComboDelegate(Format::getFormatNames(), this);
-//	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
-//
-//	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
-//	ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
-//
-//	auto comboDelegateState = new ComboDelegate(State::getStates(), this);
-//	ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
-//
-//	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-//	ui->tableView->setColumnHidden(0, true);
-//	ui->tableView->setSortingEnabled(true);
-//	ui->tableView->resizeColumnsToContents();
-//
-//}
+void TreeRegions::createTable()
+{
+	m_model->loadData(3);
+	/*filterModel = new SortFilterProxyModel();
+	filterModel->setSourceModel(m_model);*/
+	ui->treeView->setModel(m_model);
+
+//--------------
+
+	//QStandardItemModel* standardModel = new QStandardItemModel;
+	//QStandardItem *rootNode = standardModel->invisibleRootItem();
+
+	////defining a couple of items
+	//QStandardItem *americaItem = new QStandardItem("America");
+	//QStandardItem *mexicoItem = new QStandardItem("Canada");
+	//QStandardItem *usaItem = new QStandardItem("USA");
+	//QStandardItem *bostonItem = new QStandardItem("Boston");
+	//QStandardItem *europeItem = new QStandardItem("Europe");
+	//QStandardItem *italyItem = new QStandardItem("Italy");
+	//QStandardItem *romeItem = new QStandardItem("Rome");
+	//QStandardItem *veronaItem = new QStandardItem("Verona");
+
+	////building up the hierarchy
+	//rootNode->appendRow(americaItem);
+	//rootNode->appendRow(europeItem);
+	//americaItem->appendRow(mexicoItem);
+	//americaItem->appendRow(usaItem);
+	//usaItem->appendRow(bostonItem);
+	//europeItem->appendRow(italyItem);
+	//italyItem->appendRow(romeItem);
+	//italyItem->appendRow(veronaItem);
+
+	////register the model
+	//ui->treeView->setModel(standardModel);
+	//ui->treeView->expandAll();
+	//---------------
+
+	/*auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
+	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
+
+	auto comboDelegateFormat = new ComboDelegate(Format::getFormatNames(), this);
+	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
+
+	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
+	ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
+
+	auto comboDelegateState = new ComboDelegate(State::getStates(), this);
+	ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
+
+	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->tableView->setColumnHidden(0, true);
+	ui->tableView->setSortingEnabled(true);
+	ui->tableView->resizeColumnsToContents();*/
+
+}
 //
 //void TreeRegions::slotAdd()
 //{

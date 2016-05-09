@@ -256,15 +256,15 @@ QList<BaseItem*> Geodata::loadItemsFromDb() {
 	QSqlQuery query(db);
 
 	if (!query.exec(
-		"SELECT record_id, place_name, site_name,  format_name, description, state_name,  date, type_name, geodata_records.url, geodata_records.comment\
+		"SELECT geodata_records.id, place_name, sites.name,  formats.name, scales.description, states.name,  sessions.date, type_name, geodata_records.url, geodata_records.comment\
 		FROM geodata_records\
-		JOIN sites ON geodata_records.site_id=sites.site_id\
-		JOIN formats ON geodata_records.format_id=formats.format_id\
-		JOIN scales ON scales.scale_id=geodata_records.scale_id\
-		JOIN states ON states.state_id=geodata_records.state_id\
-		JOIN sessions ON sessions.session_id=geodata_records.session_id\
-		JOIN users ON sessions.user_id=users.user_id\
-		JOIN usertypes ON users.type_id=usertypes.type_id"
+		JOIN sites ON geodata_records.site_id=sites.id\
+		JOIN formats ON geodata_records.format_id=formats.id\
+		JOIN scales ON scales.id=geodata_records.id\
+		JOIN states ON states.id=geodata_records.id\
+		JOIN sessions ON sessions.id=geodata_records.id\
+		JOIN users ON sessions.user_id=users.id\
+		JOIN usertypes ON users.type_id=usertypes.id"
 		))
 	{
 		qDebug() << "ERRRRRRORRRR";

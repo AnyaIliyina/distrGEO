@@ -10,7 +10,7 @@ RegionItem::RegionItem()
 }
 
 int RegionItem::columnCount() const {
-	return 1;
+	return 2;
 };
 
 void RegionItem::removeChild(BaseItem* child) {
@@ -32,22 +32,12 @@ QVariant RegionItem::data(int column, int role) const {
 		{
 			return m_name;
 		}
+
+
 		return QVariant();
 	}
 }
 
-
-bool RegionItem::setData(int column, const QVariant& value, int role)
-{
-	qDebug() << "setData Regions";
-	if (value.isNull() || value.toString().isEmpty())
-		return false;
-
-	if (role == Qt::EditRole) {
-		if (column == 0)
-			m_name = value.toString();
-	}
-}
 
 RegionItem * RegionItem::itemFromRegion(Region * region)
 {
@@ -56,8 +46,18 @@ RegionItem * RegionItem::itemFromRegion(Region * region)
 	item->m_parent_id = region->parent_id();
 	item->m_name = region->name();
 	item->m_comment = region->comment();
-	delete region;
 	return item;
+}
+
+bool RegionItem::setData(int column, const QVariant& value, int role) {
+	qDebug() << "setData RegionItem";
+	if (value.isNull() || value.toString().isEmpty())
+		return false;
+
+	if (role == Qt::EditRole) {
+		if (column == 0)
+			m_name = value.toString();
+	}
 }
 
 RegionItem* RegionItem::findChildren(QList<RegionItem*> list)
@@ -82,6 +82,7 @@ bool RegionItem::isValid() const
 {
 	if (m_name.isNull() || m_name.isEmpty())
 			return false;
+	return true;
 }
 
 
@@ -113,29 +114,43 @@ bool RegionItem::cancel() { return true; }
 
 QList<BaseItem*> RegionItem::loadItemsFromDb() {
 	qDebug() << "loadItemsFromDb Regions";
-	//QList<RegionItem*> list;
-	//int id = 1;
-	//Region* region = new Region(id);
-	//while (region->name() != "")
-	//{
-	//	RegionItem *item = itemFromRegion(region);
-	//	list << item;		
-	//	delete region;
-	//	region = new Region(++id);
-	//}
-	//
-	QList<BaseItem*> finalList;
-	//for (int i = 0; i < list.count(); i++)
-	//{
-	//	if (list.at(i)->m_parent_id == 0)
-	//	{
-	//		finalList << list.at(i);
-	//		qDebug() << list.at(i)->m_id;
-	//	}
-	//	
-	//}
+	QList<BaseItem*> list;
+	RegionItem* r = new RegionItem();
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare(
+		"SELECT name\
+		FROM regions\
+	WHERE id = :id ");
+	query.bindValue(":id", m_id);
 
-	return finalList;
+	while (query.next()) {
+		RegionItem* r = new RegionItem();
+		r->m_id = id;
+		r->m_name = query.value(0).toString();
+		list << r;
+	}
+	/*Region* region = new Region(id);
+	while (region->name() != "")
+	{
+		RegionItem *item = itemFromRegion(region);
+		list << item;		
+		delete region;
+		region = new Region(++id);
+	}*/
+	/*qDebug() << "got list 1";
+	QList<BaseItem*> finalList;
+	for (int i = 0; i < list.count(); i++)
+	{
+		if (list.at(i)->m_parent_id == 0)
+		{
+			finalList << list.at(i);
+			qDebug() << list.at(i)->m_id;
+		}
+		
+	}*/
+
+	return list;
 }
 
 
