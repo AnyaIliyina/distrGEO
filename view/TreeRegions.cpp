@@ -1,30 +1,18 @@
 #include "TreeRegions.h"
-#include "Database.h"
-#include "Scale.h"
-#include "State.h"
-#include "Geodata_record.h"
-#include "Geodata.h"
 #include "RegionItem.h"
 #include "Item_model.h"
-#include "Combo_delegate.h"
-#include "Site.h"
-#include "Format.h"
-#include "Session.h"
-#include "SortFilterProxyModel.h"
-#include <QSortFilterProxyModel>
-#include <QApplication>
-#include <QMainWindow>
 #include <QSqlTableModel>
 #include <QTableView>
 #include <QMessageBox>
 #include <QDesktopServices>
-#include <QUrl>
+
 
 
 TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 {
 	ui->setupUi(this);
 	setupModel();
+	
 	
 	//setDisabled();
 	/*QObject::connect(ui->action_New, SIGNAL(triggered()), this, SLOT(slotAdd()));
@@ -48,13 +36,10 @@ TreeRegions::~TreeRegions()
 void TreeRegions::setupModel()
 {
 	delete m_model;
-	//QSqlDatabase db = Database::database();
-	qDebug() << "here";
 	m_model = new ItemModel();
 	m_model->loadData(3);
-	/*ui->treeView->setModel(m_model);
-	ui->treeView->expandAll();*/
-	createTable();
+	ui->treeView->setModel(m_model);
+	//createTable();
 }
 
 void TreeRegions::setDisabled()
@@ -69,7 +54,7 @@ void TreeRegions::setDisabled()
 
 void TreeRegions::slotRefresh()
 {
-	//setupModel();
+	setupModel();
 }
 
 //void TreeRegions::slotEnableButtons()
@@ -155,10 +140,10 @@ void TreeRegions::slotRefresh()
 //
 void TreeRegions::createTable()
 {
-	m_model->loadData(3);
+	//m_model->loadData(3);
 	/*filterModel = new SortFilterProxyModel();
 	filterModel->setSourceModel(m_model);*/
-	ui->treeView->setModel(m_model);
+	//ui->treeView->setModel(m_model);
 
 //--------------
 
@@ -190,22 +175,22 @@ void TreeRegions::createTable()
 	//ui->treeView->expandAll();
 	//---------------
 
-	/*auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
-	ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
+	//auto comboDelegateSite = new ComboDelegate(Site::getSiteNames(), this);
+	//ui->tableView->setItemDelegateForColumn(2, comboDelegateSite);
 
-	auto comboDelegateFormat = new ComboDelegate(Format::getFormatNames(), this);
-	ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
+	//auto comboDelegateFormat = new ComboDelegate(Format::getFormatNames(), this);
+	//ui->tableView->setItemDelegateForColumn(3, comboDelegateFormat);
 
-	auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
-	ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
+	//auto comboDelegateScale = new ComboDelegate(Scale::getDescription(), this);
+	//ui->tableView->setItemDelegateForColumn(4, comboDelegateScale);
 
-	auto comboDelegateState = new ComboDelegate(State::getStates(), this);
-	ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
+	//auto comboDelegateState = new ComboDelegate(State::getStates(), this);
+	//ui->tableView->setItemDelegateForColumn(5, comboDelegateState);
 
-	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->tableView->setColumnHidden(0, true);
-	ui->tableView->setSortingEnabled(true);
-	ui->tableView->resizeColumnsToContents();*/
+	//ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	//ui->tableView->setColumnHidden(0, true);
+	//ui->tableView->setSortingEnabled(true);
+	//ui->tableView->resizeColumnsToContents();
 
 }
 //

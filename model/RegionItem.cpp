@@ -1,167 +1,175 @@
 #include "RegionItem.h"
 
 
-RegionItem::~RegionItem()
-{
-}
 
-RegionItem::RegionItem()
-{
-}
+#include <QBrush>
+#include <QDebug>
+#include <QPixmap>
+#include <QSqlError>
+#include <QSqlDatabase> 
+#include <QSqlQuery>
+
+
+RegionItem::~RegionItem() {};
+RegionItem::RegionItem() : BaseItem() { };
 
 int RegionItem::columnCount() const {
-	return 2;
+	return 3;
 };
 
-void RegionItem::removeChild(BaseItem* child) {
-	if (!m_children.contains(child))
+void RegionItem::removeChild(BaseItem* child)
+{
+	if (!m_children.contains(child)) 
 		return;
-
-	RegionItem* region = dynamic_cast<RegionItem*>(child);
-	if (region == NULL)
-		return;
-
-	Region::deleteRegion(region->m_id);
+	RegionItem *r_item = dynamic_cast<RegionItem*>(child);
+	if (r_item == NULL)   
+		return; 
+	if (!child->isNew()) {
+		/*auto db = QSqlDatabase::database("PsqlConnection", true);  
+		QSqlQuery query(db); 
+		query.prepare(" DELETE FROM itgi.itgi_groups "    " WHERE id = :id ");  
+		query.bindValue(":id", itgiGroup->m_id);  
+		if (!query.exec())    
+			throw ItgiException(QString("Не удалось удалить группу ИТГИ.\n%1").arg(db.lastError().text())); */
+	} 
 	m_children.removeOne(child);
 };
 
-QVariant RegionItem::data(int column, int role) const {
+
+QVariant RegionItem::data(int column, int role) const
+{ 
 	if (role == Qt::DisplayRole || role == Qt::EditRole || role == Qt::ToolTipRole)
 	{
 		if (column == 0)
-		{
+			return m_id;
+		if (column == 1)
 			return m_name;
-		}
-
-
-		return QVariant();
+		if (column == 2)
+			return m_comment;
 	}
-}
 
-
-RegionItem * RegionItem::itemFromRegion(Region * region)
-{
-	RegionItem* item = new RegionItem();
-	item->m_id = region->id();
-	item->m_parent_id = region->parent_id();
-	item->m_name = region->name();
-	item->m_comment = region->comment();
-	return item;
-}
-
-bool RegionItem::setData(int column, const QVariant& value, int role) {
-	qDebug() << "setData RegionItem";
-	if (value.isNull() || value.toString().isEmpty())
-		return false;
-
-	if (role == Qt::EditRole) {
-		if (column == 0)
-			m_name = value.toString();
-	}
-}
-
-RegionItem* RegionItem::findChildren(QList<RegionItem*> list)
-{
-	while (!list.isEmpty())
-	{
-		for (int i = 0; i < list.count(); i++)
-		{
-
-			if (list.at(i)->m_parent_id == m_id)
-				appendChild(list.at(i));
-		}
-	}
-	return this;
-}
-
-
+	if (role == Qt::UserRole) 
+			return m_id;
 	
-	
+	return QVariant();	
+}; 
 
-bool RegionItem::isValid() const
+
+bool RegionItem::setData(int column, const QVariant& value, int role)
 {
-	if (m_name.isNull() || m_name.isEmpty())
-			return false;
-	return true;
-}
-
-
-bool RegionItem::isNew() const
-{
-	return m_id == 0;
-};
-
-bool RegionItem::save()
-{
-
-	if (isValid())
+	if (value.isNull() || value.toString().isEmpty()) 
+		return false;  if (role == Qt::EditRole)
 	{
-		m_comment = "";
-		//m_parent_id = 
-		if (m_id == 0) {
-			//Создание
-		}
-		else
-		{
-			// Изменение 
-		}
-
-		return true;
-	}
-}
-
-bool RegionItem::cancel() { return true; }
-
-QList<BaseItem*> RegionItem::loadItemsFromDb() {
-	qDebug() << "loadItemsFromDb Regions";
-	QList<BaseItem*> list;
-	RegionItem* r = new RegionItem();
-	QSqlDatabase db = Database::database();
-	QSqlQuery query(db);
-	query.prepare(
-		"SELECT name\
-		FROM regions\
-	WHERE id = :id ");
-	query.bindValue(":id", m_id);
-
-	while (query.next()) {
-		RegionItem* r = new RegionItem();
-		r->m_id = id;
-		r->m_name = query.value(0).toString();
-		list << r;
-	}
-	/*Region* region = new Region(id);
-	while (region->name() != "")
-	{
-		RegionItem *item = itemFromRegion(region);
-		list << item;		
-		delete region;
-		region = new Region(++id);
-	}*/
-	/*qDebug() << "got list 1";
-	QList<BaseItem*> finalList;
-	for (int i = 0; i < list.count(); i++)
-	{
-		if (list.at(i)->m_parent_id == 0)
-		{
-			finalList << list.at(i);
-			qDebug() << list.at(i)->m_id;
-		}
-		
-	}*/
-
-	return list;
+	if (column == 0) 
+		m_id = value.toInt();  
+	if (column == 1)   
+		m_name = value.toString();
+	if (column == 2)
+		m_comment = value.toString();
+	} 
+	return true; 
 }
 
 
 QVariant RegionItem::headerData(int section, int role) const {
-
 	if (role == Qt::DisplayRole) {
 		if (section == 0)
-			return ("Регионы");
-		
+			return ("ID");
+		if (section == 1)
+			return "Название";
+		if (section == 2)
+			return "Комментарий";
 	}
-
 	return QVariant();
+}; 
+
+bool RegionItem::isValid() const 
+{
+	if (m_name.isNull() || m_name.isEmpty()) 
+		return false;  
+	if (m_comment.isNull() || m_comment.isEmpty())
+		return false;
+	return true;
 };
 
+bool RegionItem::isNew() const 
+{
+	return (m_id == 0);
+}; 
+
+bool RegionItem::save() {
+	auto db = QSqlDatabase::database("PsqlConnection", true);  
+	QSqlQuery query(db); 
+	if (m_id == 0) { 
+		// Вставка новой группы ИТГИ   query.prepare(    " INSERT INTO itgi.itgi_groups( "    " code, name, group_id "    " ) VALUES( "    " :code, :name, :group_id "    " ) "    " RETURNING id "   );  
+		/*ItgiGroup parentGroup = static_cast<ItgiGroup*>(m_parent); 
+		query.bindValue(":code", m_code); 
+		query.bindValue(":name", m_name);  
+		query.bindValue(":group_id",    parentGroup->m_id == 0 ? QVariant() : parentGroup->m_id); 
+		if (!query.exec() || !query.next())   
+			throw ItgiException(    QString("Не удалось добавить новую группу ИТГИ.\n%1").arg(db.lastError().text())   ); 
+		m_id = query.value(0).toInt();  */
+	} 
+	else { 
+		// Изменение группы ИТГИ  
+		/*query.prepare(   " UPDATE itgi.itgi_groups "    " SET "    " code = :code, "    " name = :name "    " WHERE id = :id "   ); 
+		query.bindValue(":code", m_code);
+		query.bindValue(":name", m_name); 
+		query.bindValue(":id", m_id); 
+		if (!query.exec())   
+			throw ItgiException(     QString("Не удалось применить изменения группы ИТГИ.\n%1")    .arg(db.lastError().text())    ); */
+	}  return true;
+}; 
+
+bool RegionItem::cancel() {
+	if (isNew())  
+		return true; 
+	/*auto db = QSqlDatabase::database("PsqlConnection", true); 
+	QSqlQuery query(db); 
+	query.prepare(   " SELECT code, name "   " FROM itgi.itgi_groups "   " WHERE id = :id "  ); 
+	query.bindValue(":id", m_id); 
+	if (!query.exec() || !query.next())  
+		throw ItgiException(    QString("Не удалось отменить изменения группы ИТГИ.\n%1")    .arg(db.lastError().text())   );
+	m_code = query.value(0).toString();  
+	m_name = query.value(1).toString();  
+	return true; */
+}; 
+
+QList<BaseItem*> RegionItem::loadItemsFromDb()
+{
+	qDebug() << "loadItemsFromDb RegionItems";
+	QList<BaseItem*> list; 
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db); 
+	if (!query.exec(
+		"WITH RECURSIVE tree(id, name, comment, parent_id, depth) AS \
+		(\
+			SELECT id, name, comment, 0 AS parent_id, 1 AS depth \
+			 FROM regions \
+				WHERE parent_id IS 0 \
+			UNION ALL\
+			SELECT r.id, r.name, r.comment, r.parent_id, tr.depth+1 AS depth\
+			 FROM regions r, tree tr\
+				WHERE r.parent_id = tr.id\
+		)\
+		SELECT * from tree ORDER BY tree.parent_id ASC, tree.name ASC  limit 1000"))
+		qDebug() << "wrong query" << query.lastError().text();
+				
+	QMap<int, RegionItem*> map;
+	while (query.next()) 
+	{   
+		RegionItem* r_item = new RegionItem();
+		r_item->m_id = query.value(0).toInt();			// id   
+		r_item->m_name = query.value(1).toString(); 	// name 
+		// qDebug() << "name: " << r_item->m_name;
+		r_item->m_comment = query.value(2).toString(); 	// comment   
+		int parent_id = query.value(3).toInt(); 		// parent_id  
+		if (parent_id == 0)
+			list << r_item; 
+		else {  
+			auto parent = map[parent_id];  
+			parent->appendChild(r_item);  
+		}   map.insert(r_item->m_id, r_item); 
+	} 
+	return list;
+};
