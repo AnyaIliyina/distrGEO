@@ -15,7 +15,6 @@ QWidget* ComboDelegate::createEditor(
 	// Возвращаем QComboBox
 	//auto cBox = new QComboBox(parent);
 	MultiListWidget *cBox = new MultiListWidget(parent);
-	
 	for (int i = 0; i < m_list.count(); i++) {
 		cBox->addItem(m_list[i]);
 	}

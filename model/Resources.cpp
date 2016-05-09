@@ -128,11 +128,6 @@ bool Resources::hasChildren() const {
 
 bool Resources::save() {
 
-	
-	//	getSiteId();
-	//	getFormatId();
-	//getScaleId();
-	//getStateId();
 	if (m_id == 0) {
 		//Создание
 		Site* ns = new Site(m_url, m_name,1, m_comment );
@@ -147,7 +142,7 @@ bool Resources::save() {
 		Site *ns = new Site(m_url, m_name, 1, m_comment);
 		ns->setId(m_id);
 		/*ns->updateRecord();
-		m_id = ngdr->id();
+		m_id = ns->id();
 		delete ngdr;*/
 	}
 
@@ -182,7 +177,6 @@ bool Resources::cancel() {
 QList<BaseItem*> Resources::loadItemsFromDb() {
 	qDebug() << "loadItemsFromDb Resources";
 	QList<BaseItem*> list;
-
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 
