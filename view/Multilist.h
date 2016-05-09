@@ -16,7 +16,7 @@ class MultiListWidget: public QComboBox
 		Q_PROPERTY(QStringList checkedItems READ checkedItems WRITE setCheckedItems)
 
 public:
-	MultiListWidget(QWidget *parent=0);
+	MultiListWidget(QWidget *parent=NULL);
 	virtual ~MultiListWidget();
 
 	QStringList checkedItems() const;
