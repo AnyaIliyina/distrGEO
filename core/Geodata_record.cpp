@@ -202,6 +202,7 @@ bool Geodata_record::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS  geodata_records (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		site_id INTEGER,		\

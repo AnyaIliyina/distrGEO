@@ -16,6 +16,8 @@
 #include "Region.h"
 #include "SiteRegion.h"
 #include "SiteType.h"
+#include "DepartmentRegion.h"
+#include "DepartmentType.h"
 #include <QFileInfo>
 /*!
 \file
@@ -99,7 +101,13 @@ QSqlDatabase Database::database()
 */
 void Database::configure()
 {
+		Usertype::createTable();
+		Usertype::completeTable();
+		User::createTable();
+		User::completeTable();
 		Log::createTable();
+		Session::createTable();
+		Session::completeTable();
 		Language::createTable();
 		Language::completeTable();
 		Site::createTable();
@@ -110,16 +118,10 @@ void Database::configure()
 		State::completeTable();
 		Scale::createTable();
 		Scale::completeTable();
-		User::createTable();
-		User::completeTable();
 		Status::createTable();
 		Status::completeTable();
-		Usertype::createTable();
-		Usertype::completeTable();
 		Geodata_record::createTable();
 		// Geodata_record::completeTable();
-		Session::createTable();
-		Session::completeTable();
 		GeodataType::createTable();
 		GeodataType::completeTable();
 		Department::createTable();
@@ -135,4 +137,6 @@ void Database::createBridgeTables()
 	SiteRegion::createTable();
 	SiteLang::createTable();
 	SiteType::createTable();
+	DepartmentRegion::createTable();
+	DepartmentType::createTable();
 }

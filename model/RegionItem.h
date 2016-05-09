@@ -50,7 +50,7 @@ private:
 	/*QString m_all1;
 	QString m_all;*/
 	int m_type = 0;
-	RegionItem(Region* region);
+	RegionItem* itemFromRegion(Region* region);
 	
 	/*! Ищет в списке list дочерние элементы (рекурсивно)	*/
 	RegionItem* findChildren(QList<RegionItem*>list);

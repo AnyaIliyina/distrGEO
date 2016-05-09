@@ -136,12 +136,13 @@ bool User::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS  users (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		type_id     integer     NOT NULL,\
 		login NVARCHAR(16) UNIQUE NOT NULL,\
 		password NVARCHAR(16),\
-		FOREIGN KEY(type_id) REFERENCES usertypes(id)\
+		foreign key(type_id)  references usertypes(id)\
 		 )"
 		))
 	{
@@ -160,7 +161,7 @@ bool User::completeTable()
 	users << User(1, "search_module", "111")
 		<< User(2, "system", "111")
 		<< User(3, "Olga", "iamolga")
-		<< User(4, "uservasya", "iamvasya");
+		<< User(8, "uservasya", "iamvasya");
 	return insert(users);
 }
 

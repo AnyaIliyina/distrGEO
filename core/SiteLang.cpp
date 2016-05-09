@@ -78,6 +78,7 @@ bool SiteLang::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_langs (\
 		site_id INTEGER,		\
 		language_id INTEGER,   \
