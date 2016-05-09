@@ -154,8 +154,9 @@ void ViewSites::createTable()
 	filterModel->setSourceModel(m_model);
 	ui->tableView->setModel(filterModel);
 
-	auto comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
+	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
 	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
+	
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
 	ui->tableView->setSortingEnabled(true);

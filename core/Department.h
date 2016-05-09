@@ -112,6 +112,19 @@ public:
 
 
 	// ----------- Методы, обращающиеся к базе ----------
+	/*!
+	Конструирует объект класса Department из параметров
+	\param const QString& name - название департамента;
+	\param const QString& country - страна  департамента;
+	\param const QString& adress - адрес  департамента;
+	\param const QString& mail - электронная почта департамента;
+	\param const QString& fax - факс департамента;
+	\param const QString& phone -телефон  департамента;
+	\param const QString& comment;
+	*/
+	Department(const QString& name, const QString& country, const QString& adress, const QString& mail,
+	 const QString& phone, const QString& fax="", const QString& comment = "");
+
 	/*! Конструктор
 	Получает информацию из БД 
 	\param int id - id ведомства*/
@@ -142,4 +155,9 @@ public:
 	\return true - если таблица успешно заполнена
 	*/
 	static bool completeTable();
+
+
+	/*! Устанавливает значение id департамента
+	\param int id - id департамента*/
+	void setId(int id);
 };

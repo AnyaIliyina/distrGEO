@@ -3,6 +3,7 @@
 #include "Item_model.h"
 #include "Geodata.h"
 #include "SortFilterProxyModel.h"
+#include "Combo_delegate.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -39,7 +40,7 @@ private:
 	ItemModel* m_model=nullptr;
 	SortFilterProxyModel *filterModel;
 	bool m_editMode = false;
-	
+	ComboDelegate *comboDelegateLanguage;
 
 	/*!
 	Метод для установки модели в таблицу и настройки таблицы

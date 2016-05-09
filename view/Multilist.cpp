@@ -81,7 +81,7 @@ void MultiListWidget::collectCheckedItems()
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());
 
 	mCheckedItems.clear();
-	mCheckedIDs.clear();
+	//mCheckedIDs.clear();
 
 	for (int i = 0; i < count(); ++i)
 	{
@@ -92,7 +92,7 @@ void MultiListWidget::collectCheckedItems()
 		if (checkState == Qt::Checked)
 		{
 			mCheckedItems.push_back(currentItem->text());
-			mCheckedIDs.push_back(currentItem->row()+1);
+			//mCheckedIDs.push_back(currentItem->row()+1);
 		}
 	}
 

@@ -69,12 +69,28 @@ QStringList GeodataType::getList()
 	return typeNames;
 }
 
-QStringList GeodataType::getList(int id)
+QStringList GeodataType::getListForSites(int id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery queryGPI(db);
 	QStringList typeNames;
 	queryGPI.prepare(("SELECT name FROM geodata_types WHERE id in (SELECT site_types.type_id FROM site_types WHERE site_types.site_id = :id )"));
+	queryGPI.bindValue(":id", id);
+	if (!queryGPI.exec())
+	{
+		qDebug() << queryGPI.lastError().text();
+	}
+	while (queryGPI.next())
+		typeNames.push_back(queryGPI.value(0).toString());
+	return typeNames;
+}
+
+QStringList GeodataType::getListForDepartments(int id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery queryGPI(db);
+	QStringList typeNames;
+	queryGPI.prepare(("SELECT name FROM geodata_types WHERE id in (SELECT department_types.type_id FROM department_types WHERE department_types.department_id = :id )"));
 	queryGPI.bindValue(":id", id);
 	if (!queryGPI.exec())
 	{

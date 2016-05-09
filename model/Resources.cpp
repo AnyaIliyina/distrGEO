@@ -127,12 +127,10 @@ bool Resources::hasChildren() const {
 };
 
 bool Resources::save() {
-
 	
-	//	getSiteId();
-	//	getFormatId();
-	//getScaleId();
-	//getStateId();
+	if (m_comment == NULL)
+		m_comment = " ";
+
 	if (m_id == 0) {
 		//Создание
 		Site* ns = new Site(m_url, m_name,1, m_comment );
@@ -147,7 +145,7 @@ bool Resources::save() {
 		Site *ns = new Site(m_url, m_name, 1, m_comment);
 		ns->setId(m_id);
 		/*ns->updateRecord();
-		m_id = ngdr->id();
+		m_id = ns->id();
 		delete ngdr;*/
 	}
 
@@ -164,14 +162,13 @@ bool Resources::cancel() {
 	query.bindValue(":id", m_id);
 	if (!query.exec())
 	{
-		qDebug() << "ERRRRRRORRRR";
 		qDebug() << query.lastError().text();
 	}
 	query.next();
 	m_name = query.value(1).toString();
 	m_url = query.value(2).toString();
 	m_language = Language::getList(m_id).join(", ");
-	m_gpi = GeodataType::getList(m_id).join(", ");
+	m_gpi = GeodataType::getListForSites(m_id).join(", ");
 	m_comment = query.value(3).toString();
 	return true;
 }
@@ -182,13 +179,11 @@ bool Resources::cancel() {
 QList<BaseItem*> Resources::loadItemsFromDb() {
 	qDebug() << "loadItemsFromDb Resources";
 	QList<BaseItem*> list;
-
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 
 	if (!query.exec(" SELECT id, name, url, comment FROM sites"))
 	{
-		qDebug() << "ERRRRRRORRRR";
 		qDebug() << query.lastError().text();
 	}
 	while (query.next())
@@ -198,7 +193,7 @@ QList<BaseItem*> Resources::loadItemsFromDb() {
 		res->m_name = query.value(1).toString();
 		res->m_url = query.value(2).toString();
 		res->m_language = Language::getList(res->m_id).join(", ");
-		res->m_gpi = GeodataType::getList(res->m_id).join(", ");
+		res->m_gpi = GeodataType::getListForSites(res->m_id).join(", ");
 		res->m_comment = query.value(3).toString();
 		list << res;
 	}
