@@ -52,7 +52,6 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action_NewParent"/>
-   <addaction name="action_NewChild"/>
    <addaction name="separator"/>
    <addaction name="action_Delete"/>
    <addaction name="separator"/>
@@ -64,7 +63,7 @@
   <action name="action_NewParent">
    <property name="icon">
     <iconset resource="icons/ViewWindowRes.qrc">
-     <normaloff>:/plus+.png</normaloff>:/plus+.png</iconset>
+     <normaloff>:/1.png</normaloff>:/1.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
@@ -119,18 +118,6 @@
    </property>
    <property name="toolTip">
     <string>Отменить</string>
-   </property>
-  </action>
-  <action name="action_NewChild">
-   <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
-     <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;NewChild</string>
-   </property>
-   <property name="toolTip">
-    <string>Добавить</string>
    </property>
   </action>
  </widget>

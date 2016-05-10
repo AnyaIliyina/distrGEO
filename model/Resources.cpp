@@ -143,9 +143,12 @@ bool Resources::save() {
 		m_comment = " ";
 	QStringList listLanguage =m_language.split(", ");
 	QList<int> listIdLang = Language::getIDs(listLanguage);
+
 	qDebug().noquote() << "list idlang" << listIdLang;
+
 	QStringList listGPI = m_gpi.split(", ");
 	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+
 	qDebug ().noquote()<< "list idgpi" << listIdGPI;
 	if (m_id == 0) {
 		//Создание

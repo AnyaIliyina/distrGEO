@@ -93,9 +93,9 @@ QList<int> Language::getIDs(QStringList listLang)
 	for (int i = 0; i < listLang.count();i++)
 	{
 		QSqlQuery queryLang(db);
-		queryLang.prepare((" SELECT id FROM languages WHERE name=:name"));
+		queryLang.prepare("SELECT id FROM languages WHERE name=:name");
 		QString str= listLang[i];
-		queryLang.bindValue("name",str);
+		queryLang.bindValue(":name",str);
 		if (!queryLang.exec())
 		{
 			qDebug() << queryLang.lastError().text();
