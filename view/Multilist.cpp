@@ -91,7 +91,7 @@ void MultiListWidget::collectCheckedItems()
 
 		if (checkState == Qt::Checked)
 		{
-			mCheckedItems.push_back(currentItem->text());
+			mCheckedItems.push_back((currentItem->text()).toUtf8());
 			mCheckedIDs.push_back(currentItem->row()+1);
 		}
 	}
@@ -110,7 +110,7 @@ void MultiListWidget::updateDisplayText()
 	QFontMetrics fontMetrics(font());
 
 	mDisplayText = mCheckedItems.join(", ");
-
+	mDisplayText = mDisplayText.toUtf8();
 	if (fontMetrics.size(Qt::TextSingleLine, mDisplayText).width() > textRect.width())
 	{
 		while (mDisplayText != "" && fontMetrics.size(Qt::TextSingleLine, mDisplayText + "...").width() > textRect.width())

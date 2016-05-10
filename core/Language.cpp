@@ -88,19 +88,21 @@ QList<int> Language::getIDs(QStringList listLang)
 {
 	QSqlDatabase db = Database::database();
 	QList<int> listIDs;
+	/*qDebug().noquote()<< listLang[1];
+	qDebug().noquote() << listLang[0];*/
 	for (int i = 0; i < listLang.count();i++)
 	{
 		QSqlQuery queryLang(db);
-		queryLang.prepare((" SELECT id FROM languages WHERE name= :name"));
-		queryLang.bindValue("name",listLang.at(i));
+		queryLang.prepare((" SELECT id FROM languages WHERE name=:name"));
+		QString str= listLang[i];
+		queryLang.bindValue("name",str);
 		if (!queryLang.exec())
 		{
 			qDebug() << queryLang.lastError().text();
 		}
-		while (queryLang.next())
-		{
-			listIDs.push_back(queryLang.value(0).toInt());
-		}
+		int a = queryLang.value(0).toInt();
+		listIDs.push_back(a);
+		
 	}
 	return listIDs;
 }

@@ -109,15 +109,13 @@ QList<int> GeodataType::getIDs(QStringList listGPI)
 	{
 		QSqlQuery query(db);
 		query.prepare((" SELECT id FROM geodata_types WHERE name= :name"));
-		query.bindValue("name", listGPI.at(i));
+		query.bindValue("name", listGPI[i]);
 		if (!query.exec())
 		{
 			qDebug() << query.lastError().text();
 		}
-		while (query.next())
-		{
 			listIDs.push_back(query.value(0).toInt());
-		}
+		
 	}
 	return listIDs;
 }
