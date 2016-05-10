@@ -43,7 +43,14 @@ int ItemModel::columnCount(const QModelIndex& parent) const {
 };
 
 bool ItemModel::hasChildren(const QModelIndex& parent) const {
-		return false;
+	BaseItem* parentItem;
+
+	if (!parent.isValid())
+		parentItem = m_rootItem;
+	else
+		parentItem = static_cast<BaseItem*>(parent.internalPointer());
+
+	return parentItem->hasChildren();
 };
 
 QModelIndex ItemModel::index(int row, int column, const QModelIndex& parent) const {

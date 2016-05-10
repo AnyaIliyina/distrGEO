@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Site.h"
 #include "Language.h"
+#include "SiteLang.h"
 #include "GeodataType.h"
 #include "SiteLang.h"
 #include "SiteType.h"
@@ -161,7 +162,7 @@ bool Resources::save() {
 		}
 
 		delete ns;
-
+		
 
 	}
 	else {
@@ -228,6 +229,8 @@ QList<BaseItem*> Resources::loadItemsFromDb() {
 		res->m_language = Language::getList(res->m_id).join(", ");
 		res->m_gpi = GeodataType::getListForSites(res->m_id).join(", ");
 		res->m_comment = query.value(3).toString();
+		res->m_langs = SiteLang::languagesBySite(res->m_id);
+		this->setData(3, QVariant::fromValue(m_langs), Qt::EditRole);
 		list << res;
 	}
 	return list;
