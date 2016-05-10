@@ -50,10 +50,10 @@ public:
 	ItemModel* model() const;
 		
 private slots:
-	///*!
-	//Слот добавления
-	//*/
-	//void slotAdd();
+	/*!
+	Слот добавления
+	*/
+	void slotAdd();
 	
 	/*!
 	Слот удаления

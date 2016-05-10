@@ -26,6 +26,7 @@ void RegionItem::removeChild(BaseItem* child)
 	if (r_item == NULL)   
 		return; 
 	if (!child->isNew()) {
+		Region::deleteRegion(r_item->m_id);
 		/*auto db = QSqlDatabase::database("PsqlConnection", true);  
 		QSqlQuery query(db); 
 		query.prepare(" DELETE FROM itgi.itgi_groups "    " WHERE id = :id ");  
@@ -104,14 +105,23 @@ bool RegionItem::save() {
 	QSqlQuery query(db); 
 	if (m_id == 0) { 
 		// Вставка нового региона 
-		/*query.prepare(    " INSERT INTO itgi.itgi_groups( "    " code, name, group_id "    " ) VALUES( "    " :code, :name, :group_id "    " ) "    " RETURNING id "   );  
-		ItgiGroup parentGroup = static_cast<ItgiGroup*>(m_parent); 
-		query.bindValue(":code", m_code); 
+		Region *r = new Region();
+		query.prepare(    "INSERT INTO regions( "   
+			" comment, name, parent_id "
+			" ) VALUES( "
+			" :comment, :name, :parent_id "
+			" ) "
+			);  
+		RegionItem * parentGroup = static_cast<RegionItem*>(m_parent); 
+		query.bindValue(":comment", m_comment); 
 		query.bindValue(":name", m_name);  
-		query.bindValue(":group_id",    parentGroup->m_id == 0 ? QVariant() : parentGroup->m_id); 
-		if (!query.exec() || !query.next())   
-			throw ItgiException(    QString("Не удалось добавить новую группу ИТГИ.\n%1").arg(db.lastError().text())   ); 
-		m_id = query.value(0).toInt();  */
+		query.bindValue(":parent_id",    parentGroup->m_id == 0 ? 0 : parentGroup->m_id); 
+		if (!query.exec())   
+			qDebug() << "Не удалось добавить новую группу ИТГИ." << query.lastError().text(); 
+		if (query.next()) {
+			qDebug() << "получилось";
+			m_id = query.lastInsertId().toInt();
+		}
 	} 
 	else { 
 		// Изменение 
@@ -127,15 +137,19 @@ bool RegionItem::save() {
 bool RegionItem::cancel() {
 	if (isNew())  
 		return true; 
-	/*auto db = QSqlDatabase::database("PsqlConnection", true); 
+	/*auto db = Database::database();
 	QSqlQuery query(db); 
 	query.prepare(   " SELECT code, name "   " FROM itgi.itgi_groups "   " WHERE id = :id "  ); 
 	query.bindValue(":id", m_id); 
 	if (!query.exec() || !query.next())  
 		throw ItgiException(    QString("Не удалось отменить изменения группы ИТГИ.\n%1")    .arg(db.lastError().text())   );
 	m_code = query.value(0).toString();  
-	m_name = query.value(1).toString();  
-	return true; */
+	m_name = query.value(1).toString();  */
+	Region *r = new Region(m_id);
+	m_name = r->name();
+	m_comment = r->comment();
+	delete r;
+	return true; 
 }; 
 
 QList<BaseItem*> RegionItem::loadItemsFromDb()

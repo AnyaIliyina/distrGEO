@@ -15,7 +15,7 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 	
 	
 	setDisabled();
-	QObject::connect(ui->action_NewParent, SIGNAL(triggered()), this, SLOT(slotAdd()));
+	QObject::connect(ui->action_New, SIGNAL(triggered()), this, SLOT(slotAdd()));
 	QObject::connect(ui->action_Delete, SIGNAL(triggered()), this, SLOT(slotDelete()));
 	QObject::connect(ui->action_Edit, SIGNAL(triggered()), this, SLOT(slotEdit()));
 	QObject::connect(ui->action_Yes, SIGNAL(triggered()), this, SLOT(slotSave()));
@@ -52,8 +52,8 @@ void TreeRegions::setDisabled()
 {
 	ui->action_Edit->setEnabled(false);
 	ui->action_Delete->setEnabled(false);
-	ui->action_NewParent->setEnabled(false);
-	ui->action_NewChild->setEnabled(false);
+	ui->action_New->setEnabled(false);
+	//ui->action_NewChild->setEnabled(false);
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	
@@ -75,8 +75,8 @@ void TreeRegions::slotEnableButtons()
 	{
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
-		ui->action_NewParent->setEnabled(false);
-		ui->action_NewChild->setEnabled(false);
+		ui->action_New->setEnabled(false);
+		//ui->action_New->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
@@ -84,8 +84,8 @@ void TreeRegions::slotEnableButtons()
 	else
 	{
 		//ui->treeView->setSelectionBehavior(QAbstractItemView::SelectRows);
-		ui->action_NewParent->setEnabled(true);
-		ui->action_NewChild->setEnabled(true);
+		ui->action_New->setEnabled(true);
+		//ui->action_NewChild->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
 		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
@@ -113,15 +113,15 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 	{
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
-		ui->action_NewParent->setEnabled(false);
-		ui->action_NewChild->setEnabled(false);
+		ui->action_New->setEnabled(false);
+//		ui->action_NewChild->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
 	else
 	{
-		ui->action_NewParent->setEnabled(true);
-		ui->action_NewChild->setEnabled(true);
+		ui->action_New->setEnabled(true);
+//		ui->action_NewChild->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
 		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
@@ -150,35 +150,35 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 ////}
 //
 
-//
-//void TreeRegions::slotAdd()
-//{
-//	m_editMode = true;
-//	emit signalChangeEditMode();
-//	QModelIndex index;
+
+void TreeRegions::slotAdd()
+{
+	m_editMode = true;
+	emit signalChangeEditMode();
+	QModelIndex m_index=ui->treeView->selectionModel()->currentIndex();
 //	auto m_index = filterModel->mapToSource(index);
-//	m_model->insertRows(0, 1, m_index);
-//	auto rowCount = m_model->rowCount(m_index);
-//	auto child = m_model->index(rowCount - 1, 0, m_index); 
-//	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
-//	ui->tableView->edit(child);
-//	
-//}
-//
-//void TreeRegions::slotDelete()
-//{
-//	
-//	int  deleteMsgBox = QMessageBox::question(this, "",
-//		"Удалить выбранную запись?",
-//		QMessageBox::Yes, QMessageBox::No);
-//	if (deleteMsgBox == QMessageBox::Yes)
-//	{
-//		auto index = ui->tableView->selectionModel()->currentIndex();
-//		auto m_index = filterModel->mapToSource(index);
-//		m_model->removeRows(0, 1, m_index);
-//	}
-//}
-//
+	m_model->insertRows(0, 1, m_index);
+	auto rowCount = m_model->rowCount(m_index);
+	auto child = m_model->index(rowCount - 1, 0, m_index); 
+	ui->treeView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
+	ui->treeView->edit(child);
+	
+}
+
+void TreeRegions::slotDelete()
+{
+	
+	int  deleteMsgBox = QMessageBox::question(this, "",
+		"Удалить выбранную запись?",
+		QMessageBox::Yes, QMessageBox::No);
+	if (deleteMsgBox == QMessageBox::Yes)
+	{
+		auto m_index = ui->treeView->selectionModel()->currentIndex();
+		//auto m_index = filterModel->mapToSource(index);
+		m_model->removeRows(0, 1, m_index);
+	}
+}
+
 void TreeRegions::slotEdit()
 {	
 	m_editMode = true;
