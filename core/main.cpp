@@ -13,8 +13,8 @@
 
 int main(int argc, char* argv[])
 {	
+	setlocale(LC_ALL, "Russian");
 	QApplication app(argc, argv);
-	
 	Database::restore();
 	MainWindow *w = new MainWindow();
 	return app.exec();

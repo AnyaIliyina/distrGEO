@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>1.png</file>
     <file>check.png</file>
     <file>plus+.png</file>
     <file>close.png</file>

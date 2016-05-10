@@ -141,12 +141,15 @@ bool Resources::save() {
 	
 	if (m_comment == NULL)
 		m_comment = " ";
-	QStringList listLanguage = m_language.split(", ");
+	QStringList listLanguage =m_language.split(", ");
 	QList<int> listIdLang = Language::getIDs(listLanguage);
-	qDebug() << "list idlang" << listIdLang;
+
+	qDebug().noquote() << "list idlang" << listIdLang;
+
 	QStringList listGPI = m_gpi.split(", ");
 	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
-	qDebug ()<< "list idgpi" << listIdGPI;
+
+	qDebug ().noquote()<< "list idgpi" << listIdGPI;
 	if (m_id == 0) {
 		//Создание
 		Site* ns = new Site(m_url, m_name,1, m_comment );
@@ -154,11 +157,11 @@ bool Resources::save() {
 		m_id = ns->id();
 		for (int i = 0;i < listIdLang.count(); ++i)
 		{
-			SiteLang(m_id, listIdLang.at(i)).insertIntoDatabase();
+			SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
 		}
 		for (int i = 0;i < listIdGPI.count(); ++i)
 		{
-			SiteType(m_id, listIdGPI.at(i)).insertIntoDatabase();
+			SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
 		}
 
 		delete ns;
@@ -174,11 +177,11 @@ bool Resources::save() {
 		SiteType::deleteBySite(m_id);
 		for (int i = 0;i < listIdLang.count(); ++i)
 		{
-			SiteLang(m_id, listIdLang.at(i)).insertIntoDatabase();
+			SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
 		}
 		for (int i = 0;i < listIdGPI.count(); ++i)
 		{
-			SiteType(m_id, listIdGPI.at(i)).insertIntoDatabase();
+			SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
 		}
 		delete ns;
 	}
@@ -229,6 +232,8 @@ QList<BaseItem*> Resources::loadItemsFromDb() {
 		res->m_language = Language::getList(res->m_id).join(", ");
 		res->m_gpi = GeodataType::getListForSites(res->m_id).join(", ");
 		res->m_comment = query.value(3).toString();
+		
+		
 		list << res;
 	}
 	return list;
