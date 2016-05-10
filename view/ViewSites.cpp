@@ -2,8 +2,9 @@
 #include "Database.h"
 #include "Scale.h"
 #include "State.h"
-#include "Geodata_record.h"
+#include "GeodataType.h"
 #include "Geodata.h"
+
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
@@ -50,6 +51,7 @@ void ViewSites::setupModel()
 	m_model = new ItemModel();
 	createTable();
 }
+
 
 void ViewSites::setDisabled()
 {
@@ -157,6 +159,11 @@ void ViewSites::createTable()
 	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
 	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
 	
+
+	comboDelegateGPI = new ComboDelegate(GeodataType::getList(), this);
+	ui->tableView->setItemDelegateForColumn(4, comboDelegateGPI);
+
+
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
 	ui->tableView->setSortingEnabled(true);
@@ -207,7 +214,7 @@ void ViewSites::slotEdit()
 	qDebug() << "m_index" << m_index;
 	
 	m_model->startEditMode(m_index);
-	ui->tableView->edit(m_index);
+	ui->tableView->edit(index);
 }
 
 void ViewSites::slotSave()

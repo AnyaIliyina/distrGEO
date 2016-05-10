@@ -34,14 +34,15 @@ public:
 	\param QString whereQryPart- строка запроса к базе
 	*/
 	 void setupModel();
-
+	SortFilterProxyModel *filterModel;
+	
 private:
 	Ui::ViewSites *ui;
 	ItemModel* m_model=nullptr;
-	SortFilterProxyModel *filterModel;
+	
 	bool m_editMode = false;
 	ComboDelegate *comboDelegateLanguage;
-
+	ComboDelegate *comboDelegateGPI;
 	/*!
 	Метод для установки модели в таблицу и настройки таблицы
 	*/
@@ -89,6 +90,8 @@ private slots:
 	 Слот открытия ссылки
 	 */
 	 void slotOpenUrl();
+
+	  
  signals:
 	 /*!
 	 Сигнал для включения/выключения кнопок
