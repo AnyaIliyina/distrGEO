@@ -2,7 +2,7 @@
 #include <QSizePolicy>
 #include <QStylePainter>
 
-MultiListWidget::MultiListWidget(QWidget*parent) : QComboBox(parent)
+MultiListWidget::MultiListWidget(const QModelIndex &index, QWidget*parent) : QComboBox(parent)
 	
 {
 	
@@ -81,7 +81,7 @@ void MultiListWidget::collectCheckedItems()
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());
 
 	mCheckedItems.clear();
-	//mCheckedIDs.clear();
+	mCheckedIDs.clear();
 
 	for (int i = 0; i < count(); ++i)
 	{
@@ -92,12 +92,13 @@ void MultiListWidget::collectCheckedItems()
 		if (checkState == Qt::Checked)
 		{
 			mCheckedItems.push_back(currentItem->text());
-			//mCheckedIDs.push_back(currentItem->row()+1);
+			mCheckedIDs.push_back(currentItem->row()+1);
 		}
 	}
 
 	updateDisplayText();
-
+	emit signalCheckedIDs(mCheckedIDs);
+	qDebug() << "collect multilist ids" << mCheckedIDs;
 	repaint();
 }
 
@@ -119,6 +120,7 @@ void MultiListWidget::updateDisplayText()
 
 		mDisplayText += "...";
 	}
+
 }
 
 void MultiListWidget::slotModelRowsInserted(const QModelIndex &parent, int start, int end)

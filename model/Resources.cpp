@@ -74,16 +74,23 @@ bool Resources::setData(int column, const QVariant& value, int role) {
 				m_url = value.toString();
 			}
 		if (column == 3)
+		{
 			m_language = value.toString();
+			qDebug() << m_language;
+		}
 		if (column == 4)
+		{
 			m_gpi = value.toString();
+			qDebug() << m_gpi;
+		}
 		if (column == 5)
 			m_comment= value.toString();
 		
 		}
 	
 	return true;
-};
+}
+
 
 QVariant Resources::headerData(int section, int role) const {
 	

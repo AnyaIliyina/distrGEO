@@ -45,6 +45,7 @@ public:
 	bool cancel() Q_DECL_OVERRIDE;
 
 	QList<BaseItem*> loadItemsFromDb() Q_DECL_OVERRIDE;
+	
 
 private:
 

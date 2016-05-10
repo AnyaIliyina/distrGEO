@@ -16,7 +16,7 @@ class MultiListWidget: public QComboBox
 		Q_PROPERTY(QStringList checkedItems READ checkedItems WRITE setCheckedItems)
 
 public:
-	MultiListWidget(QWidget *parent=NULL);
+	MultiListWidget(const QModelIndex &index, QWidget *parent=NULL);
 	virtual ~MultiListWidget();
 
 	QStringList checkedItems() const;
@@ -42,6 +42,8 @@ private:
 	void slotModelRowsInserted(const QModelIndex &parent, int start, int end);
 	//void slotModelRowsRemoved(const QModelIndex &parent, int start, int end);
 	void slotModelItemChanged(QStandardItem *item);
-
+	
+signals:
+	void signalCheckedIDs(QList<int>);
 };
 
