@@ -59,6 +59,11 @@ void TreeRegions::setDisabled()
 	
 }
 
+ItemModel * TreeRegions::model() const
+{
+	return m_model;
+}
+
 void TreeRegions::slotRefresh()
 {
 	setupModel();

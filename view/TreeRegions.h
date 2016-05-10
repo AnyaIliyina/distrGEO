@@ -45,16 +45,20 @@ private:
 	// void createTable();
 
 	 void setDisabled();
+
+public:
+	ItemModel* model() const;
 		
 private slots:
 	///*!
 	//Слот добавления
 	//*/
 	//void slotAdd();
-	///*!
-	//Слот удаления
-	//*/
-	//void slotDelete();
+	
+	/*!
+	Слот удаления
+	*/
+	void slotDelete();
 	
 	/*!
 	 Слот редактирования

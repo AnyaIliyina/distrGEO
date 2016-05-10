@@ -51,6 +51,7 @@ bool ItemModel::hasChildren(const QModelIndex& parent) const {
 		parentItem = static_cast<BaseItem*>(parent.internalPointer());
 
 	return parentItem->hasChildren();
+	return false();
 };
 
 QModelIndex ItemModel::index(int row, int column, const QModelIndex& parent) const {

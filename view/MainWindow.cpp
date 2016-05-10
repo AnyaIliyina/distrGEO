@@ -119,6 +119,7 @@ void MainWindow::setDepartamentView()
 	m_vd = new ViewDepartments();
 	treeDepartments = new QTreeView();
 	treeDepartments->setMaximumSize(300, 1000);
+	treeDepartments->setModel(m_tr->model());
 	departaments = new QWidget();
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	layoutDepart->addWidget(m_vd);
