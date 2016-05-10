@@ -34,5 +34,10 @@ public:
 	/*! Создает таблицу department_types*/
 	static bool createTable();
 
+	/*! Удаляет все пары department_id - type_id,
+	в которых упоминается департамент department_id
+	\param int department_id - id департамента
+	*/
+	static void deleteByDepartment(int department_id);
 };
 

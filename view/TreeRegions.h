@@ -58,7 +58,7 @@ private slots:
 	/*!
 	Слот удаления
 	*/
-	void slotDelete();
+	//void slotDelete();
 	
 	/*!
 	 Слот редактирования

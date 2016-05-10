@@ -3,6 +3,7 @@
 #include "Geodata_record.h"
 #include "Site.h"
 #include "Department.h"
+#include "DepartmentType.h"
 #include "GeodataType.h"
 #include <QBrush>
 #include <QDebug>
@@ -29,6 +30,7 @@ void Departments::removeChild(BaseItem* child) {
 	if (department == NULL)
 		return;
 			Department::deleteDepartment(department->m_id);
+			DepartmentType::deleteByDepartment(department->m_id);
 	m_children.removeOne(child);
 };
 
@@ -150,11 +152,21 @@ bool Departments::save() {
 	m_comment = " ";
 	if (m_fax == NULL)
 		m_fax = " ";
+
+	QStringList listGPI = m_gpi.split(", ");
+	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+
 	if (m_id == 0) {
 		//Создание
 		Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
 		qDebug() << nd->insertIntoDatabase();
 		m_id = nd->id();
+		
+		for (int i = 0;i < listIdGPI.count(); ++i)
+		{
+			DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
+		}
+
 		delete nd;
 
 	}
@@ -164,6 +176,11 @@ bool Departments::save() {
 		nd->setId(m_id);
 		nd->update();
 		m_id = nd->id();
+		DepartmentType::deleteByDepartment(m_id);
+		for (int i = 0;i < listIdGPI.count(); ++i)
+		{
+			DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
+		}
 		delete nd;
 	}
 
