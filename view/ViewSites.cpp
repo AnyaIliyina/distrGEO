@@ -161,6 +161,7 @@ void ViewSites::createTable()
 	ui->tableView->setColumnHidden(0, true);
 	ui->tableView->setSortingEnabled(true);
 	ui->tableView->resizeColumnsToContents();
+
 }
 
 void ViewSites::slotAdd()

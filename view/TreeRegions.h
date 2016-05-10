@@ -57,27 +57,31 @@ private slots:
 	//Слот удаления
 	//*/
 	//void slotDelete();
-	///*
-	// Слот редактирования
-	// */
-	// void slotEdit();
-	// /*!
-	// Слот применения изменений
-	// */
-	// void slotSave();
-	// /*!
-	// Слот отмены изменений
-	// */
-	// void slotCancel();
+	
+	/*!
+	 Слот редактирования
+	 */
+	 void slotEdit();
+	
+	 /*!
+	 Слот применения изменений
+	 */
+	 void slotSave();
+
+	 /*!
+	 Слот отмены изменений
+	 */
+	 void slotCancel();
+	
 	 /*!
 	 Слот обновления модели
 	 */
 	 void slotRefresh();
-	 ///*!
-	 //Слоты включения/выключения кнопок 
-	 //*/
-  //   void slotEnableButtons(const QItemSelection &, const QItemSelection &);
-	 //void slotEnableButtons();
+	 /*!
+	 Слоты включения/выключения кнопок 
+	 */
+     void slotEnableButtons(const QItemSelection &, const QItemSelection &);
+	 void slotEnableButtons();
 	 ///*!
 	 //Слот фильтрации данных в таблице
 	 //\param QString text - искомая строка
@@ -94,6 +98,6 @@ private slots:
 	 ///*!
 	 //Сигнал о том, что данные в модели изменились
 	 //*/
-	 //void dataChanged();
+	 void dataChanged();
 
 };

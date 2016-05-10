@@ -17,6 +17,7 @@ int RegionItem::columnCount() const {
 	return 3;
 };
 
+
 void RegionItem::removeChild(BaseItem* child)
 {
 	if (!m_children.contains(child)) 
@@ -41,9 +42,9 @@ QVariant RegionItem::data(int column, int role) const
 	if (role == Qt::DisplayRole || role == Qt::EditRole || role == Qt::ToolTipRole)
 	{
 		if (column == 0)
-			return m_id;
-		if (column == 1)
 			return m_name;
+		if (column == 1)
+			return m_id;
 		if (column == 2)
 			return m_comment;
 	}
@@ -58,12 +59,13 @@ QVariant RegionItem::data(int column, int role) const
 bool RegionItem::setData(int column, const QVariant& value, int role)
 {
 	if (value.isNull() || value.toString().isEmpty()) 
-		return false;  if (role == Qt::EditRole)
+		return false;  
+	if (role == Qt::EditRole)
 	{
 	if (column == 0) 
-		m_id = value.toInt();  
+		m_name = value.toString();  
 	if (column == 1)   
-		m_name = value.toString();
+		m_id = value.toInt();
 	if (column == 2)
 		m_comment = value.toString();
 	} 
@@ -72,11 +74,11 @@ bool RegionItem::setData(int column, const QVariant& value, int role)
 
 
 QVariant RegionItem::headerData(int section, int role) const {
-	if (role == Qt::DisplayRole) {
+	if (role == Qt::EditRole) {			// DisplayRole
 		if (section == 0)
-			return ("ID");
-		if (section == 1)
 			return "Название";
+		/*if (section == 1)
+			return "ID";*/
 		if (section == 2)
 			return "Комментарий";
 	}
@@ -98,7 +100,7 @@ bool RegionItem::isNew() const
 }; 
 
 bool RegionItem::save() {
-	auto db = QSqlDatabase::database("PsqlConnection", true);  
+	auto db = Database::database();
 	QSqlQuery query(db); 
 	if (m_id == 0) { 
 		// Вставка новой группы ИТГИ   query.prepare(    " INSERT INTO itgi.itgi_groups( "    " code, name, group_id "    " ) VALUES( "    " :code, :name, :group_id "    " ) "    " RETURNING id "   );  
@@ -112,13 +114,15 @@ bool RegionItem::save() {
 	} 
 	else { 
 		// Изменение группы ИТГИ  
-		/*query.prepare(   " UPDATE itgi.itgi_groups "    " SET "    " code = :code, "    " name = :name "    " WHERE id = :id "   ); 
-		query.bindValue(":code", m_code);
-		query.bindValue(":name", m_name); 
-		query.bindValue(":id", m_id); 
-		if (!query.exec())   
-			throw ItgiException(     QString("Не удалось применить изменения группы ИТГИ.\n%1")    .arg(db.lastError().text())    ); */
-	}  return true;
+		int parent_id = m_parent->data(1, Qt::EditRole).toInt();
+		Region *r = new Region(parent_id, m_name, m_comment);
+		r->setId(m_id);
+		qDebug() << r->name();
+		r->update();
+	//	m_id = r->id();
+		delete r;
+	} 
+	return true;
 }; 
 
 bool RegionItem::cancel() {
@@ -153,7 +157,7 @@ QList<BaseItem*> RegionItem::loadItemsFromDb()
 				WHERE r.parent_id = tr.id\
 		)\
 		SELECT * from tree ORDER BY tree.parent_id ASC, tree.name ASC  limit 1000"))
-		qDebug() << "wrong query" << query.lastError().text();
+		qDebug() << "RegionItem::loadItemsFromDb() error:" << query.lastError().text();
 				
 	QMap<int, RegionItem*> map;
 	while (query.next()) 

@@ -2,8 +2,7 @@
 #include <QSizePolicy>
 #include <QStylePainter>
 
-MultiListWidget::MultiListWidget(QWidget *parent)
-	
+MultiListWidget::MultiListWidget(QWidget*parent): QComboBox(parent)
 {
 	
 	setMinimumSize(59, 29);

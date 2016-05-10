@@ -25,6 +25,8 @@ public:
 	*/
 	int columnCount() const Q_DECL_OVERRIDE;
 
+	//int rowCount() const Q_DECL_OVERRIDE;
+
 	void removeChild(BaseItem* child) Q_DECL_OVERRIDE;
 
 	QVariant data(int column, int role) const Q_DECL_OVERRIDE;

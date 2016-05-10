@@ -32,7 +32,6 @@ int BaseItem::row() const {
 		return 0;
 	else
 	{
-		qDebug()<<"row"<< m_parent;
 		return m_parent->m_children.indexOf(const_cast<BaseItem*>(this));
 	}
 };

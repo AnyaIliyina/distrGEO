@@ -55,6 +55,7 @@ private:
 	QString m_language;
 	QString m_gpi;
 	QString m_comment;
+	QList<int> m_langs;
 	int m_type = 0;
 
 };

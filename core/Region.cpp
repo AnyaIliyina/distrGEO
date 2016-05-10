@@ -112,7 +112,7 @@ bool Region::update(int session_id)
 	QSqlQuery query(db);
 	query.prepare("UPDATE regions\
 					SET\
-					paret_id=:parent_id, name=:name, comment=:comment \
+					parent_id=:parent_id, name=:name, comment=:comment \
 						WHERE id=:id");
 	query.bindValue(":name", m_name);
 	query.bindValue(":parent_id", m_parent_id);
@@ -127,7 +127,7 @@ bool Region::update(int session_id)
 		return false;
 	}
 	db.close();
-	Log::create(session_id, "Department: update", m_id);
+	Log::create(session_id, "Region: update", m_id);
 	return true;
 }
 
