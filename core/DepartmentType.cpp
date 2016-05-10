@@ -54,3 +54,18 @@ bool DepartmentType::createTable()
 	return true;
 }
 
+void DepartmentType::deleteByDepartment(int department_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("DELETE FROM department_types WHERE department_id =?");
+	query.addBindValue(department_id);
+	if (!query.exec())
+	{
+		qDebug() << "DepartmentType::deleteByDepartment(int department_id) error";
+		qDebug() << query.lastError().text();
+		db.close();
+	}
+	db.close();
+}
+

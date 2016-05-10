@@ -105,17 +105,21 @@ QList<int> GeodataType::getIDs(QStringList listGPI)
 {
 	QSqlDatabase db = Database::database();
 	QList<int> listIDs;
-	for (int i = 0; i < listGPI.count();i++)
+	QSqlQuery query(db);
+	QString str = listGPI.join("','");
+	qDebug().noquote() << str;
+	QString qry = QString("SELECT id FROM geodata_types WHERE name IN ('%1')").arg(str);
+	qDebug().noquote() << qry;
+	query.prepare(qry);
+	if (!query.exec())
 	{
-		QSqlQuery query(db);
-		query.prepare((" SELECT id FROM geodata_types WHERE name= :name"));
-		query.bindValue("name", listGPI[i]);
-		if (!query.exec())
-		{
-			qDebug() << query.lastError().text();
-		}
-			listIDs.push_back(query.value(0).toInt());
-		
+		qDebug() << query.lastError().text();
 	}
+	while (query.next())
+	{
+		int gr = query.value(0).toInt();
+		listIDs.push_back(gr);
+	}
+
 	return listIDs;
 }

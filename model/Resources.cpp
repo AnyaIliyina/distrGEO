@@ -34,6 +34,8 @@ void Resources::removeChild(BaseItem* child) {
 		return;
 
 		Site::deleteRecord(resource->m_id);
+		SiteLang::deleteBySite(resource->m_id);
+		SiteType::deleteBySite(resource->m_id);
 	m_children.removeOne(child);
 };
 
@@ -141,15 +143,13 @@ bool Resources::save() {
 	
 	if (m_comment == NULL)
 		m_comment = " ";
+
 	QStringList listLanguage =m_language.split(", ");
 	QList<int> listIdLang = Language::getIDs(listLanguage);
-
-	qDebug().noquote() << "list idlang" << listIdLang;
 
 	QStringList listGPI = m_gpi.split(", ");
 	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
 
-	qDebug ().noquote()<< "list idgpi" << listIdGPI;
 	if (m_id == 0) {
 		//Создание
 		Site* ns = new Site(m_url, m_name,1, m_comment );

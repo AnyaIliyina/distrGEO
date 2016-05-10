@@ -53,7 +53,6 @@ void TreeRegions::setDisabled()
 	ui->action_Edit->setEnabled(false);
 	ui->action_Delete->setEnabled(false);
 	ui->action_NewParent->setEnabled(false);
-	ui->action_NewChild->setEnabled(false);
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	
@@ -76,7 +75,6 @@ void TreeRegions::slotEnableButtons()
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_NewParent->setEnabled(false);
-		ui->action_NewChild->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
@@ -85,7 +83,6 @@ void TreeRegions::slotEnableButtons()
 	{
 		//ui->treeView->setSelectionBehavior(QAbstractItemView::SelectRows);
 		ui->action_NewParent->setEnabled(true);
-		ui->action_NewChild->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
 		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
@@ -114,14 +111,12 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_NewParent->setEnabled(false);
-		ui->action_NewChild->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 	}
 	else
 	{
 		ui->action_NewParent->setEnabled(true);
-		ui->action_NewChild->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
 		if (ui->treeView->selectionModel()->selectedRows().count() > 1)

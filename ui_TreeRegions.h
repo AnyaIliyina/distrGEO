@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'TreeRegions.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -30,7 +30,6 @@ public:
     QAction *action_Edit;
     QAction *action_Yes;
     QAction *action_No;
-    QAction *action_NewChild;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
     QTreeView *treeView;
@@ -44,7 +43,7 @@ public:
         action_NewParent = new QAction(TreeRegions);
         action_NewParent->setObjectName(QStringLiteral("action_NewParent"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/plus+.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/1.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_NewParent->setIcon(icon);
         action_Delete = new QAction(TreeRegions);
         action_Delete->setObjectName(QStringLiteral("action_Delete"));
@@ -66,11 +65,6 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_No->setIcon(icon4);
-        action_NewChild = new QAction(TreeRegions);
-        action_NewChild->setObjectName(QStringLiteral("action_NewChild"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/plus.png"), QSize(), QIcon::Normal, QIcon::Off);
-        action_NewChild->setIcon(icon5);
         centralwidget = new QWidget(TreeRegions);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);
@@ -88,7 +82,6 @@ public:
         TreeRegions->addToolBar(Qt::TopToolBarArea, toolBar);
 
         toolBar->addAction(action_NewParent);
-        toolBar->addAction(action_NewChild);
         toolBar->addSeparator();
         toolBar->addAction(action_Delete);
         toolBar->addSeparator();
@@ -127,10 +120,6 @@ public:
         action_No->setText(QApplication::translate("TreeRegions", "&No", 0));
 #ifndef QT_NO_TOOLTIP
         action_No->setToolTip(QApplication::translate("TreeRegions", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214", 0));
-#endif // QT_NO_TOOLTIP
-        action_NewChild->setText(QApplication::translate("TreeRegions", "&NewChild", 0));
-#ifndef QT_NO_TOOLTIP
-        action_NewChild->setToolTip(QApplication::translate("TreeRegions", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", 0));
 #endif // QT_NO_TOOLTIP
         toolBar->setWindowTitle(QApplication::translate("TreeRegions", "toolBar", 0));
 #ifndef QT_NO_TOOLTIP
