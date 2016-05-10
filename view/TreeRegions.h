@@ -42,7 +42,7 @@ private:
 	/*!
 	Метод для установки модели в таблицу и настройки таблицы
 	*/
-	 void createTable();
+	// void createTable();
 
 	 void setDisabled();
 		

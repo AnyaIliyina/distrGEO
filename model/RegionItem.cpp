@@ -103,8 +103,9 @@ bool RegionItem::save() {
 	auto db = Database::database();
 	QSqlQuery query(db); 
 	if (m_id == 0) { 
-		// Вставка новой группы ИТГИ   query.prepare(    " INSERT INTO itgi.itgi_groups( "    " code, name, group_id "    " ) VALUES( "    " :code, :name, :group_id "    " ) "    " RETURNING id "   );  
-		/*ItgiGroup parentGroup = static_cast<ItgiGroup*>(m_parent); 
+		// Вставка нового региона 
+		/*query.prepare(    " INSERT INTO itgi.itgi_groups( "    " code, name, group_id "    " ) VALUES( "    " :code, :name, :group_id "    " ) "    " RETURNING id "   );  
+		ItgiGroup parentGroup = static_cast<ItgiGroup*>(m_parent); 
 		query.bindValue(":code", m_code); 
 		query.bindValue(":name", m_name);  
 		query.bindValue(":group_id",    parentGroup->m_id == 0 ? QVariant() : parentGroup->m_id); 
@@ -113,13 +114,11 @@ bool RegionItem::save() {
 		m_id = query.value(0).toInt();  */
 	} 
 	else { 
-		// Изменение группы ИТГИ  
+		// Изменение 
 		int parent_id = m_parent->data(1, Qt::EditRole).toInt();
 		Region *r = new Region(parent_id, m_name, m_comment);
 		r->setId(m_id);
-		qDebug() << r->name();
 		r->update();
-	//	m_id = r->id();
 		delete r;
 	} 
 	return true;
