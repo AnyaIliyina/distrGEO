@@ -4,12 +4,15 @@
 #include "Site.h"
 #include "Language.h"
 #include "GeodataType.h"
+#include "SiteLang.h"
+#include "SiteType.h"
 #include <QBrush>
 #include <QDebug>
 #include <QPixmap>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+
 
 
 Resources::~Resources() {};
@@ -137,12 +140,26 @@ bool Resources::save() {
 	
 	if (m_comment == NULL)
 		m_comment = " ";
-
+	QStringList listLanguage = m_language.split(", ");
+	QList<int> listIdLang = Language::getIDs(listLanguage);
+	qDebug() << "list idlang" << listIdLang;
+	QStringList listGPI = m_gpi.split(", ");
+	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+	qDebug ()<< "list idgpi" << listIdGPI;
 	if (m_id == 0) {
 		//Создание
 		Site* ns = new Site(m_url, m_name,1, m_comment );
 		qDebug() << ns->insertIntoDatabase();
 		m_id = ns->id();
+		for (int i = 0;i < listIdLang.count(); ++i)
+		{
+			SiteLang(m_id, listIdLang.at(i)).insertIntoDatabase();
+		}
+		for (int i = 0;i < listIdGPI.count(); ++i)
+		{
+			SiteType(m_id, listIdGPI.at(i)).insertIntoDatabase();
+		}
+
 		delete ns;
 
 
@@ -151,9 +168,18 @@ bool Resources::save() {
 		// Изменение 
 		Site *ns = new Site(m_url, m_name, 1, m_comment);
 		ns->setId(m_id);
-		/*ns->updateRecord();
-		m_id = ns->id();
-		delete ngdr;*/
+		ns->updateRecord();
+		SiteLang::deleteBySite(m_id);
+		SiteType::deleteBySite(m_id);
+		for (int i = 0;i < listIdLang.count(); ++i)
+		{
+			SiteLang(m_id, listIdLang.at(i)).insertIntoDatabase();
+		}
+		for (int i = 0;i < listIdGPI.count(); ++i)
+		{
+			SiteType(m_id, listIdGPI.at(i)).insertIntoDatabase();
+		}
+		delete ns;
 	}
 
 	return true;

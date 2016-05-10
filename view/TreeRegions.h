@@ -2,7 +2,6 @@
 #include "ui_TreeRegions.h"
 #include "Item_model.h"
 #include "Geodata.h"
-#include "SortFilterProxyModel.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -37,7 +36,6 @@ public:
 private:
 	Ui::TreeRegions *ui;
 	ItemModel* m_model=nullptr;
-	SortFilterProxyModel *filterModel;
 	bool m_editMode = false;
 	
 

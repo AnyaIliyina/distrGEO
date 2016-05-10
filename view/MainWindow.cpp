@@ -134,18 +134,13 @@ void MainWindow::setupModel()
 	m_res_model->loadData(1);
 	m_dep_model = new ItemModel();
 	m_dep_model->loadData(2);
-
-	m_filter_res_model = new SortFilterProxyModel();
-	m_filter_res_model->setSourceModel(m_res_model);
-	m_filter_dep_model = new SortFilterProxyModel();
-	m_filter_dep_model->setSourceModel(m_dep_model);
-
-	tableSites->setModel(m_filter_res_model);
+	
+	tableSites->setModel(m_res_model);
 	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableSites->setColumnHidden(0, true);
 	tableSites->setSortingEnabled(true);
 	tableSites->resizeColumnsToContents();
-	tableDepartments->setModel(m_filter_dep_model);
+	tableDepartments->setModel(m_dep_model);
 	tableDepartments->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableDepartments->setColumnHidden(0, true);
 	tableDepartments->setSortingEnabled(true);

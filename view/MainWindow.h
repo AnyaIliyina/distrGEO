@@ -8,7 +8,7 @@
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
 #include "Item_model.h"
-#include "SortFilterProxyModel.h"
+
 
 /*!
 	\file
@@ -50,9 +50,9 @@ private:
 	QWidget *departaments;
 
 	ItemModel *m_res_model;
-	SortFilterProxyModel *m_filter_res_model;
+	
 	ItemModel *m_dep_model;
-	SortFilterProxyModel *m_filter_dep_model;
+	
 
 	void setSearchResources();
 	void setResourcesView();

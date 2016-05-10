@@ -94,3 +94,18 @@ bool SiteType::createTable()
 	SiteType(1, 2).insertIntoDatabase();
 	return true;
 }
+
+void SiteType::deleteBySite(int site_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("DELETE FROM site_types WHERE site_id =?");
+	query.addBindValue(site_id);
+	if (!query.exec())
+	{
+		qDebug() << "SiteType::deleteBySite(int site_id) error";
+		qDebug() << query.lastError().text();
+		db.close();
+	}
+	db.close();
+}

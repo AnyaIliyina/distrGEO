@@ -1,5 +1,6 @@
 #include "Language.h"
 #include "Database.h"
+#include "Scale.h"
 #include <QString>
 
 bool Language::createTable()
@@ -81,5 +82,26 @@ QStringList Language::getList(int id)
 		languages.push_back(queryLang.value(0).toString());
 	}
 	return languages;
+}
+
+QList<int> Language::getIDs(QStringList listLang)
+{
+	QSqlDatabase db = Database::database();
+	QList<int> listIDs;
+	for (int i = 0; i < listLang.count();i++)
+	{
+		QSqlQuery queryLang(db);
+		queryLang.prepare((" SELECT id FROM languages WHERE name= :name"));
+		queryLang.bindValue("name",listLang.at(i));
+		if (!queryLang.exec())
+		{
+			qDebug() << queryLang.lastError().text();
+		}
+		while (queryLang.next())
+		{
+			listIDs.push_back(queryLang.value(0).toInt());
+		}
+	}
+	return listIDs;
 }
 

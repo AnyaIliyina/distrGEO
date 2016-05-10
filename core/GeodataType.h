@@ -57,5 +57,9 @@ public:
 	\return QStringList typeNames - названия типов*/
 	static QStringList getListForDepartments(int id);
 	
+	/*!
+	Возвращает список id гпи по их названию
+	\return QList <int> ids*/
+	static QList <int> getIDs(QStringList listGPI);
 };
 

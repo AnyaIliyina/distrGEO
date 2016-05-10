@@ -49,5 +49,10 @@ public:
 	Возвращает список языков определенного сайта
 	\return QStringList languages*/
 	static QStringList getList(int id);
+
+	/*!
+	Возвращает список id языков по их названию
+	\return QList <int> ids*/
+	static QList <int> getIDs(QStringList listLang);
 };
 
