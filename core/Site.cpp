@@ -316,3 +316,26 @@ void Site::setId(int id)
 {
 	m_id = id;
 }
+
+
+void Site::updateRecord(int session_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("UPDATE sites\
+					SET\
+					url =:url, name=:name, comment=:comment WHERE id=:id");
+	query.bindValue(":url", m_url);
+	query.bindValue(":name", m_name);
+	query.bindValue(":comment", m_comment);
+	query.bindValue(":id", m_id);
+	if (!query.exec()) {
+		qDebug() << "Site::updateRecord():  error updating sites";
+		QString errorString = query.lastError().text();
+		qDebug() << errorString;
+		db.close();
+		Log::create(session_id, "Site: update", m_id, errorString);
+	}
+	db.close();
+	Log::create(session_id, "Site: update", m_id);
+}

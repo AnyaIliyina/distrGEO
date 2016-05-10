@@ -150,7 +150,7 @@ bool ItemModel::insertRows(int row, int count, const QModelIndex& parent) {
 	parentItem->appendChild(child);
 	m_editedItem = child;
 	
-	this->beginInsertRows(parent, parentItem->rowCount() - 1, parentItem->rowCount() - 1);
+	this->beginInsertRows(parent, parentItem->rowCount(), parentItem->rowCount());
 	this->endInsertRows();
 
 	return true;

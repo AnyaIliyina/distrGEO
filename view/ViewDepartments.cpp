@@ -9,8 +9,6 @@
 #include "Site.h"
 #include "Format.h"
 #include "Session.h"
-#include "SortFilterProxyModel.h"
-#include <QSortFilterProxyModel>
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -142,9 +140,7 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 void ViewDepartments::createTable()
 {
 	m_model->loadData(2);
-	filterModel = new SortFilterProxyModel();
-	filterModel->setSourceModel(m_model);
-	ui->tableView->setModel(filterModel);
+	ui->tableView->setModel(m_model);
 
 	auto comboDelegate = new ComboDelegate(GeodataType::getList(), this);
 	ui->tableView->setItemDelegateForColumn(7, comboDelegate);
@@ -161,10 +157,9 @@ void ViewDepartments::slotAdd()
 	m_editMode = true;
 	emit signalChangeEditMode();
 	QModelIndex index;
-	auto m_index = filterModel->mapToSource(index);
-	m_model->insertRows(0, 1, m_index);
-	auto rowCount = m_model->rowCount(m_index);
-	auto child = m_model->index(rowCount - 1, 0, m_index); 
+	m_model->insertRows(0, 1, index);
+	auto rowCount = m_model->rowCount(index);
+	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
 	ui->tableView->edit(child);
 	
@@ -182,8 +177,7 @@ void ViewDepartments::slotDelete()
 		for (int i = indexes.count() - 1; i >= 0; i--)
 		{
 			auto index = indexes.at(i);
-			auto m_index = filterModel->mapToSource(index);
-			m_model->removeRows(0, 1, m_index);
+			m_model->removeRows(0, 1, index);
 		}
 	}
 }
@@ -194,12 +188,9 @@ void ViewDepartments::slotEdit()
 	m_editMode = true;
 	emit signalChangeEditMode();
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	qDebug() << "index" << index;
-	auto m_index= filterModel->mapToSource(index);
-	qDebug() << "m_index" << m_index;
-	
-	m_model->startEditMode(m_index);
-	ui->tableView->edit(m_index);
+		
+	m_model->startEditMode(index);
+	ui->tableView->edit(index);
 }
 
 void ViewDepartments::slotSave()
@@ -214,7 +205,7 @@ void ViewDepartments::slotSave()
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	auto m_index = filterModel->mapToSource(index);
+
 
 }
 
@@ -228,9 +219,8 @@ void ViewDepartments::slotCancel()
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	auto m_index = filterModel->mapToSource(index);
 	ui->tableView->reset();
-	ui->tableView->selectionModel()->setCurrentIndex(m_index, QItemSelectionModel::Select |
+	ui->tableView->selectionModel()->setCurrentIndex(index, QItemSelectionModel::Select |
 		QItemSelectionModel::Rows);
 	
 }

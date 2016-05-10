@@ -164,4 +164,9 @@ public:
 	 /*! Устанавливает значение id сайта
 	 \param int id - id сайта*/
 	 void setId(int id);
+
+	 /*!
+	 Обновляет запись в базе данных
+	 */
+	 void updateRecord(int session_id= Database::currentSessionId());
 };

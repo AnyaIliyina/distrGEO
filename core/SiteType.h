@@ -51,5 +51,11 @@ public:
 	/*! Создает таблицу site_types
 	\return true - таблица создана*/
 	static bool createTable();
+
+	/*! Удаляет все пары site_id - type_id,
+	в которых упоминается интернет-ресурс site_id
+	\param int site_id - id интернет-ресурса
+	*/
+	static void deleteBySite(int site_id);
 };
 

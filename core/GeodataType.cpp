@@ -100,3 +100,24 @@ QStringList GeodataType::getListForDepartments(int id)
 		typeNames.push_back(queryGPI.value(0).toString());
 	return typeNames;
 }
+
+QList<int> GeodataType::getIDs(QStringList listGPI)
+{
+	QSqlDatabase db = Database::database();
+	QList<int> listIDs;
+	for (int i = 0; i < listGPI.count();i++)
+	{
+		QSqlQuery query(db);
+		query.prepare((" SELECT id FROM geodata_types WHERE name= :name"));
+		query.bindValue("name", listGPI.at(i));
+		if (!query.exec())
+		{
+			qDebug() << query.lastError().text();
+		}
+		while (query.next())
+		{
+			listIDs.push_back(query.value(0).toInt());
+		}
+	}
+	return listIDs;
+}

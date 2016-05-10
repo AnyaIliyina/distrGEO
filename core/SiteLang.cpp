@@ -74,6 +74,21 @@ QList<int> SiteLang::languagesBySite(int site_id)
 	
 }
 
+void SiteLang::deleteBySite(int site_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("DELETE FROM site_langs WHERE site_id =?");
+	query.addBindValue(site_id);
+	if (!query.exec())
+	{
+		qDebug() << "SiteLang::deleteBySite(int site_id) error";
+		qDebug() << query.lastError().text();
+		db.close();
+	}
+	db.close();
+}
+
 bool SiteLang::createTable()
 {
 	QSqlDatabase db = Database::database();

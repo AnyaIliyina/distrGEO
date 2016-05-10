@@ -2,7 +2,6 @@
 #include "ui_ViewSites.h"
 #include "Item_model.h"
 #include "Geodata.h"
-#include "SortFilterProxyModel.h"
 #include "Combo_delegate.h"
 #include <QApplication>
 #include <QMainWindow>
@@ -34,7 +33,7 @@ public:
 	\param QString whereQryPart- строка запроса к базе
 	*/
 	 void setupModel();
-	SortFilterProxyModel *filterModel;
+
 	
 private:
 	Ui::ViewSites *ui;
@@ -80,11 +79,6 @@ private slots:
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	 /*!
-	 Слот фильтрации данных в таблице
-	 \param QString text - искомая строка
-	 */
-	 void slotFilterChanged(QString text);
 
 	 /*!
 	 Слот открытия ссылки
