@@ -144,39 +144,41 @@ void Database::createBridgeTables()
 
 void Database::addTriggers()
 {
-	/*onDeleteTrigger("sites", "site_langs");
+	onDeleteTrigger("sites", "site_langs");
 	onDeleteTrigger("sites", "site_regions");
 	onDeleteTrigger("sites", "site_types");
 	onDeleteTrigger("departments", "department_regions");
 	onDeleteTrigger("regions", "department_regions");
 	onDeleteTrigger("departments", "department_types");
-	*/
-	
+	regionsTrigger();	
 }
 
 void Database::onDeleteTrigger(const QString& tableName, 
 	const QString & dependentTableName)
 {
+	const QString column_name = tableName.mid(0, tableName.length() - 1) + "_id";
 	QSqlDatabase db = database();
 	QSqlQuery query(db);
 	QString queryString = "CREATE TRIGGER del_" + tableName + "_after_" + dependentTableName
 		+ " BEFORE DELETE ON " + tableName
 		+ " FOR EACH ROW BEGIN DELETE from " + dependentTableName
-		+ " WHERE "+ tableName + "_id = OLD.id; END;";
+		+ " WHERE "+ column_name + " = OLD.id; END;";
 	if(!query.exec(queryString))
 		qDebug() << "no del_" + tableName + "_after_" + dependentTableName+" trigger:" << query.lastError().text();
+	qDebug() << queryString;
 	db.close();
 }
 
 void Database::regionsTrigger()
-{/*
+{
 	QSqlDatabase db = database();
 	QSqlQuery query(db);
-	QString queryString = "CREATE TRIGGER del_" + tableName + "_after_" + dependentTableName
-		+ " BEFORE DELETE ON " + tableName
-		+ " FOR EACH ROW BEGIN DELETE from " + dependentTableName
-		+ " WHERE " + tableName + "_id = OLD.id; END;";
+	QString queryString = "CREATE TRIGGER del_regions_after_regions\
+		 BEFORE DELETE ON regions \
+		 FOR EACH ROW BEGIN DELETE from regions \
+		 WHERE regions.parent_id = OLD.id; END;";
 	if (!query.exec(queryString))
-		qDebug() << "no del_" + tableName + "_after_" + dependentTableName + " trigger:" << query.lastError().text();
-	db.close();*/
+		qDebug() << "no del_regions_after_regions trigger:" << query.lastError().text();
+	qDebug() << queryString;
+	db.close();
 }
