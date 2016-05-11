@@ -161,7 +161,7 @@ bool Region::createTable()
 		parent_id  INTEGER  ,\
 		name     TEXT    UNIQUE NOT NULL,\
 		comment     TEXT   ,   \
-		FOREIGN KEY(parent_id) REFERENCES regions(id)\
+		FOREIGN KEY(parent_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE\
 		)"
 		)))
 	{
