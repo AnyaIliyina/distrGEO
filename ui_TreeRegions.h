@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'TreeRegions.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.0
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -25,7 +25,7 @@ QT_BEGIN_NAMESPACE
 class Ui_TreeRegions
 {
 public:
-    QAction *action_NewParent;
+    QAction *action_New;
     QAction *action_Delete;
     QAction *action_Edit;
     QAction *action_Yes;
@@ -40,11 +40,11 @@ public:
         if (TreeRegions->objectName().isEmpty())
             TreeRegions->setObjectName(QStringLiteral("TreeRegions"));
         TreeRegions->resize(670, 389);
-        action_NewParent = new QAction(TreeRegions);
-        action_NewParent->setObjectName(QStringLiteral("action_NewParent"));
+        action_New = new QAction(TreeRegions);
+        action_New->setObjectName(QStringLiteral("action_New"));
         QIcon icon;
         icon.addFile(QStringLiteral(":/1.png"), QSize(), QIcon::Normal, QIcon::Off);
-        action_NewParent->setIcon(icon);
+        action_New->setIcon(icon);
         action_Delete = new QAction(TreeRegions);
         action_Delete->setObjectName(QStringLiteral("action_Delete"));
         QIcon icon1;
@@ -81,7 +81,7 @@ public:
         toolBar->setMovable(false);
         TreeRegions->addToolBar(Qt::TopToolBarArea, toolBar);
 
-        toolBar->addAction(action_NewParent);
+        toolBar->addAction(action_New);
         toolBar->addSeparator();
         toolBar->addAction(action_Delete);
         toolBar->addSeparator();
@@ -101,9 +101,9 @@ public:
 #ifndef QT_NO_TOOLTIP
         TreeRegions->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        action_NewParent->setText(QApplication::translate("TreeRegions", "&New", 0));
+        action_New->setText(QApplication::translate("TreeRegions", "&New", 0));
 #ifndef QT_NO_TOOLTIP
-        action_NewParent->setToolTip(QApplication::translate("TreeRegions", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214( \321\201\321\202\321\200\320\260\320\275\321\203???)", 0));
+        action_New->setToolTip(QApplication::translate("TreeRegions", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\320\263\320\270\320\276\320\275", 0));
 #endif // QT_NO_TOOLTIP
         action_Delete->setText(QApplication::translate("TreeRegions", "&Delete", 0));
 #ifndef QT_NO_TOOLTIP

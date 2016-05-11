@@ -56,11 +56,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;core;database;view;search_module;model;C:\Qt\5.5.1\qtbase\include;C:\Qt\5.5.1\qtbase\include\QtWidgets;C:\Qt\5.5.1\qtbase\include\QtGui;C:\Qt\5.5.1\qtbase\include\QtANGLE;C:\Qt\5.5.1\qtbase\include\QtNetwork;C:\Qt\5.5.1\qtbase\include\QtSql;C:\Qt\5.5.1\qtbase\include\QtCore;debug;.;C:\Qt\5.5.1\qtbase\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;core;database;view;search_module;model;C:\qt\qt\qtbase\include;C:\qt\qt\qtbase\include\QtWidgets;C:\qt\qt\qtbase\include\QtGui;C:\qt\qt\qtbase\include\QtANGLE;C:\qt\qt\qtbase\include\QtNetwork;C:\qt\qt\qtbase\include\QtSql;C:\qt\qt\qtbase\include\QtCore;debug;.;C:\qt\qt\qtbase\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>debug\</ObjectFileName>
       <Optimization>Disabled</Optimization>
@@ -73,8 +74,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Qt\5.5.1\qtbase\lib\Qt5Widgetsd.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Guid.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Networkd.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Sqld.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Qt\5.5.1\qtbase\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\qt\qt\qtbase\lib\Qt5Widgetsd.lib;C:\qt\qt\qtbase\lib\Qt5Guid.lib;C:\qt\qt\qtbase\lib\Qt5Networkd.lib;C:\qt\qt\qtbase\lib\Qt5Sqld.lib;C:\qt\qt\qtbase\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\qt\qt\qtbase\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -95,11 +96,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;core;database;view;search_module;model;C:\Qt\5.5.1\qtbase\include;C:\Qt\5.5.1\qtbase\include\QtWidgets;C:\Qt\5.5.1\qtbase\include\QtGui;C:\Qt\5.5.1\qtbase\include\QtANGLE;C:\Qt\5.5.1\qtbase\include\QtNetwork;C:\Qt\5.5.1\qtbase\include\QtSql;C:\Qt\5.5.1\qtbase\include\QtCore;release;.;C:\Qt\5.5.1\qtbase\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;core;database;view;search_module;model;C:\qt\qt\qtbase\include;C:\qt\qt\qtbase\include\QtWidgets;C:\qt\qt\qtbase\include\QtGui;C:\qt\qt\qtbase\include\QtANGLE;C:\qt\qt\qtbase\include\QtNetwork;C:\qt\qt\qtbase\include\QtSql;C:\qt\qt\qtbase\include\QtCore;release;.;C:\qt\qt\qtbase\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>release\</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
@@ -114,8 +116,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Qt\5.5.1\qtbase\lib\Qt5Widgets.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Gui.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Network.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Sql.lib;C:\Qt\5.5.1\qtbase\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Qt\5.5.1\qtbase\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\qt\qt\qtbase\lib\Qt5Widgets.lib;C:\qt\qt\qtbase\lib\Qt5Gui.lib;C:\qt\qt\qtbase\lib\Qt5Network.lib;C:\qt\qt\qtbase\lib\Qt5Sql.lib;C:\qt\qt\qtbase\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\qt\qt\qtbase\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -184,7 +186,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\Combo_delegate.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\Combo_delegate.h -o debug\moc_Combo_delegate.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\Combo_delegate.h -o debug\moc_Combo_delegate.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/Combo_delegate.h</Message>
@@ -192,7 +194,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\Combo_delegate.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\Combo_delegate.h -o release\moc_Combo_delegate.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\Combo_delegate.h -o release\moc_Combo_delegate.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/Combo_delegate.h</Message>
@@ -203,7 +205,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Department.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Department.h -o debug\moc_Department.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Department.h -o debug\moc_Department.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Department.h</Message>
@@ -211,7 +213,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Department.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Department.h -o release\moc_Department.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Department.h -o release\moc_Department.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Department.h</Message>
@@ -224,7 +226,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\EditDepartments.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\EditDepartments.h -o debug\moc_EditDepartments.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\EditDepartments.h -o debug\moc_EditDepartments.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/EditDepartments.h</Message>
@@ -232,7 +234,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\EditDepartments.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\EditDepartments.h -o release\moc_EditDepartments.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\EditDepartments.h -o release\moc_EditDepartments.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/EditDepartments.h</Message>
@@ -242,7 +244,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\EditSites.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\EditSites.h -o debug\moc_EditSites.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\EditSites.h -o debug\moc_EditSites.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/EditSites.h</Message>
@@ -250,7 +252,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\EditSites.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\EditSites.h -o release\moc_EditSites.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\EditSites.h -o release\moc_EditSites.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/EditSites.h</Message>
@@ -260,7 +262,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Format.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Format.h -o debug\moc_Format.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Format.h -o debug\moc_Format.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Format.h</Message>
@@ -268,7 +270,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Format.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Format.h -o release\moc_Format.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Format.h -o release\moc_Format.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Format.h</Message>
@@ -282,7 +284,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">model\Item_model.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore model\Item_model.h -o debug\moc_Item_model.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore model\Item_model.h -o debug\moc_Item_model.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC model/Item_model.h</Message>
@@ -290,7 +292,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">model\Item_model.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore model\Item_model.h -o release\moc_Item_model.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore model\Item_model.h -o release\moc_Item_model.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC model/Item_model.h</Message>
@@ -301,7 +303,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Log.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Log.h -o debug\moc_Log.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Log.h -o debug\moc_Log.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Log.h</Message>
@@ -309,7 +311,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Log.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Log.h -o release\moc_Log.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Log.h -o release\moc_Log.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Log.h</Message>
@@ -319,7 +321,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\LoginDialog.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\LoginDialog.h -o debug\moc_LoginDialog.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\LoginDialog.h -o debug\moc_LoginDialog.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/LoginDialog.h</Message>
@@ -327,7 +329,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\LoginDialog.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\LoginDialog.h -o release\moc_LoginDialog.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\LoginDialog.h -o release\moc_LoginDialog.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/LoginDialog.h</Message>
@@ -337,7 +339,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\MainWindow.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\MainWindow.h -o debug\moc_MainWindow.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\MainWindow.h -o debug\moc_MainWindow.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/MainWindow.h</Message>
@@ -345,7 +347,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\MainWindow.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\MainWindow.h -o release\moc_MainWindow.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\MainWindow.h -o release\moc_MainWindow.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/MainWindow.h</Message>
@@ -355,7 +357,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\Multilist.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\Multilist.h -o debug\moc_Multilist.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\Multilist.h -o debug\moc_Multilist.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/Multilist.h</Message>
@@ -363,7 +365,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\Multilist.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\Multilist.h -o release\moc_Multilist.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\Multilist.h -o release\moc_Multilist.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/Multilist.h</Message>
@@ -373,7 +375,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">search_module\Parser.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\Parser.h -o debug\moc_Parser.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\Parser.h -o debug\moc_Parser.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC search_module/Parser.h</Message>
@@ -381,7 +383,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">search_module\Parser.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\Parser.h -o release\moc_Parser.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\Parser.h -o release\moc_Parser.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC search_module/Parser.h</Message>
@@ -391,7 +393,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">search_module\ParserGeofabrik.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\ParserGeofabrik.h -o debug\moc_ParserGeofabrik.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\ParserGeofabrik.h -o debug\moc_ParserGeofabrik.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC search_module/ParserGeofabrik.h</Message>
@@ -399,7 +401,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">search_module\ParserGeofabrik.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\ParserGeofabrik.h -o release\moc_ParserGeofabrik.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\ParserGeofabrik.h -o release\moc_ParserGeofabrik.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC search_module/ParserGeofabrik.h</Message>
@@ -409,7 +411,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">search_module\ParserGisLub.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\ParserGisLub.h -o debug\moc_ParserGisLub.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\ParserGisLub.h -o debug\moc_ParserGisLub.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC search_module/ParserGisLub.h</Message>
@@ -417,7 +419,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">search_module\ParserGisLub.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\ParserGisLub.h -o release\moc_ParserGisLub.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\ParserGisLub.h -o release\moc_ParserGisLub.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC search_module/ParserGisLub.h</Message>
@@ -430,7 +432,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">search_module\SM_Session.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\SM_Session.h -o debug\moc_SM_Session.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\SM_Session.h -o debug\moc_SM_Session.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC search_module/SM_Session.h</Message>
@@ -438,7 +440,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">search_module\SM_Session.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore search_module\SM_Session.h -o release\moc_SM_Session.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore search_module\SM_Session.h -o release\moc_SM_Session.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC search_module/SM_Session.h</Message>
@@ -448,7 +450,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Scale.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Scale.h -o debug\moc_Scale.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Scale.h -o debug\moc_Scale.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Scale.h</Message>
@@ -456,7 +458,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Scale.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Scale.h -o release\moc_Scale.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Scale.h -o release\moc_Scale.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Scale.h</Message>
@@ -466,7 +468,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Session.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Session.h -o debug\moc_Session.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Session.h -o debug\moc_Session.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Session.h</Message>
@@ -474,7 +476,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Session.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Session.h -o release\moc_Session.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Session.h -o release\moc_Session.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Session.h</Message>
@@ -488,7 +490,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\State.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\State.h -o debug\moc_State.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\State.h -o debug\moc_State.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/State.h</Message>
@@ -496,7 +498,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\State.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\State.h -o release\moc_State.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\State.h -o release\moc_State.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/State.h</Message>
@@ -506,7 +508,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Status.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Status.h -o debug\moc_Status.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Status.h -o debug\moc_Status.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Status.h</Message>
@@ -514,7 +516,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Status.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Status.h -o release\moc_Status.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Status.h -o release\moc_Status.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Status.h</Message>
@@ -524,7 +526,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\TreeRegions.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\TreeRegions.h -o debug\moc_TreeRegions.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\TreeRegions.h -o debug\moc_TreeRegions.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/TreeRegions.h</Message>
@@ -532,7 +534,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\TreeRegions.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\TreeRegions.h -o release\moc_TreeRegions.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\TreeRegions.h -o release\moc_TreeRegions.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/TreeRegions.h</Message>
@@ -544,7 +546,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">core\Usertype.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Usertype.h -o debug\moc_Usertype.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Usertype.h -o debug\moc_Usertype.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC core/Usertype.h</Message>
@@ -552,7 +554,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">core\Usertype.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore core\Usertype.h -o release\moc_Usertype.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore core\Usertype.h -o release\moc_Usertype.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC core/Usertype.h</Message>
@@ -562,7 +564,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\ViewDepartments.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\ViewDepartments.h -o debug\moc_ViewDepartments.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\ViewDepartments.h -o debug\moc_ViewDepartments.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/ViewDepartments.h</Message>
@@ -570,7 +572,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\ViewDepartments.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\ViewDepartments.h -o release\moc_ViewDepartments.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\ViewDepartments.h -o release\moc_ViewDepartments.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/ViewDepartments.h</Message>
@@ -580,7 +582,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\ViewSites.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\ViewSites.h -o debug\moc_ViewSites.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\ViewSites.h -o debug\moc_ViewSites.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC view/ViewSites.h</Message>
@@ -588,7 +590,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\ViewSites.h;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/Qt/5.5.1/qtbase/mkspecs/win32-msvc2015 -IC:/Users/OlyaMolya/Desktop/??????/distrGEO -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/core -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/database -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/view -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/search_module -IC:/Users/OlyaMolya/Desktop/??????/distrGEO/model -IC:/Qt/5.5.1/qtbase/include -IC:/Qt/5.5.1/qtbase/include/QtWidgets -IC:/Qt/5.5.1/qtbase/include/QtGui -IC:/Qt/5.5.1/qtbase/include/QtANGLE -IC:/Qt/5.5.1/qtbase/include/QtNetwork -IC:/Qt/5.5.1/qtbase/include/QtSql -IC:/Qt/5.5.1/qtbase/include/QtCore view\ViewSites.h -o release\moc_ViewSites.cpp
+C:\qt\qt\qtbase\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -D_MSC_VER=1900 -D_WIN32 -IC:/qt/qt/qtbase/mkspecs/win32-msvc2015 -IC:/Users/????/Source/Repos/distrGEO -IC:/Users/????/Source/Repos/distrGEO/core -IC:/Users/????/Source/Repos/distrGEO/database -IC:/Users/????/Source/Repos/distrGEO/view -IC:/Users/????/Source/Repos/distrGEO/search_module -IC:/Users/????/Source/Repos/distrGEO/model -IC:/qt/qt/qtbase/include -IC:/qt/qt/qtbase/include/QtWidgets -IC:/qt/qt/qtbase/include/QtGui -IC:/qt/qt/qtbase/include/QtANGLE -IC:/qt/qt/qtbase/include/QtNetwork -IC:/qt/qt/qtbase/include/QtSql -IC:/qt/qt/qtbase/include/QtCore view\ViewSites.h -o release\moc_ViewSites.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC view/ViewSites.h</Message>
@@ -748,7 +750,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\EditDepartments.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\EditDepartments.ui -o ui_EditDepartments.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\EditDepartments.ui -o ui_EditDepartments.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/EditDepartments.ui</Message>
@@ -756,7 +758,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\EditDepartments.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\EditDepartments.ui -o ui_EditDepartments.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\EditDepartments.ui -o ui_EditDepartments.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/EditDepartments.ui</Message>
@@ -767,7 +769,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\EditSites.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\EditSites.ui -o ui_EditSites.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\EditSites.ui -o ui_EditSites.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/EditSites.ui</Message>
@@ -775,7 +777,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\EditSites.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\EditSites.ui -o ui_EditSites.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\EditSites.ui -o ui_EditSites.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/EditSites.ui</Message>
@@ -786,7 +788,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\LoginDialog.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\LoginDialog.ui -o ui_LoginDialog.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\LoginDialog.ui -o ui_LoginDialog.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/LoginDialog.ui</Message>
@@ -794,7 +796,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\LoginDialog.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\LoginDialog.ui -o ui_LoginDialog.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\LoginDialog.ui -o ui_LoginDialog.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/LoginDialog.ui</Message>
@@ -805,7 +807,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\MainWindow.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\MainWindow.ui -o ui_MainWindow.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\MainWindow.ui -o ui_MainWindow.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/MainWindow.ui</Message>
@@ -813,7 +815,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\MainWindow.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\MainWindow.ui -o ui_MainWindow.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\MainWindow.ui -o ui_MainWindow.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/MainWindow.ui</Message>
@@ -824,7 +826,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\TreeRegions.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\TreeRegions.ui -o ui_TreeRegions.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\TreeRegions.ui -o ui_TreeRegions.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/TreeRegions.ui</Message>
@@ -832,7 +834,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\TreeRegions.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\TreeRegions.ui -o ui_TreeRegions.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\TreeRegions.ui -o ui_TreeRegions.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/TreeRegions.ui</Message>
@@ -843,7 +845,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\ViewDepartments.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\ViewDepartments.ui -o ui_ViewDepartments.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\ViewDepartments.ui -o ui_ViewDepartments.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/ViewDepartments.ui</Message>
@@ -851,7 +853,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\ViewDepartments.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\ViewDepartments.ui -o ui_ViewDepartments.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\ViewDepartments.ui -o ui_ViewDepartments.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/ViewDepartments.ui</Message>
@@ -862,7 +864,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\ViewSites.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\ViewSites.ui -o ui_ViewSites.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\ViewSites.ui -o ui_ViewSites.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UIC view/ViewSites.ui</Message>
@@ -870,7 +872,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\ViewSites.ui;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-(set QT_PLUGIN_PATH=C:\Qt\5.5.1\qtbase\plugins) &amp; (set PATH=C:\Qt\5.5.1\qtbase\lib;%PATH:)=^)%) &amp; C:\Qt\5.5.1\qtbase\bin\uic.exe view\ViewSites.ui -o ui_ViewSites.h
+(set QT_PLUGIN_PATH=C:\qt\qt\qtbase\plugins) &amp; (set PATH=C:\qt\qt\qtbase\lib;%PATH:)=^)%) &amp; C:\qt\qt\qtbase\bin\uic.exe view\ViewSites.ui -o ui_ViewSites.h
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UIC view/ViewSites.ui</Message>
@@ -883,7 +885,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">view\icons\ViewWindowRes.qrc;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\rcc.exe -name ViewWindowRes view\icons\ViewWindowRes.qrc -o debug\qrc_ViewWindowRes.cpp
+C:\qt\qt\qtbase\bin\rcc.exe -name ViewWindowRes view\icons\ViewWindowRes.qrc -o debug\qrc_ViewWindowRes.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC view/icons/ViewWindowRes.qrc</Message>
@@ -891,7 +893,7 @@ endlocal</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">view\icons\ViewWindowRes.qrc;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
 if errorlevel 1 goto VCEnd
-C:\Qt\5.5.1\qtbase\bin\rcc.exe -name ViewWindowRes view\icons\ViewWindowRes.qrc -o release\qrc_ViewWindowRes.cpp
+C:\qt\qt\qtbase\bin\rcc.exe -name ViewWindowRes view\icons\ViewWindowRes.qrc -o release\qrc_ViewWindowRes.cpp
 if errorlevel 1 goto VCEnd
 endlocal</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC view/icons/ViewWindowRes.qrc</Message>
