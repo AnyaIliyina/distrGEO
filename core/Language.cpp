@@ -25,7 +25,7 @@ bool Language::createTable()
 bool Language::completeTable()
 {
 	QStringList languages;
-	languages << "русский" << "английский";
+	languages << "русский" << "английский" << "французский" << "немецкий";
 	return insert(languages);
 }
 
@@ -33,18 +33,15 @@ bool Language::insert(QStringList languageNames)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < languageNames.count(); i++)
-	{
-		query.prepare("INSERT INTO languages(name)\
-	VALUES (?)");
-		query.addBindValue(languageNames.at(i));
-		if (!query.exec()) {
+	QString joinedNames = languageNames.join("'),('");
+	QString qryString = QString("INSERT INTO languages(name)\
+	VALUES ('%1')").arg(joinedNames);
+	if (!query.exec(qryString)) {
 			qDebug() << "Language::insert(QStringList languageNames): error inserting into table Languages";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
 		}
-	}
 	db.close();
 }
 

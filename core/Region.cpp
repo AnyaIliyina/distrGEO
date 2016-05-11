@@ -191,22 +191,26 @@ bool Region::completeTable()
 
 bool Region::insert(QList<Region> regions)
 {
+	QString queryStr = "INSERT INTO regions(parent_id, name, comment) VALUES ";
+	for (int r = 0; r < regions.count(); r++)
+	{
+		queryStr += "(";
+		queryStr += QString::number(regions.at(r).parent_id());
+		queryStr += ",'";
+		queryStr += regions.at(r).name();
+		queryStr += "','";
+		queryStr += regions.at(r).comment();
+		queryStr += "'),";
+	}
+	queryStr.chop(1);
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < regions.count(); i++)
-	{
-		query.prepare("INSERT INTO regions ( parent_id, name, comment)\
-		VALUES (?, ?, ?)");
-		query.addBindValue(regions.at(i).parent_id());
-		query.addBindValue(regions.at(i).name());
-		query.addBindValue(regions.at(i).comment());
-		if (!query.exec()) {
+	if (!query.exec(queryStr)) {
 			qDebug() << "Region::insertIntoDatabase(QList<Region> regions):  error inserting into table Regions";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
 		}
-	}
 	db.close();
 	return true;
 }

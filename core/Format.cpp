@@ -82,18 +82,14 @@ bool Format::insert(QStringList formatNames)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < formatNames.count(); i++)
-	{
-		query.prepare("INSERT INTO formats(name)\
-	VALUES (?)");
-		query.addBindValue(formatNames.at(i));
-		if (!query.exec()) {
+	QString joinedNames = formatNames.join("'),('");
+	QString qryString = QString("INSERT INTO formats(name) VALUES ('%1')").arg(joinedNames);
+	if (!query.exec(qryString)) {
 			qDebug() << "Format::insert(QStringList formatNames): error inserting into Table formats";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
 		}
-	}
 	db.close();
 }
 

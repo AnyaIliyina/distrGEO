@@ -103,7 +103,7 @@ public:
 #endif // QT_NO_TOOLTIP
         action_New->setText(QApplication::translate("TreeRegions", "&New", 0));
 #ifndef QT_NO_TOOLTIP
-        action_New->setToolTip(QApplication::translate("TreeRegions", "\320\235\320\276\320\262\321\213\320\271 \321\200\320\265\320\263\320\270\320\276\320\275", 0));
+        action_New->setToolTip(QApplication::translate("TreeRegions", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214( \321\201\321\202\321\200\320\260\320\275\321\203???)", 0));
 #endif // QT_NO_TOOLTIP
         action_Delete->setText(QApplication::translate("TreeRegions", "&Delete", 0));
 #ifndef QT_NO_TOOLTIP

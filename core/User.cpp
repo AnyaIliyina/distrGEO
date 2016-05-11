@@ -88,21 +88,25 @@ int User::user_id(const QString & login)
 
 bool User::insert(QList<User> users)
 {
+	QString queryStr = "INSERT INTO users(type_id, login, password) VALUES ";
+	for (int u = 0; u < users.count(); u++)
+	{
+		queryStr += "(";
+		queryStr += QString::number(users.at(u).type_id());
+		queryStr += ",'";
+		queryStr += users.at(u).login();
+		queryStr += "','";
+		queryStr += users.at(u).password();
+		queryStr += "'),";
+	}
+	queryStr.chop(1);
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < users.count(); i++)
-	{
-		query.prepare("INSERT INTO users ( type_id, login, password)\
-		VALUES (?, ?, ?)");
-		query.addBindValue(users.at(i).type_id());
-		query.addBindValue(users.at(i).login());
-		query.addBindValue(users.at(i).password());
-		if (!query.exec()) {
+	if (!query.exec(queryStr)) {
 			qDebug() << "User::insert(QList<User> users):  error inserting into Table users";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
-		}
 	}
 	db.close();
 	return false;

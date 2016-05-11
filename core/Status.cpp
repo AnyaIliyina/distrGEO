@@ -89,18 +89,15 @@ bool Status::insert(QStringList statusNames)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < statusNames.count(); i++)
-	{
-		query.prepare("INSERT INTO statuses(name)\
-	VALUES (?)");
-		query.addBindValue(statusNames.at(i));
-		if (!query.exec()) {
+	QString joinedNames = statusNames.join("'),('");
+	QString qryString = QString("INSERT INTO statuses(name) VALUES ('%1')").arg(joinedNames);
+	if (!query.exec(qryString))
+		{
 			qDebug() << "Status :: insert(QStringList statusNames): error inserting into Table statuses";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
 		}
-	}
 	db.close();
 	return true;
 }

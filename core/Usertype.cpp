@@ -90,17 +90,13 @@ bool Usertype::insert(QStringList typeNames)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < typeNames.count(); i++)
-	{
-		query.prepare("INSERT INTO usertypes(name)\
-	VALUES (?)");
-		query.addBindValue(typeNames.at(i));
-		if (!query.exec()) {
+	QString joinedNames = typeNames.join("'),('");
+	QString qryString = QString("INSERT INTO usertypes(name) VALUES ('%1')").arg(joinedNames);
+	if (!query.exec(qryString)) {
 			qDebug() << "Usertype::insert(QStringList typeNames): error inserting into Table states";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
-		}
 	}
 	db.close();
 	return true;

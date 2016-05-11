@@ -150,24 +150,30 @@ int Site::insertIntoDatabase(int session_id)
 
 
 bool Site::insert(QList<Site> sites)
-{
+{	
+	QString queryStr = "INSERT INTO sites(url, name, status_id, comment) VALUES ";
+	for (int s = 0; s < sites.count(); s++)
+	{
+		queryStr += "('";
+		queryStr += sites.at(s).url();
+		queryStr += "','";
+		queryStr += sites.at(s).name();
+		queryStr += "',";
+		queryStr += QString::number(sites.at(s).status_id());
+		queryStr += ",'";
+		queryStr += sites.at(s).comment();
+		queryStr += "'),";
+	}
+	queryStr.chop(1);
+
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < sites.count(); i++)
-	{
-		query.prepare("INSERT INTO sites ( url, name, status_id, comment)\
-		VALUES (?, ?, ?, ?)");
-		query.addBindValue(sites.at(i).url());
-		query.addBindValue(sites.at(i).name());
-		query.addBindValue(sites.at(i).status_id());
-		query.addBindValue(sites.at(i).comment());
-		if (!query.exec()) {
+	if (!query.exec(queryStr)) {
 			qDebug() << "Site::insertIntoDatabase(QList<Site> sites):  error inserting into Table sites";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
 		}
-	}
 	db.close();
 	return true;
 }

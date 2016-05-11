@@ -99,17 +99,14 @@ bool State::insert(QStringList stateNames)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	for (int i = 0; i < stateNames.count(); i++)
+	QString joinedNames = stateNames.join("'),('");
+	QString qryString = QString("INSERT INTO states(name) VALUES ('%1')").arg(joinedNames);
+	if (!query.exec(qryString))
 	{
-		query.prepare("INSERT INTO states(name)\
-	VALUES (?)");
-		query.addBindValue(stateNames.at(i));
-		if (!query.exec()) {
 			qDebug() << "State :: insert(QStringList stateNames): error inserting into Table states";
 			qDebug() << query.lastError().text();
 			db.close();
 			return false;
-		}
 	}
 	db.close();
 	return true;
