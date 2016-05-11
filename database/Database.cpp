@@ -144,13 +144,13 @@ void Database::createBridgeTables()
 
 void Database::addTriggers()
 {
-	onDeleteTrigger("sites", "site_langs");
+	/*onDeleteTrigger("sites", "site_langs");
 	onDeleteTrigger("sites", "site_regions");
 	onDeleteTrigger("sites", "site_types");
 	onDeleteTrigger("departments", "department_regions");
 	onDeleteTrigger("regions", "department_regions");
 	onDeleteTrigger("departments", "department_types");
-	
+	*/
 	
 }
 

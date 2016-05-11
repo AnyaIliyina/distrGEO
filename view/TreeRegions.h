@@ -56,6 +56,12 @@ private slots:
 	void slotAdd();
 	
 	/*!
+	Слот добавления
+	*/
+	void slotAddRoot();
+
+
+	/*!
 	Слот удаления
 	*/
 	void slotDelete();

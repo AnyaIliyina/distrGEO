@@ -51,6 +51,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_NewRoot"/>
    <addaction name="action_New"/>
    <addaction name="separator"/>
    <addaction name="action_Delete"/>
@@ -60,16 +61,16 @@
    <addaction name="action_Yes"/>
    <addaction name="action_No"/>
   </widget>
-  <action name="action_New">
+  <action name="action_NewRoot">
    <property name="icon">
     <iconset resource="icons/ViewWindowRes.qrc">
-     <normaloff>:/1.png</normaloff>:/1.png</iconset>
+     <normaloff>:/root.png</normaloff>:/root.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
    </property>
    <property name="toolTip">
-    <string>Добавить( страну???)</string>
+    <string>Новый корневой</string>
    </property>
   </action>
   <action name="action_Delete">
@@ -118,6 +119,18 @@
    </property>
    <property name="toolTip">
     <string>Отменить</string>
+   </property>
+  </action>
+  <action name="action_New">
+   <property name="icon">
+    <iconset resource="icons/ViewWindowRes.qrc">
+     <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="toolTip">
+    <string>Новый</string>
    </property>
   </action>
  </widget>

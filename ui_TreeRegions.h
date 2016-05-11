@@ -25,11 +25,12 @@ QT_BEGIN_NAMESPACE
 class Ui_TreeRegions
 {
 public:
-    QAction *action_New;
+    QAction *action_NewRoot;
     QAction *action_Delete;
     QAction *action_Edit;
     QAction *action_Yes;
     QAction *action_No;
+    QAction *action_New;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
     QTreeView *treeView;
@@ -40,11 +41,11 @@ public:
         if (TreeRegions->objectName().isEmpty())
             TreeRegions->setObjectName(QStringLiteral("TreeRegions"));
         TreeRegions->resize(670, 389);
-        action_New = new QAction(TreeRegions);
-        action_New->setObjectName(QStringLiteral("action_New"));
+        action_NewRoot = new QAction(TreeRegions);
+        action_NewRoot->setObjectName(QStringLiteral("action_NewRoot"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/1.png"), QSize(), QIcon::Normal, QIcon::Off);
-        action_New->setIcon(icon);
+        icon.addFile(QStringLiteral(":/root.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_NewRoot->setIcon(icon);
         action_Delete = new QAction(TreeRegions);
         action_Delete->setObjectName(QStringLiteral("action_Delete"));
         QIcon icon1;
@@ -65,6 +66,11 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_No->setIcon(icon4);
+        action_New = new QAction(TreeRegions);
+        action_New->setObjectName(QStringLiteral("action_New"));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/plus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_New->setIcon(icon5);
         centralwidget = new QWidget(TreeRegions);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);
@@ -81,6 +87,7 @@ public:
         toolBar->setMovable(false);
         TreeRegions->addToolBar(Qt::TopToolBarArea, toolBar);
 
+        toolBar->addAction(action_NewRoot);
         toolBar->addAction(action_New);
         toolBar->addSeparator();
         toolBar->addAction(action_Delete);
@@ -101,9 +108,9 @@ public:
 #ifndef QT_NO_TOOLTIP
         TreeRegions->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        action_New->setText(QApplication::translate("TreeRegions", "&New", 0));
+        action_NewRoot->setText(QApplication::translate("TreeRegions", "&New", 0));
 #ifndef QT_NO_TOOLTIP
-        action_New->setToolTip(QApplication::translate("TreeRegions", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214( \321\201\321\202\321\200\320\260\320\275\321\203???)", 0));
+        action_NewRoot->setToolTip(QApplication::translate("TreeRegions", "\320\235\320\276\320\262\321\213\320\271 \320\272\320\276\321\200\320\275\320\265\320\262\320\276\320\271", 0));
 #endif // QT_NO_TOOLTIP
         action_Delete->setText(QApplication::translate("TreeRegions", "&Delete", 0));
 #ifndef QT_NO_TOOLTIP
@@ -120,6 +127,10 @@ public:
         action_No->setText(QApplication::translate("TreeRegions", "&No", 0));
 #ifndef QT_NO_TOOLTIP
         action_No->setToolTip(QApplication::translate("TreeRegions", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214", 0));
+#endif // QT_NO_TOOLTIP
+        action_New->setText(QApplication::translate("TreeRegions", "&New", 0));
+#ifndef QT_NO_TOOLTIP
+        action_New->setToolTip(QApplication::translate("TreeRegions", "\320\235\320\276\320\262\321\213\320\271", 0));
 #endif // QT_NO_TOOLTIP
         toolBar->setWindowTitle(QApplication::translate("TreeRegions", "toolBar", 0));
 #ifndef QT_NO_TOOLTIP
