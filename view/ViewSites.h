@@ -97,4 +97,6 @@ private slots:
 	 */
 	 void dataChanged();
 
+	 void valueSelected(int);
+
 };

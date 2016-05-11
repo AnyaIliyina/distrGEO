@@ -81,6 +81,8 @@ private slots:
 	\param  user_id - идентификатор пользователя */
 	void slotStartSession(int user_id);
 
+	void slotSelectRegion(int i);
+
 };
 
 
