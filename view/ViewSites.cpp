@@ -79,7 +79,7 @@ void ViewSites::slotEnableButtons()
 		ui->action_No->setEnabled(true);
 		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		qDebug() << value;
-		//emit valueSelected(value);
+		emit valueSelected(value);
 	}
 	else
 	{

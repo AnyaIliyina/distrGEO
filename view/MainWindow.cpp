@@ -11,6 +11,7 @@
 #include <QTextEdit>
 #include <QDebug>
 #include <QStatusBar>
+#include <QDockWidget>
 
 MainWindow::MainWindow(QMainWindow *parent)
 {
@@ -70,13 +71,13 @@ void MainWindow::slotSelectRegion(int i)
 	qDebug() << "slooooot";
 	if (i < 0)
 	{
-		treeSites->showMinimized();
+		dockWidgetSites->close();
 		treeSites->setEnabled(false);
 	}
 	else
 	{
 		treeSites->setModel(m_tr->model());
-		treeSites->showNormal();
+		dockWidgetSites->showNormal();
 		treeSites->setEnabled(true);
 		
 	}
@@ -126,12 +127,16 @@ void MainWindow::setResourcesView()
 	treeSites->setMaximumSize(300, 1000);
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
+	dockWidgetSites = new QDockWidget("Регионы");
+	dockWidgetSites->setWidget(treeSites);
+	
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
 	layoutSites->addWidget(m_vs);
-	layoutSites->addWidget(treeSites);
+	layoutSites->addWidget(dockWidgetSites);
 	sites->setLayout(layoutSites);
+	dockWidgetSites->close();
 }
 
 void MainWindow::setDepartamentView()

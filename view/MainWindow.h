@@ -48,7 +48,7 @@ private:
 	QWidget *search;
 	QWidget *sites;
 	QWidget *departaments;
-
+	QDockWidget *dockWidgetSites;
 	ItemModel *m_res_model;
 	
 	ItemModel *m_dep_model;
