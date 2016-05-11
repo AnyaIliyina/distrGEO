@@ -65,6 +65,23 @@ void MainWindow::slotStartSession(int user_id)
 	slotConfigure();
 }
 
+void MainWindow::slotSelectRegion(int i)
+{
+	qDebug() << "slooooot";
+	if (i < 0)
+	{
+		treeSites->showMinimized();
+		treeSites->setEnabled(false);
+	}
+	else
+	{
+		treeSites->setModel(m_tr->model());
+		treeSites->showNormal();
+		treeSites->setEnabled(true);
+		
+	}
+}
+
 /*!
 Выводит основное окно и начинает работу модуля поиска
 */
@@ -107,6 +124,9 @@ void MainWindow::setResourcesView()
 	m_vs = new ViewSites();
 	treeSites = new QTreeView();
 	treeSites->setMaximumSize(300, 1000);
+	treeSites->showMinimized();
+	treeSites->setEnabled(false);
+	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
 	layoutSites->addWidget(m_vs);
