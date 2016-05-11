@@ -77,19 +77,22 @@ void ViewSites::slotEnableButtons()
 		ui->action_OpenUrl->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		emit valueSelected(1);
+		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		qDebug() << value;
+		//emit valueSelected(value);
 	}
 	else
 	{
 		ui->action_New->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
-		emit valueSelected(1);
+		
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
+			emit valueSelected(-1);
 			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
@@ -97,12 +100,16 @@ void ViewSites::slotEnableButtons()
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
+			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			qDebug() << value;
+			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
+			emit valueSelected(-1);
 		}
 	}
 }
@@ -117,31 +124,37 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		ui->action_OpenUrl->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		emit valueSelected(1);
+		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		qDebug() << value;
+		emit valueSelected(value);
 	}
 	else
 	{
 		ui->action_New->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
-		emit valueSelected(1);
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
+			emit valueSelected(-1);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
+			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			qDebug() << value;
+			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
+			emit valueSelected(-1);
 		}
 	}
 	
