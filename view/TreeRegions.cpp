@@ -233,6 +233,7 @@ void TreeRegions::slotCancel()
 //	auto m_index = filterModel->mapToSource(index);
 	auto m_index = ui->treeView->selectionModel()->currentIndex();
 	ui->treeView->reset();
+	ui->treeView->expandAll();
 	ui->treeView->selectionModel()->setCurrentIndex(m_index, QItemSelectionModel::Select |
 		QItemSelectionModel::Rows);
 	
