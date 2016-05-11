@@ -71,13 +71,12 @@ void MainWindow::slotSelectRegion(int i)
 	qDebug() << "slooooot";
 	if (i < 0)
 	{
-		dockWidgetSites->close();
+		treeSites->collapseAll();
 		treeSites->setEnabled(false);
 	}
 	else
 	{
-		treeSites->setModel(m_tr->model());
-		dockWidgetSites->showNormal();
+		
 		treeSites->setEnabled(true);
 		
 	}
@@ -127,16 +126,14 @@ void MainWindow::setResourcesView()
 	treeSites->setMaximumSize(300, 1000);
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
-	dockWidgetSites = new QDockWidget("Регионы");
-	dockWidgetSites->setWidget(treeSites);
-	
+	treeSites->setModel(m_tr->model());
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
 	layoutSites->addWidget(m_vs);
-	layoutSites->addWidget(dockWidgetSites);
+	layoutSites->addWidget(treeSites);
 	sites->setLayout(layoutSites);
-	dockWidgetSites->close();
+	
 }
 
 void MainWindow::setDepartamentView()

@@ -59,7 +59,7 @@ void ViewSites::setDisabled()
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	ui->action_OpenUrl->setEnabled(false);
-	emit valueSelected(-1);
+	//emit valueSelected(-1);
 }
 
 void ViewSites::slotRefresh()
