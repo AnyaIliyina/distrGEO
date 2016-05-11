@@ -248,7 +248,7 @@ bool Geodata::cancel() {
 	return true;
 };
 
-QList<BaseItem*> Geodata::loadItemsFromDb() {
+QList<BaseItem*> Geodata::loadItemsFromDb(QVariant id) {
 	qDebug() << "loadItemsFromDb Geodata";
 	QList<BaseItem*> list;
 

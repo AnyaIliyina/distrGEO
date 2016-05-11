@@ -16,7 +16,7 @@ class BaseItem;
 static class ItemFactory
 {
 public:
-	static BaseItem* loadFromDb(int type);
+	static BaseItem* loadFromDb(int type, QVariant id = QVariant());
 
 	static BaseItem* createNew(int type);
 };

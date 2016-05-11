@@ -5,11 +5,11 @@
 #include "Geodata.h"
 #include "RegionItem.h"
 
-BaseItem* ItemFactory::loadFromDb(int type) {
+BaseItem* ItemFactory::loadFromDb(int type, QVariant id) {
 	// Создаем верхний элемент
 	BaseItem* item = createNew(type);
 
-	QList<BaseItem*> children = item->loadItemsFromDb();
+	QList<BaseItem*> children = item->loadItemsFromDb(id);
 	
 	// Добавляем истинные значения верхнему элементу
 	for (int i = 0; i < children.count(); i++)

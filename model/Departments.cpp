@@ -212,17 +212,30 @@ bool Departments::cancel() {
 	return true;
 };
 
-QList<BaseItem*> Departments::loadItemsFromDb() {
+QList<BaseItem*> Departments::loadItemsFromDb(QVariant id) {
 	qDebug() << "loadItemsFromDb Departments";
 	QList<BaseItem*> list;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-
-	if (!query.exec("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments"))
+	if (id.isNull())
 	{
-		qDebug() << query.lastError().text();
+		if (!query.exec("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments"))
+			qDebug() << query.lastError().text();
 	}
-
+	else
+	{
+		query.prepare(
+			" SELECT d.id, d.name, d.country, d.adress,  d.phone,\
+			d.fax, d.mail, d.comment\
+			 FROM departments AS d \
+			 JOIN department_regions AS dr \
+			 ON dr.department_id = d.id \
+			WHERE dr.region_id = :region_id "
+			);
+		query.bindValue(":region_id", id);
+		if (!query.exec())
+			qDebug() << query.lastError().text();
+	}
 	while (query.next()) {
 		Departments* dep = new Departments();
 		dep->m_id = query.value(0).toInt(); 

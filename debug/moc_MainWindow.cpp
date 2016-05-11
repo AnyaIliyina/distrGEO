@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[104];
+    QByteArrayData data[14];
+    char stringdata0[151];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,15 +35,20 @@ QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 6), // "status"
 QT_MOC_LITERAL(4, 34, 11), // "slotCloseMW"
 QT_MOC_LITERAL(5, 46, 13), // "slotConfigure"
-QT_MOC_LITERAL(6, 60, 16), // "slotStartSession"
-QT_MOC_LITERAL(7, 77, 7), // "user_id"
-QT_MOC_LITERAL(8, 85, 16), // "slotSelectRegion"
-QT_MOC_LITERAL(9, 102, 1) // "i"
+QT_MOC_LITERAL(6, 60, 13), // "slotForSearch"
+QT_MOC_LITERAL(7, 74, 14), // "QItemSelection"
+QT_MOC_LITERAL(8, 89, 16), // "slotStartSession"
+QT_MOC_LITERAL(9, 106, 7), // "user_id"
+QT_MOC_LITERAL(10, 114, 16), // "slotSelectRegion"
+QT_MOC_LITERAL(11, 131, 1), // "i"
+QT_MOC_LITERAL(12, 133, 11), // "slotOpenUrl"
+QT_MOC_LITERAL(13, 145, 5) // "index"
 
     },
     "MainWindow\0slotShowStatus\0\0status\0"
-    "slotCloseMW\0slotConfigure\0slotStartSession\0"
-    "user_id\0slotSelectRegion\0i"
+    "slotCloseMW\0slotConfigure\0slotForSearch\0"
+    "QItemSelection\0slotStartSession\0user_id\0"
+    "slotSelectRegion\0i\0slotOpenUrl\0index"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +58,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,18 +66,22 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x08 /* Private */,
-       4,    0,   42,    2, 0x08 /* Private */,
-       5,    0,   43,    2, 0x08 /* Private */,
-       6,    1,   44,    2, 0x08 /* Private */,
-       8,    1,   47,    2, 0x08 /* Private */,
+       1,    1,   49,    2, 0x08 /* Private */,
+       4,    0,   52,    2, 0x08 /* Private */,
+       5,    0,   53,    2, 0x08 /* Private */,
+       6,    2,   54,    2, 0x08 /* Private */,
+       8,    1,   59,    2, 0x08 /* Private */,
+      10,    1,   62,    2, 0x08 /* Private */,
+      12,    1,   65,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7,    2,    2,
     QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::QModelIndex,   13,
 
        0        // eod
 };
@@ -86,8 +95,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->slotShowStatus((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->slotCloseMW(); break;
         case 2: _t->slotConfigure(); break;
-        case 3: _t->slotStartSession((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->slotSelectRegion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->slotForSearch((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 4: _t->slotStartSession((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->slotSelectRegion((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->slotOpenUrl((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -118,13 +129,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

@@ -6,6 +6,7 @@
 #include "ViewSites.h"
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
+#include "SiteRegion.h"
 #include "State.h"
 #include "Database.h"
 #include <QTextEdit>
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QMainWindow *parent)
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
 	ld->slotShowLD();
-
+	QObject::connect(tableSites, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotOpenUrl(QModelIndex)));
 }
 
 
@@ -82,6 +83,23 @@ void MainWindow::slotSelectRegion(int i)
 	}
 }
 
+void MainWindow::slotOpenUrl(const QModelIndex & index)
+{
+	auto m_index = tableSites->selectionModel()->currentIndex();
+	int row = m_index.row();
+	auto child = m_res_model->index(row, 2);
+	QString url = m_res_model->data(child).toString();
+	QUrl m_url(url);
+	bool res = QDesktopServices::openUrl(m_url);
+}
+
+void MainWindow::slotForSearch(const QItemSelection &, const QItemSelection &)
+{
+	int id = treeSearch->model()->data(treeSearch->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+	setupModelSite(id);
+	setupModelDepartment(id);
+}
+
 /*!
 Выводит основное окно и начинает работу модуля поиска
 */
@@ -106,6 +124,9 @@ void MainWindow::setSearchResources()
 {
 	treeSearch = new QTreeView();
 	treeSearch->setMaximumWidth(400);
+	treeSearch->setModel(m_tr->model());
+	treeSearch->setColumnHidden(1, true);
+	treeSearch->resizeColumnToContents(0);
 	tableSites = new QTableView();
 	tableDepartments = new QTableView();
 	search = new QWidget();
@@ -116,7 +137,8 @@ void MainWindow::setSearchResources()
 	layoutSearch->addWidget(treeSearch);
 	layoutSearch->addLayout(verticalLayout);
 	search->setLayout(layoutSearch);
-	setupModel();
+	QObject::connect(treeSearch->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+	this, SLOT(slotForSearch(const QItemSelection &, const QItemSelection &)));
 }
 
 void MainWindow::setResourcesView()
@@ -150,26 +172,28 @@ void MainWindow::setDepartamentView()
 
 }
 
-void MainWindow::setupModel()
-{
-	
+void MainWindow::setupModelSite(int id)
+{	
 	m_res_model = new ItemModel();
-	m_res_model->loadData(1);
-	m_dep_model = new ItemModel();
-	m_dep_model->loadData(2);
-	
+	m_res_model->loadData(1, id);
 	tableSites->setModel(m_res_model);
 	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableSites->setColumnHidden(0, true);
 	tableSites->setSortingEnabled(true);
 	tableSites->resizeColumnsToContents();
+	
+}
+
+void MainWindow::setupModelDepartment(int id)
+{
+	m_dep_model = new ItemModel();
+	m_dep_model->loadData(2, id);
 	tableDepartments->setModel(m_dep_model);
 	tableDepartments->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableDepartments->setColumnHidden(0, true);
 	tableDepartments->setSortingEnabled(true);
 	tableDepartments->resizeColumnsToContents();
 }
-
 
 /*!
 Закрывает основное окно

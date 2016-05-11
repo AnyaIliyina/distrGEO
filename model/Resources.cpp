@@ -213,16 +213,30 @@ bool Resources::cancel() {
 	
 
 
-QList<BaseItem*> Resources::loadItemsFromDb() {
+QList<BaseItem*> Resources::loadItemsFromDb(QVariant id ) {
 	qDebug() << "loadItemsFromDb Resources";
 	QList<BaseItem*> list;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 
-	if (!query.exec(" SELECT id, name, url, comment FROM sites"))
-	{
-		qDebug() << query.lastError().text();
+	if (id.isNull()) {
+		if (!query.exec(" SELECT id, name, url, comment FROM sites"))
+			qDebug() << query.lastError().text();
 	}
+	else {
+		qDebug() << "opopa";
+		query.prepare(
+			" SELECT s.id, s.name, s.url, s.comment \
+			 FROM sites AS s \
+			 JOIN site_regions AS sr \
+			 ON sr.site_id = s.id \
+			WHERE sr.region_id = :region_id "
+			);
+		query.bindValue(":region_id", id);
+		if (!query.exec())
+			qDebug() << query.lastError().text();
+	}
+
 	while (query.next())
 	{
 		Resources *res = new Resources();

@@ -148,7 +148,7 @@ bool RegionItem::cancel() {
 	return true; */
 }; 
 
-QList<BaseItem*> RegionItem::loadItemsFromDb()
+QList<BaseItem*> RegionItem::loadItemsFromDb(QVariant id )
 {
 	qDebug() << "loadItemsFromDb RegionItems";
 	QList<BaseItem*> list; 

@@ -56,7 +56,8 @@ private:
 	void setSearchResources();
 	void setResourcesView();
 	void setDepartamentView();
-	void setupModel();
+	void setupModelSite(int id);
+	void setupModelDepartment(int id);
 private slots:
 	/*!
 	Выводит сообщение на панель StatusBar
@@ -75,12 +76,16 @@ private slots:
 	*/
 	void slotConfigure();
 
+	void slotForSearch(const QItemSelection &, const QItemSelection &);
 	/*!
 	Начинает сессию для пользователя user_id
 	\param  user_id - идентификатор пользователя */
 	void slotStartSession(int user_id);
 
 	void slotSelectRegion(int i);
+
+	void slotOpenUrl(const QModelIndex &index);
+	
 
 };
 

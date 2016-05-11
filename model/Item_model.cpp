@@ -266,7 +266,7 @@ void ItemModel::loadData(int type, QVariant id) {
 	}
 	m_editedItem = NULL;
 
-	m_rootItem = ItemFactory::loadFromDb(type);
+	m_rootItem = ItemFactory::loadFromDb(type, id);
 	m_type = type;
 
 	this->endResetModel();

@@ -41,7 +41,7 @@ public:
 	virtual bool save() = 0;
 	virtual bool cancel() = 0;
 
-	virtual QList<BaseItem*> loadItemsFromDb() = 0;
+	virtual QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) = 0;
 
 protected:
 	BaseItem* m_parent = NULL;
