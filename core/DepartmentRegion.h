@@ -32,6 +32,12 @@ public:
 	\param int session_id - id текущей сессии*/
 	void insertIntoDatabase(int session_id = Database::currentSessionId());
 
+	/*! Возвращает список регионов, информацией о
+	которых располагает ведомство
+	\param int department_id - id ведомства
+	\return QList<int> regionIds - список из id регионов*/
+	static QList<int>regionsByDepartment(int department_id);
+
 
 	/*! Создает таблицу department_regions*/
 	static bool createTable();

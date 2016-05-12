@@ -165,7 +165,7 @@ void Database::onDeleteTrigger(const QString& tableName,
 		+ " WHERE "+ column_name + " = OLD.id; END;";
 	if(!query.exec(queryString))
 		qDebug() << "no del_" + tableName + "_after_" + dependentTableName+" trigger:" << query.lastError().text();
-	qDebug() << queryString;
+//	qDebug() << queryString;
 	db.close();
 }
 
