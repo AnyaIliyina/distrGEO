@@ -22,6 +22,7 @@ public:
 	int columnCount() const Q_DECL_OVERRIDE;
 	bool setData(int column, const QVariant& value, int role) Q_DECL_OVERRIDE;
 	QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) Q_DECL_OVERRIDE;
+	QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
 	static QMap<int, RegionItemChecked*> getMap();
 	void setChecked(bool checked);
 private:

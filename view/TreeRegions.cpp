@@ -1,6 +1,7 @@
 #include "TreeRegions.h"
 #include "RegionItem.h"
 #include "Item_model.h"
+#include "Types.h"
 #include <QSqlTableModel>
 #include <QTableView>
 #include <QMessageBox>
@@ -12,26 +13,6 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 {
 	ui->setupUi(this);
 	setupModel();
-}
-
-TreeRegions::~TreeRegions()
-{
-	delete ui;
-	delete m_model;
-}
-
-void TreeRegions::setupModel()
-{
-//	delete m_model;
-	m_model = new ItemModel();
-	m_model->loadData(3);
-	ui->treeView->setModel(m_model);
-	ui->treeView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->treeView->setColumnHidden(1, true);
-	ui->treeView->setColumnHidden(2, true);
-	ui->treeView->expandAll();
-
-	setDisabled();
 	QObject::connect(ui->action_New, SIGNAL(triggered()), this, SLOT(slotAdd()));
 	QObject::connect(ui->action_NewRoot, SIGNAL(triggered()), this, SLOT(slotAddRoot()));
 	QObject::connect(ui->action_Delete, SIGNAL(triggered()), this, SLOT(slotDelete()));
@@ -39,13 +20,37 @@ void TreeRegions::setupModel()
 	QObject::connect(ui->action_Yes, SIGNAL(triggered()), this, SLOT(slotSave()));
 	QObject::connect(ui->action_No, SIGNAL(triggered()), this, SLOT(slotCancel()));
 
+	
+	//QObject::connect(ui->treeView->model(), SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
+	slotEnableButtons();
+}
+
+TreeRegions::~TreeRegions()
+{
+	delete ui;
+	delete m_model;
+	
+}
+
+void TreeRegions::setupModel()
+{
+//	delete m_model;
+	ui->treeView->setModel(NULL);
+	m_model = new ItemModel();
+	m_model->loadData(ItemTypes::RegionItemType);
+	ui->treeView->setModel(m_model);
+	ui->treeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->treeView->setColumnHidden(1, true);
+	ui->treeView->setColumnHidden(2, true);
+	ui->treeView->expandAll();
+	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
-	//QObject::connect(ui->treeView->model(), SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
-	slotEnableButtons();
+	//setDisabled();
 }
 
 void TreeRegions::setDisabled()
@@ -80,28 +85,32 @@ void TreeRegions::slotEnableButtons()
 		ui->action_NewRoot->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
+		ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 	}
 	else
 	{
 		ui->action_New->setEnabled(true);
+		//ui->action_New->setEnabled(false);
 		ui->action_NewRoot->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
 		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
 		{
 			ui->action_Delete->setEnabled(true);
+			ui->action_New->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 		}
 		if (ui->treeView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
+			ui->action_New->setEnabled(true);
 			ui->action_Edit->setEnabled(true);			
 		}
 		if (ui->treeView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
-			ui->action_Edit->setEnabled(false);			
+			ui->action_Edit->setEnabled(false);	
+			ui->action_New->setEnabled(true);
 		}
 	}
 }
@@ -189,6 +198,7 @@ void TreeRegions::slotDelete()
 		//int row = m_index->row();
 		//auto m_index = filterModel->mapToSource(index);
 		m_model->removeRows(0, 1, m_index);
+		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 		emit dataChanged();
 		}
 }
@@ -214,13 +224,14 @@ void TreeRegions::slotSave()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		setDisabled();
+	//	setDisabled();
 		emit dataChanged();
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	auto m_index = ui->treeView->selectionModel()->currentIndex();
-//	auto m_index = filterModel->mapToSource(index);
+	ui->treeView->selectionModel()->setCurrentIndex(m_index, QItemSelectionModel::Select |
+		QItemSelectionModel::Rows);
 
 }
 

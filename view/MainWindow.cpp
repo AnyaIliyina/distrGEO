@@ -168,7 +168,7 @@ void MainWindow::setSearchResources()
 	treeSearch->setMaximumWidth(400);
 	treeSearch->setModel(m_tr->model());
 	treeSearch->setColumnHidden(1, true);
-	//treeSearch->setColumnHidden(1, true);
+	treeSearch->setColumnHidden(2, true);
 	treeSearch->resizeColumnToContents(0);
 	tableSites = new QTableView();
 	tableDepartments = new QTableView();
@@ -193,8 +193,10 @@ void MainWindow::setResourcesView()
 	treeSites->setEnabled(false);
 	m_regionsChecked = new ItemModel();
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
+	map = RegionItemChecked::getMap();
 	treeSites->setModel(m_regionsChecked);
 	treeSites->setColumnHidden(2, true);
+	treeSites->setColumnHidden(3, true);
 	
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -224,6 +226,8 @@ void MainWindow::setDepartamentView()
 void MainWindow::slotSetupRegionsModel()
 {
 	qDebug() << "slotSetupRegionsModel";
+	/*for (int i = 0; i < map.count(); i++)
+		delete map.values().at(i);*/
 	treeSites->setModel(NULL);
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
 	treeSites->setModel(m_regionsChecked);

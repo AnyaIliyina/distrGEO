@@ -81,11 +81,15 @@ void RegionItemChecked::setChecked(bool checked)
 	m_checked = checked;
 }
 
+QVariant RegionItemChecked::headerData(int section, int role) const {
+		return QVariant();
+};
 
 QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 {
 	qDebug() << "loadItemsFromDb RegionItemsChecked";
 	map.clear();
+
 	QList<BaseItem*> list;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
@@ -103,7 +107,6 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 		SELECT * from tree ORDER BY tree.parent_id ASC, tree.name ASC  limit 1000"))
 		qDebug() << "RegionItem::loadItemsFromDb() error:" << query.lastError().text();
 
-	//QMap<int, RegionItemChecked*> map;
 	while (query.next())
 	{
 		RegionItemChecked* r_item = new RegionItemChecked();

@@ -32,7 +32,7 @@ public:
 	virtual QVariant data(int column, int role) const Q_DECL_OVERRIDE;
 
 	virtual bool setData(int column, const QVariant& value, int role);
-	QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
+	virtual QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
 	
 	bool isValid() const Q_DECL_OVERRIDE;
 	bool isNew() const Q_DECL_OVERRIDE;

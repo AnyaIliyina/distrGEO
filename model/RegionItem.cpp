@@ -75,13 +75,13 @@ bool RegionItem::setData(int column, const QVariant& value, int role)
 
 
 QVariant RegionItem::headerData(int section, int role) const {
-	if (role == Qt::EditRole) {			// DisplayRole
+	if (role == Qt::DisplayRole) {			
 		if (section == 0)
-			return "Название";
+			return "Регионы";
 		/*if (section == 1)
-			return "ID";*/
+			return "ID";
 		if (section == 2)
-			return "Комментарий";
+			return "Комментарий";*/
 	}
 	return QVariant();
 }; 
