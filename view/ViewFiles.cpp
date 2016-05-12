@@ -108,6 +108,7 @@ void ViewFiles::slotAdd()
 	emit signalChangeEditMode();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
+	ui->tableView->resizeRowsToContents();
 	auto rowCount = m_model->rowCount(index);
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);

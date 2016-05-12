@@ -6,7 +6,7 @@ MultiListWidget::MultiListWidget(const QModelIndex &index, QWidget*parent) : QCo
 	
 {
 	
-	setMinimumSize(59, 29);
+	
 	connect(model(), SIGNAL(rowsInserted(QModelIndex, int, int)), this, SLOT(slotModelRowsInserted(QModelIndex, int, int)));
 	
 	QStandardItemModel *standartModel = qobject_cast<QStandardItemModel*>(model());

@@ -202,6 +202,7 @@ void ViewContent::slotAdd()
 	emit signalChangeEditMode();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
+	ui->tableView->resizeRowsToContents();
 	auto rowCount = m_model->rowCount(index);
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
@@ -232,6 +233,7 @@ void ViewContent::slotEdit()
 	m_editMode = true;
 	emit signalChangeEditMode();
 	auto index = ui->tableView->selectionModel()->currentIndex();
+	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
 }
@@ -248,7 +250,7 @@ void ViewContent::slotSave()
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	
+	ui->tableView->resizeRowsToContents();
 }
 
 void ViewContent::slotCancel()
