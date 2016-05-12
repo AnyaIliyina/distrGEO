@@ -66,6 +66,7 @@ private:
 	void setDepartamentView();
 	void setupModelSite(int id);
 	void setupModelDepartment(int id);
+
 private slots:
 	/*!
 	Выводит сообщение на панель StatusBar
@@ -99,6 +100,9 @@ private slots:
 
 	void slotOpenUrl(const QModelIndex &index);
 	
+	void slotGetCheckSite();
+
+	void slotEditCheck(int id, bool save);
 
 };
 

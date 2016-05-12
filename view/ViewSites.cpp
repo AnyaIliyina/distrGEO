@@ -137,6 +137,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		ui->action_No->setEnabled(false);
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
+			qDebug() << ">1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
@@ -144,6 +145,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
+			qDebug() << "=1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
@@ -153,6 +155,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
+			qDebug() << "=0";
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
@@ -218,19 +221,18 @@ void ViewSites::slotDelete()
 			m_model->removeRows(0, 1, index);
 		}
 	}
-	//emit dataChanged();
-	/*m_editMode = false;
-	emit signalChangeEditMode();*/
+
 }
 
 void ViewSites::slotEdit()
 {
-	
 	m_editMode = true;
 	emit signalChangeEditMode();
+	//emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
+
 }
 
 void ViewSites::slotSave()
@@ -241,11 +243,15 @@ void ViewSites::slotSave()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		//emit dataChanged();
-	
+		/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();*/
+		/*emit signalSave(value, true);*/
 	}
 	else
+	{
+		/*emit signalSave(-1, false);*/
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
+
+	}
 	//auto index = ui->tableView->selectionModel()->currentIndex();
 	
 
@@ -257,6 +263,7 @@ void ViewSites::slotCancel()
 	{
 		m_editMode = false;
 		emit signalChangeEditMode();
+		/*emit signalSave(-1, false);*/
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
