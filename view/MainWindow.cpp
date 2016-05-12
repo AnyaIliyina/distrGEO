@@ -42,7 +42,7 @@ void MainWindow::slotConfigure()
 {	
 	m_tr = new TreeRegions();
 	slotSetupRegionsModel();
-	QObject::connect(m_tr, SIGNAL(dataChanged()), SLOT(slotSetupRegionsModel()));
+	QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
@@ -95,18 +95,18 @@ void MainWindow::slotSelectDepartment(int id)
 {
 	if (id < 0)
 	{
-		treeSites->collapseAll();
-		treeSites->setEnabled(false);
+		treeDepartments->collapseAll();
+		treeDepartments->setEnabled(false);
 	}
 	else
 	{
-		treeSites->setEnabled(true);
+		treeDepartments->setEnabled(true);
 		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
 		for (int i = 0; i < map.count(); i++)
 			map.values().at(i)->setChecked(false);
 		for (int i = 0; i < IDs.count(); i++)
 		{
-			treeSites->setFocus();
+			treeDepartments->setFocus();
 			map[IDs.at(i)]->setChecked(true);
 		}
 
@@ -167,6 +167,7 @@ void MainWindow::setSearchResources()
 	treeSearch->setMaximumWidth(400);
 	treeSearch->setModel(m_tr->model());
 	treeSearch->setColumnHidden(1, true);
+	//treeSearch->setColumnHidden(1, true);
 	treeSearch->resizeColumnToContents(0);
 	tableSites = new QTableView();
 	tableDepartments = new QTableView();
@@ -190,6 +191,7 @@ void MainWindow::setResourcesView()
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
 	treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(2, true);
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -220,6 +222,7 @@ void MainWindow::slotSetupRegionsModel()
 	//delete m_regionsChecked;
 	m_regionsChecked = new ItemModel();
 	m_regionsChecked->loadData(4);
+	QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
 	map = RegionItemChecked::getMap();
 }
 
