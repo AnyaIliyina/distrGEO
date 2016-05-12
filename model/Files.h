@@ -11,12 +11,12 @@
 
 */
 
-class Geodata : public BaseItem
+class Files : public BaseItem
 {
 public:
 	int id=0;
-	virtual ~Geodata();
-	Geodata();
+	virtual ~Files();
+	Files();
 
 	/*!
 	Возвращает количество колонок
@@ -44,32 +44,15 @@ public:
 	bool save() Q_DECL_OVERRIDE;
 	bool cancel() Q_DECL_OVERRIDE;
 
-	void getFormatId();
-	void getSiteId();
-	void getScaleId();
-	void getStateId();
+	
 	QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) Q_DECL_OVERRIDE;
 
 private:
 
 	int m_id=0;
-	int m_state_id = 0;
-	int m_scale_id = 0;
-	int m_session_id = 0;
 	QString m_name;
-	QString m_site_name;
-	QString m_ctype;
+	QString m_ftype;
 	QString m_date;
-	QString m_description;
-	QString m_state_name;
-	QString m_siteurl;
-	QString m_user_type;
-	QString m_url;
-	QString m_comment;
-	/*QString m_all1;
-	QString m_all;*/
-	int m_format_id;
-	int m_site_id;
 	int m_type = 0;
 
 };

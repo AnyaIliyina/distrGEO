@@ -74,6 +74,9 @@
     <ClCompile Include="view\EditSites.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="model\Files.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="core\Format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -161,7 +164,13 @@
     <ClCompile Include="core\Usertype.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="view\ViewContent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="view\ViewDepartments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\ViewFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="view\ViewSites.cpp">
@@ -199,6 +208,9 @@
     <CustomBuild Include="view\EditSites.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="model\Files.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="core\Format.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -289,7 +301,13 @@
     <CustomBuild Include="core\Usertype.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\ViewContent.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="view\ViewDepartments.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\ViewFiles.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="view\ViewSites.h">
@@ -417,10 +435,22 @@
     <ClCompile Include="release\moc_Usertype.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="debug\moc_ViewContent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_ViewContent.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_ViewDepartments.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_ViewDepartments.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_ViewFiles.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_ViewFiles.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_ViewSites.cpp">
@@ -450,7 +480,13 @@
     <ClInclude Include="ui_TreeRegions.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="ui_ViewContent.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
     <ClInclude Include="ui_ViewDepartments.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_ViewFiles.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ui_ViewSites.h">
@@ -473,7 +509,13 @@
     <CustomBuild Include="view\TreeRegions.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\ViewContent.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="view\ViewDepartments.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\ViewFiles.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="view\ViewSites.ui">

@@ -44,12 +44,13 @@ void MainWindow::slotConfigure()
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
+	setContentView();
 
 	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
-	ui->tabWidget->addTab(new QWidget, "Материалы");
+	ui->tabWidget->addTab(content, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
 
 
@@ -98,6 +99,7 @@ void MainWindow::slotForSearch(const QItemSelection &, const QItemSelection &)
 	int id = treeSearch->model()->data(treeSearch->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 	setupModelSite(id);
 	setupModelDepartment(id);
+
 }
 
 /*!
@@ -118,6 +120,17 @@ void MainWindow::showMW()
 	//}
 	//else
 		statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
+}
+
+void MainWindow::setContentView()
+{
+	m_vc = new ViewContent();
+	m_vf = new ViewFiles();
+	content = new QWidget();
+	QVBoxLayout *vertLayout = new QVBoxLayout();
+	vertLayout->addWidget(m_vc);
+	vertLayout->addWidget(m_vf);
+	content->setLayout(vertLayout);
 }
 
 void MainWindow::setSearchResources()
@@ -179,8 +192,14 @@ void MainWindow::setupModelSite(int id)
 	tableSites->setModel(m_res_model);
 	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableSites->setColumnHidden(0, true);
-	tableSites->setSortingEnabled(true);
 	tableSites->resizeColumnsToContents();
+	tableSites->resizeRowsToContents();
+
+	tableSites->setColumnWidth(1, 120);
+	tableSites->setColumnWidth(2, 300);
+	tableSites->setColumnWidth(3, 200);
+	tableSites->setColumnWidth(4, 300);
+	tableSites->setColumnWidth(5, 300);
 	
 }
 
@@ -191,8 +210,17 @@ void MainWindow::setupModelDepartment(int id)
 	tableDepartments->setModel(m_dep_model);
 	tableDepartments->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableDepartments->setColumnHidden(0, true);
-	tableDepartments->setSortingEnabled(true);
 	tableDepartments->resizeColumnsToContents();
+	tableDepartments->resizeRowsToContents();
+
+	tableDepartments->setColumnWidth(1, 300);
+	tableDepartments->setColumnWidth(2, 150);
+	tableDepartments->setColumnWidth(3, 350);
+	tableDepartments->setColumnWidth(4, 100);
+	tableDepartments->setColumnWidth(5, 100);
+	tableDepartments->setColumnWidth(6, 200);
+	tableDepartments->setColumnWidth(7, 350);
+	tableDepartments->setColumnWidth(8, 350);
 }
 
 /*!
