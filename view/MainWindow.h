@@ -9,7 +9,8 @@
 #include "RegionItemChecked.h"
 #include "TreeRegions.h"
 #include "Item_model.h"
-
+#include "ViewContent.h"
+#include "ViewFiles.h"
 
 /*!
 	\file
@@ -39,6 +40,8 @@ private:
 	ViewDepartments *m_vd;
 	ViewSites *m_vs;
 	TreeRegions *m_tr;
+	ViewContent *m_vc;
+	ViewFiles *m_vf;
 	QTreeView *treeSites;
 	QTreeView *treeDepartments;
 	QTreeView *treeSearch;
@@ -49,6 +52,7 @@ private:
 	QWidget *search;
 	QWidget *sites;
 	QWidget *departaments;
+	QWidget *content;
 	ItemModel *m_res_model;
 	
 	ItemModel *m_dep_model;
@@ -56,7 +60,7 @@ private:
 	ItemModel *m_regionsChecked=nullptr;
 	
 	QMap<int, RegionItemChecked*> map;	// id регионов и указатели на регионы
-
+	void setContentView();
 	void setSearchResources();
 	void setResourcesView();
 	void setDepartamentView();

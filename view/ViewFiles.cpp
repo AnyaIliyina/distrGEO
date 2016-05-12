@@ -89,7 +89,7 @@ void ViewFiles::slotEnableButtons(const QItemSelection &, const QItemSelection &
 
 void ViewFiles::createTable()
 {
-	m_model->loadData(4);
+	m_model->loadData(5);
 	ui->tableView->setModel(m_model);
 
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);

@@ -3,6 +3,7 @@
 #include "Departments.h"
 #include "types.h"
 #include "Geodata.h"
+#include "Files.h"
 #include "RegionItem.h"
 #include "RegionItemChecked.h"
 
@@ -33,6 +34,8 @@ BaseItem* ItemFactory::createNew(int type) {
 		return new RegionItem();
 	case ItemTypes::RegionItemCheckedType:
 		return new RegionItemChecked();
+	case ItemTypes::FilesType:
+		return new Files();
 	default:
 		return NULL;
 	}
