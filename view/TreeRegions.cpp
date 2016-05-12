@@ -187,6 +187,7 @@ void TreeRegions::slotDelete()
 		auto m_index = ui->treeView->selectionModel()->currentIndex();
 		//auto m_index = filterModel->mapToSource(index);
 		m_model->removeRows(0, 1, m_index);
+		emit dataChanged();
 	}
 }
 

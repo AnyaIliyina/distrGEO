@@ -33,6 +33,26 @@ void DepartmentRegion::insertIntoDatabase(int session_id)
 	}
 }
 
+QList<int> DepartmentRegion::regionsByDepartment(int department_id)
+{
+	QList<int>regionIds;
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("SELECT department_id FROM department_regions WHERE department_id =?");
+	query.addBindValue(department_id);
+	if (!query.exec())
+	{
+		qDebug() << "DepartmentRegion::regionsByDepartment(int department_id) error";
+		qDebug() << query.lastError().text();
+		db.close();
+	}
+	while (query.next())
+		regionIds << query.value(0).toInt();
+
+	db.close();
+	return regionIds;
+}
+
 bool DepartmentRegion::createTable()
 {
 	QSqlDatabase db = Database::database();

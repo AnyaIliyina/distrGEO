@@ -135,17 +135,13 @@ bool RegionItem::save() {
 }; 
 
 bool RegionItem::cancel() {
-	if (isNew())  
-		return true; 
-	/*auto db = QSqlDatabase::database("PsqlConnection", true); 
-	QSqlQuery query(db); 
-	query.prepare(   " SELECT code, name "   " FROM itgi.itgi_groups "   " WHERE id = :id "  ); 
-	query.bindValue(":id", m_id); 
-	if (!query.exec() || !query.next())  
-		throw ItgiException(    QString("Не удалось отменить изменения группы ИТГИ.\n%1")    .arg(db.lastError().text())   );
-	m_code = query.value(0).toString();  
-	m_name = query.value(1).toString();  
-	return true; */
+	if (isNew())
+		return true;
+	Region *r = new Region(m_id);
+	m_name = r->name();
+	m_comment = r->comment();
+	delete r;
+	return true;
 }; 
 
 QList<BaseItem*> RegionItem::loadItemsFromDb(QVariant id )

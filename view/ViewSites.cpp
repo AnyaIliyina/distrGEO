@@ -176,15 +176,8 @@ void ViewSites::createTable()
 
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
+	ui->tableView->setSortingEnabled(true);
 	ui->tableView->resizeColumnsToContents();
-	ui->tableView->resizeRowsToContents();
-
-	ui->tableView->setColumnWidth(1, 120);
-	ui->tableView->setColumnWidth(2, 300);
-	ui->tableView->setColumnWidth(3, 200);
-	ui->tableView->setColumnWidth(4, 300);
-	ui->tableView->setColumnWidth(5, 300);
-	
 
 }
 

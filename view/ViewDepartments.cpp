@@ -147,20 +147,9 @@ void ViewDepartments::createTable()
 
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);
+	ui->tableView->setSortingEnabled(true);
 	ui->tableView->resizeColumnsToContents();
-	ui->tableView->resizeRowsToContents();
 
-	ui->tableView->setColumnWidth(1, 300);
-	ui->tableView->setColumnWidth(2, 150);
-	ui->tableView->setColumnWidth(3, 350);
-	ui->tableView->setColumnWidth(4, 100);
-	ui->tableView->setColumnWidth(5, 100);
-	ui->tableView->setColumnWidth(6, 200);
-	ui->tableView->setColumnWidth(7, 350);
-	ui->tableView->setColumnWidth(8, 350);
-
-
-	
 }
 
 void ViewDepartments::slotAdd()
@@ -173,7 +162,7 @@ void ViewDepartments::slotAdd()
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
 	ui->tableView->edit(child);
-	ui->tableView->resizeRowsToContents();
+	
 }
 
 void ViewDepartments::slotDelete()
@@ -216,7 +205,7 @@ void ViewDepartments::slotSave()
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();
+
 
 }
 

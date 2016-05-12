@@ -7,6 +7,7 @@
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
 #include "SiteRegion.h"
+#include "DepartmentRegion.h"
 #include "State.h"
 #include "Database.h"
 #include <QTextEdit>
@@ -40,17 +41,17 @@ MainWindow::~MainWindow()
 void MainWindow::slotConfigure()
 {	
 	m_tr = new TreeRegions();
-	
+	slotSetupRegionsModel();
+	QObject::connect(m_tr, SIGNAL(dataChanged()), SLOT(slotSetupRegionsModel()));
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
-	setContentView();
-
+	
 	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
-	ui->tabWidget->addTab(content, "Материалы");
+	ui->tabWidget->addTab(new QWidget, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
 
 
@@ -68,19 +69,47 @@ void MainWindow::slotStartSession(int user_id)
 	slotConfigure();
 }
 
-void MainWindow::slotSelectRegion(int i)
+void MainWindow::slotSelectRegion(int id)
 {
 	qDebug() << "slooooot";
-	if (i < 0)
+	if (id < 0)
 	{
 		treeSites->collapseAll();
 		treeSites->setEnabled(false);
 	}
 	else
 	{
-		
 		treeSites->setEnabled(true);
-		
+		QList<int> IDs = SiteRegion::regionsBySite(id);
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->setChecked(false);
+		for (int i = 0; i < IDs.count(); i++)
+		{
+			treeSites->setFocus();
+			map[IDs.at(i)]->setChecked(true);
+		}		
+	}
+}
+
+void MainWindow::slotSelectDepartment(int id)
+{
+	if (id < 0)
+	{
+		treeSites->collapseAll();
+		treeSites->setEnabled(false);
+	}
+	else
+	{
+		treeSites->setEnabled(true);
+		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->setChecked(false);
+		for (int i = 0; i < IDs.count(); i++)
+		{
+			treeSites->setFocus();
+			map[IDs.at(i)]->setChecked(true);
+		}
+
 	}
 }
 
@@ -99,7 +128,6 @@ void MainWindow::slotForSearch(const QItemSelection &, const QItemSelection &)
 	int id = treeSearch->model()->data(treeSearch->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 	setupModelSite(id);
 	setupModelDepartment(id);
-
 }
 
 /*!
@@ -120,17 +148,6 @@ void MainWindow::showMW()
 	//}
 	//else
 		statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
-}
-
-void MainWindow::setContentView()
-{
-	m_vc = new ViewContent();
-	m_vf = new ViewFiles();
-	content = new QWidget();
-	QVBoxLayout *vertLayout = new QVBoxLayout();
-	vertLayout->addWidget(m_vc);
-	vertLayout->addWidget(m_vf);
-	content->setLayout(vertLayout);
 }
 
 void MainWindow::setSearchResources()
@@ -161,7 +178,7 @@ void MainWindow::setResourcesView()
 	treeSites->setMaximumSize(300, 1000);
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
-	treeSites->setModel(m_tr->model());
+	treeSites->setModel(m_regionsChecked);
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -176,13 +193,23 @@ void MainWindow::setDepartamentView()
 	m_vd = new ViewDepartments();
 	treeDepartments = new QTreeView();
 	treeDepartments->setMaximumSize(300, 1000);
-	treeDepartments->setModel(m_tr->model());
+	treeDepartments->setModel(m_regionsChecked);
+	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectDepartment(int)));
 	departaments = new QWidget();
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	layoutDepart->addWidget(m_vd);
 	layoutDepart->addWidget(treeDepartments);
 	departaments->setLayout(layoutDepart);
 
+}
+
+void MainWindow::slotSetupRegionsModel()
+{
+	qDebug() << "slotSetupRegionsModel";
+	//delete m_regionsChecked;
+	m_regionsChecked = new ItemModel();
+	m_regionsChecked->loadData(4);
+	map = RegionItemChecked::getMap();
 }
 
 void MainWindow::setupModelSite(int id)
@@ -192,14 +219,8 @@ void MainWindow::setupModelSite(int id)
 	tableSites->setModel(m_res_model);
 	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableSites->setColumnHidden(0, true);
+	tableSites->setSortingEnabled(true);
 	tableSites->resizeColumnsToContents();
-	tableSites->resizeRowsToContents();
-
-	tableSites->setColumnWidth(1, 120);
-	tableSites->setColumnWidth(2, 300);
-	tableSites->setColumnWidth(3, 200);
-	tableSites->setColumnWidth(4, 300);
-	tableSites->setColumnWidth(5, 300);
 	
 }
 
@@ -210,17 +231,8 @@ void MainWindow::setupModelDepartment(int id)
 	tableDepartments->setModel(m_dep_model);
 	tableDepartments->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableDepartments->setColumnHidden(0, true);
+	tableDepartments->setSortingEnabled(true);
 	tableDepartments->resizeColumnsToContents();
-	tableDepartments->resizeRowsToContents();
-
-	tableDepartments->setColumnWidth(1, 300);
-	tableDepartments->setColumnWidth(2, 150);
-	tableDepartments->setColumnWidth(3, 350);
-	tableDepartments->setColumnWidth(4, 100);
-	tableDepartments->setColumnWidth(5, 100);
-	tableDepartments->setColumnWidth(6, 200);
-	tableDepartments->setColumnWidth(7, 350);
-	tableDepartments->setColumnWidth(8, 350);
 }
 
 /*!

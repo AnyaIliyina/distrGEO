@@ -4,12 +4,11 @@
 #include <QString>
 #include "LoginDialog.h"
 #include "ui_MainWindow.h"
-#include "ViewContent.h"
 #include "ViewSites.h"
 #include "ViewDepartments.h"
+#include "RegionItemChecked.h"
 #include "TreeRegions.h"
 #include "Item_model.h"
-#include "ViewFiles.h"
 
 
 /*!
@@ -40,25 +39,24 @@ private:
 	ViewDepartments *m_vd;
 	ViewSites *m_vs;
 	TreeRegions *m_tr;
-	ViewContent *m_vc;
-	ViewFiles *m_vf;
 	QTreeView *treeSites;
 	QTreeView *treeDepartments;
 	QTreeView *treeSearch;
 	QTableView *tableSites;
 	QTableView *tableDepartments;
-
 	QHBoxLayout *vslayout;
 	QHBoxLayout *vdlayout;
 	QWidget *search;
 	QWidget *sites;
 	QWidget *departaments;
-	QWidget *content;
 	ItemModel *m_res_model;
 	
 	ItemModel *m_dep_model;
+	//ItemModel *m_regions;
+	ItemModel *m_regionsChecked=nullptr;
 	
-	void setContentView();
+	QMap<int, RegionItemChecked*> map;	// id регионов и указатели на регионы
+
 	void setSearchResources();
 	void setResourcesView();
 	void setDepartamentView();
@@ -75,6 +73,9 @@ private slots:
 	Закрывает основное окно
 	*/
 	void slotCloseMW();
+
+	/*! Создает модель из экземпляров RegionItemChecked*/
+	void slotSetupRegionsModel();
 	
 	/*!
 	"Собирает" основное окно из виджетов
@@ -89,6 +90,8 @@ private slots:
 	void slotStartSession(int user_id);
 
 	void slotSelectRegion(int i);
+
+	void slotSelectDepartment(int i);
 
 	void slotOpenUrl(const QModelIndex &index);
 	

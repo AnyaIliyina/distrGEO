@@ -4,7 +4,7 @@
 #include "types.h"
 #include "Geodata.h"
 #include "RegionItem.h"
-#include "Files.h"
+#include "RegionItemChecked.h"
 
 BaseItem* ItemFactory::loadFromDb(int type, QVariant id) {
 	// Создаем верхний элемент
@@ -31,8 +31,8 @@ BaseItem* ItemFactory::createNew(int type) {
 		return new Departments();
 	case ItemTypes::RegionItemType:
 		return new RegionItem();
-	case ItemTypes::FilesType:
-		return new Files();
+	case ItemTypes::RegionItemCheckedType:
+		return new RegionItemChecked();
 	default:
 		return NULL;
 	}
