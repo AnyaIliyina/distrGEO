@@ -32,6 +32,7 @@ ViewSites::ViewSites(QWidget * parent): ui(new Ui::ViewSites) // ??
 	QObject::connect(ui->tableView->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)) ,this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)) );
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
+	//QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotEnableButtons()));
 	QObject::connect(ui->action_OpenUrl, SIGNAL(triggered()), this, SLOT(slotOpenUrl()));
 	//QObject::connect(ui->tableView->model, SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 }
@@ -116,6 +117,7 @@ void ViewSites::slotEnableButtons()
 
 void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &)
 {
+	qDebug() << "slotik";
 	if (m_editMode)
 	{
 		ui->action_Edit->setEnabled(false);
@@ -135,6 +137,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		ui->action_No->setEnabled(false);
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
+			qDebug() << ">1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
@@ -142,6 +145,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
+			qDebug() << "=1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
@@ -151,6 +155,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
+			qDebug() << "=0";
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
@@ -190,7 +195,7 @@ void ViewSites::createTable()
 void ViewSites::slotAdd()
 {
 	m_editMode = true;
-	
+	emit signalChangeEditMode();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
 	ui->tableView->resizeRowsToContents();
@@ -198,7 +203,7 @@ void ViewSites::slotAdd()
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
 	ui->tableView->edit(child);
-	emit signalChangeEditMode();
+	
 }
 
 void ViewSites::slotDelete()
@@ -216,38 +221,49 @@ void ViewSites::slotDelete()
 			m_model->removeRows(0, 1, index);
 		}
 	}
+
 }
 
 void ViewSites::slotEdit()
 {
-	
 	m_editMode = true;
 	emit signalChangeEditMode();
+	//emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
+
 }
 
 void ViewSites::slotSave()
 {
 	if (m_model->save())
 	{
+		
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		emit dataChanged();
+		/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();*/
+		/*emit signalSave(value, true);*/
 	}
 	else
+	{
+		/*emit signalSave(-1, false);*/
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
-	auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();
+
+	}
+	//auto index = ui->tableView->selectionModel()->currentIndex();
+	
+
 }
 
 void ViewSites::slotCancel()
 {
 	if (m_model->cancel())
 	{
-		setDisabled();
+		m_editMode = false;
+		emit signalChangeEditMode();
+		/*emit signalSave(-1, false);*/
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);

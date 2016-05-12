@@ -9,8 +9,8 @@
 #include "SiteRegion.h"
 #include "DepartmentRegion.h"
 #include "State.h"
-#include "Types.h"
 #include "Database.h"
+#include "Types.h"
 #include <QTextEdit>
 #include <QDebug>
 #include <QStatusBar>
@@ -42,8 +42,8 @@ MainWindow::~MainWindow()
 void MainWindow::slotConfigure()
 {	
 	m_tr = new TreeRegions();
-	slotSetupRegionsModel();
-	//QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
+	
+	QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
@@ -192,16 +192,18 @@ void MainWindow::setResourcesView()
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
 	m_regionsChecked = new ItemModel();
-	m_regionsChecked->loadData(4);
-	/*treeSites->setModel(m_regionsChecked);
-	treeSites->setColumnHidden(2, true);*/
-	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
+	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
+	treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(2, true);
+	
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
 	layoutSites->addWidget(m_vs);
 	layoutSites->addWidget(treeSites);
 	sites->setLayout(layoutSites);
-	
+	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
+	/*QObject::connect(m_vs, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckSite()));
+	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheck(int, bool)));*/
 }
 
 void MainWindow::setDepartamentView()
@@ -222,14 +224,10 @@ void MainWindow::setDepartamentView()
 void MainWindow::slotSetupRegionsModel()
 {
 	qDebug() << "slotSetupRegionsModel";
-	//delete m_regionsChecked;
-	//m_regionsChecked = new ItemModel();
-	//m_regionsChecked->loadData(4);
-	map = RegionItemChecked::getMap();
-//	treeSites->setModel(NULL);
-	m_regionsChecked->loadData(RegionItemCheckedType, QVariant());
+	treeSites->setModel(NULL);
+	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
 	treeSites->setModel(m_regionsChecked);
-	//treeDepartments->setModel(m_regionsChecked);
+	map = RegionItemChecked::getMap();
 }
 
 void MainWindow::setupModelSite(int id)
@@ -239,7 +237,6 @@ void MainWindow::setupModelSite(int id)
 	tableSites->setModel(m_res_model);
 	tableSites->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableSites->setColumnHidden(0, true);
-	
 	tableSites->resizeColumnsToContents();
 	tableSites->resizeRowsToContents();
 	tableSites->setColumnWidth(1, 120);
@@ -284,4 +281,14 @@ void MainWindow::slotCloseMW()
 void MainWindow::slotShowStatus(const QString &str)
 {
 	statusBar()->showMessage(str);
+}
+
+void MainWindow::slotGetCheckSite()
+{
+	qDebug() << "SLoot getCheckSite";
+}
+
+void MainWindow::slotEditCheck(int id, bool save)
+{
+	qDebug() << "Slot EditCheck";
 }

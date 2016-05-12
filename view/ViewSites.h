@@ -91,12 +91,15 @@ private slots:
 	 Сигнал для включения/выключения кнопок
 	 */
 	 void signalChangeEditMode();
-
+	void valueSelected(int);
+	 //void signalEditSite();
+	 //void signalSave(int, bool);
 	 /*!
 	 Сигнал о том, что данные в модели изменились
 	 */
 	 void dataChanged();
 
-	 void valueSelected(int);
-
+	
+	 
+	
 };
