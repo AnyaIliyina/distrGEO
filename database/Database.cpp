@@ -144,13 +144,61 @@ void Database::createBridgeTables()
 
 void Database::addTriggers()
 {
-	onDeleteTrigger("sites", "site_langs");
+	/*onDeleteTrigger("sites", "site_langs");
 	onDeleteTrigger("sites", "site_regions");
 	onDeleteTrigger("sites", "site_types");
 	onDeleteTrigger("departments", "department_regions");
 	onDeleteTrigger("regions", "department_regions");
-	onDeleteTrigger("departments", "department_types");
+	onDeleteTrigger("departments", "department_types");*/
 	regionsTrigger();	
+	QSqlDatabase db = database();
+	QSqlQuery query(db);
+	QString queryString = "CREATE TRIGGER del_sitelangs\
+		 BEFORE DELETE ON sites \
+		 FOR EACH ROW BEGIN DELETE from site_langs \
+		 WHERE site_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no del_sitelangs trigger:" << query.lastError().text();
+
+	 queryString = "CREATE TRIGGER del_siteregions\
+		 BEFORE DELETE ON sites \
+		 FOR EACH ROW BEGIN DELETE from site_regions \
+		 WHERE site_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no del_siteregions trigger:" << query.lastError().text();
+
+	queryString = "CREATE TRIGGER del_sitetypes\
+		 BEFORE DELETE ON sites \
+		 FOR EACH ROW BEGIN DELETE from site_types \
+		 WHERE site_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no del_sitetypes:" << query.lastError().text();
+
+	queryString = "CREATE TRIGGER del_department_regions\
+		 BEFORE DELETE ON departments \
+		 FOR EACH ROW BEGIN DELETE from department_regions \
+		 WHERE department_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no del_department_regions:" << query.lastError().text();
+
+
+	queryString = "CREATE TRIGGER del_reg_dep\
+		 BEFORE DELETE ON regions \
+		 FOR EACH ROW BEGIN DELETE from department_regions \
+		 WHERE region_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no ddel_reg_dep:" << query.lastError().text();
+
+
+	queryString = "CREATE TRIGGER del_dep_types\
+		 BEFORE DELETE ON departments \
+		 FOR EACH ROW BEGIN DELETE from department_types \
+		 WHERE department_id = OLD.id; END;";
+	if (!query.exec(queryString))
+		qDebug() << "no ddel_dep_types:" << query.lastError().text();
+
+	//qDebug() << queryString;
+	db.close();
 }
 
 void Database::onDeleteTrigger(const QString& tableName, 
@@ -179,6 +227,6 @@ void Database::regionsTrigger()
 		 WHERE regions.parent_id = OLD.id; END;";
 	if (!query.exec(queryString))
 		qDebug() << "no del_regions_after_regions trigger:" << query.lastError().text();
-	qDebug() << queryString;
+//	qDebug() << queryString;
 	db.close();
 }
