@@ -98,6 +98,7 @@ private slots:
 
 	 
  signals:
+	 void newNodelReady();
 	 /*!
 	 Сигнал для включения/выключения кнопок
 	 */
@@ -108,4 +109,5 @@ private slots:
 	 //*/
 	 void dataChanged();
 
+	 
 };
