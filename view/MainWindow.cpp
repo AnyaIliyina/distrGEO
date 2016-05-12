@@ -9,6 +9,7 @@
 #include "SiteRegion.h"
 #include "DepartmentRegion.h"
 #include "State.h"
+#include "Types.h"
 #include "Database.h"
 #include <QTextEdit>
 #include <QDebug>
@@ -42,7 +43,7 @@ void MainWindow::slotConfigure()
 {	
 	m_tr = new TreeRegions();
 	slotSetupRegionsModel();
-	QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
+	//QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
@@ -190,8 +191,10 @@ void MainWindow::setResourcesView()
 	treeSites->setMaximumSize(300, 1000);
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
-	treeSites->setModel(m_regionsChecked);
-	treeSites->setColumnHidden(2, true);
+	m_regionsChecked = new ItemModel();
+	m_regionsChecked->loadData(4);
+	/*treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(2, true);*/
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -220,10 +223,13 @@ void MainWindow::slotSetupRegionsModel()
 {
 	qDebug() << "slotSetupRegionsModel";
 	//delete m_regionsChecked;
-	m_regionsChecked = new ItemModel();
-	m_regionsChecked->loadData(4);
-	QObject::connect(m_tr, SIGNAL(newNodelReady()), SLOT(slotSetupRegionsModel()));
+	//m_regionsChecked = new ItemModel();
+	//m_regionsChecked->loadData(4);
 	map = RegionItemChecked::getMap();
+//	treeSites->setModel(NULL);
+	m_regionsChecked->loadData(RegionItemCheckedType, QVariant());
+	treeSites->setModel(m_regionsChecked);
+	//treeDepartments->setModel(m_regionsChecked);
 }
 
 void MainWindow::setupModelSite(int id)
