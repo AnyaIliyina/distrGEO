@@ -47,15 +47,19 @@ public:
 	\return QList<int> regionIds - список из id регионов*/
 	static QList<int>regionsBySite(int site_id);
 
-	/*! Удаляет из базы все пары, в которых упоминается регион region_id
-	\param int region_id - id региона
-	\param int language_id - id языка*/
-	static void deleteByRegion(int region_id);
+	///*! Удаляет из базы все пары, в которых упоминается регион region_id
+	//\param int region_id - id региона
+	//\param int language_id - id языка*/
+	//static void deleteByRegion(int region_id);
 
-	/*! Удаляет из базы все пары, в которых упоминается
-	интернет-ресурс site_id
-	\param int site_id - id интернет-ресурса*/
-	static void deleteBySite(int site_id);
+	///*! Удаляет из базы все пары, в которых упоминается
+	//интернет-ресурс site_id
+	//\param int site_id - id интернет-ресурса*/
+	//static void deleteBySite(int site_id);
+
+	/*! Удаляет из базы запись
+	*/
+	static void deleteRecord(int site_id, int region_id, int session_id = Database::currentSessionId());
 
 	/*! Создает таблицу site_regions*/
 	static bool createTable();

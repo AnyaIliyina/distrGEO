@@ -1,5 +1,24 @@
 ﻿#include "SiteRegion.h"
 
+void SiteRegion::deleteRecord(int site_id, int region_id, int session_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	QString site_idstr = QString::number(site_id);
+	QString region_idstr = QString::number(region_id);
+	if (!query.exec("DELETE FROM site_regions WHERE ((site_id=\'" + site_idstr + "\') AND (region_id=\'" +
+		region_idstr + "\'))"))
+	{
+		QString errorString = query.lastError().text();
+		qDebug() << errorString;
+		Log::create(session_id, "SiteRegion: delete", site_id, errorString);
+	}
+	else
+	{
+		Log::create(session_id, "SiteRegion: delete", site_id);
+	}
+}
+
 bool SiteRegion::createTable()
 {
 	QSqlDatabase db = Database::database();

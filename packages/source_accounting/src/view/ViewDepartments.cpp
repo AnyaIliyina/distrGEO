@@ -91,7 +91,6 @@ void ViewDepartments::slotEnableButtons()
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-			qDebug() << value;
 			emit valueSelected(value);
 			
 		}
@@ -228,9 +227,6 @@ void ViewDepartments::slotSave()
 		emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
-		/*auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();*/
-
 }
 
 void ViewDepartments::slotCancel()

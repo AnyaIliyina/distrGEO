@@ -4,7 +4,7 @@
 #include "State.h"
 #include "GeodataType.h"
 #include "Geodata.h"
-
+#include "Types.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
@@ -32,9 +32,7 @@ ViewSites::ViewSites(QWidget * parent): ui(new Ui::ViewSites) // ??
 	QObject::connect(ui->tableView->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)) ,this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)) );
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	//QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotEnableButtons()));
 	QObject::connect(ui->action_OpenUrl, SIGNAL(triggered()), this, SLOT(slotOpenUrl()));
-	//QObject::connect(ui->tableView->model, SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 }
 
 ViewSites::~ViewSites()
@@ -60,7 +58,6 @@ void ViewSites::setDisabled()
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	ui->action_OpenUrl->setEnabled(false);
-	//emit valueSelected(-1);
 }
 
 void ViewSites::slotRefresh()
@@ -80,9 +77,7 @@ void ViewSites::slotEnableButtons()
 		ui->action_OpenUrl->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-		qDebug() << value;
-		emit valueSelected(value);*/
+
 	}
 	else
 	{
@@ -104,7 +99,6 @@ void ViewSites::slotEnableButtons()
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
 			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-			qDebug() << value;
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
@@ -127,9 +121,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		ui->action_OpenUrl->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-	/*	int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-		qDebug() << value;
-		emit valueSelected(value);*/
+	
 	}
 	else
 	{
@@ -138,7 +130,6 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		ui->action_No->setEnabled(false);
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
-			qDebug() << ">1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);
@@ -150,7 +141,6 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
 			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-			qDebug() << value;
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
@@ -167,7 +157,7 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 
 void ViewSites::createTable()
 {
-	m_model->loadData(1);
+	m_model->loadData(ItemTypes::ResourceType);
 	ui->tableView->setModel(m_model);
 
 	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
@@ -236,6 +226,7 @@ void ViewSites::slotEdit()
 
 void ViewSites::slotSave()
 {
+	
 	if (m_model->save())
 	{
 		
@@ -251,9 +242,6 @@ void ViewSites::slotSave()
 		emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
-	//auto index = ui->tableView->selectionModel()->currentIndex();
-	
-
 }
 
 void ViewSites::slotCancel()
