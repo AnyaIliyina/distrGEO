@@ -30,7 +30,6 @@ void Departments::removeChild(BaseItem* child) {
 	if (department == NULL)
 		return;
 			Department::deleteDepartment(department->m_id);
-			//DepartmentType::deleteByDepartment(department->m_id);
 	m_children.removeOne(child);
 };
 

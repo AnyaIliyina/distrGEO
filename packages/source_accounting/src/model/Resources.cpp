@@ -34,8 +34,6 @@ void Resources::removeChild(BaseItem* child) {
 		return;
 
 		Site::deleteRecord(resource->m_id);
-	//	SiteLang::deleteBySite(resource->m_id);
-	//	SiteType::deleteBySite(resource->m_id);
 	m_children.removeOne(child);
 };
 
