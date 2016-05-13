@@ -213,6 +213,8 @@ void MainWindow::setDepartamentView()
 	m_vd = new ViewDepartments();
 	treeDepartments = new QTreeView();
 	treeDepartments->setMaximumSize(300, 1000);
+	treeDepartments->showMinimized();
+	treeDepartments->setEnabled(false);
 	treeDepartments->setModel(m_regionsChecked);
 	treeDepartments->setColumnHidden(2, true);
 	treeDepartments->setColumnHidden(3, true);
