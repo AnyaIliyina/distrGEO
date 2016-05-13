@@ -22,7 +22,6 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
-	//slotEnableButtons();
 }
 
 TreeRegions::~TreeRegions()
@@ -43,7 +42,6 @@ void TreeRegions::setupModel()
 	ui->treeView->setColumnHidden(2, true);
 	ui->treeView->expandAll();
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	//setDisabled();
 }
 
 void TreeRegions::setDisabled()

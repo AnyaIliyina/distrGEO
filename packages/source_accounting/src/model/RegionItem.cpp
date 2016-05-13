@@ -95,8 +95,8 @@ bool RegionItem::isValid() const
 {
 	if (m_name.isNull() || m_name.isEmpty()) 
 		return false;  
-	if (m_comment.isNull() || m_comment.isEmpty())
-		return false;
+	/*if (m_comment.isNull() || m_comment.isEmpty())
+		return false;*/
 	return true;
 };
 

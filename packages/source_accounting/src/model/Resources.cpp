@@ -139,16 +139,17 @@ bool Resources::hasChildren() const {
 
 bool Resources::save() {
 	
-	if (m_comment == NULL)
-		m_comment = " ";
-
-	QStringList listLanguage =m_language.split(", ");
-	QList<int> listIdLang = Language::getIDs(listLanguage);
-
-	QStringList listGPI = m_gpi.split(", ");
-	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+	
 	if (isValid())
 	{
+			if (m_comment == NULL)
+			m_comment = " ";
+
+		QStringList listLanguage =m_language.split(", ");
+		QList<int> listIdLang = Language::getIDs(listLanguage);
+
+		QStringList listGPI = m_gpi.split(", ");
+		QList<int> listIdGPI = GeodataType::getIDs(listGPI);
 		if (m_id == 0) {
 			//Создание
 			Site* ns = new Site(m_url, m_name, 1, m_comment);
@@ -248,8 +249,7 @@ QList<BaseItem*> Resources::loadItemsFromDb(QVariant id ) {
 		res->m_language = Language::getList(res->m_id).join(", ");
 		res->m_gpi = GeodataType::getListForSites(res->m_id).join(", ");
 		res->m_comment = query.value(3).toString();
-		
-		
+				
 		list << res;
 	}
 	return list;

@@ -76,11 +76,7 @@ private slots:
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	 ///*!
-	 //Слот фильтрации данных в таблице
-	 //\param QString text - искомая строка
-	 //*/
-	 //void slotFilterChanged(QString text);
+	
 
 	
  signals:
