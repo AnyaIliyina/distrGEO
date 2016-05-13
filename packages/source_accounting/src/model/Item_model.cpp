@@ -129,8 +129,13 @@ Qt::ItemFlags ItemModel::flags(const QModelIndex& index) const {
 
 	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
 
-	if (item == m_editedItem)
+	if(item == m_editedItem)
+	{
+		if (m_editedItem->isCheckable() && index.column() == 0)
+			return Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
+		
 		return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
+	}
 	else
 		return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 };

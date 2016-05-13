@@ -38,4 +38,9 @@ int BaseItem::row() const {
 
 bool BaseItem::hasChildren() const {
 	return rowCount() != 0;
+}
+
+bool BaseItem::isCheckable() const
+{
+	return false;
 };

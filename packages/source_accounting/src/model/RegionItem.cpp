@@ -73,6 +73,11 @@ bool RegionItem::setData(int column, const QVariant& value, int role)
 	return true; 
 }
 
+bool RegionItem::isCheckable() const
+{
+	return true;
+}
+
 
 QVariant RegionItem::headerData(int section, int role) const {
 	if (role == Qt::DisplayRole) {			

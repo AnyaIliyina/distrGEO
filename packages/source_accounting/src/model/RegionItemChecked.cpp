@@ -53,14 +53,10 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 {
 	if (value.isNull() || value.toString().isEmpty())
 		return false;
-	if (role == Qt::EditRole)		// Qt::EditRole
+	if (role == Qt::CheckStateRole)		// Qt::EditRole
 	{
 		if (column == 0)
-			m_checked =(  Qt::Checked )? true : false;
-		/*if (column == 1)
-			m_id = value.toInt();
-		if (column == 2)
-			m_comment = value.toString();*/
+			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
 	}
 	return true;
 }

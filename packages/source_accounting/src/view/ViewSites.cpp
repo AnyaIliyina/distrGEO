@@ -228,7 +228,7 @@ void ViewSites::slotEdit()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
-	//emit signalEditSite();
+	emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
@@ -243,12 +243,12 @@ void ViewSites::slotSave()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();*/
-		/*emit signalSave(value, true);*/
+		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		emit signalSave(value, true);
 	}
 	else
 	{
-		/*emit signalSave(-1, false);*/
+		emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 
 	}

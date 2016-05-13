@@ -37,6 +37,7 @@ public:
 	virtual bool isValid() const = 0;
 	virtual bool isNew() const = 0;
 	virtual bool hasChildren() const;
+	virtual bool isCheckable() const;
 
 	virtual bool save() = 0;
 	virtual bool cancel() = 0;
