@@ -63,8 +63,8 @@
   </widget>
   <action name="action_NewRoot">
    <property name="icon">
-    <iconset>
-     <normaloff>:/root.png</normaloff>:/root.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/root.png</normaloff>:/images/root.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>
@@ -75,8 +75,8 @@
   </action>
   <action name="action_Delete">
    <property name="icon">
-    <iconset>
-     <normaloff>:/trash.png</normaloff>:/trash.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/trash.png</normaloff>:/images/trash.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Delete</string>
@@ -87,8 +87,8 @@
   </action>
   <action name="action_Edit">
    <property name="icon">
-    <iconset>
-     <normaloff>:/note.png</normaloff>:/note.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/note.png</normaloff>:/images/note.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Edit</string>
@@ -99,8 +99,8 @@
   </action>
   <action name="action_Yes">
    <property name="icon">
-    <iconset>
-     <normaloff>:/check.png</normaloff>:/check.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/check.png</normaloff>:/images/check.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Yes</string>
@@ -111,8 +111,8 @@
   </action>
   <action name="action_No">
    <property name="icon">
-    <iconset>
-     <normaloff>:/close.png</normaloff>:/close.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
    </property>
    <property name="text">
     <string>&amp;No</string>
@@ -123,8 +123,8 @@
   </action>
   <action name="action_New">
    <property name="icon">
-    <iconset>
-     <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
+    <iconset resource="../resources/ViewWindowRes.qrc">
+     <normaloff>:/images/plus.png</normaloff>:/images/plus.png</iconset>
    </property>
    <property name="text">
     <string>&amp;New</string>

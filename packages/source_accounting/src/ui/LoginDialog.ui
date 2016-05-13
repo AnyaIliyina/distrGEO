@@ -135,8 +135,8 @@ border:0px}
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/check.png</normaloff>:/check.png</iconset>
+        <iconset resource="../resources/ViewWindowRes.qrc">
+         <normaloff>:/images/check.png</normaloff>:/images/check.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -164,8 +164,8 @@ border:0px}
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/close.png</normaloff>:/close.png</iconset>
+        <iconset resource="../resources/ViewWindowRes.qrc">
+         <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
        </property>
        <property name="iconSize">
         <size>

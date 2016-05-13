@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>images/upload.png</file>
     <file>./images/arrow-right.png</file>
     <file>./images/root.png</file>
     <file>./images/1.png</file>
