@@ -262,7 +262,7 @@ void ViewSites::slotCancel()
 	{
 		m_editMode = false;
 		emit signalChangeEditMode();
-		/*emit signalSave(-1, false);*/
+		emit signalSave(-1, false);
 		
 	}
 	else

@@ -325,11 +325,31 @@ void MainWindow::slotMakeCheckEditble(const QItemSelection &, const QItemSelecti
 	treeSites->edit(index);
 }
 
-void MainWindow::slotEditCheck(int id, bool save)
+void MainWindow::slotEditCheck(int id, bool saveChanges)
 {
-	qDebug() << "Slot EditCheck";
+	qDebug() << "slooooot";
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
+	
+	for (int i = 0; i < map.count(); i++)
+	{
+		if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
+		{
+			int region_id = map.keys().at(i);
+			SiteRegion *site_reg = new SiteRegion(id, region_id);
+			if (map.values().at(i)->isChecked())	//галочку поставили
+			{
+				site_reg->insertIntoDatabase();
+				qDebug() << "inserted, ha?";
+			}
+			else
+			{
+				//site_reg->
+				qDebug() << "link is deleted";
+			}
+						
+		}
+	}
 	
 }
 

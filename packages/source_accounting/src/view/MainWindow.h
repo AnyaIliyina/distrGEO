@@ -108,7 +108,7 @@ private slots:
 
 	void slotGetCheckDepartment();
 
-	void slotEditCheckDepartment(int id, bool save);
+	void slotEditCheckDepartment(int id, bool saveChanges);
 
 
 };

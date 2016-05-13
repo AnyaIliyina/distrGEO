@@ -58,7 +58,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 {
 	if (value.isNull() || value.toString().isEmpty())
 		return false;
-	if (role == Qt::CheckStateRole)		// Qt::EditRole
+	if (role == Qt::CheckStateRole)		// Qt::EditRole  
 	{
 		if (column == 0)
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
@@ -69,7 +69,8 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 
 RegionItemChecked::RegionItemChecked() : RegionItem()
 {
-	m_checked = true;
+	m_checked = false;
+	m_old_checked = false;
 }
 
 QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
@@ -80,6 +81,12 @@ QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
 void RegionItemChecked::setChecked(bool checked)
 {
 	m_checked = checked;
+	m_old_checked = checked;
+}
+
+bool RegionItemChecked::isChecked()
+{
+	return m_checked;
 }
 
 QVariant RegionItemChecked::headerData(int section, int role) const {
@@ -113,7 +120,7 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 		RegionItemChecked* r_item = new RegionItemChecked();
 		r_item->m_id = query.value(0).toInt();			// id   
 		r_item->m_name = query.value(1).toString(); 	// name 
-		r_item->m_checked = false;												
+		//r_item->m_checked = false;												
 		r_item->m_comment = query.value(2).toString(); 	// comment   
 		int parent_id = query.value(3).toInt(); 		// parent_id  
 		if (parent_id == 0)
@@ -127,4 +134,10 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 		map.insert(r_item->m_id, r_item);
 	}
 	return list;
+};
+
+
+bool RegionItemChecked::save()
+{	
+	return (m_checked != m_old_checked);
 };

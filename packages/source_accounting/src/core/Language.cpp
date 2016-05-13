@@ -87,9 +87,7 @@ QList<int> Language::getIDs(QStringList listLang)
 	QList<int> listIDs;
 	QSqlQuery queryLang(db);
 	QString str = listLang.join("','");
-	qDebug().noquote() << str;
 	QString qry = QString("SELECT id FROM languages WHERE name IN ('%1')").arg(str);
-	qDebug().noquote() << qry;
 	queryLang.prepare(qry);
 	if (!queryLang.exec())
 	{

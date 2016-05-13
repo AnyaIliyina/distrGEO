@@ -26,8 +26,12 @@ public:
 	static QMap<int, RegionItemChecked*> getMap();
 	void setChecked(bool checked);
 	bool isCheckable() const Q_DECL_OVERRIDE;
+	bool isChecked();
+	bool save() Q_DECL_OVERRIDE;
 private:
 	bool m_checked=true;
+	bool m_old_checked;
 	static QMap<int, RegionItemChecked*> map;
+	static QList <int> IDs;
 	
 };
