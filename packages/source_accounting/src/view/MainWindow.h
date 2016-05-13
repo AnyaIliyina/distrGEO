@@ -104,6 +104,11 @@ private slots:
 
 	void slotEditCheck(int id, bool save);
 
+	void slotGetCheckDepartment();
+
+	void slotEditCheckDepartment(int id, bool save);
+
+
 };
 
 

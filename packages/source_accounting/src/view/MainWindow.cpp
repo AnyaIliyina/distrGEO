@@ -27,7 +27,7 @@ MainWindow::MainWindow(QMainWindow *parent)
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
 	ld->slotShowLD();
-	//QObject::connect(tableSites, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotOpenUrl(QModelIndex)));
+	QObject::connect(tableSites, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotOpenUrl(QModelIndex)));
 }
 
 
@@ -214,23 +214,35 @@ void MainWindow::setDepartamentView()
 	treeDepartments = new QTreeView();
 	treeDepartments->setMaximumSize(300, 1000);
 	treeDepartments->setModel(m_regionsChecked);
-	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectDepartment(int)));
+	treeDepartments->setColumnHidden(2, true);
+	treeDepartments->setColumnHidden(3, true);
 	departaments = new QWidget();
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	layoutDepart->addWidget(m_vd);
 	layoutDepart->addWidget(treeDepartments);
 	departaments->setLayout(layoutDepart);
-
+	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectDepartment(int)));
+	QObject::connect(m_vd, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckDepartment()));
+	QObject::connect(m_vd, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheckDepartment(int, bool)));
 }
 
 void MainWindow::slotSetupRegionsModel()
 {
 	qDebug() << "slotSetupRegionsModel";
-	/*for (int i = 0; i < map.count(); i++)
-		delete map.values().at(i);*/
+	
 	treeSites->setModel(NULL);
+	treeDepartments->setModel(NULL);
+
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
+
 	treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(2, true);
+	treeSites->setColumnHidden(3, true);
+
+	treeDepartments->setModel(m_regionsChecked);
+	treeDepartments->setColumnHidden(2, true);
+	treeDepartments->setColumnHidden(3, true);
+
 	map = RegionItemChecked::getMap();
 }
 
@@ -293,6 +305,16 @@ void MainWindow::slotGetCheckSite()
 }
 
 void MainWindow::slotEditCheck(int id, bool save)
+{
+	qDebug() << "Slot EditCheck";
+}
+
+void MainWindow::slotGetCheckDepartment()
+{
+	qDebug() << "SLoot getCheckSite";
+}
+
+void MainWindow::slotEditCheckDepartment(int id, bool save)
 {
 	qDebug() << "Slot EditCheck";
 }

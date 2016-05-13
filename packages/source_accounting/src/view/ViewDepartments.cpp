@@ -82,18 +82,22 @@ void ViewDepartments::slotEnableButtons()
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
+			emit valueSelected(-1);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
+			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			qDebug() << value;
+			emit valueSelected(value);
 			
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
-			
+			emit valueSelected(-1);
 		}
 	}
 }
@@ -117,19 +121,21 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
-			
+			emit valueSelected(-1);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
-			
+			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			qDebug() << value;
+			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
-			
+			emit valueSelected(-1);
 		}
 	}
 	
@@ -198,6 +204,7 @@ void ViewDepartments::slotEdit()
 	
 	m_editMode = true;
 	emit signalChangeEditMode();
+	emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
@@ -211,12 +218,16 @@ void ViewDepartments::slotSave()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		emit dataChanged();
+		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		emit signalSave(value, true);
 	}
 	else
+	{
+		emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
-	auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();
+	}
+		/*auto index = ui->tableView->selectionModel()->currentIndex();
+	ui->tableView->resizeRowsToContents();*/
 
 }
 
@@ -226,6 +237,7 @@ void ViewDepartments::slotCancel()
 	{
 		m_editMode = false;
 		emit signalChangeEditMode();
+		emit signalSave(-1, false);
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
