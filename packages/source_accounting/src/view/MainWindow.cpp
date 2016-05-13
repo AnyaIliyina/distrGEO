@@ -204,8 +204,8 @@ void MainWindow::setResourcesView()
 	layoutSites->addWidget(treeSites);
 	sites->setLayout(layoutSites);
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
-	/*QObject::connect(m_vs, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckSite()));
-	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheck(int, bool)));*/
+	QObject::connect(m_vs, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckSite()));
+	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheck(int, bool)));
 }
 
 void MainWindow::setDepartamentView()
@@ -304,11 +304,24 @@ void MainWindow::slotShowStatus(const QString &str)
 void MainWindow::slotGetCheckSite()
 {
 	qDebug() << "SLoot getCheckSite";
+	qDebug() << QObject::connect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
+}
+
+void MainWindow::slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)
+{
+	qDebug() << "slotMakeCheckEditble";
+	auto index = treeSites->selectionModel()->currentIndex();
+	m_regionsChecked->startEditMode(index);
+	treeSites->edit(index);
 }
 
 void MainWindow::slotEditCheck(int id, bool save)
 {
 	qDebug() << "Slot EditCheck";
+	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
+	
 }
 
 void MainWindow::slotGetCheckDepartment()

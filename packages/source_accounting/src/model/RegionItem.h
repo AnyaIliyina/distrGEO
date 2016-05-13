@@ -36,7 +36,7 @@ public:
 	
 	bool isValid() const Q_DECL_OVERRIDE;
 	bool isNew() const Q_DECL_OVERRIDE;
-	//bool hasChildren() const Q_DECL_OVERRIDE;
+	virtual bool isCheckable() const Q_DECL_OVERRIDE;
 
 	bool save() Q_DECL_OVERRIDE;
 	bool cancel() Q_DECL_OVERRIDE;

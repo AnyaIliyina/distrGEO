@@ -102,6 +102,8 @@ private slots:
 	
 	void slotGetCheckSite();
 
+	void slotMakeCheckEditble(const QItemSelection &, const QItemSelection &);
+
 	void slotEditCheck(int id, bool save);
 
 	void slotGetCheckDepartment();
