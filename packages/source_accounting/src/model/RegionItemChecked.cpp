@@ -28,15 +28,20 @@ QVariant RegionItemChecked::data(int column, int role) const
 
 	if (role == Qt::CheckStateRole)
 		if (column == 0)
-			return m_checked? Qt::Checked: Qt::Unchecked;
-	
+			return m_checked ? Qt::Checked : Qt::Unchecked;
+
 
 	return QVariant();
 };
 
+bool RegionItemChecked::isCheckable() const
+{
+	return true;
+}
+
 
 int RegionItemChecked::columnCount() const {
-		return 4;
+	return 4;
 };
 //
 //bool RegionItemChecked::setData(int column, const QVariant & value, int role)
@@ -78,7 +83,7 @@ void RegionItemChecked::setChecked(bool checked)
 }
 
 QVariant RegionItemChecked::headerData(int section, int role) const {
-		return QVariant();
+	return QVariant();
 };
 
 QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
@@ -108,15 +113,18 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 		RegionItemChecked* r_item = new RegionItemChecked();
 		r_item->m_id = query.value(0).toInt();			// id   
 		r_item->m_name = query.value(1).toString(); 	// name 
-		r_item->m_checked = false;												// -------
+		r_item->m_checked = false;												
 		r_item->m_comment = query.value(2).toString(); 	// comment   
 		int parent_id = query.value(3).toInt(); 		// parent_id  
 		if (parent_id == 0)
 			list << r_item;
 		else {
-			auto parent = map[parent_id];
-			parent->appendChild(r_item);
-		}   map.insert(r_item->m_id, r_item);
+			if (map.contains(parent_id)) {
+				auto parent = map[parent_id];
+				parent->appendChild(r_item);
+			}
+		}
+		map.insert(r_item->m_id, r_item);
 	}
 	return list;
 };

@@ -47,7 +47,7 @@ void TreeRegions::setupModel()
 	ui->treeView->setColumnHidden(2, true);
 	ui->treeView->expandAll();
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	//setDisabled();
+	setDisabled();
 }
 
 void TreeRegions::setDisabled()

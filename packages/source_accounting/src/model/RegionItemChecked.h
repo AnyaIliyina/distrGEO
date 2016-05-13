@@ -25,6 +25,7 @@ public:
 	QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
 	static QMap<int, RegionItemChecked*> getMap();
 	void setChecked(bool checked);
+	bool isCheckable() const Q_DECL_OVERRIDE;
 private:
 	bool m_checked=true;
 	static QMap<int, RegionItemChecked*> map;

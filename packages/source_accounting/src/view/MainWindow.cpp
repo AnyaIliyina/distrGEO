@@ -87,7 +87,11 @@ void MainWindow::slotSelectRegion(int id)
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeSites->setFocus();
-			map[IDs.at(i)]->setChecked(true);
+			qDebug() << IDs.at(i);
+			if (map.contains(IDs.at(i)))
+			{
+				map.value(IDs.at(i))->setChecked(true);
+			}
 		}		
 	}
 }
@@ -108,7 +112,12 @@ void MainWindow::slotSelectDepartment(int id)
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeDepartments->setFocus();
-			map[IDs.at(i)]->setChecked(true);
+			if (map.contains(IDs.at(i)))
+			{
+				auto item = map[IDs.at(i)];
+				//treeDepartments->expand(model()->data(column[0], Qt::UserRole)->
+				map[IDs.at(i)]->setChecked(true);
+			}
 		}
 
 	}

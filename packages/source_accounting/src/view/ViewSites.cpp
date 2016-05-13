@@ -117,7 +117,6 @@ void ViewSites::slotEnableButtons()
 
 void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &)
 {
-	qDebug() << "slotik";
 	if (m_editMode)
 	{
 		ui->action_Edit->setEnabled(false);
@@ -145,7 +144,6 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 1)
 		{
-			qDebug() << "=1";
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
@@ -155,7 +153,6 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{
-			qDebug() << "=0";
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrl->setEnabled(false);

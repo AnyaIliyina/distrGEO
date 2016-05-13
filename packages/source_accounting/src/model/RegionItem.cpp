@@ -75,7 +75,7 @@ bool RegionItem::setData(int column, const QVariant& value, int role)
 
 bool RegionItem::isCheckable() const
 {
-	return true;
+	return false;
 }
 
 
