@@ -320,6 +320,7 @@ void MainWindow::slotMakeCheckEditble(const QItemSelection &, const QItemSelecti
 	qDebug() << "slotMakeCheckEditble";
 	auto index = treeSites->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
+	qDebug() << "index" << index;
 	treeSites->edit(index);
 }
 
@@ -329,24 +330,25 @@ void MainWindow::slotEditCheck(int id, bool saveChanges)
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
 	
-	for (int i = 0; i < map.count(); i++)
-	{
-		if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
+		for (int i = 0; i < map.count(); i++)
 		{
-			int region_id = map.keys().at(i);
-			SiteRegion *site_reg = new SiteRegion(id, region_id);
-			if (map.values().at(i)->isChecked())	//галочку поставили
+			if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
 			{
-				site_reg->insertIntoDatabase();
-				qDebug() << "inserted, ha?";
+				int region_id = map.keys().at(i);
+				SiteRegion *site_reg = new SiteRegion(id, region_id);
+				if (map.values().at(i)->isChecked())	//галочку поставили
+				{
+					site_reg->insertIntoDatabase();
+					qDebug() << "inserted, ha?";
+				}
+				else
+				{
+					site_reg->deleteRecord();
+					qDebug() << "link is deleted";
+				}
+
 			}
-			else
-			{
-				//site_reg->
-				qDebug() << "link is deleted";
-			}
-						
-		}
+		
 	}
 	
 }

@@ -59,7 +59,7 @@ public:
 
 	/*! Удаляет из базы запись
 	*/
-	static void deleteRecord(int site_id, int region_id, int session_id = Database::currentSessionId());
+	void deleteRecord(int session_id = Database::currentSessionId());
 
 	/*! Создает таблицу site_regions*/
 	static bool createTable();
