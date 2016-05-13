@@ -1,5 +1,6 @@
 #include "RegionItem.h"
 #include "RegionItemChecked.h"
+#include "SiteRegion.h"
 
 
 
@@ -29,7 +30,7 @@ QVariant RegionItemChecked::data(int column, int role) const
 	if (role == Qt::CheckStateRole)
 		if (column == 0)
 			return m_checked ? Qt::Checked : Qt::Unchecked;
-	
+
 	return QVariant();
 };
 
@@ -58,10 +59,31 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 {
 	if (value.isNull() || value.toString().isEmpty())
 		return false;
-	if (role == Qt::CheckStateRole)		//  Qt::CheckStateRole
+	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
 		if (column == 0)
+		{
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
+			/*if(m_checked)
+				map[m_id] = this;
+			else {
+				if (map.contains(m_id))
+					map.remove(m_id);
+			}*/
+		}
+	}
+	if (role == Qt::UserRole) {
+		auto list = SiteRegion::sitesByRegion(value.toInt());
+		
+		rootItem()->setChecked(false);
+
+		for (int i = 0;i < list.count();i++) {
+			if (map.contains(list[i])) {
+				auto item = 
+					dynamic_cast<RegionItemChecked*>(map[list[i]]);
+				item->m_checked = true;
+			}
+		}
 	}
 	return true;
 }
@@ -82,7 +104,23 @@ void RegionItemChecked::setChecked(bool checked)
 {
 	m_checked = checked;
 	m_old_checked = checked;
+
 }
+
+void RegionItemChecked::setCheckedChildren(bool checked) {
+	m_checked = checked;
+	for (int i = 0;i < m_children.count();i++) {
+		dynamic_cast<RegionItemChecked*>(m_children[i])->setChecked(checked);
+	}
+};
+
+RegionItemChecked* RegionItemChecked::rootItem() {
+	auto parent = dynamic_cast<RegionItemChecked*>(m_parent);
+	if (parent->id == -1)
+		return parent;
+	else
+		return parent->rootItem();
+};
 
 bool RegionItemChecked::isChecked()
 {
@@ -138,7 +176,8 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 
 
 bool RegionItemChecked::save()
-{	
+{
+
 	bool result = m_checked != m_old_checked;
 	qDebug() << "in save " << result;
 	return result;

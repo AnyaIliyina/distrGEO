@@ -231,10 +231,10 @@ void ViewSites::slotSave()
 	{
 		
 		m_editMode = false;
-		emit signalChangeEditMode();
-		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
+		emit signalChangeEditMode();
+		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		
 	}
 	else

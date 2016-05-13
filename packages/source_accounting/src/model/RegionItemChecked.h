@@ -2,6 +2,7 @@
 
 #include "Base_item.h"
 #include "RegionItem.h"
+#include "Item_factory.h"
 
 /*!
 
@@ -29,9 +30,13 @@ public:
 	bool isChecked();
 	bool save() Q_DECL_OVERRIDE;
 private:
+	friend ItemFactory;
+
 	bool m_checked=true;
 	bool m_old_checked;
 	static QMap<int, RegionItemChecked*> map;
 	static QList <int> IDs;
 	
+	void setCheckedChildren(bool checked);
+	RegionItemChecked* rootItem();
 };

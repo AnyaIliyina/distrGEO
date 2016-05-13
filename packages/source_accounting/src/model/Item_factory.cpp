@@ -11,6 +11,15 @@ BaseItem* ItemFactory::loadFromDb(int type, QVariant id) {
 	// Создаем верхний элемент
 	BaseItem* item = createNew(type);
 
+	switch (type)
+	{
+	case ItemTypes::RegionItemCheckedType:
+		dynamic_cast<RegionItemChecked*>(item)->id = -1;
+		break;
+	default:
+		break;
+	}
+
 	QList<BaseItem*> children = item->loadItemsFromDb(id);
 	
 	// Добавляем истинные значения верхнему элементу

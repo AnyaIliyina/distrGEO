@@ -78,7 +78,7 @@ void MainWindow::slotSelectRegion(int id)
 		treeSites->setEnabled(false);
 	}
 	else
-	{
+	{		
 		treeSites->setEnabled(true);
 		QList<int> IDs = SiteRegion::regionsBySite(id);
 		for (int i = 0; i < map.count(); i++)
@@ -329,7 +329,7 @@ void MainWindow::slotEditCheck(int id, bool saveChanges)
 	qDebug() << "slooooot";
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
-	
+	map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
 		{
 			if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
