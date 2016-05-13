@@ -57,12 +57,11 @@ bool DepartmentRegion::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  department_regions (\
 		department_id INTEGER,		\
 		region_id INTEGER,   \
-		FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE CASCADE ON UPDATE CASCADE,\
-		FOREIGN KEY(region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		FOREIGN KEY(department_id) REFERENCES departments(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(region_id) REFERENCES regions(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{

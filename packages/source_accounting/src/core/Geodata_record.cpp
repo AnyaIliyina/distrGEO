@@ -202,7 +202,6 @@ bool Geodata_record::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS  geodata_records (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		site_id INTEGER,		\
@@ -213,11 +212,11 @@ bool Geodata_record::createTable()
 		place_name     TEXT   NOT NULL,\
 		comment TEXT,   \
 		url TEXT,   \
-		FOREIGN KEY(site_id) REFERENCES sites(id),\
-		FOREIGN KEY(session_id) REFERENCES sessions(id),\
-		FOREIGN KEY(format_id) REFERENCES formats(id),\
-		FOREIGN KEY(scale_id) REFERENCES scales(id),\
-		FOREIGN KEY(state_id) REFERENCES states(id)\
+		FOREIGN KEY(site_id) REFERENCES sites(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(session_id) REFERENCES sessions(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(format_id) REFERENCES formats(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(scale_id) REFERENCES scales(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(state_id) REFERENCES states(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		 )"
 		))
 	{

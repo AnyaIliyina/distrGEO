@@ -140,13 +140,12 @@ bool User::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS  users (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		type_id     integer     NOT NULL,\
 		login NVARCHAR(16) UNIQUE NOT NULL,\
 		password NVARCHAR(16),\
-		foreign key(type_id)  references usertypes(id)\
+		foreign key(type_id)  references usertypes(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		 )"
 		))
 	{

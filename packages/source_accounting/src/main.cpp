@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	QApplication::setApplicationName("source_accounting");
 
 	QDir dir;
-	dir.mkdir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+	dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
 
 	Database::restore();
 	MainWindow *w = new MainWindow();

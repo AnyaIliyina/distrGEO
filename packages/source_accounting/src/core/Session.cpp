@@ -68,7 +68,7 @@ bool Session::createTable()
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		user_id     INTEGER ,\
 		date INTEGER, \
-		FOREIGN KEY(user_id) REFERENCES users(id)\
+		FOREIGN KEY(user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		 )"
 		)))
 	{

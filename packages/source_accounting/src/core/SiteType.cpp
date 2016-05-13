@@ -75,12 +75,11 @@ bool SiteType::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_types (\
 		site_id INTEGER,		\
 		type_id INTEGER,   \
-		FOREIGN KEY(site_id) REFERENCES sites(id) ON DELETE CASCADE ON UPDATE CASCADE,\
-		FOREIGN KEY(type_id) REFERENCES geodata_types(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		FOREIGN KEY(site_id) REFERENCES sites(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(type_id) REFERENCES geodata_types(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{

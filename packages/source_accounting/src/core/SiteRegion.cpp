@@ -4,12 +4,11 @@ bool SiteRegion::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_regions (\
 		site_id INTEGER,		\
 		region_id INTEGER,   \
-		FOREIGN KEY(site_id) REFERENCES sites(id) ON DELETE CASCADE ON UPDATE CASCADE,\
-		FOREIGN KEY(region_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		FOREIGN KEY(site_id) REFERENCES sites(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(region_id) REFERENCES regions(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{

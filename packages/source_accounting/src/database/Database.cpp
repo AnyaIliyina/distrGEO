@@ -41,12 +41,20 @@ int Database::SystemSessionId = 1;
 void Database::restore(int session_id)
 {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-	auto pathToDb = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QString("/database/geoDB");
+	auto pathToDb = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QString("/geoDB");
 	db.setDatabaseName(pathToDb);
 
-	// Если файла pathToDb не существует, создать все таблицы:
+	bool allow_create = false;
 	QFileInfo dbFile(pathToDb);
-	if (!dbFile.exists()) {
+	if (!dbFile.exists())
+		allow_create = true;
+	db.open();
+	QSqlQuery query(db);
+	if (!query.exec("PRAGMA foreign_keys = ON"))
+		qDebug() << query.lastError().text();
+
+	// Если файла pathToDb не существует, создать все таблицы:
+	if (allow_create) {
 		configure();
 		Log::create(session_id, "Database: restore");
 	}

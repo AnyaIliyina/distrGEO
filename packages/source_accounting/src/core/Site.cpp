@@ -212,14 +212,13 @@ bool Site::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  sites (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		url     TEXT    UNIQUE NOT NULL,\
 		name TEXT UNIQUE NOT NULL,\
 		status_id INTEGER,		\
 		comment TEXT,   \
-		FOREIGN KEY(status_id) REFERENCES statuses(id)\
+		FOREIGN KEY(status_id) REFERENCES statuses(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)) )
 	{

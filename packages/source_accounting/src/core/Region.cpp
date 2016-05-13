@@ -155,13 +155,12 @@ bool Region::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  regions (\
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		parent_id  INTEGER  ,\
 		name     TEXT    UNIQUE NOT NULL,\
 		comment     TEXT   ,   \
-		FOREIGN KEY(parent_id) REFERENCES regions(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		FOREIGN KEY(parent_id) REFERENCES regions(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{

@@ -25,14 +25,13 @@ bool Log::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if (!query.exec("CREATE TABLE IF NOT EXISTS logs (\
 		id   INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		session_id INTEGER NOT NULL,\
 		operation_name TEXT NOT NULL,\
 		object_id INTEGER,\
 		error_string TEXT,\
-		FOREIGN KEY(session_id) REFERENCES sessions(session_id) \
+		FOREIGN KEY(session_id) REFERENCES sessions(session_id) ON UPDATE CASCADE ON DELETE CASCADE \
 		)"
 		))
 	{

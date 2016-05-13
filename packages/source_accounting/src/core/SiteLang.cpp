@@ -93,12 +93,11 @@ bool SiteLang::createTable()
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.exec("PRAGMA foreign_keys = ON;");
 	if ((!query.exec("CREATE TABLE IF NOT EXISTS  site_langs (\
 		site_id INTEGER,		\
 		language_id INTEGER,   \
-		FOREIGN KEY(site_id) REFERENCES sites(id) ON DELETE CASCADE ON UPDATE CASCADE,\
-		FOREIGN KEY(language_id) REFERENCES languages(id) ON DELETE CASCADE ON UPDATE CASCADE\
+		FOREIGN KEY(site_id) REFERENCES sites(id) ON UPDATE CASCADE ON DELETE CASCADE,\
+		FOREIGN KEY(language_id) REFERENCES languages(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{
