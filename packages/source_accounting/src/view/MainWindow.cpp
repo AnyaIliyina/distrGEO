@@ -72,7 +72,6 @@ void MainWindow::slotStartSession(int user_id)
 
 void MainWindow::slotSelectRegion(int id)
 {
-	qDebug() << "slooooot";
 	if (id < 0)
 	{
 		treeSites->collapseAll();
@@ -87,7 +86,6 @@ void MainWindow::slotSelectRegion(int id)
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeSites->setFocus();
-			qDebug() << IDs.at(i);
 			if (map.contains(IDs.at(i)))
 			{
 				map.value(IDs.at(i))->setChecked(true);

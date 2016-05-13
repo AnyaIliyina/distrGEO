@@ -40,7 +40,7 @@ QList<int> SiteType::sitesByType(int type_id)
 	query.addBindValue(type_id);
 	if (!query.exec())
 	{
-		qDebug() << "iteType::sitesByType(int type_id) error";
+		qDebug() << "SiteType::sitesByType(int type_id) error";
 		qDebug() << query.lastError().text();
 		db.close();
 	}

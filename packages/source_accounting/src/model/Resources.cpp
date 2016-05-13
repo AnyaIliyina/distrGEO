@@ -63,8 +63,7 @@ QVariant Resources::data(int column, int role) const{
 };
 
 bool Resources::setData(int column, const QVariant& value, int role) {
-	qDebug() << "setData Resources";
-	if (value.isNull() || value.toString().isEmpty())
+		if (value.isNull() || value.toString().isEmpty())
 		return false;
 
 	if (role == Qt::EditRole) {
@@ -74,22 +73,13 @@ bool Resources::setData(int column, const QVariant& value, int role) {
 			m_name = value.toString();
 		if (column == 2)
 			if (Site::urlFromString(value.toString()))
-			{
 				m_url = value.toString();
-			}
 		if (column == 3)
-		{
 			m_language = value.toString();
-			qDebug() << m_language;
-		}
 		if (column == 4)
-		{
 			m_gpi = value.toString();
-			qDebug() << m_gpi;
-		}
 		if (column == 5)
-			m_comment= value.toString();
-		
+			m_comment= value.toString();	
 		}
 	
 	return true;
@@ -153,7 +143,7 @@ bool Resources::save() {
 		if (m_id == 0) {
 			//Создание
 			Site* ns = new Site(m_url, m_name, 1, m_comment);
-			qDebug() << ns->insertIntoDatabase();
+			ns->insertIntoDatabase();
 			m_id = ns->id();
 			for (int i = 0;i < listIdLang.count(); ++i)
 			{
@@ -217,7 +207,6 @@ bool Resources::cancel() {
 
 
 QList<BaseItem*> Resources::loadItemsFromDb(QVariant id ) {
-	qDebug() << "loadItemsFromDb Resources";
 	QList<BaseItem*> list;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
@@ -227,7 +216,6 @@ QList<BaseItem*> Resources::loadItemsFromDb(QVariant id ) {
 			qDebug() << query.lastError().text();
 	}
 	else {
-		qDebug() << "opopa";
 		query.prepare(
 			" SELECT s.id, s.name, s.url, s.comment \
 			 FROM sites AS s \

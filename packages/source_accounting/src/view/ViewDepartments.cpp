@@ -129,7 +129,6 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
-			qDebug() << value;
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)

@@ -98,7 +98,6 @@ void MultiListWidget::collectCheckedItems()
 
 	updateDisplayText();
 	emit signalCheckedIDs(mCheckedIDs);
-	qDebug() << "collect multilist ids" << mCheckedIDs;
 	repaint();
 }
 

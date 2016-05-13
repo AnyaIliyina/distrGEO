@@ -303,7 +303,6 @@ void Site::deleteRecord(int & id, int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	qDebug() << id;
 	QString idstr = QString::number(id);
 	if (!query.exec("DELETE FROM sites WHERE id=\'" + idstr + "\'"))
 	{

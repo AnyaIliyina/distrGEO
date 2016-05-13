@@ -65,7 +65,6 @@ QVariant Departments::data(int column, int role) const{
 };
 
 bool Departments::setData(int column, const QVariant& value, int role) {
-	qDebug() << "setData Departments";
 	if (value.isNull() || value.toString().isEmpty())
 		return false;
 
@@ -157,7 +156,7 @@ bool Departments::save() {
 		if (m_id == 0) {
 			//Создание
 			Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
-			qDebug() << nd->insertIntoDatabase();
+			nd->insertIntoDatabase();
 			m_id = nd->id();
 
 			for (int i = 0;i < listIdGPI.count(); ++i)
@@ -214,7 +213,6 @@ bool Departments::cancel() {
 };
 
 QList<BaseItem*> Departments::loadItemsFromDb(QVariant id) {
-	qDebug() << "loadItemsFromDb Departments";
 	QList<BaseItem*> list;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);

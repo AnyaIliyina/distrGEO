@@ -178,7 +178,6 @@ QList<BaseItem*> RegionItem::loadItemsFromDb(QVariant id )
 		RegionItem* r_item = new RegionItem();
 		r_item->m_id = query.value(0).toInt();			// id   
 		r_item->m_name = query.value(1).toString(); 	// name 
-		// qDebug() << "name: " << r_item->m_name;
 		r_item->m_comment = query.value(2).toString(); 	// comment   
 		int parent_id = query.value(3).toInt(); 		// parent_id  
 		if (parent_id == 0)

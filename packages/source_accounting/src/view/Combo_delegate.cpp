@@ -26,7 +26,6 @@ QWidget* ComboDelegate::createEditor(
 void ComboDelegate::setEditorData(QWidget * editor, const QModelIndex & index) const
 {
 	QString value = index.model()->data(index).toString();
-	qDebug() <<"string"<<value;
 	QStringList listCheckedItems = value.split(", ");
 	MultiListWidget *listWidget = static_cast<MultiListWidget*>(editor);
 	listWidget->setCheckedItems(listCheckedItems);
@@ -39,7 +38,7 @@ void ComboDelegate::setModelData(QWidget * editor, QAbstractItemModel * model, c
 	{
 		model->setData(index, listWidget->checkedItems().join(", "));
 	}
-	qDebug() << index.model()->data(index).toString();
+	
 }
 ;
 
