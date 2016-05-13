@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ViewSites</class>
- <widget class="QMainWindow" name="ViewSites">
+ <class>ViewDepartments</class>
+ <widget class="QMainWindow" name="ViewDepartments">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>670</width>
-    <height>387</height>
+    <height>389</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,8 +66,6 @@ border-width:2px
    <addaction name="action_New"/>
    <addaction name="action_Delete"/>
    <addaction name="separator"/>
-   <addaction name="action_OpenUrl"/>
-   <addaction name="separator"/>
    <addaction name="action_Edit"/>
    <addaction name="separator"/>
    <addaction name="action_Yes"/>
@@ -75,7 +73,7 @@ border-width:2px
   </widget>
   <action name="action_New">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
    </property>
    <property name="text">
@@ -87,7 +85,7 @@ border-width:2px
   </action>
   <action name="action_Delete">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/trash.png</normaloff>:/trash.png</iconset>
    </property>
    <property name="text">
@@ -99,7 +97,7 @@ border-width:2px
   </action>
   <action name="action_Edit">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/note.png</normaloff>:/note.png</iconset>
    </property>
    <property name="text">
@@ -111,7 +109,7 @@ border-width:2px
   </action>
   <action name="action_Yes">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/check.png</normaloff>:/check.png</iconset>
    </property>
    <property name="text">
@@ -123,7 +121,7 @@ border-width:2px
   </action>
   <action name="action_No">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/close.png</normaloff>:/close.png</iconset>
    </property>
    <property name="text">
@@ -133,21 +131,9 @@ border-width:2px
     <string>Отменить</string>
    </property>
   </action>
-  <action name="action_OpenUrl">
-   <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
-     <normaloff>:/share2.png</normaloff>:/share2.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;OpenUrl</string>
-   </property>
-   <property name="toolTip">
-    <string>Перейти по ссылке</string>
-   </property>
-  </action>
  </widget>
  <resources>
-  <include location="icons/ViewWindowRes.qrc"/>
+  <include location="../resources/ViewWindowRes.qrc"/>
  </resources>
  <connections/>
 </ui>

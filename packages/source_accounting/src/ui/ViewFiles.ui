@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ViewContent</class>
- <widget class="QMainWindow" name="ViewContent">
+ <class>ViewFiles</class>
+ <widget class="QMainWindow" name="ViewFiles">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,17 +66,11 @@ border-width:2px
    <addaction name="action_New"/>
    <addaction name="action_Delete"/>
    <addaction name="separator"/>
-   <addaction name="action_OpenUrlSite"/>
-   <addaction name="action_OpenUrlCart"/>
-   <addaction name="separator"/>
-   <addaction name="action_Edit"/>
-   <addaction name="separator"/>
-   <addaction name="action_Yes"/>
-   <addaction name="action_No"/>
+   <addaction name="action_OpenFile"/>
   </widget>
   <action name="action_New">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/plus.png</normaloff>:/plus.png</iconset>
    </property>
    <property name="text">
@@ -88,7 +82,7 @@ border-width:2px
   </action>
   <action name="action_Delete">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/trash.png</normaloff>:/trash.png</iconset>
    </property>
    <property name="text">
@@ -100,7 +94,7 @@ border-width:2px
   </action>
   <action name="action_Edit">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/note.png</normaloff>:/note.png</iconset>
    </property>
    <property name="text">
@@ -112,7 +106,7 @@ border-width:2px
   </action>
   <action name="action_Yes">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/check.png</normaloff>:/check.png</iconset>
    </property>
    <property name="text">
@@ -124,7 +118,7 @@ border-width:2px
   </action>
   <action name="action_No">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/close.png</normaloff>:/close.png</iconset>
    </property>
    <property name="text">
@@ -136,7 +130,7 @@ border-width:2px
   </action>
   <action name="action_OpenUrlCart">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/share2.png</normaloff>:/share2.png</iconset>
    </property>
    <property name="text">
@@ -148,7 +142,7 @@ border-width:2px
   </action>
   <action name="action_OpenUrlSite">
    <property name="icon">
-    <iconset resource="icons/ViewWindowRes.qrc">
+    <iconset>
      <normaloff>:/arrow-right.png</normaloff>:/arrow-right.png</iconset>
    </property>
    <property name="text">
@@ -158,9 +152,21 @@ border-width:2px
     <string>Перейти по ссылке (URL-сайта)</string>
    </property>
   </action>
+  <action name="action_OpenFile">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/upload.png</normaloff>:/upload.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;OpenFile</string>
+   </property>
+   <property name="toolTip">
+    <string>Скачать файл</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="icons/ViewWindowRes.qrc"/>
+  <include location="../resources/ViewWindowRes.qrc"/>
  </resources>
  <connections/>
 </ui>

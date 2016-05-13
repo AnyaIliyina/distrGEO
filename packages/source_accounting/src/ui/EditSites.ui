@@ -213,7 +213,7 @@ border:0px
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="icons/ViewWindowRes.qrc">
+        <iconset>
          <normaloff>:/check.png</normaloff>:/check.png</iconset>
        </property>
        <property name="iconSize">
@@ -242,7 +242,7 @@ border:0px}</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="icons/ViewWindowRes.qrc">
+        <iconset>
          <normaloff>:/close.png</normaloff>:/close.png</iconset>
        </property>
        <property name="iconSize">
@@ -286,7 +286,7 @@ border:0px}</string>
   </layout>
  </widget>
  <resources>
-  <include location="icons/ViewWindowRes.qrc"/>
+  <include location="../resources/ViewWindowRes.qrc"/>
  </resources>
  <connections>
   <connection>
