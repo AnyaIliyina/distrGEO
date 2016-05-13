@@ -126,13 +126,16 @@ bool Departments::isValid() const {
 		return false;
 	if (m_name.isNull() || m_name.isEmpty())
 		return false;
+	if (m_phone.isNull() || m_phone.isEmpty())
+		return false;
 	if (m_address.isNull() || m_address.isEmpty())
 		return false;
 	if (m_fax.isNull() || m_fax.isEmpty())
 		return false;
 	if (m_gpi.isNull() || m_gpi.isEmpty())
 		return false;
-	
+	if (m_email.isNull() || m_email.isEmpty())
+		return false;
 	
 	return true;
 };
@@ -147,43 +150,42 @@ bool Departments::hasChildren() const {
 
 bool Departments::save() {
 
-	if (m_comment == NULL)
-	m_comment = " ";
-	if (m_fax == NULL)
-		m_fax = " ";
+	if (isValid()) {
+		QStringList listGPI = m_gpi.split(", ");
+		QList<int> listIdGPI = GeodataType::getIDs(listGPI);
 
-	QStringList listGPI = m_gpi.split(", ");
-	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+		if (m_id == 0) {
+			//Создание
+			Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
+			qDebug() << nd->insertIntoDatabase();
+			m_id = nd->id();
 
-	if (m_id == 0) {
-		//Создание
-		Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
-		qDebug() << nd->insertIntoDatabase();
-		m_id = nd->id();
-		
-		for (int i = 0;i < listIdGPI.count(); ++i)
-		{
-			DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
+			for (int i = 0;i < listIdGPI.count(); ++i)
+			{
+				DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
+			}
+
+			delete nd;
+
+		}
+		else {
+			// Изменение 
+			Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
+			nd->setId(m_id);
+			nd->update();
+			m_id = nd->id();
+			DepartmentType::deleteByDepartment(m_id);
+			for (int i = 0;i < listIdGPI.count(); ++i)
+			{
+				DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
+			}
+			delete nd;
 		}
 
-		delete nd;
-
+		return true;
 	}
-	else {
-		// Изменение 
-		Department* nd = new Department(m_name, m_country, m_address, m_email, m_phone, m_fax, m_comment);
-		nd->setId(m_id);
-		nd->update();
-		m_id = nd->id();
-		DepartmentType::deleteByDepartment(m_id);
-		for (int i = 0;i < listIdGPI.count(); ++i)
-		{
-			DepartmentType(m_id, listIdGPI[i]).insertIntoDatabase();
-		}
-		delete nd;
-	}
-
-	return true;
+	else
+		return false;
 };
 
 bool Departments::cancel() {

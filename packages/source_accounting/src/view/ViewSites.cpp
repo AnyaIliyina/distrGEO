@@ -65,7 +65,9 @@ void ViewSites::setDisabled()
 
 void ViewSites::slotRefresh()
 {
+	ui->tableView->setModel(NULL);
 	setupModel();
+
 }
 
 void ViewSites::slotEnableButtons()
@@ -242,12 +244,12 @@ void ViewSites::slotSave()
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
+		
 	}
 	else
 	{
 		emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
-
 	}
 	//auto index = ui->tableView->selectionModel()->currentIndex();
 	
@@ -261,6 +263,7 @@ void ViewSites::slotCancel()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		/*emit signalSave(-1, false);*/
+		
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);

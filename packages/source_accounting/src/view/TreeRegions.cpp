@@ -22,10 +22,7 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
-	
-		
-	//QObject::connect(ui->treeView->model(), SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
-	slotEnableButtons();
+	//slotEnableButtons();
 }
 
 TreeRegions::~TreeRegions()
@@ -37,7 +34,6 @@ TreeRegions::~TreeRegions()
 
 void TreeRegions::setupModel()
 {
-//	delete m_model;
 	ui->treeView->setModel(NULL);
 	m_model = new ItemModel();
 	m_model->loadData(ItemTypes::RegionItemType);
@@ -47,7 +43,7 @@ void TreeRegions::setupModel()
 	ui->treeView->setColumnHidden(2, true);
 	ui->treeView->expandAll();
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	setDisabled();
+	//setDisabled();
 }
 
 void TreeRegions::setDisabled()
@@ -68,7 +64,6 @@ ItemModel * TreeRegions::model() const
 
 void TreeRegions::slotRefresh()
 {
-	//setupModel();
 	emit newNodelReady();
 }
 
@@ -82,7 +77,6 @@ void TreeRegions::slotEnableButtons()
 		ui->action_NewRoot->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 	}
 	else
 	{
@@ -115,7 +109,7 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 		ui->action_NewRoot->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
+	
 	}
 	else
 	{
@@ -136,21 +130,12 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 		}
 	}
 }
-//
-////void TreeRegions::slotFilterChanged(QString text)
-////{
-////	QRegExp regExp(text, Qt::CaseInsensitive);
-////	filterModel->setFilterRegExp(regExp);
-////}
-//
-
 
 void TreeRegions::slotAdd()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
 	QModelIndex m_index=ui->treeView->selectionModel()->currentIndex();
-//	auto m_index = filterModel->mapToSource(index);
 	m_model->insertRows(0, 1, m_index);
 	auto rowCount = m_model->rowCount(m_index);
 	auto child = m_model->index(rowCount - 1, 0, m_index); 
@@ -163,8 +148,7 @@ void TreeRegions::slotAddRoot()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
-	QModelIndex m_index;// = ui->treeView->selectionModel()->currentIndex();
-	//	auto m_index = filterModel->mapToSource(index);
+	QModelIndex m_index;
 	m_model->insertRows(0, 1, m_index);
 	auto rowCount = m_model->rowCount(m_index);
 	auto child = m_model->index(rowCount - 1, 0, m_index);
@@ -181,10 +165,7 @@ void TreeRegions::slotDelete()
 	if (deleteMsgBox == QMessageBox::Yes)
 	{
 		auto m_index = ui->treeView->selectionModel()->currentIndex();
-		//int row = m_index->row();
-		//auto m_index = filterModel->mapToSource(index);
 		m_model->removeRows(0, 1, m_index);
-		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 		emit dataChanged();
 		}
 }
@@ -194,9 +175,6 @@ void TreeRegions::slotEdit()
 	m_editMode = true;
 	emit signalChangeEditMode();
 	auto m_index = ui->treeView->selectionModel()->currentIndex();
-	//qDebug() << "index" << index;
-	//auto m_index= filterModel->mapToSource(index);
-	//qDebug() << "m_index" << m_index;
 	
 	m_model->startEditMode(m_index);
 	ui->treeView->edit(m_index);
@@ -210,7 +188,6 @@ void TreeRegions::slotSave()
 		m_editMode = false;
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-	//	setDisabled();
 		emit dataChanged();
 	}
 	else
@@ -230,8 +207,6 @@ void TreeRegions::slotCancel()
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
-//	auto index = ui->treeView->selectionModel()->currentIndex();
-//	auto m_index = filterModel->mapToSource(index);
 	auto m_index = ui->treeView->selectionModel()->currentIndex();
 	ui->treeView->reset();
 	ui->treeView->expandAll();

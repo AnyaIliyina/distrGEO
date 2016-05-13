@@ -124,8 +124,8 @@ bool Resources::isValid() const {
 		return false;
 	if (m_gpi.isNull() || m_gpi.isEmpty())
 		return false;
-	
-	
+	if (m_url.isNull() || m_url.isEmpty())
+		return false;
 	return true;
 };
 
@@ -147,44 +147,48 @@ bool Resources::save() {
 
 	QStringList listGPI = m_gpi.split(", ");
 	QList<int> listIdGPI = GeodataType::getIDs(listGPI);
+	if (isValid())
+	{
+		if (m_id == 0) {
+			//Создание
+			Site* ns = new Site(m_url, m_name, 1, m_comment);
+			qDebug() << ns->insertIntoDatabase();
+			m_id = ns->id();
+			for (int i = 0;i < listIdLang.count(); ++i)
+			{
+				SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
+			}
+			for (int i = 0;i < listIdGPI.count(); ++i)
+			{
+				SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
+			}
 
-	if (m_id == 0) {
-		//Создание
-		Site* ns = new Site(m_url, m_name,1, m_comment );
-		qDebug() << ns->insertIntoDatabase();
-		m_id = ns->id();
-		for (int i = 0;i < listIdLang.count(); ++i)
-		{
-			SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
+			delete ns;
+
+
 		}
-		for (int i = 0;i < listIdGPI.count(); ++i)
-		{
-			SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
+		else {
+			// Изменение 
+			Site *ns = new Site(m_url, m_name, 1, m_comment);
+			ns->setId(m_id);
+			ns->updateRecord();
+			SiteLang::deleteBySite(m_id);
+			SiteType::deleteBySite(m_id);
+			for (int i = 0;i < listIdLang.count(); ++i)
+			{
+				SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
+			}
+			for (int i = 0;i < listIdGPI.count(); ++i)
+			{
+				SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
+			}
+			delete ns;
 		}
 
-		delete ns;
-		
-
+		return true;
 	}
-	else {
-		// Изменение 
-		Site *ns = new Site(m_url, m_name, 1, m_comment);
-		ns->setId(m_id);
-		ns->updateRecord();
-		SiteLang::deleteBySite(m_id);
-		SiteType::deleteBySite(m_id);
-		for (int i = 0;i < listIdLang.count(); ++i)
-		{
-			SiteLang(m_id, listIdLang[i]).insertIntoDatabase();
-		}
-		for (int i = 0;i < listIdGPI.count(); ++i)
-		{
-			SiteType(m_id, listIdGPI[i]).insertIntoDatabase();
-		}
-		delete ns;
-	}
-
-	return true;
+	else
+		return false;
 };
 
 bool Resources::cancel() {
