@@ -227,7 +227,6 @@ QList<BaseItem*> Resources::loadItemsFromDb(QVariant id ) {
 			qDebug() << query.lastError().text();
 	}
 	else {
-		qDebug() << "opopa";
 		query.prepare(
 			" SELECT s.id, s.name, s.url, s.comment \
 			 FROM sites AS s \

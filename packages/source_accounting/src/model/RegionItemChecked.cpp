@@ -29,10 +29,10 @@ QVariant RegionItemChecked::data(int column, int role) const
 	if (role == Qt::CheckStateRole)
 		if (column == 0)
 			return m_checked ? Qt::Checked : Qt::Unchecked;
-
-
+	
 	return QVariant();
 };
+
 
 bool RegionItemChecked::isCheckable() const
 {
@@ -58,7 +58,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 {
 	if (value.isNull() || value.toString().isEmpty())
 		return false;
-	if (role == Qt::CheckStateRole)		// Qt::EditRole  
+	if (role == Qt::CheckStateRole)		//  Qt::CheckStateRole
 	{
 		if (column == 0)
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
@@ -139,5 +139,7 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 
 bool RegionItemChecked::save()
 {	
-	return (m_checked != m_old_checked);
+	bool result = m_checked != m_old_checked;
+	qDebug() << "in save " << result;
+	return result;
 };
