@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 
 	QDir dir;
 	dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-
+	qDebug() << QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 	Database::restore();
 	MainWindow *w = new MainWindow();
 	return app.exec();

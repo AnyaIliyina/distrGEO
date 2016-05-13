@@ -135,6 +135,8 @@ bool Region::deleteRegion(int region_id, int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
+	if(!query.exec("PRAGMA foreign_keys = ON"))
+		qDebug() << query.lastError().text();
 	QString idstr = QString::number(region_id);
 	if (!query.exec("DELETE FROM regions WHERE id=\'" + idstr + "\'"))
 	{

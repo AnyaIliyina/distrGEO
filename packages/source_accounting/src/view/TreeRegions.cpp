@@ -19,8 +19,11 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 	QObject::connect(ui->action_Edit, SIGNAL(triggered()), this, SLOT(slotEdit()));
 	QObject::connect(ui->action_Yes, SIGNAL(triggered()), this, SLOT(slotSave()));
 	QObject::connect(ui->action_No, SIGNAL(triggered()), this, SLOT(slotCancel()));
-
+	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
+	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	
+		
 	//QObject::connect(ui->treeView->model(), SIGNAL(signalId(int)), this, SLOT(slotIdRecord()));
 	slotEnableButtons();
 }
@@ -43,13 +46,7 @@ void TreeRegions::setupModel()
 	ui->treeView->setColumnHidden(1, true);
 	ui->treeView->setColumnHidden(2, true);
 	ui->treeView->expandAll();
-	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
-	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 	QObject::connect(this, SIGNAL(dataChanged()), this, SLOT(slotRefresh()));
-	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
-	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
 	//setDisabled();
 }
 
@@ -71,7 +68,7 @@ ItemModel * TreeRegions::model() const
 
 void TreeRegions::slotRefresh()
 {
-	setupModel();
+	//setupModel();
 	emit newNodelReady();
 }
 
@@ -85,32 +82,24 @@ void TreeRegions::slotEnableButtons()
 		ui->action_NewRoot->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
-		ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
+		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 	}
 	else
 	{
 		ui->action_New->setEnabled(true);
-		//ui->action_New->setEnabled(false);
 		ui->action_NewRoot->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
-		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
-		{
-			ui->action_Delete->setEnabled(true);
-			ui->action_New->setEnabled(false);
-			ui->action_Edit->setEnabled(false);
-		}
 		if (ui->treeView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
-			ui->action_New->setEnabled(true);
 			ui->action_Edit->setEnabled(true);			
 		}
-		if (ui->treeView->selectionModel()->selectedRows().count() == 0)
+		else
 		{
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);	
-			ui->action_New->setEnabled(true);
+			
 		}
 	}
 }
@@ -118,7 +107,6 @@ void TreeRegions::slotEnableButtons()
 
 void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection &)
 {
-	qDebug() << "enable b";
  	if (m_editMode)
 	{
 		ui->action_Edit->setEnabled(false);
@@ -127,28 +115,26 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 		ui->action_NewRoot->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
+		//ui->treeView->setSelectionMode(QAbstractItemView::NoSelection);
 	}
 	else
 	{
+		ui->action_New->setEnabled(true);
+		ui->action_NewRoot->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
-		if (ui->treeView->selectionModel()->selectedRows().count() > 1)
-		{
-			ui->action_Delete->setEnabled(true);
-			ui->action_Edit->setEnabled(false);
-		}
 		if (ui->treeView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
-			ui->action_Edit->setEnabled(true);
+			ui->action_Edit->setEnabled(true);			
 		}
-		if (ui->treeView->selectionModel()->selectedRows().count() == 0)
+		else
 		{
 			ui->action_Delete->setEnabled(false);
-			ui->action_Edit->setEnabled(false);
+			ui->action_Edit->setEnabled(false);	
+			
 		}
 	}
-	
 }
 //
 ////void TreeRegions::slotFilterChanged(QString text)
