@@ -106,37 +106,40 @@ bool RegionItem::isNew() const
 }; 
 
 bool RegionItem::save() {
-	auto db = Database::database();
-	QSqlQuery query(db); 
-	if (m_id == 0) { 
-		// Вставка нового региона 
-		Region *r = new Region();
-		query.prepare(    "INSERT INTO regions( "   
-			" comment, name, parent_id "
-			" ) VALUES( "
-			" :comment, :name, :parent_id "
-			" ) "
-			);  
-		RegionItem * parentGroup = static_cast<RegionItem*>(m_parent); 
-		query.bindValue(":comment", m_comment); 
-		query.bindValue(":name", m_name);  
-		query.bindValue(":parent_id",    parentGroup->m_id == 0 ? 0 : parentGroup->m_id); 
-		if (!query.exec())   
-			qDebug() << "Не удалось добавить новую группу ИТГИ." << query.lastError().text(); 
-		if (query.next()) {
-			qDebug() << "получилось";
-			m_id = query.lastInsertId().toInt();
+	if (isValid()) {
+		auto db = Database::database();
+		QSqlQuery query(db);
+		if (m_id == 0) {
+			// Вставка нового региона 
+			Region *r = new Region();
+			query.prepare("INSERT INTO regions( "
+				" comment, name, parent_id "
+				" ) VALUES( "
+				" :comment, :name, :parent_id "
+				" ) "
+				);
+			RegionItem * parentGroup = static_cast<RegionItem*>(m_parent);
+			query.bindValue(":comment", m_comment);
+			query.bindValue(":name", m_name);
+			query.bindValue(":parent_id", parentGroup->m_id == 0 ? 0 : parentGroup->m_id);
+			if (!query.exec())
+				qDebug() << "Не удалось добавить новую группу ИТГИ." << query.lastError().text();
+			if (query.next()) {
+				qDebug() << "получилось";
+				m_id = query.lastInsertId().toInt();
+			}
 		}
-	} 
-	else { 
-		// Изменение 
-		int parent_id = m_parent->data(1, Qt::EditRole).toInt();
-		Region *r = new Region(parent_id, m_name, m_comment);
-		r->setId(m_id);
-		r->update();
-		delete r;
-	} 
-	return true;
+		else {
+			// Изменение 
+			int parent_id = m_parent->data(1, Qt::EditRole).toInt();
+			Region *r = new Region(parent_id, m_name, m_comment);
+			r->setId(m_id);
+			r->update();
+			delete r;
+		}
+		return true;
+	}
+	return false;
 }; 
 
 bool RegionItem::cancel() {
