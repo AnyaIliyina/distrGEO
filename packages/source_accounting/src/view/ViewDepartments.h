@@ -94,4 +94,9 @@ private slots:
 	 */
 	 void dataChanged();
 
+	 void valueSelected(int);
+
+	 void signalEditSite();
+
+	 void signalSave(int, bool);
 };
