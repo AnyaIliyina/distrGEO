@@ -9,6 +9,7 @@
 #include "Site.h"
 #include "Format.h"
 #include "Session.h"
+#include "Types.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -60,6 +61,7 @@ void ViewDepartments::setDisabled()
 
 void ViewDepartments::slotRefresh()
 {
+	ui->tableView->setModel(NULL);
 	setupModel();
 }
 
@@ -145,7 +147,7 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 
 void ViewDepartments::createTable()
 {
-	m_model->loadData(2);
+	m_model->loadData(ItemTypes::DepartmentType);
 	ui->tableView->setModel(m_model);
 
 	auto comboDelegate = new ComboDelegate(GeodataType::getList(), this);
