@@ -72,7 +72,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 			}*/
 		}
 	}
-	if (role == Qt::UserRole) {
+	/*if (role == Qt::UserRole) {
 		auto list = SiteRegion::sitesByRegion(value.toInt());
 		
 		rootItem()->setChecked(false);
@@ -84,7 +84,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 				item->m_checked = true;
 			}
 		}
-	}
+	}*/
 	return true;
 }
 

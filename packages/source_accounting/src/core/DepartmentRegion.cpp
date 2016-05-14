@@ -38,7 +38,7 @@ QList<int> DepartmentRegion::regionsByDepartment(int department_id)
 	QList<int>regionIds;
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("SELECT department_id FROM department_regions WHERE department_id =?");
+	query.prepare("SELECT region_id FROM department_regions WHERE department_id =?");
 	query.addBindValue(department_id);
 	if (!query.exec())
 	{

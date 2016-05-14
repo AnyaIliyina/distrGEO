@@ -49,7 +49,6 @@ void MainWindow::slotConfigure()
 	setDepartamentView();
 	setContentView();
 	ui->tabWidget->addTab(search, "Поиск источников");
-	ui->tabWidget->addTab(new QWidget, "Поиск материалов");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
 	ui->tabWidget->addTab(content, "Материалы");
@@ -105,6 +104,7 @@ void MainWindow::slotSelectRegionDepartment(int id)
 	{
 		treeDepartments->setEnabled(true);
 		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
+		//map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
 			map.values().at(i)->setChecked(false);
 		for (int i = 0; i < IDs.count(); i++)
@@ -226,7 +226,7 @@ void MainWindow::setDepartamentView()
 	treeDepartments->showMinimized();
 	treeDepartments->setEnabled(false);
 
-
+	//map = RegionItemChecked::getMap();
 
 	treeDepartments->setModel(m_regionsChecked);
 	treeDepartments->setColumnHidden(2, true);
