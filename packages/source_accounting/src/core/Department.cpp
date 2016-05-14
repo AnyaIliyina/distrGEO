@@ -245,6 +245,7 @@ bool Department::completeTable()
 	d->setMail("hydep@hydrograph.spb.su");
 	d->setName("ФГУП \"Гидрографическое предприятие\"");
 	d->setPhone("(812) 310-37-68");
+	d->setFax("(812) 310-37-68");
 	bool succeded = d->insertIntoDatabase();
 	delete d;
 	return succeded;

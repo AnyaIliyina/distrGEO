@@ -91,6 +91,8 @@ bool SiteType::createTable()
 	db.close();
 
 	SiteType(1, 2).insertIntoDatabase();
+	SiteType(2, 2).insertIntoDatabase();
+	SiteType(3, 2).insertIntoDatabase();
 	return true;
 }
 

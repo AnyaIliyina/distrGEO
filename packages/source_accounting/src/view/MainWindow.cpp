@@ -204,8 +204,8 @@ void MainWindow::setResourcesView()
 	map = RegionItemChecked::getMap();
 
 	treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(1, true);
 	treeSites->setColumnHidden(2, true);
-	treeSites->setColumnHidden(3, true);
 	
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -229,9 +229,9 @@ void MainWindow::setDepartamentView()
 	//map = RegionItemChecked::getMap();
 
 	treeDepartments->setModel(m_regionsChecked);
+	treeDepartments->setColumnHidden(1, true);
 	treeDepartments->setColumnHidden(2, true);
-	treeDepartments->setColumnHidden(3, true);
-
+	
 	departaments = new QWidget();
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	layoutDepart->addWidget(m_vd);

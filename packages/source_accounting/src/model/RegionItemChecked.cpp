@@ -16,12 +16,16 @@ QVariant RegionItemChecked::data(int column, int role) const
 {
 	if (role == Qt::DisplayRole || role == Qt::EditRole || role == Qt::ToolTipRole)
 	{
-		if (column == 1)
+		/*if (column == 0)
+			return QVariant();*/
+		if (column == 0)
 			return m_name;
-		if (column == 2)
+		if (column == 1)
 			return m_id;
-		if (column == 3)
+		if (column == 2)
 			return m_comment;
+		
+		
 	}
 
 	if (role == Qt::UserRole)
@@ -42,7 +46,7 @@ bool RegionItemChecked::isCheckable() const
 
 
 int RegionItemChecked::columnCount() const {
-	return 4;
+	return 3;
 };
 //
 //bool RegionItemChecked::setData(int column, const QVariant & value, int role)
@@ -61,8 +65,8 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 		return false;
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
-		if (column == 0)
-		{
+		/*if (column == 0)
+		{*/
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
 			/*if(m_checked)
 				map[m_id] = this;
@@ -70,7 +74,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 				if (map.contains(m_id))
 					map.remove(m_id);
 			}*/
-		}
+	//	}
 	}
 	/*if (role == Qt::UserRole) {
 		auto list = SiteRegion::sitesByRegion(value.toInt());
