@@ -92,7 +92,7 @@ private slots:
 
 	 void valueSelected(int);
 
-	 void signalEditSite();
+	 void signalEditDepartment();
 
 	 void signalSave(int, bool);
 };

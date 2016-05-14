@@ -70,7 +70,7 @@ void MainWindow::slotStartSession(int user_id)
 	slotConfigure();
 }
 
-void MainWindow::slotSelectRegion(int id)
+void MainWindow::slotSelectRegionSite(int id)
 {
 	if (id < 0)
 	{
@@ -94,7 +94,7 @@ void MainWindow::slotSelectRegion(int id)
 	}
 }
 
-void MainWindow::slotSelectDepartment(int id)
+void MainWindow::slotSelectRegionDepartment(int id)
 {
 	if (id < 0)
 	{
@@ -112,9 +112,7 @@ void MainWindow::slotSelectDepartment(int id)
 			treeDepartments->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
-				auto item = map[IDs.at(i)];
-				//treeDepartments->expand(model()->data(column[0], Qt::UserRole)->
-				map[IDs.at(i)]->setChecked(true);
+				map.value(IDs.at(i))->setChecked(true);
 			}
 		}
 
@@ -194,13 +192,17 @@ void MainWindow::setSearchResources()
 void MainWindow::setResourcesView()
 {
 	m_vs = new ViewSites();
+
 	treeSites = new QTreeView();
 	treeSites->setMaximumSize(300, 1000);
 	treeSites->showMinimized();
 	treeSites->setEnabled(false);
+
 	m_regionsChecked = new ItemModel();
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
+
 	map = RegionItemChecked::getMap();
+
 	treeSites->setModel(m_regionsChecked);
 	treeSites->setColumnHidden(2, true);
 	treeSites->setColumnHidden(3, true);
@@ -210,28 +212,33 @@ void MainWindow::setResourcesView()
 	layoutSites->addWidget(m_vs);
 	layoutSites->addWidget(treeSites);
 	sites->setLayout(layoutSites);
-	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegion(int)));
+	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegionSite(int)));
 	QObject::connect(m_vs, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckSite()));
-	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheck(int, bool)));
+	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheckSite(int, bool)));
 }
 
 void MainWindow::setDepartamentView()
 {
 	m_vd = new ViewDepartments();
+
 	treeDepartments = new QTreeView();
 	treeDepartments->setMaximumSize(300, 1000);
 	treeDepartments->showMinimized();
 	treeDepartments->setEnabled(false);
+
+
+
 	treeDepartments->setModel(m_regionsChecked);
 	treeDepartments->setColumnHidden(2, true);
 	treeDepartments->setColumnHidden(3, true);
+
 	departaments = new QWidget();
 	QHBoxLayout *layoutDepart = new QHBoxLayout();
 	layoutDepart->addWidget(m_vd);
 	layoutDepart->addWidget(treeDepartments);
 	departaments->setLayout(layoutDepart);
-	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectDepartment(int)));
-	QObject::connect(m_vd, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckDepartment()));
+	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegionDepartment(int)));
+	QObject::connect(m_vd, SIGNAL(signalEditDepartment()), this, SLOT(slotGetCheckDepartment()));
 	QObject::connect(m_vd, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheckDepartment(int, bool)));
 }
 
@@ -312,10 +319,10 @@ void MainWindow::slotGetCheckSite()
 {
 	qDebug() << "SLoot getCheckSite";
 	qDebug() << QObject::connect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
+		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
 }
 
-void MainWindow::slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)
+void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)
 {
 	qDebug() << "slotMakeCheckEditble";
 	auto index = treeSites->selectionModel()->currentIndex();
@@ -324,41 +331,76 @@ void MainWindow::slotMakeCheckEditble(const QItemSelection &, const QItemSelecti
 	treeSites->edit(index);
 }
 
-void MainWindow::slotEditCheck(int id, bool saveChanges)
+void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 {
 	qDebug() << "slooooot";
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-		this, SLOT(slotMakeCheckEditble(const QItemSelection &, const QItemSelection &)));
+		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
 	map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
 		{
-			if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
+			if (id != -1)
 			{
-				int region_id = map.keys().at(i);
-				SiteRegion *site_reg = new SiteRegion(id, region_id);
-				if (map.values().at(i)->isChecked())	//галочку поставили
+				if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
 				{
-					site_reg->insertIntoDatabase();
-					qDebug() << "inserted, ha?";
-				}
-				else
-				{
-					site_reg->deleteRecord();
-					qDebug() << "link is deleted";
-				}
+					int region_id = map.keys().at(i);
+					SiteRegion *site_reg = new SiteRegion(id, region_id);
+					if (map.values().at(i)->isChecked())	//галочку поставили
+					{
+						site_reg->insertIntoDatabase();
+						qDebug() << "inserted, ha?";
+					}
+					else
+					{
+						site_reg->deleteRecord();
+						qDebug() << "link is deleted";
+					}
 
+				}
 			}
-		
 	}
 	
 }
 
 void MainWindow::slotGetCheckDepartment()
 {
-	qDebug() << "SLoot getCheckSite";
+	qDebug() << QObject::connect(treeDepartments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)));
 }
 
-void MainWindow::slotEditCheckDepartment(int id, bool save)
+void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)
 {
-	qDebug() << "Slot EditCheck";
+	qDebug() << "slotMakeCheckEditble";
+	auto index = treeDepartments->selectionModel()->currentIndex();
+	m_regionsChecked->startEditMode(index);
+	qDebug() << "index" << index;
+	treeDepartments->edit(index);
+}
+
+void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
+{
+	qDebug() << "slooooot";
+	QObject::disconnect(treeDepartments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)));
+	map = RegionItemChecked::getMap();
+	for (int i = 0; i < map.count(); i++)
+	{
+		if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
+		{
+			int region_id = map.keys().at(i);
+			DepartmentRegion *dep_reg = new DepartmentRegion(id, region_id);
+			if (map.values().at(i)->isChecked())	//галочку поставили
+			{
+				dep_reg->insertIntoDatabase();
+				qDebug() << "inserted, ha?";
+			}
+			else
+			{
+				dep_reg->deleteRecord();
+				qDebug() << "link is deleted";
+			}
+
+		}
+
+	}
 }

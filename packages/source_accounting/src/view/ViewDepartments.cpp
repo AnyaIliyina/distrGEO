@@ -80,6 +80,7 @@ void ViewDepartments::slotEnableButtons()
 		ui->action_New->setEnabled(true);
 		ui->action_Yes->setEnabled(false);
 		ui->action_No->setEnabled(false);
+
 		if (ui->tableView->selectionModel()->selectedRows().count() > 1)
 		{
 			ui->action_Delete->setEnabled(true);
@@ -204,7 +205,7 @@ void ViewDepartments::slotEdit()
 	
 	m_editMode = true;
 	emit signalChangeEditMode();
-	emit signalEditSite();
+	emit signalEditDepartment();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
@@ -216,10 +217,11 @@ void ViewDepartments::slotSave()
 	if (m_model->save())
 	{
 		m_editMode = false;
-		emit signalChangeEditMode();
-		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
+		emit signalChangeEditMode();
+		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
+		
 	}
 	else
 	{

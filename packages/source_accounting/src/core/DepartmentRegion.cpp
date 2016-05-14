@@ -74,3 +74,22 @@ bool DepartmentRegion::createTable()
 	DepartmentRegion(1, 1).insertIntoDatabase();
 	return true;
 }
+
+void DepartmentRegion::deleteRecord(int session_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	QString depart_idstr = QString::number(m_department_id);
+	QString region_idstr = QString::number(m_region_id);
+	if (!query.exec("DELETE FROM department_regions WHERE ((department_id=\'" + depart_idstr + "\') AND (region_id=\'" +
+		region_idstr + "\'))"))
+	{
+		QString errorString = query.lastError().text();
+		qDebug() << errorString;
+		Log::create(session_id, "DepartmentRegion::deleteRecord", m_department_id, errorString);
+	}
+	else
+	{
+		Log::create(session_id, "DepartmentRegion::deleteRecord", m_department_id);
+	}
+}

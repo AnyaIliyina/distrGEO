@@ -94,23 +94,23 @@ private slots:
 	\param  user_id - идентификатор пользователя */
 	void slotStartSession(int user_id);
 
-	void slotSelectRegion(int i);
+	void slotSelectRegionSite(int);
 
-	void slotSelectDepartment(int i);
+	void slotSelectRegionDepartment(int);
 
 	void slotOpenUrl(const QModelIndex &index);
 	
 	void slotGetCheckSite();
 
-	void slotMakeCheckEditble(const QItemSelection &, const QItemSelection &);
+	void slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &);
 
-	void slotEditCheck(int id, bool save);
+	void slotEditCheckSite(int id, bool saveChanges);
 
 	void slotGetCheckDepartment();
 
 	void slotEditCheckDepartment(int id, bool saveChanges);
 
-
+	void slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &);
 };
 
 

@@ -41,5 +41,8 @@ public:
 
 	/*! Создает таблицу department_regions*/
 	static bool createTable();
+
+	/*! Удаляет из базы запись	*/
+	void deleteRecord(int session_id = Database::currentSessionId());
 };
 

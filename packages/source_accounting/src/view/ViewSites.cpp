@@ -219,6 +219,7 @@ void ViewSites::slotEdit()
 	emit signalChangeEditMode();
 	emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();
+	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
 
