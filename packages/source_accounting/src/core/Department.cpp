@@ -34,9 +34,9 @@ const QString & Department::country() const
 	return m_country;
 }
 
-const QString & Department::adress() const
+const QString & Department::address() const
 {
-	return m_adress;
+	return m_address;
 }
 
 const QString & Department::mail() const
@@ -74,9 +74,9 @@ void Department::setPhone(const QString & phone)
 	m_phone = phone;
 }
 
-void Department::setAdress(const QString & adress)
+void Department::setAdress(const QString & address)
 {
-	m_adress = adress;
+	m_address = address;
 }
 
 void Department::setFax(const QString & fax)
@@ -94,12 +94,12 @@ void Department::setComment(const QString & comment)
 	m_comment = comment;
 }
 
-Department::Department(const QString & name, const QString & country, const QString & adress, const QString & mail, const QString & phone, const QString & fax,  const QString & comment)
+Department::Department(const QString & name, const QString & country, const QString & address, const QString & mail, const QString & phone, const QString & fax,  const QString & comment)
 {
 	m_id = 0;
 	m_name = name;
 	m_country = country;
-	m_adress = adress;
+	m_address = address;
 	m_mail = mail;
 	m_fax = fax;
 	m_phone = phone;
@@ -116,7 +116,7 @@ Department::Department(int id)
 	model.select();
 	QString name = model.record(0).value("name").toString();
 	QString country = model.record(0).value("country").toString();
-	QString adress = model.record(0).value("adress").toString();
+	QString address = model.record(0).value("address").toString();
 	QString mail = model.record(0).value("mail").toString();
 	QString fax = model.record(0).value("fax").toString();
 	QString phone = model.record(0).value("phone").toString();
@@ -126,7 +126,7 @@ Department::Department(int id)
 	m_id = id;
 	m_name = name;
 	m_country = country;
-	m_adress = adress;
+	m_address = address;
 	m_mail = mail;
 	m_fax = fax;
 	m_phone = phone;
@@ -137,11 +137,11 @@ bool Department::insertIntoDatabase(int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO departments ( name, country, adress, mail, fax, phone, comment)\
+	query.prepare("INSERT INTO departments ( name, country, address, mail, fax, phone, comment)\
 		VALUES (?, ?, ?, ?, ?, ?, ?)");
 	query.addBindValue(m_name);
 	query.addBindValue(m_country);
-	query.addBindValue(m_adress);
+	query.addBindValue(m_address);
 	query.addBindValue(m_mail);
 	query.addBindValue(m_fax);
 	query.addBindValue(m_phone);
@@ -169,12 +169,12 @@ bool Department::update(int session_id)
 	query.prepare("UPDATE departments\
 					SET\
 					name=:name, country=:country, \
-					adress=:adress, mail=:mail, fax=:fax,\
+					address=:address, mail=:mail, fax=:fax,\
 					phone=:phone, comment=:comment \
 						 WHERE id=:id");
 	query.bindValue(":name", m_name);
 	query.bindValue(":country", m_country);
-	query.bindValue(":adress", m_adress);
+	query.bindValue(":address", m_address);
 	query.bindValue(":mail", m_mail);
 	query.bindValue(":fax", m_fax);
 	query.bindValue(":phone", m_phone);
@@ -220,7 +220,7 @@ bool Department::createTable()
 		id  INTEGER         PRIMARY KEY AUTOINCREMENT, \
 		name     TEXT    UNIQUE NOT NULL,\
 		country TEXT NOT NULL,\
-		adress TEXT NOT NULL,\
+		address TEXT NOT NULL,\
 		mail     TEXT  NOT NULL ,\
 		fax     TEXT   ,\
 		phone    TEXT NOT NULL  ,\

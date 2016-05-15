@@ -193,7 +193,7 @@ bool Departments::cancel() {
 
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments WHERE id=:id");
+	query.prepare("SELECT id, name, country, address,  phone, fax, mail, comment FROM departments WHERE id=:id");
 	query.bindValue(":id", m_id);
 	if (!query.exec())
 	{
@@ -218,13 +218,13 @@ QList<BaseItem*> Departments::loadItemsFromDb(QVariant id) {
 	QSqlQuery query(db);
 	if (id.isNull())
 	{
-		if (!query.exec("SELECT id, name, country, adress,  phone, fax, mail, comment FROM departments"))
+		if (!query.exec("SELECT id, name, country, address,  phone, fax, mail, comment FROM departments"))
 			qDebug() << query.lastError().text();
 	}
 	else
 	{
 		query.prepare(
-			" SELECT d.id, d.name, d.country, d.adress,  d.phone,\
+			" SELECT d.id, d.name, d.country, d.address,  d.phone,\
 			d.fax, d.mail, d.comment\
 			 FROM departments AS d \
 			 JOIN department_regions AS dr \

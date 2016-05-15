@@ -35,7 +35,7 @@ int ParserGeofabrik::parse(int site_id)
 		QByteArray *reply = getReply(currentPage);
 
 		if (*reply == "")	{
-			qDebug() << "wrong adress.";
+			qDebug() << "wrong address.";
 			return PAGE_NOT_AVAILABLE;
 		}
 		if (!separateTable(*reply)) {

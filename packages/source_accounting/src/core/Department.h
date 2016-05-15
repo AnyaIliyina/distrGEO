@@ -25,7 +25,7 @@ private:
 	int m_id;
 	QString m_name;
 	QString m_country;
-	QString m_adress;
+	QString m_address;
 	QString m_mail;
 	QString m_fax = "";
 	QString m_phone;
@@ -52,8 +52,8 @@ public:
 
 	/*!
 	Возвращает адрес ведомства
-	\return const QString& adress - адрес*/
-	const QString & adress() const;
+	\return const QString& address - адрес*/
+	const QString & address() const;
 
 	/*!
 	Возвращает e-mail ведомства
@@ -92,8 +92,8 @@ public:
 
 	/*!
 	Присваивает адрес ведомству.
-	\param const QString& adress - адрес*/
-	void setAdress(const QString& adress);
+	\param const QString& address - адрес*/
+	void setAdress(const QString& address);
 
 	/*!
 	Присваивает ведомству факс
@@ -116,13 +116,13 @@ public:
 	Конструирует объект класса Department из параметров
 	\param const QString& name - название департамента;
 	\param const QString& country - страна  департамента;
-	\param const QString& adress - адрес  департамента;
+	\param const QString& address - адрес  департамента;
 	\param const QString& mail - электронная почта департамента;
 	\param const QString& fax - факс департамента;
 	\param const QString& phone -телефон  департамента;
 	\param const QString& comment;
 	*/
-	Department(const QString& name, const QString& country, const QString& adress, const QString& mail,
+	Department(const QString& name, const QString& country, const QString& address, const QString& mail,
 	 const QString& phone, const QString& fax="", const QString& comment = "");
 
 	/*! Конструктор

@@ -39,7 +39,7 @@ bool DepartmentType::createTable()
 		department_id INTEGER,		\
 		type_id INTEGER,   \
 		FOREIGN KEY(department_id) REFERENCES departments(id) ON UPDATE CASCADE ON DELETE CASCADE,\
-		FOREIGN KEY(type_id) REFERENCES type(id) ON UPDATE CASCADE ON DELETE CASCADE\
+		FOREIGN KEY(type_id) REFERENCES geodata_types(id) ON UPDATE CASCADE ON DELETE CASCADE\
 		)"
 		)))
 	{
