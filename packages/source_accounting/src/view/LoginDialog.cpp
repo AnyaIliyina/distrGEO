@@ -55,7 +55,7 @@ void LoginDialog::slotShowLD()
 		emit dialog_shown();
 }
 
-QString LoginDialog::getLogin() 
+const QString& LoginDialog::getLogin() 
 {
 	return m_login;
 }

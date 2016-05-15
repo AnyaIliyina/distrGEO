@@ -59,7 +59,6 @@ public:
 	\param int id */
 	void setId(int id);
 
-
 	/*! Устанавливает id региона-предка
 	\param int parent_id */
 	void setParentId(int parent_id);
@@ -106,7 +105,7 @@ public:
 
 	/*!
 	Записывает информацию о регионах из списка в базу
-	\param (QList<Site> regions - список регионов
+	\param QList<Site> regions - список регионов
 	\return true - информация записана
 	\false -  возникли ошибки
 	*/

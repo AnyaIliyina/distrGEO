@@ -65,7 +65,6 @@ void MainWindow::slotConfigure()
 void MainWindow::slotStartSession(int user_id)
 {
 	Session::createSession(user_id);
-	qDebug() << "SEEEEEEEEEE" << Database::currentSessionId();
 	slotConfigure();
 }
 

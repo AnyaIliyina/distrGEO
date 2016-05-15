@@ -7,7 +7,7 @@
 /*!
 
 \file
-\brief	Наследник Item_model
+\brief	Элемент Item_model
 \author Ильина А.
 \date май 2016
 

@@ -150,11 +150,6 @@ int ParserGeofabrik::parseTable(QByteArray &content, bool isIndex)
 }
 
 
-QStringRef ParserGeofabrik::translate(const QString & text)
-{
-	return QStringRef();
-}
-
 
 bool ParserGeofabrik::separateTable(QByteArray& ba)
 {

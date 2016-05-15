@@ -25,9 +25,9 @@ public:
 	~LoginDialog();
 	
 	/*!
-	Метод для получения логина
+	Возвращает логин
 	*/
-	QString getLogin();
+	const QString& getLogin();
 	
 signals:
 	/*!

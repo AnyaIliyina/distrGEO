@@ -63,6 +63,5 @@ private:
 	значениями	site_id, state_id, session_id
 	\return Geodata_record* record - новая запись*/
 	Geodata_record* recordPrepared();
-
-	QStringRef translate(const QString& text);
+		
 };

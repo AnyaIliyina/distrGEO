@@ -29,13 +29,6 @@ private:
 	site_types*/
 	static void createBridgeTables();
 
-	static void addTriggers();
-
-	static void onDeleteTrigger(const QString& table, 
-		const QString& dependentTable);
-	
-	static void regionsTrigger();
-
 public:
 	/*!	Возвращает открытое подключение к базе.
 	\return QSqlDatabase db - подключение к базе */

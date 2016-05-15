@@ -11,7 +11,7 @@
 /*!
 \file
 \brief    Регионы, ГП-информацию о которых поставляют ведомства
-(таблица department_regions)
+(связующая таблица department_regions)
 \author   Ильина А.
 \date     май 2016
 */

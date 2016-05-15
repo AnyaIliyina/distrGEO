@@ -11,7 +11,7 @@
 /*!
 \file
 \brief    Тип ГПИ, предоставляемой ведомством
-(таблица department_types)
+(связующая таблица department_types)
 \author   Ильина А.
 \date     май 2016
 */
