@@ -47,11 +47,11 @@ void MainWindow::slotConfigure()
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
-	setContentView();
+	//setContentView();
 	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
-	ui->tabWidget->addTab(content, "Материалы");
+	//ui->tabWidget->addTab(content, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
 
 
