@@ -11,7 +11,7 @@
 
 /*!
 	 \file
-	 \brief  Вывод результатов поиска и работа с ними
+	 \brief  Таблица интернет-ресурсов и работа с ней
 	 \author Козырева О.
 	 \date   апрель 2016
 */
@@ -30,7 +30,7 @@ public:
 	~ViewSites();
 		
 	/*!
-	\param QString whereQryPart- строка запроса к базе
+	Устанавливает модель в таблицу
 	*/
 	 void setupModel();
 
@@ -38,15 +38,18 @@ public:
 private:
 	Ui::ViewSites *ui;
 	ItemModel* m_model=nullptr;
-	
 	bool m_editMode = false;
 	ComboDelegate *comboDelegateLanguage;
 	ComboDelegate *comboDelegateGPI;
+
 	/*!
-	Метод для установки модели в таблицу и настройки таблицы
+	Метод для настройки таблицы 
 	*/
 	 void createTable();
 
+	 /*!
+	 Метод для выключения всех кнопок, исключая кнопку "Добавить"
+	 */
 	 void setDisabled();
 		
 private slots:
@@ -87,13 +90,28 @@ private slots:
 
 	  
  signals:
+	 /*!
+	 Сигнал, испускается при редактировании записи, для включения режима редактирования дерева регионов
+	 */
 	 void signalEditSite();
+
+	 /*!
+	 Сигнал, испускается при сохранении записи, для сохранения изменений в дереве регионов
+	\param int - id интернет-ресурса
+	\param bool 
+	*/
 	 void signalSave(int, bool);
+
 	 /*!
 	 Сигнал для включения/выключения кнопок
 	 */
 	 void signalChangeEditMode();
-	void valueSelected(int);
+
+	 /*!
+	 Сигнал, для выделения элементов дерева регионов, по выделенной записи в таблице интернет-ресурсов
+	 \param int !=-1, если выделена одна запись в таблице, отправляем id выделеной записи
+	 */
+	 void valueSelected(int);
 	 
 	 /*!
 	 Сигнал о том, что данные в модели изменились

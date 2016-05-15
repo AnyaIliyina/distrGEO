@@ -2,7 +2,7 @@
 #include <QDockWidget>
 #include "ui_EditSites.h"
 /*!
-\brief 
+\brief Класс виджета редактирования и создания записи в интернет-ресурсах для пользователя.
 \author Козырева О.
 \date апрель 2016г.
 */

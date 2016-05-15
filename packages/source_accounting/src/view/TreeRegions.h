@@ -29,7 +29,7 @@ public:
 	~TreeRegions();
 		
 	/*!
-	\param QString whereQryPart- строка запроса к базе
+	Устанавливает модель в таблицу
 	*/
 	 void setupModel();
 
@@ -42,7 +42,10 @@ private:
 	ItemModel* m_model=nullptr;	// модель дерева
 	bool m_editMode = false;	// режим редактирования
 	
-	/*! Отключает кнопки */
+
+	/*!
+	Отключает кнопки (исключая кнопку "Добавить")
+	*/
 	void setDisabled();
 
 		
@@ -77,13 +80,13 @@ private slots:
 	 Слот отмены изменений
 	 */
 	 void slotCancel();
-		 
+	
 	 /*!
 	 Слоты включения/выключения кнопок 
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	
+
 	 
  signals:
 	 /*!

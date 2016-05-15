@@ -16,7 +16,6 @@
 class RegionItem : public BaseItem
 {
 public:
-	/*! Деструктор*/
 	virtual ~RegionItem();
 	
 	/*! Конструктор */
@@ -62,13 +61,13 @@ public:
 	/*! Определяет, есть ли в модели столбец с чек-боксом (для роли Qt::CheckStateRole.)
 	\return true - столбец есть*/
 	virtual bool isCheckable() const Q_DECL_OVERRIDE;
-	
+
 	/*!	Сохраняет изменения */
 	bool save() Q_DECL_OVERRIDE;
 
 	/*! Отменяет изменения*/
 	bool cancel() Q_DECL_OVERRIDE;
-	
+
 	/*! Загружает данные из БД
 	\return QList<BaseItem*> - список загруженных элементов*/
 	virtual QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) Q_DECL_OVERRIDE;

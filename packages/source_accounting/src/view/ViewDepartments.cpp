@@ -46,6 +46,8 @@ void ViewDepartments::setupModel()
 	delete m_model;
 	QSqlDatabase db = Database::database();
 	m_model = new ItemModel();
+	m_model->loadData(ItemTypes::DepartmentType);
+	ui->tableView->setModel(m_model);
 	createTable();
 }
 
@@ -146,9 +148,6 @@ void ViewDepartments::slotEnableButtons(const QItemSelection &, const QItemSelec
 
 void ViewDepartments::createTable()
 {
-	m_model->loadData(ItemTypes::DepartmentType);
-	ui->tableView->setModel(m_model);
-
 	auto comboDelegate = new ComboDelegate(GeodataType::getList(), this);
 	ui->tableView->setItemDelegateForColumn(7, comboDelegate);
 

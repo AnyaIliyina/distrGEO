@@ -2,7 +2,7 @@
 #include <QDockWidget>
 #include "ui_EditDepartments.h"
 /*!
-\brief 
+\brief  Класс виджета редактирования и создания записи в ведомства для пользователя.
 \author Козырева О.
 \date апрель 2016г.
 */

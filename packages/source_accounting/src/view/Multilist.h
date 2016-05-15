@@ -4,7 +4,7 @@
 #include <QComboBox>
 #include <QWidget>
 /*!
-*  \brief 
+*  \brief Наследник combobox, расширенный для выделения нескольких элементов списка
 *  \author Козырева О.
 *  \date  май 2016г.
 */
