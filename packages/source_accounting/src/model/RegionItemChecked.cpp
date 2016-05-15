@@ -66,8 +66,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
-			if (m_checked == true)
-				checkChildren(this);
+			checkChildren(this, m_checked);
 			/*if(m_checked)
 				map[m_id] = this;
 			else {
@@ -130,15 +129,15 @@ bool RegionItemChecked::isChecked()
 	return m_checked;
 }
 
-void RegionItemChecked::checkChildren(RegionItemChecked * parent)
+void RegionItemChecked::checkChildren(RegionItemChecked * parent, bool newCheckState)
 {
-	parent->m_checked = true;
+	parent->m_checked = newCheckState;
 	if (parent->hasChildren())
 	{
 		for (int i = 0; i < parent->m_children.count(); i++)
 		{
 			auto child = dynamic_cast<RegionItemChecked*>(parent->m_children.at(i));
-			checkChildren(child);
+			checkChildren(child, newCheckState);
 		}
 	}
 }
