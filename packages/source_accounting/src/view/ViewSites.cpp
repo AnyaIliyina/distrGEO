@@ -241,7 +241,7 @@ void ViewSites::slotSave()
 	}
 	else
 	{
-		emit signalSave(-1, false);
+		//emit signalSave(-1, false);
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
 }
