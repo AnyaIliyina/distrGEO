@@ -31,7 +31,7 @@ public:
 	bool save() Q_DECL_OVERRIDE;
 private:
 	friend ItemFactory;
-
+	void checkChildren(RegionItemChecked* parent);
 	bool m_checked=true;
 	bool m_old_checked;
 	static QMap<int, RegionItemChecked*> map;

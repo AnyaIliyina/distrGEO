@@ -65,16 +65,15 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 		return false;
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
-		/*if (column == 0)
-		{*/
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
+			if (m_checked == true)
+				checkChildren(this);
 			/*if(m_checked)
 				map[m_id] = this;
 			else {
 				if (map.contains(m_id))
 					map.remove(m_id);
 			}*/
-	//	}
 	}
 	/*if (role == Qt::UserRole) {
 		auto list = SiteRegion::sitesByRegion(value.toInt());
@@ -131,6 +130,19 @@ bool RegionItemChecked::isChecked()
 	return m_checked;
 }
 
+void RegionItemChecked::checkChildren(RegionItemChecked * parent)
+{
+	parent->m_checked = true;
+	if (parent->hasChildren())
+	{
+		for (int i = 0; i < parent->m_children.count(); i++)
+		{
+			auto child = dynamic_cast<RegionItemChecked*>(parent->m_children.at(i));
+			checkChildren(child);
+		}
+	}
+}
+
 QVariant RegionItemChecked::headerData(int section, int role) const {
 	return QVariant();
 };
@@ -181,8 +193,5 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 
 bool RegionItemChecked::save()
 {
-
-	bool result = m_checked != m_old_checked;
-	qDebug() << "in save " << result;
-	return result;
+	return m_checked != m_old_checked;
 };
