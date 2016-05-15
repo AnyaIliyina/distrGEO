@@ -11,9 +11,9 @@
 
 /*!
 	 \file
-	 \brief  
+	 \brief  Таблица картматериалов и работа с ней
 	 \author Козырева О.
-	 \date   апрель 2016
+	 \date   май 2016
 */
 
 class ViewContent : public QMainWindow {

@@ -29,7 +29,7 @@ public:
 	~TreeRegions();
 		
 	/*!
-	\param QString whereQryPart- строка запроса к базе
+	Устанавливает модель в таблицу
 	*/
 	 void setupModel();
 
@@ -38,12 +38,14 @@ private:
 	ItemModel* m_model=nullptr;
 	bool m_editMode = false;
 	
-
 	/*!
-	Метод для установки модели в таблицу и настройки таблицы
+	Метод для настройки таблицы
 	*/
 	// void createTable();
 
+	/*!
+	Метод для выключения всех кнопок, исключая кнопку "Добавить"
+	*/
 	 void setDisabled();
 
 public:
@@ -90,12 +92,7 @@ private slots:
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	 ///*!
-	 //Слот фильтрации данных в таблице
-	 //\param QString text - искомая строка
-	 //*/
-	 //void slotFilterChanged(QString text);
-
+	
 	 
  signals:
 	 void newNodelReady();
@@ -104,9 +101,9 @@ private slots:
 	 */
 	 void signalChangeEditMode();
 
-	 ///*!
-	 //Сигнал о том, что данные в модели изменились
-	 //*/
+	 /*!
+	 Сигнал о том, что данные в модели изменились
+	 */
 	 void dataChanged();
 
 	 

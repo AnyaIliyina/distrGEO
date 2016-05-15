@@ -15,6 +15,7 @@
 class RegionItem : public BaseItem
 {
 public:
+	int id = 0;
 	virtual ~RegionItem();
 	RegionItem();
 

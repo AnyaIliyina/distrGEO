@@ -46,6 +46,8 @@ void ViewSites::setupModel()
 	delete m_model;
 	QSqlDatabase db = Database::database();
 	m_model = new ItemModel();
+	m_model->loadData(ItemTypes::ResourceType);
+	ui->tableView->setModel(m_model);
 	createTable();
 }
 
@@ -157,9 +159,6 @@ void ViewSites::slotEnableButtons(const QItemSelection &, const QItemSelection &
 
 void ViewSites::createTable()
 {
-	m_model->loadData(ItemTypes::ResourceType);
-	ui->tableView->setModel(m_model);
-
 	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
 	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
 	
