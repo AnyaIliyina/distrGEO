@@ -10,8 +10,8 @@
 
 /*!
 	 \file
-	 \brief  Вывод результатов поиска и работа с ними
-	 \author Козырева О.
+	 \brief  Вывод дерева регионов (с кнопками для редактирования, без чек-боксов)
+	 \author Козырева О., Ильина А.
 	 \date   апрель 2016
 */
 
@@ -33,21 +33,18 @@ public:
 	*/
 	 void setupModel();
 
+	 /*! Возвращает модель дерева регионов
+	 \return ItemModel* model - модель*/
+	 ItemModel* model() const;
+
 private:
-	Ui::TreeRegions *ui;
-	ItemModel* m_model=nullptr;
-	bool m_editMode = false;
+	Ui::TreeRegions *ui;		// экземпляр класса, описывающего форму	
+	ItemModel* m_model=nullptr;	// модель дерева
+	bool m_editMode = false;	// режим редактирования
 	
+	/*! Отключает кнопки */
+	void setDisabled();
 
-	/*!
-	Метод для установки модели в таблицу и настройки таблицы
-	*/
-	// void createTable();
-
-	 void setDisabled();
-
-public:
-	ItemModel* model() const;
 		
 private slots:
 	/*!
@@ -80,33 +77,23 @@ private slots:
 	 Слот отмены изменений
 	 */
 	 void slotCancel();
-	
-	 /*!
-	 Слот обновления модели
-	 */
-	 void slotRefresh();
+		 
 	 /*!
 	 Слоты включения/выключения кнопок 
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
-	 ///*!
-	 //Слот фильтрации данных в таблице
-	 //\param QString text - искомая строка
-	 //*/
-	 //void slotFilterChanged(QString text);
-
+	
 	 
  signals:
-	 void newNodelReady();
 	 /*!
 	 Сигнал для включения/выключения кнопок
 	 */
 	 void signalChangeEditMode();
 
-	 ///*!
-	 //Сигнал о том, что данные в модели изменились
-	 //*/
+	 /*!
+	 Сигнал о том, что данные в модели изменились
+	 */
 	 void dataChanged();
 
 	 

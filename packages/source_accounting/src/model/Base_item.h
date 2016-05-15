@@ -37,7 +37,11 @@ public:
 	virtual bool isValid() const = 0;
 	virtual bool isNew() const = 0;
 	virtual bool hasChildren() const;
-	virtual bool isCheckable() const;
+
+
+	/*! Определяет, есть ли в модели столбец с чек-боксом (для роли Qt::CheckStateRole.)
+	\return true - столбец есть*/
+	virtual bool isCheckable() const;		
 
 	virtual bool save() = 0;
 	virtual bool cancel() = 0;

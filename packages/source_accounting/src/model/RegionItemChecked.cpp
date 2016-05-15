@@ -109,12 +109,6 @@ void RegionItemChecked::setChecked(bool checked)
 
 }
 
-void RegionItemChecked::setCheckedChildren(bool checked) {
-	m_checked = checked;
-	for (int i = 0;i < m_children.count();i++) {
-		dynamic_cast<RegionItemChecked*>(m_children[i])->setChecked(checked);
-	}
-};
 
 RegionItemChecked* RegionItemChecked::rootItem() {
 	auto parent = dynamic_cast<RegionItemChecked*>(m_parent);

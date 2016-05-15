@@ -131,8 +131,8 @@ Qt::ItemFlags ItemModel::flags(const QModelIndex& index) const {
 
 	if(item == m_editedItem)
 	{
-		if (m_editedItem->isCheckable() && index.column() == 0)
-			return  Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;	//Qt::ItemIsEnabled |
+		if (m_editedItem->isCheckable() && index.column() == 0)				//
+			return  Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;			//
 		
 		return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
 	}
