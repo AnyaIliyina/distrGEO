@@ -46,18 +46,7 @@ bool RegionItemChecked::isCheckable() const
 int RegionItemChecked::columnCount() const {
 	return 3;
 };
-//
-//bool RegionItemChecked::setData(int column, const QVariant & value, int role)
-//{
-//	return false;
-//}
 
-
-//QModelIndex RegionItemChecked::index(int row, int column,
-//	const QModelIndex &parent = QModelIndex()) const
-//{
-//	
-//}
 
 RegionItemChecked::~RegionItemChecked()
 {
@@ -108,6 +97,11 @@ bool RegionItemChecked::isChecked()
 	return m_checked;
 }
 
+void RegionItemChecked::uncheckAll()
+{
+	checkChildren(rootItem(), false);
+}
+
 void RegionItemChecked::checkChildren(RegionItemChecked * parent, bool newCheckState)
 {
 	parent->m_checked = newCheckState;
@@ -120,6 +114,7 @@ void RegionItemChecked::checkChildren(RegionItemChecked * parent, bool newCheckS
 		}
 	}
 }
+
 
 QVariant RegionItemChecked::headerData(int section, int role) const {
 	return QVariant();

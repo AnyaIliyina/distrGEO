@@ -173,7 +173,7 @@ void ViewDepartments::slotAdd()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
-	emit signalEditDepartment();
+	emit signalNewDepartment();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
 	ui->tableView->resizeRowsToContents();

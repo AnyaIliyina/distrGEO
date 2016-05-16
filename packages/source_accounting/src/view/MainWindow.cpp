@@ -16,6 +16,9 @@
 #include <QStatusBar>
 #include <QDockWidget>
 
+#define resourcesTabIndex 1;
+#define departmentsTabIndex 2;
+
 MainWindow::MainWindow(QMainWindow *parent)
 {
 	ui = new Ui::MainWindow();
@@ -53,6 +56,7 @@ void MainWindow::slotConfigure()
 	ui->tabWidget->addTab(departaments, "Ведомства");
 	//ui->tabWidget->addTab(content, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
+	QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotSyncTabs(int)));
 
 
 	QStatusBar *status = new QStatusBar();
@@ -115,7 +119,6 @@ void MainWindow::slotSelectRegionDepartment(int id)
 			if (map.contains(IDs.at(i)))
 			{
 				map.value(IDs.at(i))->setChecked(true);
-				//treeDepartments->expand(m_regionsChecked->index(0, 0, treeDepartments->mo));
 			}
 		}
 
@@ -206,10 +209,10 @@ void MainWindow::setResourcesView()
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
 
 	map = RegionItemChecked::getMap();
-
 	treeSites->setModel(m_regionsChecked);
 	treeSites->setColumnHidden(1, true);
 	treeSites->setColumnHidden(2, true);
+	
 	
 	sites = new QWidget();
 	QHBoxLayout *layoutSites = new QHBoxLayout();
@@ -218,7 +221,9 @@ void MainWindow::setResourcesView()
 	sites->setLayout(layoutSites);
 	QObject::connect(m_vs, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegionSite(int)));
 	QObject::connect(m_vs, SIGNAL(signalEditSite()), this, SLOT(slotGetCheckSite()));
+	QObject::connect(m_vs, SIGNAL(signalNewSite()), this, SLOT(slotGetCheckSite()));
 	QObject::connect(m_vs, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheckSite(int, bool)));
+	QObject::connect(m_vs, SIGNAL(signalNewSite()), this, SLOT(slotUncheckTreeSites()));
 }
 
 void MainWindow::setDepartamentView()
@@ -243,7 +248,9 @@ void MainWindow::setDepartamentView()
 	departaments->setLayout(layoutDepart);
 	QObject::connect(m_vd, SIGNAL(valueSelected(int)), this, SLOT(slotSelectRegionDepartment(int)));
 	QObject::connect(m_vd, SIGNAL(signalEditDepartment()), this, SLOT(slotGetCheckDepartment()));
+	QObject::connect(m_vd, SIGNAL(signalNewDepartment()), this, SLOT(slotGetCheckDepartment()));
 	QObject::connect(m_vd, SIGNAL(signalSave(int, bool)), this, SLOT(slotEditCheckDepartment(int, bool)));
+	QObject::connect(m_vd, SIGNAL(signalNewDepartment()), this, SLOT(slotUncheckTreeDepartments()));
 }
 
 void MainWindow::slotSetupRegionsModel()
@@ -254,12 +261,12 @@ void MainWindow::slotSetupRegionsModel()
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
 
 	treeSites->setModel(m_regionsChecked);
+	treeSites->setColumnHidden(1, true);
 	treeSites->setColumnHidden(2, true);
-	treeSites->setColumnHidden(3, true);
 
 	treeDepartments->setModel(m_regionsChecked);
+	treeDepartments->setColumnHidden(1, true);
 	treeDepartments->setColumnHidden(2, true);
-	treeDepartments->setColumnHidden(3, true);
 
 	map = RegionItemChecked::getMap();
 }
@@ -346,10 +353,12 @@ void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 					if (map.values().at(i)->isChecked())	//галочку поставили
 					{
 						site_reg->insertIntoDatabase();
+						qDebug() << "inserted";
 					}
 					else
 					{
 						site_reg->deleteRecord();
+						qDebug() << "deleted";
 					}
 				}
 			}
@@ -394,4 +403,31 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 			}
 		}
 	}
+}
+
+void MainWindow::slotSyncTabs(int tabIndex)
+{
+	const int tabResourcesIndex = 1;
+	if (tabIndex == tabResourcesIndex)
+		m_vs->slotEnableButtons();
+
+	const int tabDepartmentsIndex = 2;
+	if (tabIndex == tabDepartmentsIndex)
+		m_vd->slotEnableButtons();
+}
+
+void MainWindow::slotUncheckTreeSites()
+{
+	treeSites->setEnabled(true);
+	treeSites->expandAll();
+	if(!map.isEmpty())
+	map.values().at(0)->uncheckAll();
+}
+
+void MainWindow::slotUncheckTreeDepartments()
+{
+	treeDepartments->setEnabled(true);
+	treeDepartments->expandAll();
+	for (int i = 0; i < map.count(); i++)
+		map.values().at(i)->setChecked(false);
 }

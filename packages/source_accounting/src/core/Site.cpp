@@ -140,10 +140,10 @@ int Site::insertIntoDatabase(int session_id)
 		return -1;
 	}
 	else {
-		int id = query.lastInsertId().toInt();
+		m_id = query.lastInsertId().toInt();
 		db.close();
-		Log::create(session_id, "Site: insert", id);
-		return id;
+		Log::create(session_id, "Site: insert", m_id);
+		return m_id;
 	}
 	
 }

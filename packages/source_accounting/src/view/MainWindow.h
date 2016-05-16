@@ -155,6 +155,17 @@ private slots:
 	\param int id - id ведомства
 	\param bool saveChanges: true - сохранить изменения, false - отмена*/
 	void slotEditCheckDepartment(int id, bool saveChanges);
+
+	/*! При смене вкладок обеспечивает соответствие дерева регионов выбранной строке в tableView
+	(для вкладок Интернет-ресурсы  и Ведомства)
+	\param int tabIndex - номер выбранной вкладки */
+	void slotSyncTabs(int tabIndex);
+
+	/*! Включает treeSites и удаляет галочки в чек-боксах*/
+	void slotUncheckTreeSites();
+
+	/*! Включает treeDepartments и удаляет галочки в чек-боксах*/
+	void slotUncheckTreeDepartments();
 };
 
 

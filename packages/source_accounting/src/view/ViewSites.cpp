@@ -183,8 +183,9 @@ void ViewSites::createTable()
 void ViewSites::slotAdd()
 {
 	m_editMode = true;
+	emit signalNewSite();
+//	emit signalEditSite();
 	emit signalChangeEditMode();
-	emit signalEditSite();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
 	ui->tableView->resizeRowsToContents();
@@ -192,7 +193,6 @@ void ViewSites::slotAdd()
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
 	ui->tableView->edit(child);
-	
 }
 
 void ViewSites::slotDelete()

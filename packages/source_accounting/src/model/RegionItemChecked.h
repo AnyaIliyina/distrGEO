@@ -69,13 +69,15 @@ public:
 	\return false - значение m_checked не изменилось*/
 	bool save() Q_DECL_OVERRIDE;
 
-	
+	/*! Присваивает полю m_checked всех айтемов значение false*/
+	void uncheckAll();
+
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
 	\param RegionItemChecked* parent - элемент
 	\param bool newCheckState - новое значение m_checked*/
 	void checkChildren(RegionItemChecked* parent, bool newCheckState);
-
+	
 	bool m_checked=true;	// Элемент отмечен/не отмечен - состояние чек-бокса
 	bool m_old_checked;		// Предыдущее состояние чек-бокса
 	static QMap<int, RegionItemChecked*> map;	// QMap вида <"m_id региона", "указатель на item региона">

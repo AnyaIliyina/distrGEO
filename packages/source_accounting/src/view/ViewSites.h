@@ -51,7 +51,11 @@ private:
 	 Метод для выключения всех кнопок, исключая кнопку "Добавить"
 	 */
 	 void setDisabled();
-		
+public slots:
+	/*!
+	Слот включения/выключения кнопок
+	*/
+	void slotEnableButtons();
 private slots:
 	/*!
 	Слот добавления
@@ -78,10 +82,9 @@ private slots:
 	 */
 	 void slotRefresh();
 	 /*!
-	 Слоты включения/выключения кнопок 
+	 Слот включения/выключения кнопок 
 	 */
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
-	 void slotEnableButtons();
 
 	 /*!
 	 Слот открытия ссылки
@@ -90,6 +93,11 @@ private slots:
 
 	  
  signals:
+	 /*!
+	 Сигнал, испускается при создании нового сайта, для очистки дерева регионов
+	 */
+	 void signalNewSite();
+
 	 /*!
 	 Сигнал, испускается при редактировании записи, для включения режима редактирования дерева регионов
 	 */
