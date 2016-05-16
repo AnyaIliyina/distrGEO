@@ -78,6 +78,7 @@ void MainWindow::slotSelectRegionSite(int id)
 	else
 	{		
 		treeSites->setEnabled(true);
+		treeSites->expandAll();
 		QList<int> IDs = SiteRegion::regionsBySite(id);
 		for (int i = 0; i < map.count(); i++)
 			map.values().at(i)->setChecked(false);
@@ -102,16 +103,19 @@ void MainWindow::slotSelectRegionDepartment(int id)
 	else
 	{
 		treeDepartments->setEnabled(true);
+		treeDepartments->expandAll();
 		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
 		//map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
 			map.values().at(i)->setChecked(false);
+		
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeDepartments->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
 				map.value(IDs.at(i))->setChecked(true);
+				//treeDepartments->expand(m_regionsChecked->index(0, 0, treeDepartments->mo));
 			}
 		}
 
@@ -174,6 +178,7 @@ void MainWindow::setSearchResources()
 	treeSearch->setColumnHidden(1, true);
 	treeSearch->setColumnHidden(2, true);
 	treeSearch->resizeColumnToContents(0);
+	treeSearch->expandAll();
 	tableSites = new QTableView();
 	tableDepartments = new QTableView();
 	search = new QWidget();

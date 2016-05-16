@@ -3,7 +3,7 @@
 #include "Base_item.h"
 #include "RegionItem.h"
 #include "Item_factory.h"
-
+#include <QModelIndex>
 /*!
 
 \file
@@ -69,6 +69,7 @@ public:
 	\return false - значение m_checked не изменилось*/
 	bool save() Q_DECL_OVERRIDE;
 
+	
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
 	\param RegionItemChecked* parent - элемент

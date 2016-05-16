@@ -23,9 +23,7 @@ QVariant RegionItemChecked::data(int column, int role) const
 		if (column == 1)
 			return m_id;
 		if (column == 2)
-			return m_comment;
-		
-		
+			return m_comment;		
 	}
 
 	if (role == Qt::UserRole)
@@ -55,6 +53,12 @@ int RegionItemChecked::columnCount() const {
 //}
 
 
+//QModelIndex RegionItemChecked::index(int row, int column,
+//	const QModelIndex &parent = QModelIndex()) const
+//{
+//	
+//}
+
 RegionItemChecked::~RegionItemChecked()
 {
 }
@@ -67,26 +71,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 	{
 			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
 			checkChildren(this, m_checked);
-			/*if(m_checked)
-				map[m_id] = this;
-			else {
-				if (map.contains(m_id))
-					map.remove(m_id);
-			}*/
 	}
-	/*if (role == Qt::UserRole) {
-		auto list = SiteRegion::sitesByRegion(value.toInt());
-		
-		rootItem()->setChecked(false);
-
-		for (int i = 0;i < list.count();i++) {
-			if (map.contains(list[i])) {
-				auto item = 
-					dynamic_cast<RegionItemChecked*>(map[list[i]]);
-				item->m_checked = true;
-			}
-		}
-	}*/
 	return true;
 }
 
