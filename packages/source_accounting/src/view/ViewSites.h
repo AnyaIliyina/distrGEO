@@ -47,15 +47,11 @@ private:
 	*/
 	 void createTable();
 
-	 /*!
-	 Метод для выключения всех кнопок, исключая кнопку "Добавить"
-	 */
-	 void setDisabled();
-public slots:
-	/*!
-	Слот включения/выключения кнопок
-	*/
-	void slotEnableButtons();
+//public slots:
+	///*!
+	//Слот включения/выключения кнопок
+	//*/
+	//void slotEnableButtons();
 private slots:
 	/*!
 	Слот добавления
@@ -78,20 +74,15 @@ private slots:
 	 */
 	 void slotCancel();
 	 /*!
-	 Слот обновления модели
-	 */
-	 void slotRefresh();
-	 /*!
-	 Слот включения/выключения кнопок 
-	 */
-     void slotEnableButtons(const QItemSelection &, const QItemSelection &);
-
-	 /*!
 	 Слот открытия ссылки
 	 */
 	 void slotOpenUrl();
 
-	  
+	 /*!
+	 Слоты включения/выключения кнопок
+	 */
+	 void slotIndexStatusChanged(const QModelIndex&);
+	 void slotSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
  signals:
 	 /*!
 	 Сигнал, испускается при создании нового сайта, для очистки дерева регионов
@@ -111,20 +102,11 @@ private slots:
 	 void signalSave(int, bool);
 
 	 /*!
-	 Сигнал для включения/выключения кнопок
-	 */
-	 void signalChangeEditMode();
-
-	 /*!
 	 Сигнал, для выделения элементов дерева регионов, по выделенной записи в таблице интернет-ресурсов
 	 \param int !=-1, если выделена одна запись в таблице, отправляем id выделеной записи
 	 */
 	 void valueSelected(int);
-	 
-	 /*!
-	 Сигнал о том, что данные в модели изменились
-	 */
-	 void dataChanged();
+
 
 	
 	 

@@ -44,17 +44,13 @@ private:
 	 */
 	 void createTable();
 
-	 /*!
-	 Метод для выключения всех кнопок, исключая кнопку "Добавить"
-	 */
-	 void setDisabled();
 
-public slots:	
-	/*!
-	Слот включения/выключения кнопок
-	*/
-	void slotEnableButtons();
-
+//public slots:	
+//	/*!
+//	Слот включения/выключения кнопок
+//	*/
+//	void slotEnableButtons();
+//
 private slots:
 	/*!
 	Слот добавления
@@ -76,31 +72,18 @@ private slots:
 	 Слот отмены изменений
 	 */
 	 void slotCancel();
+
 	 /*!
-	 Слот обновления модели
+	 Слоты включения/выключения кнопок
 	 */
-	 void slotRefresh();
-	 /*!
-	 Слот включения/выключения кнопок 
-	 */
-     void slotEnableButtons(const QItemSelection &, const QItemSelection &);
-	
+	 void slotIndexStatusChanged(const QModelIndex&);
+	 void slotSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	
  signals:
 	 /*!
 	 Сигнал, испускается при создании нового ведомства, для очистки дерева регионов
 	 */
 	 void signalNewDepartment();
-
-	 /*!
-	 Сигнал для включения/выключения кнопок
-	 */
-	 void signalChangeEditMode();
-
-	 /*!
-	 Сигнал о том, что данные в модели изменились
-	 */
-	 void dataChanged();
 
 	 /*!
 	 Сигнал, для выделения элементов дерева регионов, по выделенной записи в таблице ведомств

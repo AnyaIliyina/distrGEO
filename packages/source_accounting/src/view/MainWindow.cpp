@@ -409,11 +409,14 @@ void MainWindow::slotSyncTabs(int tabIndex)
 {
 	const int tabResourcesIndex = 1;
 	if (tabIndex == tabResourcesIndex)
-		m_vs->slotEnableButtons();
+	{
+		//?????????????????????
+	};
 
 	const int tabDepartmentsIndex = 2;
 	if (tabIndex == tabDepartmentsIndex)
-		m_vd->slotEnableButtons();
+	{
+	};	//m_vd->slotEnableButtons();
 }
 
 void MainWindow::slotUncheckTreeSites()
