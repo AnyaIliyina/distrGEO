@@ -34,6 +34,10 @@ public:
 	*/
 	 void setupModel();
 
+	 /*! 
+	 Настраивает виджет в соответствии с текущим выделением в таблице
+	 */
+	 void backToTab();
 	
 private:
 	Ui::ViewSites *ui;
