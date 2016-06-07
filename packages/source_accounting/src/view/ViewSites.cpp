@@ -113,6 +113,10 @@ void ViewSites::slotDelete()
 
 void ViewSites::slotEdit()
 {
+	int currSessionId = Database::currentSessionId();
+	Session *s = new Session(currSessionId);
+
+	int i=s->userType();
 	m_editMode = true;
 	emit signalEditSite();
 	auto index = ui->tableView->selectionModel()->currentIndex();

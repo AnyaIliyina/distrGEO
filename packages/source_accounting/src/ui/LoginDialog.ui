@@ -24,6 +24,10 @@
   <property name="windowTitle">
    <string>Авторизация</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/ViewWindowRes.qrc">
+    <normaloff>:/images/Bezymyanny.png</normaloff>:/images/Bezymyanny.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QLineEdit{
 border-radius:4;

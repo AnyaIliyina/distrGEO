@@ -18,6 +18,10 @@
   <property name="windowTitle">
    <string>Новая запись</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/ViewWindowRes.qrc">
+    <normaloff>:/images/Bezymyanny.png</normaloff>:/images/Bezymyanny.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QFormLayout" name="formLayout">
@@ -102,24 +106,6 @@ min-height:20px;
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineLanguage">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit{
-border-radius:4;
-border-width:1px;
-max-height:20px;
-min-height:20px;
-
-}</string>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_4">
        <property name="font">
@@ -129,24 +115,6 @@ min-height:20px;
        </property>
        <property name="text">
         <string>Виды ГПИ, предоставляемые на сайте</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="lineGPI">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit{
-border-radius:4;
-border-width:1px;
-max-height:20px;
-min-height:20px;
-
-}</string>
        </property>
       </widget>
      </item>
@@ -172,6 +140,40 @@ max-height:70px;
 min-height:70px;
 
 }</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="comboBox">
+       <property name="styleSheet">
+        <string notr="true">QComboBox{
+border-radius:4;
+border-width:1px;
+max-height:20px;
+min-height:20px;
+
+}
+QComboBox:editable{
+
+background-color: rgb(255, 255, 255);
+border-radius:4}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="comboBox_2">
+       <property name="styleSheet">
+        <string notr="true">QComboBox{
+border-radius:4;
+border-width:1px;
+max-height:20px;
+min-height:20px;
+
+}
+QComboBox:editable{
+
+background-color: rgb(255, 255, 255);
+border-radius:4}</string>
        </property>
       </widget>
      </item>

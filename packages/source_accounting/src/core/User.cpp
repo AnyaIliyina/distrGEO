@@ -164,7 +164,7 @@ bool User::completeTable()
 	users << User(1, "search_module", "111")
 		<< User(2, "system", "111")
 		<< User(3, "Olga", "iamolga")
-		<< User(8, "uservasya", "iamvasya");
+		<< User(4, "uservasya", "iamvasya");
 	return insert(users);
 }
 

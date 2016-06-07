@@ -6,9 +6,9 @@
 #include <QSqlQuery>
 #include <QTextCodec>
 
-#define login "Olga"
-#define password "iamolga"
-#define asRelease true
+//#define login "Olga"
+//#define password "iamolga"
+//#define asRelease true
 
 LoginDialog::LoginDialog(QDialog * ptr)
 {
@@ -17,8 +17,8 @@ LoginDialog::LoginDialog(QDialog * ptr)
 	connect(ui->btn_login, SIGNAL(clicked()), SLOT(slotAuthenticate()));
 	connect(this, SIGNAL(signalLogedIn(int)), this, SLOT(slotClose(int)));
 
-	// пропускать авторизацию в не дипломном варианте
-	connect(this, SIGNAL(dialog_shown()), this, SLOT(slotAuthenticate()));
+	//// пропускать авторизацию в не дипломном варианте
+	//connect(this, SIGNAL(dialog_shown()), this, SLOT(slotAuthenticate()));
 }
 
 LoginDialog::~LoginDialog()
@@ -28,9 +28,9 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::slotAuthenticate()
 {
-	/*QString login, password;
+	QString login, password;
 	login = ui->line_Login->text();
-	password = ui->line_Pass->text();*/
+	password = ui->line_Pass->text();
 	
 	if (User::userIsValid(login, password))
 	{	
@@ -51,8 +51,8 @@ void LoginDialog::slotClose(int)
 void LoginDialog::slotShowLD()
 {
 	this->show();
-	if(asRelease)
-		emit dialog_shown();
+	/*if(asRelease)
+		emit dialog_shown();*/
 }
 
 const QString& LoginDialog::getLogin() 

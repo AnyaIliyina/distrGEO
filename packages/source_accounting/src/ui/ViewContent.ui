@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
+    <width>550</width>
     <height>387</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
      <number>0</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>6</number>
     </property>
     <property name="rightMargin">
      <number>0</number>
@@ -67,7 +67,6 @@ border-width:2px
    <addaction name="action_Delete"/>
    <addaction name="separator"/>
    <addaction name="action_OpenUrlSite"/>
-   <addaction name="action_OpenUrlCart"/>
    <addaction name="separator"/>
    <addaction name="action_Edit"/>
    <addaction name="separator"/>
@@ -132,18 +131,6 @@ border-width:2px
    </property>
    <property name="toolTip">
     <string>Отменить</string>
-   </property>
-  </action>
-  <action name="action_OpenUrlCart">
-   <property name="icon">
-    <iconset resource="../resources/ViewWindowRes.qrc">
-     <normaloff>:/images/share2.png</normaloff>:/images/share2.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;OpenUrl</string>
-   </property>
-   <property name="toolTip">
-    <string>Перейти по ссылке (URL-картматериала)</string>
    </property>
   </action>
   <action name="action_OpenUrlSite">

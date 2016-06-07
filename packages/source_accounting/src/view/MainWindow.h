@@ -54,7 +54,7 @@ private:
 	QWidget *departaments;
 	QWidget *content;
 	ItemModel *m_res_model;
-	
+	ItemModel *m_cont_model;
 	ItemModel *m_dep_model;
 	ItemModel *m_regionsChecked=nullptr;
 	QMap<int, RegionItemChecked*> map;	// id регионов и указатели на регионы

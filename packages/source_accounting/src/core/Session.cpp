@@ -32,11 +32,32 @@ Session::Session(int id)
 
 Session::~Session()
 {
+
 }
 
 int Session::id()
 {
 	return m_id;
+}
+
+int Session::userType()
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	
+	if (!query.exec("SELECT type_id FROM users WHERE id =\'" + QString::number(m_user_id) + "\'"))
+	{
+		qDebug() << query.lastError().text();
+		
+	}
+	else
+	{
+		if (query.next())
+		{
+			return query.value(0).toInt();
+			
+		}
+	}
 }
 
 bool Session::insertIntoDatabase()

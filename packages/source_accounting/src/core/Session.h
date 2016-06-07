@@ -78,6 +78,8 @@ public:
 	*/
 	static bool completeTable();
 
+	int userType();
+
 };
 
 

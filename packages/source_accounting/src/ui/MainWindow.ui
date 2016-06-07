@@ -11,7 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GeoProject</string>
+   <string>Программа ведения источников КМ в мировых сетях</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/ViewWindowRes.qrc">
+    <normaloff>:/images/Bezymyanny.png</normaloff>:/images/Bezymyanny.png</iconset>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>24</width>
+    <height>40</height>
+   </size>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -70,7 +80,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/ViewWindowRes.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>action_Exit</sender>

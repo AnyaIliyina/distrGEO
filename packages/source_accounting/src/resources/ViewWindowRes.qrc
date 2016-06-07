@@ -1,5 +1,7 @@
 <RCC>
   <qresource>
+    <file>images/Bezymyanny.png</file>
+    <file>images/JP1xRW25lko.jpg</file>
     <file>images/upload.png</file>
     <file>./images/arrow-right.png</file>
     <file>./images/root.png</file>

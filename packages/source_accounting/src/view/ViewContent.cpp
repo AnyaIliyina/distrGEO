@@ -4,7 +4,7 @@
 #include "State.h"
 #include "GeodataType.h"
 #include "Geodata.h"
-
+#include "Types.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
@@ -50,6 +50,28 @@ void ViewContent::setupModel()
 	createTable();
 }
 
+void ViewContent::createTable()
+{
+	m_model->loadData(ItemTypes::GeodataType);
+	ui->tableView->setModel(m_model);
+
+	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	ui->tableView->setColumnHidden(0, true);
+	ui->tableView->resizeColumnsToContents();
+	ui->tableView->resizeRowsToContents();
+
+	ui->tableView->setColumnWidth(1, 150);
+	ui->tableView->setColumnWidth(2, 90);
+	ui->tableView->setColumnWidth(3, 90);
+	ui->tableView->setColumnWidth(4, 90);
+	ui->tableView->setColumnWidth(5, 90);
+	ui->tableView->setColumnWidth(6, 90);
+	ui->tableView->setColumnWidth(7, 100);
+	ui->tableView->setColumnWidth(8, 250);
+	ui->tableView->setColumnWidth(9, 200);
+
+
+}
 
 void ViewContent::setDisabled()
 {
@@ -59,7 +81,7 @@ void ViewContent::setDisabled()
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
 	ui->action_OpenUrlSite->setEnabled(false);
-	ui->action_OpenUrlCart->setEnabled(false);
+//	ui->action_OpenUrlCart->setEnabled(false);
 }
 
 void ViewContent::slotRefresh()
@@ -75,7 +97,7 @@ void ViewContent::slotEnableButtons()
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
 		ui->action_OpenUrlSite->setEnabled(false);
-		ui->action_OpenUrlCart->setEnabled(false);
+		//ui->action_OpenUrlCart->setEnabled(false);
 		ui->action_Yes->setEnabled(true);
 		ui->action_No->setEnabled(true);
 		/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
@@ -93,7 +115,7 @@ void ViewContent::slotEnableButtons()
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrlSite->setEnabled(false);
-			ui->action_OpenUrlCart->setEnabled(false);
+			//ui->action_OpenUrlCart->setEnabled(false);
 			//emit valueSelected(-1);
 			
 		}
@@ -102,7 +124,7 @@ void ViewContent::slotEnableButtons()
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrlSite->setEnabled(true);
-			ui->action_OpenUrlCart->setEnabled(true);
+			//ui->action_OpenUrlCart->setEnabled(true);
 			/*int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 			qDebug() << value;
 			emit valueSelected(value);*/
@@ -112,7 +134,7 @@ void ViewContent::slotEnableButtons()
 			ui->action_Delete->setEnabled(false);
 			ui->action_Edit->setEnabled(false);
 			ui->action_OpenUrlSite->setEnabled(false);
-			ui->action_OpenUrlCart->setEnabled(false);
+			//ui->action_OpenUrlCart->setEnabled(false);
 			/*emit valueSelected(-1);*/
 		}
 	}
@@ -165,36 +187,7 @@ void ViewContent::slotEnableButtons(const QItemSelection &, const QItemSelection
 }
 
 
-void ViewContent::createTable()
-{
-	m_model->loadData(0);
-	ui->tableView->setModel(m_model);
 
-	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
-	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
-	
-
-	comboDelegateGPI = new ComboDelegate(GeodataType::getList(), this);
-	ui->tableView->setItemDelegateForColumn(4, comboDelegateGPI);
-
-
-	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	ui->tableView->setColumnHidden(0, true);
-	ui->tableView->resizeColumnsToContents();
-	ui->tableView->resizeRowsToContents();
-
-	ui->tableView->setColumnWidth(1, 150);
-	ui->tableView->setColumnWidth(2, 100);
-	ui->tableView->setColumnWidth(3, 100);
-	ui->tableView->setColumnWidth(4, 100);
-	ui->tableView->setColumnWidth(5, 150);
-	ui->tableView->setColumnWidth(6, 200);
-	ui->tableView->setColumnWidth(7, 250);
-	ui->tableView->setColumnWidth(8, 100);
-	ui->tableView->setColumnWidth(9, 100);
-	ui->tableView->setColumnWidth(8, 250);
-
-}
 
 void ViewContent::slotAdd()
 {
@@ -202,7 +195,7 @@ void ViewContent::slotAdd()
 	emit signalChangeEditMode();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
-	ui->tableView->resizeRowsToContents();
+	//ui->tableView->resizeRowsToContents();
 	auto rowCount = m_model->rowCount(index);
 	auto child = m_model->index(rowCount - 1, 0, index); 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
@@ -233,7 +226,7 @@ void ViewContent::slotEdit()
 	m_editMode = true;
 	emit signalChangeEditMode();
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();
+	//ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
 }
@@ -250,7 +243,7 @@ void ViewContent::slotSave()
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	auto index = ui->tableView->selectionModel()->currentIndex();
-	ui->tableView->resizeRowsToContents();
+	//ui->tableView->resizeRowsToContents();
 }
 
 void ViewContent::slotCancel()
@@ -273,7 +266,7 @@ void ViewContent::slotOpenUrl()
 {
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	int row = index.row();
-	auto child = m_model->index(row, 2);
+	auto child = m_model->index(row, 8);
 	QString url= m_model->data(child).toString();
 	QUrl m_url(url);
 	bool res=QDesktopServices::openUrl(m_url);

@@ -52,18 +52,16 @@ public:
 
 private:
 
-	int m_id=0;
+	int m_id = 0;
 	int m_state_id = 0;
 	int m_scale_id = 0;
 	int m_session_id = 0;
-	QString m_name;
+	QString m_place_name;
 	QString m_site_name;
-	QString m_ctype;
-	QString m_date;
 	QString m_format_name;
 	QString m_description;
 	QString m_state_name;
-	QString m_site_url;
+	QString m_date;
 	QString m_user_type;
 	QString m_url;
 	QString m_comment;

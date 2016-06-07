@@ -7,6 +7,7 @@
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
 #include "SiteRegion.h"
+#include "EditSites.h"
 #include "DepartmentRegion.h"
 #include "State.h"
 #include "Database.h"
@@ -29,8 +30,9 @@ MainWindow::MainWindow(QMainWindow *parent)
 	
 	QObject::connect(ld, SIGNAL(signalLogedIn(int)),	this, SLOT(slotStartSession(int)));	 // авторизация пройдена - отобразить основное окно, 
 																							// начать работу модуля поиска
-	ld->slotShowLD();
-	QObject::connect(tableSites, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotOpenUrl(QModelIndex)));
+	ld->show();
+	/*EditSites *es = new EditSites();
+	es->show();*/
 }
 
 
@@ -50,11 +52,11 @@ void MainWindow::slotConfigure()
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
-	//setContentView();
+	setContentView();
 	ui->tabWidget->addTab(search, "Поиск источников");
 	ui->tabWidget->addTab(sites, "Интернет-ресурсы");
 	ui->tabWidget->addTab(departaments, "Ведомства");
-	//ui->tabWidget->addTab(content, "Материалы");
+	ui->tabWidget->addTab(content, "Материалы");
 	ui->tabWidget->addTab(m_tr, "Регионы");
 	QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(slotSyncTabs(int)));
 
@@ -150,15 +152,15 @@ void MainWindow::showMW()
 	this->setMinimumSize(1200, 600);
 	this->show();
 	
-	// Начать работу модуля поиска
-	//if (Site::uncheckedSitesFound()) 
-	//{
-	//	SM_Session *session = new SM_Session();
-	//	QObject::connect(session, SIGNAL(signalStatusOffered(const QString &)),
-	//		SLOT(slotShowStatus(const QString &)));	// по сигналу от session менять текст в StatusBar
-	//	session->start();
-	//}
-	//else
+	 //Начать работу модуля поиска
+	if (Site::uncheckedSitesFound()) 
+	{
+		SM_Session *session = new SM_Session();
+		QObject::connect(session, SIGNAL(signalStatusOffered(const QString &)),
+			SLOT(slotShowStatus(const QString &)));	// по сигналу от session менять текст в StatusBar
+		session->start();
+	}
+	else
 		statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
 }
 
@@ -171,6 +173,7 @@ void MainWindow::setContentView()
 	vertLayout->addWidget(m_vc);
 	vertLayout->addWidget(m_vf);
 	content->setLayout(vertLayout);
+	
 }
 
 void MainWindow::setSearchResources()
@@ -192,6 +195,7 @@ void MainWindow::setSearchResources()
 	layoutSearch->addWidget(treeSearch);
 	layoutSearch->addLayout(verticalLayout);
 	search->setLayout(layoutSearch);
+	QObject::connect(tableSites, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotOpenUrl(QModelIndex)));
 	QObject::connect(treeSearch->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 	this, SLOT(slotForSearch(const QItemSelection &, const QItemSelection &)));
 }
@@ -339,6 +343,12 @@ void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSel
 
 void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 {
+	auto m_index = treeSites->selectionModel()->currentIndex();
+	auto row = m_index.row();
+	auto column = m_index.column() -1;
+	auto child = m_regionsChecked->index(row, column, m_index);
+	treeSites->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
+
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
 	map = RegionItemChecked::getMap();

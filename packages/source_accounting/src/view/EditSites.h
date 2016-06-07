@@ -1,6 +1,7 @@
 #pragma once
 #include <QDockWidget>
 #include "ui_EditSites.h"
+#include "Database.h"
 /*!
 \brief Класс виджета редактирования и создания записи в интернет-ресурсах для пользователя.
 \author Козырева О.
@@ -24,7 +25,7 @@ public:
 	Конструктор
 	\param QDockWidget *ptr - указатель на родительский виджет
 	*/
-	explicit EditSites(int session_id, QWidget *ptr = 0);
+	explicit EditSites(int session_id = Database::smSessionId(), QWidget *ptr = 0);
 	
 	/*!
 	Деструктор
