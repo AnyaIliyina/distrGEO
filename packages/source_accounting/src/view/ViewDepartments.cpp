@@ -52,6 +52,11 @@ void ViewDepartments::setupModel()
 	createTable();
 }
 
+void ViewDepartments::backToTab()
+{
+	slotSelectionChanged(QItemSelection(), QItemSelection());
+}
+
 void ViewDepartments::createTable()
 {
 	auto comboDelegate = new ComboDelegate(GeodataType::getList(), this);

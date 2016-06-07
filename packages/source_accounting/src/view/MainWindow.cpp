@@ -80,6 +80,8 @@ void MainWindow::slotSelectRegionSite(int id)
 	{
 		treeSites->collapseAll();
 		treeSites->setEnabled(false);
+		if (!map.isEmpty())
+			map.values().at(0)->uncheckAll();
 	}
 	else
 	{		
@@ -105,6 +107,8 @@ void MainWindow::slotSelectRegionDepartment(int id)
 	{
 		treeDepartments->collapseAll();
 		treeDepartments->setEnabled(false);
+		if (!map.isEmpty())
+			map.values().at(0)->uncheckAll();
 	}
 	else
 	{
@@ -360,16 +364,13 @@ void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 				{
 					int region_id = map.keys().at(i);
 					SiteRegion *site_reg = new SiteRegion(id, region_id);
+					
 					if (map.values().at(i)->isChecked())	//галочку поставили
-					{
-						site_reg->insertIntoDatabase();
-						qDebug() << "inserted";
-					}
+							site_reg->insertIntoDatabase();
 					else
-					{
 						site_reg->deleteRecord();
-						qDebug() << "deleted";
-					}
+
+					delete site_reg;
 				}
 			}
 		}
@@ -400,16 +401,14 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 			if (id != -1)
 			{
 				int region_id = map.keys().at(i);
+
 				DepartmentRegion *dep_reg = new DepartmentRegion(id, region_id);
 				if (map.values().at(i)->isChecked())	//галочку поставили
-				{
-					dep_reg->insertIntoDatabase();
-				}
+						dep_reg->insertIntoDatabase();
 				else
-				{
 					dep_reg->deleteRecord();
-				}
-
+				
+				delete dep_reg;
 			}
 		}
 	}
@@ -420,13 +419,14 @@ void MainWindow::slotSyncTabs(int tabIndex)
 	const int tabResourcesIndex = 1;
 	if (tabIndex == tabResourcesIndex)
 	{
-		//?????????????????????
+		m_vs->backToTab();
 	};
 
 	const int tabDepartmentsIndex = 2;
 	if (tabIndex == tabDepartmentsIndex)
 	{
-	};	//m_vd->slotEnableButtons();
+		m_vd->backToTab();
+	};	
 }
 
 void MainWindow::slotUncheckTreeSites()

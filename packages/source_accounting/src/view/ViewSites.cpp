@@ -53,6 +53,11 @@ void ViewSites::setupModel()
 	createTable();
 }
 
+void ViewSites::backToTab()
+{
+	slotSelectionChanged(QItemSelection(), QItemSelection());
+}
+
 
 void ViewSites::createTable()
 {

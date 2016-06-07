@@ -13,7 +13,7 @@
 
 class BaseItem;
 
-static class ItemFactory
+class ItemFactory
 {
 public:
 	static BaseItem* loadFromDb(int type, QVariant id = QVariant());
