@@ -9,7 +9,7 @@
 
 
 
-TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
+TreeRegions::TreeRegions(QWidget * parent) : ui(new Ui::TreeRegions) // ??
 {
 	ui->setupUi(this);
 	setupModel();
@@ -22,13 +22,14 @@ TreeRegions::TreeRegions(QWidget * parent): ui(new Ui::TreeRegions) // ??
 	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
 	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
+	slotEnableButtons(QItemSelection(), QItemSelection());
 }
 
 TreeRegions::~TreeRegions()
 {
 	delete ui;
 	delete m_model;
-	
+
 }
 
 void TreeRegions::setupModel()
@@ -41,6 +42,9 @@ void TreeRegions::setupModel()
 	ui->treeView->setColumnHidden(1, true);
 	ui->treeView->setColumnHidden(2, true);
 	ui->treeView->expandAll();
+	QObject::connect(ui->treeView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
+		this, SLOT(slotEnableButtons(const QItemSelection &, const QItemSelection &)));
+	QObject::connect(this, SIGNAL(signalChangeEditMode()), this, SLOT(slotEnableButtons()));
 }
 
 void TreeRegions::setDisabled()
@@ -51,7 +55,7 @@ void TreeRegions::setDisabled()
 	ui->action_NewRoot->setEnabled(false);
 	ui->action_Yes->setEnabled(false);
 	ui->action_No->setEnabled(false);
-	
+
 }
 
 ItemModel * TreeRegions::model() const
@@ -61,14 +65,55 @@ ItemModel * TreeRegions::model() const
 
 void TreeRegions::slotEnableButtons()
 {
+	slotEnableButtons(QItemSelection(), QItemSelection());
+	/*if (m_editMode)
+	{
+	ui->action_Edit->setEnabled(false);
+	ui->action_Delete->setEnabled(false);
+	ui->action_New->setEnabled(false);
+	ui->action_NewRoot->setEnabled(false);
+	ui->action_Yes->setEnabled(m_model->allowSave());
+	ui->action_No->setEnabled(true);
+	}
+	else
+	{
+	ui->action_New->setEnabled(true);
+	ui->action_NewRoot->setEnabled(true);
+	ui->action_Yes->setEnabled(false);
+	ui->action_No->setEnabled(false);
+	if (ui->treeView->selectionModel()->selectedRows().count() == 1)
+	{
+	ui->action_Delete->setEnabled(true);
+	ui->action_Edit->setEnabled(true);
+	}
+	else
+	{
+	ui->action_Delete->setEnabled(false);
+	ui->action_Edit->setEnabled(false);
+
+	}
+	}*/
+}
+
+void TreeRegions::refreshModel()
+{
+	setupModel();
+	slotEnableButtons(QItemSelection(), QItemSelection());
+	emit newModelReady();
+}
+
+
+void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection &)
+{
 	if (m_editMode)
 	{
 		ui->action_Edit->setEnabled(false);
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
 		ui->action_NewRoot->setEnabled(false);
-		ui->action_Yes->setEnabled(true);
+		ui->action_Yes->setEnabled(m_model->allowSave());
 		ui->action_No->setEnabled(true);
+
 	}
 	else
 	{
@@ -79,46 +124,13 @@ void TreeRegions::slotEnableButtons()
 		if (ui->treeView->selectionModel()->selectedRows().count() == 1)
 		{
 			ui->action_Delete->setEnabled(true);
-			ui->action_Edit->setEnabled(true);			
+			ui->action_Edit->setEnabled(true);
 		}
 		else
 		{
 			ui->action_Delete->setEnabled(false);
-			ui->action_Edit->setEnabled(false);	
-			
-		}
-	}
-}
+			ui->action_Edit->setEnabled(false);
 
-
-void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection &)
-{
- 	if (m_editMode)
-	{
-		ui->action_Edit->setEnabled(false);
-		ui->action_Delete->setEnabled(false);
-		ui->action_New->setEnabled(false);
-		ui->action_NewRoot->setEnabled(false);
-		ui->action_Yes->setEnabled(true);
-		ui->action_No->setEnabled(true);
-	
-	}
-	else
-	{
-		ui->action_New->setEnabled(true);
-		ui->action_NewRoot->setEnabled(true);
-		ui->action_Yes->setEnabled(false);
-		ui->action_No->setEnabled(false);
-		if (ui->treeView->selectionModel()->selectedRows().count() == 1)
-		{
-			ui->action_Delete->setEnabled(true);
-			ui->action_Edit->setEnabled(true);			
-		}
-		else
-		{
-			ui->action_Delete->setEnabled(false);
-			ui->action_Edit->setEnabled(false);	
-			
 		}
 	}
 }
@@ -127,13 +139,13 @@ void TreeRegions::slotAdd()
 {
 	m_editMode = true;
 	emit signalChangeEditMode();
-	QModelIndex m_index=ui->treeView->selectionModel()->currentIndex();
+	QModelIndex m_index = ui->treeView->selectionModel()->currentIndex();
 	m_model->insertRows(0, 1, m_index);
 	auto rowCount = m_model->rowCount(m_index);
-	auto child = m_model->index(rowCount - 1, 0, m_index); 
+	auto child = m_model->index(rowCount - 1, 0, m_index);
 	ui->treeView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
 	ui->treeView->edit(child);
-	
+
 }
 
 void TreeRegions::slotAddRoot()
@@ -150,7 +162,7 @@ void TreeRegions::slotAddRoot()
 
 void TreeRegions::slotDelete()
 {
-	
+
 	int  deleteMsgBox = QMessageBox::question(this, "",
 		"Удалить выбранную запись?",
 		QMessageBox::Yes, QMessageBox::No);
@@ -159,15 +171,15 @@ void TreeRegions::slotDelete()
 		auto m_index = ui->treeView->selectionModel()->currentIndex();
 		m_model->removeRows(0, 1, m_index);
 		emit dataChanged();
-		}
+	}
 }
 
 void TreeRegions::slotEdit()
-{	
+{
 	m_editMode = true;
 	emit signalChangeEditMode();
 	auto m_index = ui->treeView->selectionModel()->currentIndex();
-	
+
 	m_model->startEditMode(m_index);
 	ui->treeView->edit(m_index);
 }
@@ -181,6 +193,7 @@ void TreeRegions::slotSave()
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		emit dataChanged();
+		refreshModel();
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
@@ -204,7 +217,7 @@ void TreeRegions::slotCancel()
 	ui->treeView->expandAll();
 	ui->treeView->selectionModel()->setCurrentIndex(m_index, QItemSelectionModel::Select |
 		QItemSelectionModel::Rows);
-	
+
 }
 
 

@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "ui_ViewDepartments.h"
 #include "Item_model.h"
-#include "Geodata.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -9,13 +8,13 @@
 #include <QSortFilterProxyModel>
 
 /*!
-	 \file
-	 \brief  Таблица ведомств и работа с ней
-	 \author Козырева О.
-	 \date   апрель 2016
+\file
+\brief  Таблица ведомств и работа с ней
+\author Козырева О.
+\date   апрель 2016
 */
 
-class ViewDepartments: public QMainWindow {
+class ViewDepartments : public QMainWindow {
 	Q_OBJECT
 public:
 	/*!
@@ -27,36 +26,36 @@ public:
 	Деструктор
 	*/
 	~ViewDepartments();
-		
+
 	/*!
 	Устанавливает модель в таблицу
 	*/
-	 void setupModel();
+	void setupModel();
 
-	 /*!
-	 Настраивает виджет в соответствии с текущим выделением в таблице
-	 */
-	 void backToTab();
+	/*!
+	Настраивает виджет в соответствии с текущим выделением в таблице
+	*/
+	void backToTab();
 
 private:
 	Ui::ViewDepartments *ui;
-	ItemModel* m_model=nullptr;
+	ItemModel* m_model = nullptr;
 	bool m_editMode = false;
-	
+	int value;
 
-	 /*!
-	 Метод для настройки таблицы 
-	 */
-	 void createTable();
+	/*!
+	Метод для настройки таблицы
+	*/
+	void createTable();
 
 
-//public slots:	
-//	/*!
-//	Слот включения/выключения кнопок
-//	*/
-//	void slotEnableButtons();
-//
-private slots:
+	//public slots:	
+	//	/*!
+	//	Слот включения/выключения кнопок
+	//	*/
+	//	void slotEnableButtons();
+	//
+	private slots:
 	/*!
 	Слот добавления
 	*/
@@ -66,45 +65,45 @@ private slots:
 	*/
 	void slotDelete();
 	/*
-	 Слот редактирования
-	 */
-	 void slotEdit();
-	 /*!
-	 Слот применения изменений
-	 */
-	 void slotSave();
-	 /*!
-	 Слот отмены изменений
-	 */
-	 void slotCancel();
+	Слот редактирования
+	*/
+	void slotEdit();
+	/*!
+	Слот применения изменений
+	*/
+	void slotSave();
+	/*!
+	Слот отмены изменений
+	*/
+	void slotCancel();
 
-	 /*!
-	 Слоты включения/выключения кнопок
-	 */
-	 void slotIndexStatusChanged(const QModelIndex&);
-	 void slotSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
-	
- signals:
-	 /*!
-	 Сигнал, испускается при создании нового ведомства, для очистки дерева регионов
-	 */
-	 void signalNewDepartment();
+	/*!
+	Слоты включения/выключения кнопок
+	*/
+	void slotIndexStatusChanged(const QModelIndex&);
+	void slotSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
-	 /*!
-	 Сигнал, для выделения элементов дерева регионов, по выделенной записи в таблице ведомств
-	 \param int !=-1, если выделена одна запись в таблице, отправляем id выделеной записи
-	 */
-	 void valueSelected(int);
+signals:
+	/*!
+	Сигнал, испускается при создании нового ведомства, для очистки дерева регионов
+	*/
+	void signalNewDepartment();
 
-	 /*!
-	 Сигнал для включения/выключения кнопок
-	 */
-	 void signalEditDepartment();
-	 
-	 /*!
-	 Сигнал, испускается при сохранении записи, для сохранения изменений в дереве регионов
-	 \param int - id интернет-ресурса
-	 \param bool 
-	 */
-	  void signalSave(int, bool);
+	/*!
+	Сигнал, для выделения элементов дерева регионов, по выделенной записи в таблице ведомств
+	\param int !=-1, если выделена одна запись в таблице, отправляем id выделеной записи
+	*/
+	void valueSelected(int);
+
+	/*!
+	Сигнал для включения/выключения кнопок
+	*/
+	void signalEditDepartment();
+
+	/*!
+	Сигнал, испускается при сохранении записи, для сохранения изменений в дереве регионов
+	\param int - id интернет-ресурса
+	\param bool
+	*/
+	void signalSave(int, bool);
 };

@@ -6,14 +6,14 @@
 
 /*!
 \file
-\brief  
+\brief
 */
 
 Region::Region()
 {
 }
 
-Region::Region(int parent_id, const QString & name, const QString & comment):
+Region::Region(int parent_id, const QString & name, const QString & comment) :
 	m_parent_id(parent_id), m_name(name), m_comment(comment)
 {
 }
@@ -85,15 +85,25 @@ bool Region::insertIntoDatabase(int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	query.prepare("INSERT INTO regions (parent_id, name, comment)\
+	if (m_parent_id != 0)
+	{
+		query.prepare("INSERT INTO regions (parent_id, name, comment)\
 		VALUES (?, ?, ?)");
-	query.addBindValue(m_parent_id);
-	query.addBindValue(m_name);
-	query.addBindValue(m_comment);
+		query.addBindValue(m_parent_id);
+		query.addBindValue(m_name);
+		query.addBindValue(m_comment);
+	}
+	else
+	{
+		query.prepare("INSERT INTO regions (name, comment)\
+		VALUES (?, ?)");
+		query.addBindValue(m_name);
+		query.addBindValue(m_comment);
+	}
 	if (!query.exec()) {
-		qDebug() << "Region::insertIntoDatabase():  error inserting into table Departments";
+		qDebug() << "Region::insertIntoDatabase():  error inserting into table Regions";
 		QString errorString = query.lastError().text();
-		qDebug() << errorString;
+		qDebug() << errorString << query.lastError();
 		db.close();
 		Log::create(session_id, "Region: insert", 0, errorString);
 		return false;
@@ -135,7 +145,7 @@ bool Region::deleteRegion(int region_id, int session_id)
 {
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
-	if(!query.exec("PRAGMA foreign_keys = ON"))
+	if (!query.exec("PRAGMA foreign_keys = ON"))
 		qDebug() << query.lastError().text();
 	QString idstr = QString::number(region_id);
 	if (!query.exec("DELETE FROM regions WHERE id=\'" + idstr + "\'"))
@@ -185,7 +195,7 @@ bool Region::completeTable()
 		<< Region(0, "Южная Америка")
 		<< Region(1, "Австрия")
 		<< Region(1, "Бельгия")
-		<<Region(1, "Россия")
+		<< Region(1, "Россия")
 		<< Region(8, "Центральный федеральный округ");
 	return insert(regions);
 }
@@ -196,7 +206,8 @@ bool Region::insert(QList<Region> regions)
 	for (int r = 0; r < regions.count(); r++)
 	{
 		queryStr += "(";
-		queryStr += QString::number(regions.at(r).parent_id());
+		(regions.at(r).parent_id() != 0) ?
+			queryStr += QString::number(regions.at(r).parent_id()) : queryStr += "NULL";
 		queryStr += ",'";
 		queryStr += regions.at(r).name();
 		queryStr += "','";
@@ -207,11 +218,11 @@ bool Region::insert(QList<Region> regions)
 	QSqlDatabase db = Database::database();
 	QSqlQuery query(db);
 	if (!query.exec(queryStr)) {
-			qDebug() << "Region::insertIntoDatabase(QList<Region> regions):  error inserting into table Regions";
-			qDebug() << query.lastError().text();
-			db.close();
-			return false;
-		}
+		qDebug() << "Region::insertIntoDatabase(QList<Region> regions):  error inserting into table Regions";
+		qDebug() << query.lastError().text();
+		db.close();
+		return false;
+	}
 	db.close();
 	return true;
 }

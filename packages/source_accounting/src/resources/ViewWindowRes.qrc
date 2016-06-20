@@ -1,7 +1,5 @@
 <RCC>
   <qresource>
-    <file>images/Bezymyanny.png</file>
-    <file>images/JP1xRW25lko.jpg</file>
     <file>images/upload.png</file>
     <file>./images/arrow-right.png</file>
     <file>./images/root.png</file>
@@ -14,6 +12,7 @@
     <file>./images/plus.png</file>
     <file>./images/share2.png</file>
     <file>./images/trash.png</file>
+    <file>./images/error_small.png</file>
     <file>./translations/qt_ru.qm</file>
     <file>./translations/qtbase_ru.qm</file>
     <file>./translations/qtscript_ru.qm</file>

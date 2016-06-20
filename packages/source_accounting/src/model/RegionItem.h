@@ -17,7 +17,7 @@ class RegionItem : public BaseItem
 {
 public:
 	virtual ~RegionItem();
-	
+
 	/*! Конструктор */
 	RegionItem();
 
@@ -43,14 +43,14 @@ public:
 	\param int role - роль
 	\return bool - значение для data присвоено*/
 	virtual bool setData(int column, const QVariant& value, int role);
-	
+
 	/*! Возвращает заголовки
 	\param int section - число столбцов
 	\param int role - роль, для которой прописаны заголовки
 	\return QVariant*/
 	virtual QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
-	
-	/*! Валидность элемента 
+
+	/*! Валидность элемента
 	\return bool isValid*/
 	bool isValid() const Q_DECL_OVERRIDE;
 
@@ -73,8 +73,8 @@ public:
 	virtual QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) Q_DECL_OVERRIDE;
 
 protected:
-	int m_id=0;				// id региона
+	int m_id = 0;				// id региона
 	QString m_name;			// название региона
-	QString m_comment="";	// комментарий 
-	//int m_type = 3;
+	QString m_comment = "";	// комментарий 
+							//int m_type = 3;
 };

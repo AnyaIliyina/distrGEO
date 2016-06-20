@@ -67,21 +67,30 @@ QVariant Geodata::data(int column, int role) const{
 		
 		return m_id;
 	}
+	if (role == Qt::UserRole) {
 
-	/*if (role == Qt::BackgroundRole) {
+		return m_id;
+	}
+	if (role == Qt::BackgroundRole) {
 		QBrush brush(Qt::cyan);
 		return brush;
 	}
 
+	// возвращает индикатор обязательного поля
 	if (role == Qt::DecorationRole && !isValid()) {
 		QPixmap pixmap(":/./images/error_small.png");
-		if (column == 0)
-			if (m_code.isNull() || m_code.isEmpty())
-				return pixmap;
 		if (column == 1)
-			if (m_name.isNull() || m_name.isEmpty())
+			if (m_place_name.isNull() || m_place_name.isEmpty())
 				return pixmap;
-	}*/
+		if (column == 8)
+			if (m_url.isNull() || m_url.isEmpty())
+				return pixmap;
+		
+		if (column == 3)
+			if (m_format_name.isNull() || m_format_name.isEmpty())
+				return pixmap;
+	}
+
 	return QVariant();
 };
 

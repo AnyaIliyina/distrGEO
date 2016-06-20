@@ -4,18 +4,17 @@
 #include "RegionItem.h"
 #include "Item_factory.h"
 #include <QModelIndex>
+#include <QObject>
 /*!
 
 \file
-\brief	Элемент Item_model. 
+\brief	Элемент Item_model.
 Содержит информацию о регионе, отображается QTreeView с чек-боксами.
 \author Ильина А.
 \date май 2016
 */
 
-class RegionItemChecked : public RegionItem
-{
-
+class RegionItemChecked : public RegionItem {
 public:
 	RegionItemChecked();
 	virtual ~RegionItemChecked();
@@ -28,12 +27,12 @@ public:
 	QVariant data(int column, int role) const Q_DECL_OVERRIDE;
 
 	/*! Записывает информацию для роли role в data колонки column
-	\param int column - номер колонки 
+	\param int column - номер колонки
 	\param onst QVariant& value -  информация, новое значение data
 	\param int role - роль
 	\return bool - значение для data присвоено*/
 	bool setData(int column, const QVariant& value, int role) Q_DECL_OVERRIDE;
-	
+
 	/*! Возвращает число столбцов
 	\return int columnCount - число столбцов*/
 	int columnCount() const Q_DECL_OVERRIDE;
@@ -51,36 +50,42 @@ public:
 	\param int role - роль, для которой прописаны заголовки
 	\return QVariant*/
 	QVariant headerData(int section, int role) const Q_DECL_OVERRIDE;
-	
-	/*! Возвращает QMap <m_id региона, RegionItemChecked*>, содержащую текущие айтемы 
+
+	/*! Возвращает QMap <m_id региона, RegionItemChecked*>, содержащую текущие айтемы
 	\return QMap<int, RegionItemChecked*>*/
 	static QMap<int, RegionItemChecked*> getMap();
 
 	/*! Устанавливает значение m_checked
-	\param bool checked - новое значение m_checked*/
-	void setChecked(bool checked);
-	
+	\param int checked - новое значение m_checked*/
+	void setChecked(int checked);
+
 	/*! Возвращает значение m_checked
-	\return bool m_checked */
-	bool isChecked();
+	\return int m_checked */
+	int checkState();
 
 	/*! Выводит элементы из режима редактирования
 	\return true - значение m_checked изменилось за время редактирования
 	\return false - значение m_checked не изменилось*/
 	bool save() Q_DECL_OVERRIDE;
 
-	/*! Присваивает полю m_checked всех айтемов значение false*/
+	/*! Присваивает полю m_checked всех айтемов значение Qt::Unchecked*/
 	void uncheckAll();
+
+	/*! Меняет значение m_checked в зависимости от состояния потомков
+	\return true - m_checked изменено
+	\return false - m_checked не изменено*/
+	bool update();
 
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
 	\param RegionItemChecked* parent - элемент
-	\param bool newCheckState - новое значение m_checked*/
-	void checkChildren(RegionItemChecked* parent, bool newCheckState);
-	
-	bool m_checked=true;	// Элемент отмечен/не отмечен - состояние чек-бокса
-	bool m_old_checked;		// Предыдущее состояние чек-бокса
+	\param int newCheckState - новое значение m_checked*/
+	void checkChildren(RegionItemChecked* parent, int newCheckState);
+
+	int m_checked = Qt::Unchecked;	// Элемент отмечен/не отмечен - состояние чек-бокса
+	int m_old_checked;		// Предыдущее состояние чек-бокса
+
 	static QMap<int, RegionItemChecked*> map;	// QMap вида <"m_id региона", "указатель на item региона">
-	
-	RegionItemChecked* rootItem();	
+
+	RegionItemChecked* rootItem();
 };

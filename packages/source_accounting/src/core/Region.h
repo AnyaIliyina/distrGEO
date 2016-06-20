@@ -11,22 +11,22 @@
 
 
 /*!
-	\file
-	\brief    Представляет сущность Регион
+\file
+\brief    Представляет сущность Регион
 (таблица regions)
-	\author  Ильина А.
-	\date     май 2016
+\author  Ильина А.
+\date     май 2016
 */
 
 
-class Region{
+class Region {
 private:
 	int m_id;
 	int m_parent_id;
 	QString m_name;
 	QString m_comment;
 public:
-	
+
 	/*! Конструктор по умолчанию*/
 	Region();
 
@@ -35,7 +35,7 @@ public:
 	\param const QString& name - название региона
 	\param const QString& comment - комментарий*/
 	Region(int parent_id, const QString& name, const QString& comment = "");
-	
+
 	/*! Деструктор*/
 	~Region();
 
@@ -63,9 +63,9 @@ public:
 	\param int parent_id */
 	void setParentId(int parent_id);
 
-	/*! Устонавливает название региона 
+	/*! Устонавливает название региона
 	\param const QString & name - название*/
-	void setName(const QString & name); 
+	void setName(const QString & name);
 
 	/*! Устонавливает комментарий
 	\param const QString & comment - комментарий*/

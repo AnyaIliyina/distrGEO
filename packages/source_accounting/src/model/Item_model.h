@@ -1,12 +1,3 @@
-/*!
-
-	\file
-	\brief Модель управления базовыми элементами
-	\author Чернышев Д.Р.
-	\date Апрель 2016
-
-*/
-
 #pragma once
 
 #include <QAbstractItemModel>
@@ -47,13 +38,18 @@ public:
 	bool save();
 	bool cancel();
 
+	void parents_emitDataChanged(const QModelIndex& index);
+	void children_emitDataChanged(const QModelIndex& index);
+
+	BaseItem* editItem();
+
 	void loadData(int type, QVariant id = QVariant());
 
 signals:
 	void indexStatusChanged(const QModelIndex& index);
 
 private:
-	
+
 	BaseItem* m_rootItem = NULL;
 	BaseItem* m_editedItem = NULL;
 	int m_type = 0;

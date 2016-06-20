@@ -14,8 +14,10 @@ ItemModel::~ItemModel() {
 	m_editedItem = NULL;
 };
 
+
 ItemModel::ItemModel() : QAbstractItemModel() {
 };
+
 
 int ItemModel::rowCount(const QModelIndex& parent) const {
 	BaseItem* parentItem;
@@ -31,6 +33,7 @@ int ItemModel::rowCount(const QModelIndex& parent) const {
 	return parentItem->rowCount();
 };
 
+
 int ItemModel::columnCount(const QModelIndex& parent) const {
 	BaseItem* parentItem;
 
@@ -38,9 +41,10 @@ int ItemModel::columnCount(const QModelIndex& parent) const {
 		parentItem = m_rootItem;
 	else
 		parentItem = static_cast<BaseItem*>(parent.internalPointer());
-	
+
 	return parentItem->columnCount();
 };
+
 
 bool ItemModel::hasChildren(const QModelIndex& parent) const {
 	BaseItem* parentItem;
@@ -53,6 +57,7 @@ bool ItemModel::hasChildren(const QModelIndex& parent) const {
 	return parentItem->hasChildren();
 	return false;
 };
+
 
 QModelIndex ItemModel::index(int row, int column, const QModelIndex& parent) const {
 	if (!hasIndex(row, column, parent))
@@ -96,23 +101,25 @@ QVariant ItemModel::data(const QModelIndex& index, int role) const {
 
 	if (role == Qt::BackgroundRole && item != m_editedItem)
 	{
-		
+
 		return QVariant();
 	}
-	
+
 	return item->data(index.column(), role);
 };
 
 bool ItemModel::setData(const QModelIndex& index, const QVariant& value, int role) {
 	if (!index.isValid())
 		return false;
-
 	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
+	if (role == Qt::CheckStateRole)
+	{
+		children_emitDataChanged(index);
+		parents_emitDataChanged(index);
+	}
 
 	bool res = item->setData(index.column(), value, role);
-
 	emit indexStatusChanged(index);
-	
 	return res;
 };
 
@@ -129,11 +136,11 @@ Qt::ItemFlags ItemModel::flags(const QModelIndex& index) const {
 
 	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
 
-	if(item == m_editedItem)
+	if (item == m_editedItem)
 	{
 		if (m_editedItem->isCheckable() && index.column() == 0)				//
 			return  Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;			//
-		
+
 		return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
 	}
 	else
@@ -155,7 +162,7 @@ bool ItemModel::insertRows(int row, int count, const QModelIndex& parent) {
 	BaseItem* child = ItemFactory::createNew(m_type);
 	parentItem->appendChild(child);
 	m_editedItem = child;
-	
+
 	this->beginInsertRows(parent, parentItem->rowCount(), parentItem->rowCount());
 	this->endInsertRows();
 
@@ -170,7 +177,7 @@ bool ItemModel::removeRows(int row, int count, const QModelIndex& index) {
 	BaseItem* parentItem = item->parent();
 	qDebug() << "Parent index";
 	auto parentIndex = index.parent();
-	
+
 
 	this->beginRemoveRows(parentIndex, item->row(), item->row());
 	//this->beginResetModel();
@@ -184,25 +191,25 @@ bool ItemModel::removeRows(int row, int count, const QModelIndex& index) {
 };
 
 /*bool ItemModel::moveRows(const QModelIndex& sourceParent, int sourceRow, int count,
-	const QModelIndex& destinationParent, int destinationChild) {
-	
-	BaseUpDownItem* upDownItem = dynamic_cast<BaseUpDownItem*>(m_rootItem->child(sourceRow));
-	if (upDownItem == NULL)
-		return false;
+const QModelIndex& destinationParent, int destinationChild) {
 
-	//this->beginMoveRows(sourceParent, sourceRow, sourceRow, destinationParent, sourceRow + 1);
-	this->beginResetModel();
+BaseUpDownItem* upDownItem = dynamic_cast<BaseUpDownItem*>(m_rootItem->child(sourceRow));
+if (upDownItem == NULL)
+return false;
 
-	bool res;
-	if (sourceRow > destinationChild)
-		res = upDownItem->up();
-	else
-		res = upDownItem->down();
+//this->beginMoveRows(sourceParent, sourceRow, sourceRow, destinationParent, sourceRow + 1);
+this->beginResetModel();
 
-	//this->endMoveRows();
-	this->endResetModel();
+bool res;
+if (sourceRow > destinationChild)
+res = upDownItem->up();
+else
+res = upDownItem->down();
 
-	return res;
+//this->endMoveRows();
+this->endResetModel();
+
+return res;
 };*/
 
 void ItemModel::startEditMode(const QModelIndex& index) {
@@ -212,7 +219,7 @@ void ItemModel::startEditMode(const QModelIndex& index) {
 		qDebug() << "index invalid";
 	}
 	m_editedItem = static_cast<BaseItem*>(index.internalPointer());
-	qDebug()<<"startEditMode m_editItem"<<m_editedItem;
+	qDebug() << "startEditMode m_editItem" << m_editedItem;
 };
 
 bool ItemModel::allowSave() {
@@ -231,6 +238,7 @@ bool ItemModel::save() {
 	m_editedItem = NULL;
 	return true;
 };
+
 
 bool ItemModel::cancel() {
 	if (m_editedItem == NULL)
@@ -259,7 +267,43 @@ bool ItemModel::cancel() {
 		m_editedItem = NULL;
 
 	return true;
-};
+}
+
+
+
+void ItemModel::parents_emitDataChanged(const QModelIndex & index)
+{
+	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
+	item = item->parent();
+	QModelIndex p_index = index.parent();
+	while (item != m_rootItem) {
+		emit dataChanged(p_index, p_index);
+		item = item->parent();
+		p_index = p_index.parent();
+	}
+}
+
+
+void ItemModel::children_emitDataChanged(const QModelIndex & index)
+{
+	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
+	emit dataChanged(index, index);
+	if (item->hasChildren())
+	{
+		emit dataChanged(index.child(0, 0), index.child(0, item->rowCount() - 1));
+		for (int i = 0; i < item->rowCount(); i++)
+		{
+			children_emitDataChanged(index.child(0, i));
+		}
+	}
+}
+
+
+BaseItem * ItemModel::editItem()
+{
+	return m_editedItem;
+}
+;
 
 void ItemModel::loadData(int type, QVariant id) {
 	// Фабрика

@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "ui_TreeRegions.h"
 #include "Item_model.h"
-#include "Geodata.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>
@@ -9,10 +8,10 @@
 #include <QSortFilterProxyModel>
 
 /*!
-	 \file
-	 \brief  Вывод дерева регионов (с кнопками для редактирования, без чек-боксов)
-	 \author Козырева О., Ильина А.
-	 \date   апрель 2016
+\file
+\brief  Вывод дерева регионов (с кнопками для редактирования, без чек-боксов)
+\author Козырева О., Ильина А.
+\date   апрель 2016
 */
 
 class TreeRegions : public QMainWindow {
@@ -27,34 +26,34 @@ public:
 	Деструктор
 	*/
 	~TreeRegions();
-		
+
 	/*!
 	Устанавливает модель в таблицу
 	*/
-	 void setupModel();
+	void setupModel();
 
-	 /*! Возвращает модель дерева регионов
-	 \return ItemModel* model - модель*/
-	 ItemModel* model() const;
+	/*! Возвращает модель дерева регионов
+	\return ItemModel* model - модель*/
+	ItemModel* model() const;
 
 private:
 	Ui::TreeRegions *ui;		// экземпляр класса, описывающего форму	
-	ItemModel* m_model=nullptr;	// модель дерева
+	ItemModel* m_model = nullptr;	// модель дерева
 	bool m_editMode = false;	// режим редактирования
-	
 
-	/*!
-	Отключает кнопки (исключая кнопку "Добавить")
-	*/
+
+								/*!
+								Отключает кнопки (исключая кнопку "Добавить")
+								*/
 	void setDisabled();
 
-		
-private slots:
+
+	private slots:
 	/*!
 	Слот добавления
 	*/
 	void slotAdd();
-	
+
 	/*!
 	Слот добавления
 	*/
@@ -65,39 +64,40 @@ private slots:
 	Слот удаления
 	*/
 	void slotDelete();
-	
+
 	/*!
-	 Слот редактирования
-	 */
-	 void slotEdit();
-	
-	 /*!
-	 Слот применения изменений
-	 */
-	 void slotSave();
+	Слот редактирования
+	*/
+	void slotEdit();
 
-	 /*!
-	 Слот отмены изменений
-	 */
-	 void slotCancel();
-	
-	 /*!
-	 Слоты включения/выключения кнопок 
-	 */
-     void slotEnableButtons(const QItemSelection &, const QItemSelection &);
-	 void slotEnableButtons();
+	/*!
+	Слот применения изменений
+	*/
+	void slotSave();
 
-	 
- signals:
-	 /*!
-	 Сигнал для включения/выключения кнопок
-	 */
-	 void signalChangeEditMode();
+	/*!
+	Слот отмены изменений
+	*/
+	void slotCancel();
 
-	 /*!
-	 Сигнал о том, что данные в модели изменились
-	 */
-	 void dataChanged();
+	/*!
+	Слоты включения/выключения кнопок
+	*/
+	void slotEnableButtons(const QItemSelection &, const QItemSelection &);
+	void slotEnableButtons();
 
-	 
+	void refreshModel();
+
+signals:
+	/*!
+	Сигнал для включения/выключения кнопок
+	*/
+	void signalChangeEditMode();
+
+	/*!
+	Сигнал о том, что данные в модели изменились
+	*/
+	void dataChanged();
+
+	void newModelReady();
 };

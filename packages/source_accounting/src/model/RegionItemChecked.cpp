@@ -2,8 +2,8 @@
 #include "RegionItemChecked.h"
 #include "SiteRegion.h"
 
-
-
+#include <QApplication>
+#include <QMouseEvent>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlDatabase> 
@@ -17,13 +17,13 @@ QVariant RegionItemChecked::data(int column, int role) const
 	if (role == Qt::DisplayRole || role == Qt::EditRole || role == Qt::ToolTipRole)
 	{
 		/*if (column == 0)
-			return QVariant();*/
+		return QVariant();*/
 		if (column == 0)
 			return m_name;
 		if (column == 1)
 			return m_id;
 		if (column == 2)
-			return m_comment;		
+			return m_comment;
 	}
 
 	if (role == Qt::UserRole)
@@ -31,7 +31,7 @@ QVariant RegionItemChecked::data(int column, int role) const
 
 	if (role == Qt::CheckStateRole)
 		if (column == 0)
-			return m_checked ? Qt::Checked : Qt::Unchecked;
+			return m_checked;
 
 	return QVariant();
 };
@@ -58,17 +58,22 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 		return false;
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
-			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
-			checkChildren(this, m_checked);
+		m_checked = (Qt::CheckState)value.toInt();
+		checkChildren(this, m_checked);
+		auto parent = dynamic_cast<RegionItemChecked*>(m_parent);
+		while (parent->update()) {
+			parent = dynamic_cast<RegionItemChecked*>(parent->m_parent);
+		}
+
+		return true;
 	}
-	return true;
 }
 
 
 RegionItemChecked::RegionItemChecked() : RegionItem()
 {
-	m_checked = false;
-	m_old_checked = false;
+	m_checked = Qt::Unchecked;
+	m_old_checked = Qt::Unchecked;
 }
 
 QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
@@ -76,7 +81,7 @@ QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
 	return map;
 }
 
-void RegionItemChecked::setChecked(bool checked)
+void RegionItemChecked::setChecked(int checked)
 {
 	m_checked = checked;
 	m_old_checked = checked;
@@ -92,7 +97,7 @@ RegionItemChecked* RegionItemChecked::rootItem() {
 		return parent->rootItem();
 };
 
-bool RegionItemChecked::isChecked()
+int RegionItemChecked::checkState()
 {
 	return m_checked;
 }
@@ -102,7 +107,29 @@ void RegionItemChecked::uncheckAll()
 	checkChildren(rootItem(), false);
 }
 
-void RegionItemChecked::checkChildren(RegionItemChecked * parent, bool newCheckState)
+bool RegionItemChecked::update()
+{
+	if (this->id == -1)						// root item
+		return false;
+	if (!this->hasChildren())
+		return false;
+	int old = m_checked;
+	m_checked = Qt::Unchecked;
+	int counter_checkedChild = 0;
+	for (int i = 0; i < this->m_children.count(); i++)
+	{
+		auto child = dynamic_cast<RegionItemChecked*>(this->m_children.at(i));
+		if (child->m_checked == Qt::Checked)
+			counter_checkedChild++;
+	}
+
+	if (counter_checkedChild > 0)
+		m_checked = (counter_checkedChild == this->m_children.count()) ? Qt::Checked : Qt::PartiallyChecked;
+	return old != m_checked;
+}
+
+
+void RegionItemChecked::checkChildren(RegionItemChecked * parent, int newCheckState)
 {
 	parent->m_checked = newCheckState;
 	if (parent->hasChildren())
@@ -131,9 +158,9 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 	if (!query.exec(
 		"WITH RECURSIVE tree(id, name, comment, parent_id, depth) AS \
 		(\
-			SELECT id, name, comment, 0 AS parent_id, 1 AS depth \
+			SELECT id, name, comment, NULL AS parent_id, 1 AS depth \
 			 FROM regions \
-				WHERE parent_id IS 0 \
+				WHERE parent_id IS NULL \
 			UNION ALL\
 			SELECT r.id, r.name, r.comment, r.parent_id, tr.depth+1 AS depth\
 			 FROM regions r, tree tr\
@@ -147,7 +174,7 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 		RegionItemChecked* r_item = new RegionItemChecked();
 		r_item->m_id = query.value(0).toInt();			// id   
 		r_item->m_name = query.value(1).toString(); 	// name 
-		//r_item->m_checked = false;												
+														//r_item->m_checked = false;												
 		r_item->m_comment = query.value(2).toString(); 	// comment   
 		int parent_id = query.value(3).toInt(); 		// parent_id  
 		if (parent_id == 0)

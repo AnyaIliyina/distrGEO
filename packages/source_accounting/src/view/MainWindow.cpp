@@ -89,15 +89,17 @@ void MainWindow::slotSelectRegionSite(int id)
 		treeSites->expandAll();
 		QList<int> IDs = SiteRegion::regionsBySite(id);
 		for (int i = 0; i < map.count(); i++)
-			map.values().at(i)->setChecked(false);
+			map.values().at(i)->setChecked(Qt::Unchecked);
 		for (int i = 0; i < IDs.count(); i++)
 		{
-			treeSites->setFocus();
+			//treeSites->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
-				map.value(IDs.at(i))->setChecked(true);
+				map.value(IDs.at(i))->setChecked(Qt::Checked);
 			}
-		}		
+		}
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->update();
 	}
 }
 
@@ -117,16 +119,18 @@ void MainWindow::slotSelectRegionDepartment(int id)
 		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
 		//map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
-			map.values().at(i)->setChecked(false);
-		
+			map.values().at(i)->setChecked(Qt::Unchecked);
+
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeDepartments->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
-				map.value(IDs.at(i))->setChecked(true);
+				map.value(IDs.at(i))->setChecked(Qt::Checked);
 			}
 		}
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->update();
 
 	}
 }
@@ -157,14 +161,14 @@ void MainWindow::showMW()
 	this->show();
 	
 	 //Начать работу модуля поиска
-	if (Site::uncheckedSitesFound()) 
-	{
-		SM_Session *session = new SM_Session();
-		QObject::connect(session, SIGNAL(signalStatusOffered(const QString &)),
-			SLOT(slotShowStatus(const QString &)));	// по сигналу от session менять текст в StatusBar
-		session->start();
-	}
-	else
+	//if (Site::uncheckedSitesFound()) 
+	//{
+	//	SM_Session *session = new SM_Session();
+	//	QObject::connect(session, SIGNAL(signalStatusOffered(const QString &)),
+	//		SLOT(slotShowStatus(const QString &)));	// по сигналу от session менять текст в StatusBar
+	//	session->start();
+	//}
+	//else
 		statusBar()->showMessage("Модуль поиска: не найдено сайтов для проверки");
 }
 
@@ -336,6 +340,7 @@ void MainWindow::slotGetCheckSite()
 {
 	qDebug() << QObject::connect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
+	treeSites->selectionModel()->clear();
 }
 
 void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)
@@ -343,49 +348,52 @@ void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSel
 	auto index = treeSites->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
 	treeSites->edit(index);
+	treeSites->setFocus();
 }
 
 void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 {
-	auto m_index = treeSites->selectionModel()->currentIndex();
-	auto row = m_index.row();
-	auto column = m_index.column() -1;
-	auto child = m_regionsChecked->index(row, column, m_index);
-	treeSites->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
-
 	QObject::disconnect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
 	map = RegionItemChecked::getMap();
-		for (int i = 0; i < map.count(); i++)
+	for (int i = 0; i < map.count(); i++)
+	{
+		if (id != -1)
 		{
-			if (id != -1)
+			if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
 			{
-				if (map.values().at(i)->save())		// значение изменилось: галочку убрали или поставили 
-				{
-					int region_id = map.keys().at(i);
-					SiteRegion *site_reg = new SiteRegion(id, region_id);
-					
-					if (map.values().at(i)->isChecked())	//галочку поставили
-							site_reg->insertIntoDatabase();
-					else
-						site_reg->deleteRecord();
+				int region_id = map.keys().at(i);
+				SiteRegion *site_reg = new SiteRegion(id, region_id);
 
-					delete site_reg;
-				}
+				if (map.values().at(i)->checkState() != Qt::Unchecked)	//галочку поставили
+					site_reg->insertIntoDatabase();
+				else
+					site_reg->deleteRecord();
+
+				delete site_reg;
 			}
 		}
+	}
+	m_regionsChecked->save();
 }
 
 void MainWindow::slotGetCheckDepartment()
 {
 	qDebug() << QObject::connect(treeDepartments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)));
+	treeDepartments->selectionModel()->clear();
 }
 
 void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)
 {
 	auto index = treeDepartments->selectionModel()->currentIndex();
+	QTimer *m_dataTimer = new QTimer();
+	m_dataTimer->setSingleShot(true);
+	qDebug() << "timer";
+	QObject::connect(m_dataTimer, SIGNAL(timeout()), this, SLOT(slotSetTreesFocused()));
+	m_dataTimer->start(0);
 	m_regionsChecked->startEditMode(index);
+	//QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
 	treeDepartments->edit(index);
 }
 
@@ -403,15 +411,16 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 				int region_id = map.keys().at(i);
 
 				DepartmentRegion *dep_reg = new DepartmentRegion(id, region_id);
-				if (map.values().at(i)->isChecked())	//галочку поставили
-						dep_reg->insertIntoDatabase();
+				if (map.values().at(i)->checkState() != Qt::Unchecked)	//галочку поставили
+					dep_reg->insertIntoDatabase();
 				else
 					dep_reg->deleteRecord();
-				
+
 				delete dep_reg;
 			}
 		}
 	}
+	m_regionsChecked->save();
 }
 
 void MainWindow::slotSyncTabs(int tabIndex)
@@ -426,15 +435,15 @@ void MainWindow::slotSyncTabs(int tabIndex)
 	if (tabIndex == tabDepartmentsIndex)
 	{
 		m_vd->backToTab();
-	};	
+	};
 }
 
 void MainWindow::slotUncheckTreeSites()
 {
 	treeSites->setEnabled(true);
 	treeSites->expandAll();
-	if(!map.isEmpty())
-	map.values().at(0)->uncheckAll();
+	if (!map.isEmpty())
+		map.values().at(0)->uncheckAll();
 }
 
 void MainWindow::slotUncheckTreeDepartments()
@@ -443,4 +452,27 @@ void MainWindow::slotUncheckTreeDepartments()
 	treeDepartments->expandAll();
 	for (int i = 0; i < map.count(); i++)
 		map.values().at(i)->setChecked(false);
+}
+
+void MainWindow::slotSetTreesFocused()
+{
+	qDebug() << "focus";
+	//m_vd->setMouseTracking(false);
+	//QTest::mouseMove(m_vd, QPoint(800,250), 3);
+	/*QMouseEvent event = QMouseEvent(QEvent::MouseMove, QPoint(1000, 1000), Qt::NoButton, Qt::NoButton, Qt::NoModifier);
+	QApplication::sendEvent(qApp->focusWidget(), &event);
+	treeDepartments->clearFocus();
+	treeDepartments->setFocus();*/
+}
+
+void MainWindow::slotSetTreeSearch()
+{
+	treeSearch->setModel(NULL);
+
+	treeSearch->setMaximumWidth(400);
+	treeSearch->setModel(m_tr->model());
+	treeSearch->setColumnHidden(1, true);
+	treeSearch->setColumnHidden(2, true);
+	treeSearch->resizeColumnToContents(0);
+	treeSearch->expandAll();
 }

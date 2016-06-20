@@ -1,14 +1,9 @@
 #include "ViewDepartments.h"
 #include "Database.h"
-#include "Scale.h"
-#include "State.h"
-#include "Geodata_record.h"
 #include "GeodataType.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
-#include "Format.h"
-#include "Session.h"
 #include "Types.h"
 #include <QApplication>
 #include <QMainWindow>
@@ -19,7 +14,7 @@
 #include <QUrl>
 
 
-ViewDepartments::ViewDepartments(QWidget * parent): ui(new Ui::ViewDepartments) // ??
+ViewDepartments::ViewDepartments(QWidget * parent) : ui(new Ui::ViewDepartments) 
 {
 	ui->setupUi(this);
 	setupModel();
@@ -29,7 +24,7 @@ ViewDepartments::ViewDepartments(QWidget * parent): ui(new Ui::ViewDepartments) 
 	QObject::connect(ui->action_Edit, SIGNAL(triggered()), this, SLOT(slotEdit()));
 	QObject::connect(ui->action_Yes, SIGNAL(triggered()), this, SLOT(slotSave()));
 	QObject::connect(ui->action_No, SIGNAL(triggered()), this, SLOT(slotCancel()));
-	
+
 }
 
 ViewDepartments::~ViewDepartments()
@@ -112,7 +107,7 @@ void ViewDepartments::slotSelectionChanged(const QItemSelection& selected, const
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
-			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
@@ -122,7 +117,7 @@ void ViewDepartments::slotSelectionChanged(const QItemSelection& selected, const
 			emit valueSelected(-1);
 		}
 	}
-	
+
 }
 
 void ViewDepartments::slotAdd()
@@ -132,17 +127,20 @@ void ViewDepartments::slotAdd()
 	m_model->insertRows(0, 1, index);
 	ui->tableView->resizeRowsToContents();
 	auto rowCount = m_model->rowCount(index);
-	auto child = m_model->index(rowCount - 1, 0, index); 
+	auto child = m_model->index(rowCount - 1, 0, index);
 
 	m_editMode = true;
 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
+	ui->tableView->selectRow(rowCount - 1);
+	value = -1;
 	ui->tableView->edit(child);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 void ViewDepartments::slotDelete()
 {
-	
+
 	int  deleteMsgBox = QMessageBox::question(this, "",
 		"Удалить выбранную запись?",
 		QMessageBox::Yes, QMessageBox::No);
@@ -159,13 +157,14 @@ void ViewDepartments::slotDelete()
 }
 
 void ViewDepartments::slotEdit()
-{	
+{
 	m_editMode = true;
 	emit signalEditDepartment();
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 void ViewDepartments::slotSave()
@@ -179,15 +178,17 @@ void ViewDepartments::slotSave()
 	if (m_model->save())
 	{
 		m_editMode = false;
-		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		if (value<0)
+			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
-		
+
 	}
 	else
 	{
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	slotSelectionChanged(QItemSelection(), QItemSelection());
 }
@@ -201,6 +202,7 @@ void ViewDepartments::slotCancel()
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->reset();
 	ui->tableView->selectionModel()->setCurrentIndex(index, QItemSelectionModel::Select |
